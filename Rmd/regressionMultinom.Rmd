@@ -1,0 +1,120 @@
+Multinomial regression
+=========================
+
+TODO
+-------------------------
+
+ - link to regressionOrdinal
+
+Install required packages
+-------------------------
+
+[`lmtest`](http://cran.r-project.org/package=lmtest), [`mlogit`](http://cran.r-project.org/package=mlogit), [`nnet`](http://cran.r-project.org/package=nnet), [`VGAM`](http://cran.r-project.org/package=VGAM)
+
+```{r}
+wants <- c("lmtest", "mlogit", "nnet", "VGAM")
+has   <- wants %in% rownames(installed.packages())
+if(any(!has)) install.packages(wants[!has])
+```
+
+Multinomial regression
+----------------------
+
+### Simulate data
+    
+```{r}
+set.seed(1.234)
+N      <- 100
+X1     <- rnorm(N, 175, 7)
+X2     <- rnorm(N,  30, 8)
+Ycont  <- 0.5*X1 - 0.3*X2 + 10 + rnorm(N, 0, 6)
+Ycateg <- cut(Ycont, breaks=quantile(Ycont), include.lowest=TRUE,
+              labels=c("--", "-", "+", "++"))
+dfRegr <- data.frame(X1, X2, Ycateg)
+```
+
+### Using `multinom()` from package `nnet`
+
+Schaetzer basieren auf neuronalen Netzen
+-> Abweichungen gegenueber `vglm()`, `mlogit()`
+
+```{r}
+library(nnet)
+mnFit <- multinom(Ycateg ~ X1 + X2, data=dfRegr)
+summary(mnFit)
+```
+
+```{r}
+library(lmtest)
+lrtest(mnFit)
+```
+
+### Using `vglm()` from package `VGAM`
+
+Schaetzer basieren auf Likelihood-Inferenz
+
+```{r}
+library(VGAM)
+vglmFitMN <- vglm(Ycateg ~ X1 + X2, family=multinomial(refLevel=1), data=dfRegr)
+summary(vglmFitMN)
+```
+
+### Using `mlogit()` from package `mlogit`
+
+Person-choice (long) format
+
+```{r}
+library(mlogit)
+dfRegrL   <- mlogit.data(dfRegr, choice="Ycateg", shape="wide", varying=NULL)
+mlogitFit <- mlogit(Ycateg ~ 0 | X1 + X2, reflevel="--", data=dfRegrL)
+summary(mlogitFit)
+```
+
+```{r}
+library(lmtest)
+coeftest(mlogitFit)
+```
+
+Predicted category membership
+-------------------------
+
+### Predicted category probabilities
+
+```{r}
+PhatCateg <- predict(mnFit, type="probs")
+head(PhatCateg)
+```
+
+```{r results='hide'}
+predict(vglmFitMN, type="response")
+fitted(mlogitFit, outcome=FALSE)
+```
+
+### Predicted categories
+
+```{r}
+(predCls <- predict(mnFit, type="class"))
+```
+
+```{r}
+categHat <- levels(dfRegr$Ycateg)[max.col(PhatCateg)]
+all.equal(factor(categHat), predCls, check.attributes=FALSE)
+```
+
+Detach (automatically) loaded packages (if possible)
+-------------------------
+
+```{r}
+try(detach(package:mlogit))
+try(detach(package:MASS))
+try(detach(package:Formula))
+try(detach(package:statmod))
+try(detach(package:lmtest))
+try(detach(package:zoo))
+try(detach(package:maxLik))
+try(detach(package:miscTools))
+try(detach(package:nnet))
+try(detach(package:VGAM))
+try(detach(package:splines))
+try(detach(package:stats4))
+```

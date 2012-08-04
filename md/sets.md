@@ -1,0 +1,184 @@
+Sets
+=========================
+
+TODO
+-------------------------
+
+ - link to combinatorics
+
+Install required packages
+-------------------------
+
+[`sets`](http://cran.r-project.org/package=sets)
+
+
+    wants <- c("sets")
+    has   <- wants %in% rownames(installed.packages())
+    if(any(!has)) install.packages(wants[!has])
+
+
+Treating duplicate values
+-------------------------
+
+
+    a <- c(4, 5, 6)
+    b <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    m <- c(2, 1, 3, 2, 1)
+    n <- c(5, 3, 1, 3, 4, 4)
+    x <- c(1, 1, 2, 2)
+    y <- c(2, 1)
+
+
+
+    setequal(x, y)
+
+    [1] TRUE
+
+    duplicated(c(1, 1, 1, 3, 3, 4, 4))
+
+    [1] FALSE  TRUE  TRUE FALSE  TRUE FALSE  TRUE
+
+    unique(c(1, 1, 1, 3, 3, 4, 4))
+
+    [1] 1 3 4
+
+    length(unique(c("A", "B", "C", "C", "B", "B", "A", "C", "C", "A")))
+
+    [1] 3
+
+
+Set operations
+-------------------------
+
+### Union
+
+    union(m, n)
+
+    [1] 2 1 3 5 4
+
+
+### Intersection
+
+
+    intersect(m, n)
+
+    [1] 1 3
+
+
+### Asymmetric and symmetric difference
+
+
+    setdiff(m, n)
+
+    [1] 2
+
+    setdiff(n, m)
+
+    [1] 5 4
+
+    union(setdiff(m, n), setdiff(n, m))
+
+    [1] 2 5 4
+
+
+### Is $e$ an element of set $X$?
+
+
+    is.element(c(29, 23, 30, 17, 30, 10), c(30, 23))
+
+    [1] FALSE  TRUE  TRUE FALSE  TRUE FALSE
+
+    c("A", "Z", "B") %in% c("A", "B", "C", "D", "E")
+
+    [1]  TRUE FALSE  TRUE
+
+
+### (Proper) subset
+
+
+    (AinB <- all(a %in% b))
+
+    [1] TRUE
+
+    (BinA <- all(b %in% a))
+
+    [1] FALSE
+
+    AinB & !BinA
+
+    [1] TRUE
+
+
+Set operations using package `sets`
+-------------------------
+
+
+    library(sets)
+    sa <- set(4, 5, 6)
+    sb <- set(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    sm <- set(2, 1, 3, 2, 1)
+    sn <- set(5, 3, 1, 3, 4, 4)
+    sx <- set(1, 1, 2, 2)
+    sy <- set(2, 1)
+    se <- 4
+    
+    set_is_empty(sa)
+
+    [1] FALSE
+
+    set_cardinality(sx)
+
+    [1] 2
+
+    set_power(sm)
+
+    {{}, {1}, {2}, {3}, {1, 2}, {1, 3}, {2, 3}, {1, 2, 3}}
+
+    set_cartesian(sa, sx)
+
+    {(4, 1), (4, 2), (5, 1), (5, 2), (6, 1), (6, 2)}
+
+    set_is_equal(sx, sy)
+
+    [1] TRUE
+
+    set_union(sm, sn)
+
+    {1, 2, 3, 4, 5}
+
+    set_intersection(sm, sn)
+
+    {1, 3}
+
+    set_symdiff(sa, sb)
+
+    {1, 2, 3, 7, 8, 9, 10}
+
+    set_complement(sm, sn)
+
+    {4, 5}
+
+    set_is_subset(sa, sb)
+
+    [1] TRUE
+
+    set_is_proper_subset(sa, sb)
+
+    [1] TRUE
+
+    set_contains_element(sa, se)
+
+    [1] TRUE
+
+
+Detach (automatically) loaded packages (if possible)
+-------------------------
+
+
+    try(detach(package:sets))
+
+
+Get this post from github
+----------------------------------------------
+
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/sets.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/sets.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/sets.R) - ([all posts](https://github.com/dwoll/RExRepos))

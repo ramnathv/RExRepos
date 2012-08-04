@@ -1,0 +1,98 @@
+
+## @knitr unnamed-chunk-1
+set.seed(1.234)
+N      <- 12
+sex    <- sample(c("f", "m"), N, replace=TRUE)
+group  <- sample(rep(c("CG", "WL", "T"), 4), N, replace=FALSE)
+age    <- sample(18:35, N, replace=TRUE)
+IQ     <- round(rnorm(N, mean=100, sd=15))
+rating <- round(runif(N, min=0, max=6))
+(myDf1 <- data.frame(id=1:N, sex, group, age, IQ, rating))
+
+
+## @knitr unnamed-chunk-2
+isSingle <- sample(c(TRUE, FALSE), nrow(myDf1), replace=TRUE)
+myDf2    <- myDf1
+myDf2$isSingle1    <- isSingle
+myDf2["isSingle2"] <- isSingle
+myDf3 <- cbind(myDf1, isSingle); myDf3[1:3, ]
+myDf4 <- transform(myDf3, rSq=rating^2); myDf4[1:3, ]
+
+
+## @knitr unnamed-chunk-3
+dfTemp       <- myDf1
+dfTemp$group <- NULL
+dfTemp[1:3, ]
+
+
+## @knitr unnamed-chunk-4
+delVars         <- c("sex", "IQ")
+dfTemp[delVars] <- list(NULL)
+dfTemp[1:3, ]
+
+
+## @knitr unnamed-chunk-5
+(idx1 <- order(myDf1$rating))
+myDf1[idx1, ]
+(idx2 <- order(myDf1$group, myDf1$IQ))
+myDf1[idx2, ]
+(idx3 <- order(myDf1$group, -myDf1$rating))
+myDf1[idx3, ]
+
+
+## @knitr unnamed-chunk-6
+(idxLog <- myDf1$sex == "f")
+(idxNum <- which(idxLog))
+myDf1[idxNum, ]
+
+
+## @knitr unnamed-chunk-7
+(idx2 <- (myDf1$sex == "m") & (myDf1$rating > 2))
+myDf1[which(idx2), ]
+
+
+## @knitr unnamed-chunk-8
+(idx3 <- (myDf1$IQ < 90) | (myDf1$IQ > 110))
+myDf1[which(idx3), ]
+
+
+## @knitr unnamed-chunk-9
+myDf1[1:3, c("group", "IQ")]
+myDf1[1:3, 2:4]
+
+
+## @knitr unnamed-chunk-10
+dfTemp         <- myDf1
+(names(dfTemp) <- paste(rep(c("A", "B"), each=3), 100:102, sep=""))
+(colIdx <- grep("^B.*$", names(dfTemp)))
+dfTemp[1:3, colIdx]
+
+
+## @knitr unnamed-chunk-11
+subset(myDf1, sex == "f")
+subset(myDf1, sex == "f", select=-2)
+subset(myDf1, (sex == "m") & (rating > 2))
+subset(myDf1, (IQ   <  90) | (IQ     > 110))
+subset(myDf1, group %in% c("CG", "WL"))
+
+
+## @knitr unnamed-chunk-12
+myDfDouble <- rbind(myDf1, myDf1[sample(1:nrow(myDf1), 4), ])
+duplicated(myDfDouble)
+myDfUnique <- unique(myDfDouble)
+
+
+## @knitr unnamed-chunk-13
+myDfNA           <- myDf1
+myDfNA$IQ[4]     <- NA
+myDfNA$rating[5] <- NA
+
+
+## @knitr unnamed-chunk-14
+is.na(myDfNA)[1:5, c("age", "IQ", "rating")]
+apply(is.na(myDfNA), 2, any)
+complete.cases(myDfNA)
+subset(myDfNA, !complete.cases(myDfNA))
+head(na.omit(myDfNA))
+
+

@@ -1,0 +1,94 @@
+Customize diagrams: Formatting
+=========================
+
+```{r echo=FALSE}
+opts_knit$set(self.contained=FALSE)
+opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE, comment="")
+```
+
+TODO
+-------------------------
+
+ - link to diagAddElements -> `axis()`, diagMultiple
+ - `RColorBrewer`
+ - show colors
+ - common set of options, example: `plot()`
+ - xlab, ylab, xlim, ylim, main, sub, asp, log, axes, type="n"
+ - only in `par()`: bt, mar, oma, xlog, ylog
+ - `par()` and `plot()`: cex, cex.axis, cex.main, cex.lab, col, font, family, las, lend, lty,
+    lwd, pch, srt, xaxs, yaxs, xaxt, yaxt
+ - fonts
+
+Install required packages
+-------------------------
+
+[`RColorBrewer`](http://cran.r-project.org/package=RColorBrewer)
+
+```{r}
+wants <- c("RColorBrewer")
+has   <- wants %in% rownames(installed.packages())
+if(any(!has)) install.packages(wants[!has])
+```
+
+Plot symbols and line types
+-------------------------
+
+### Contour plots
+    
+```{r}
+X <- matrix(rep(1:6, times=11), ncol=11)
+Y <- matrix(rep(1:11, each=6),  ncol=11)
+
+par(mar=c(1, 1, 4, 2))
+plot(0:6, seq(1, 11, length.out=7), type="n", xlab=NA, ylab=NA,
+     axes=FALSE, main="pch Datenpunkt-Symbole und lty Linientypen")
+points(X[1:26], Y[1:26], pch=0:25, bg="gray", cex=2)
+matpoints(X[ , 6:11], Y[ , 6:11], type="l", lty=6:1, lwd=2, col="black")
+text(X[1:26]-0.3, Y[1:26],    labels=0:25)
+text(rep(0.7, 6), Y[1, 6:11], labels=6:1)
+text(0, 7.5, labels="Linientypen fuer lty", srt=90, cex=1.2)
+text(0, 2.0, labels="Symbole fuer pch",     srt=90, cex=1.2)
+```
+
+Setting parameters with `par()`
+-------------------------
+
+```{r}
+set.seed(1.234)
+opv <- par(mfrow=c(1, 2), cex.main=0.9)
+op  <- par(col="gray60", lwd=2, pch=16)
+plot(rnorm(10), main="Grau, fett, gefuellte Kreise")
+par(op)
+plot(rnorm(10), main="Standardformatierung")
+par(opv)
+```
+
+Colors
+-------------------------
+
+```{r}
+palette("default")
+rgb(0, 1, 1)
+rgb(t(col2rgb("red")/255))
+hsv(0.1666, 1, 1)
+gray(0.5)
+```
+
+```{r}
+library(RColorBrewer)
+colorRampPalette(brewer.pal(9, "Blues"))(100)
+```
+
+A very nice overview of R colors is the [R color chart](http://research.stowers-institute.org/efg/R/Color/Chart/).
+
+Useful packages
+-------------------------
+
+Package [`colorspace`](http://cran.r-project.org/package=colorspace) provides more functions for converting between different color spaces.
+
+Detach (automatically) loaded packages (if possible)
+-------------------------
+
+```{r}
+try(detach(package:RColorBrewer))
+```

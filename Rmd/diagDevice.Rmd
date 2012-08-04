@@ -1,0 +1,42 @@
+Graphics devices: Opening and saving diagrams
+=========================
+
+```{r echo=FALSE}
+opts_knit$set(self.contained=FALSE)
+opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE, comment="")
+```
+
+TODO
+-------------------------
+
+ - add regions and margins
+ - more device types and options
+ - pdf: multiple pages
+
+Opening and closing a device
+-------------------------
+
+```{r}
+dev.new(); dev.new(); dev.new()
+dev.list()
+dev.cur()
+dev.set(3)
+dev.set(dev.next())
+dev.off()
+graphics.off()
+```
+
+Saving plots to a graphics file
+-------------------------
+
+```{r eval=FALSE}
+pdf("pdf_test.pdf")
+plot(1:10, rnorm(10))
+dev.off()
+```
+
+```{r eval=FALSE}
+plot(1:10, rnorm(10))
+dev.copy(jpeg, filename="copied.jpg", quality=90)
+graphics.off()
+```

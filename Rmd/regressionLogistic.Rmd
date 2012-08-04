@@ -1,0 +1,175 @@
+Binary logistic regression
+=========================
+
+TODO
+-------------------------
+
+ - link to associationOrder for `ROCR`
+ - link to regrOrdMultinom
+ - link to regrDiag for outliers, collinearity
+ - link to crossvalidation
+
+Install required packages
+-------------------------
+
+[`rms`](http://cran.r-project.org/package=rms)
+
+```{r}
+wants <- c("rms")
+has   <- wants %in% rownames(installed.packages())
+if(any(!has)) install.packages(wants[!has])
+```
+
+Descriptive model fit
+-------------------------
+
+### Simulate data
+    
+```{r}
+set.seed(1.234)
+N      <- 100
+X1     <- rnorm(N, 175, 7)
+X2     <- rnorm(N,  30, 8)
+Y      <- 0.5*X1 - 0.3*X2 + 10 + rnorm(N, 0, 6)
+Yfac   <- cut(Y, breaks=c(-Inf, median(Y), Inf), labels=c("lo", "hi"))
+dfRegr <- data.frame(X1, X2, Yfac)
+```
+
+```{r}
+cdplot(Yfac ~ X1, data=dfRegr)
+cdplot(Yfac ~ X2, data=dfRegr)
+```
+
+### Fit the model
+
+```{r}
+(glmFit <- glm(Yfac ~ X1 + X2,
+               family=binomial(link="logit"), data=dfRegr))
+```
+
+```{r}
+exp(coef(glmFit))
+exp(confint(glmFit))
+```
+
+### Fit the model based on a matrix of counts
+
+```{r}
+total  <- sample(40:60, N, replace=TRUE)           ## ungleiche n_i
+hits   <- rbinom(N, size=total, prob=0.4)
+hitMat <- cbind(hits, total-hits)
+glm(hitMat ~ X1 + X2, family=binomial(link="logit"))
+```
+
+### Fit the model based on a matrix with relative frequencies
+
+```{r}
+hitMatRel <- sweep(hitMat, 1, total, "/")
+glm(hitMatRel ~ X1 + X2, weights=total, family=binomial(link="logit"))
+```
+
+### Fitted logits and probabilities
+
+```{r}
+logitHat <- predict(glmFit, type="link")
+plot(logitHat, pch=c(1, 16)[unclass(dfRegr$Yfac)])
+abline(h=0)
+```
+
+```{r}
+Phat <- fitted(glmFit)
+Phat <- predict(glmFit, type="response")
+head(Phat)
+mean(Phat)
+prop.table(table(dfRegr$Yfac))
+```
+
+Assess model fit
+-------------------------
+
+### Classification table
+
+```{r}
+thresh <- 0.5
+Yhat   <- cut(Phat, breaks=c(-Inf, thresh, Inf), labels=c("lo", "hi"))
+cTab   <- table(Yfac, Yhat)
+addmargins(cTab)
+sum(diag(cTab)) / sum(cTab)
+```
+
+### log-Likelihood, AUC, Somers's $D_{xy}$, Nagelkerke's pseudo $R^{2}$
+
+```{r}
+logLik(glmFit)
+```
+
+```{r}
+library(rms)
+lrm(Yfac ~ X1 + X2, data=dfRegr)
+```
+
+For plotting the ROC-curve, see `ROCR` in associationOrder
+
+### McFadden and Cox & Snell seudo $R^{2}$
+
+McFadden pseudo-$R^2$
+
+```{r}
+glmFit0 <- update(glmFit, . ~ 1)
+LLf <- logLik(glmFit)
+LL0 <- logLik(glmFit0)
+as.vector(1 - (LLf / LL0))
+```
+
+Cox & Snell
+
+```{r}
+as.vector(1 - exp((2/N) * (LL0 - LLf)))
+```
+
+Nagelkerke
+
+```{r}
+as.vector((1 - exp((2/N) * (LL0 - LLf))) / (1 - exp(LL0)^(2/N)))
+```
+
+### Crossvalidation
+
+`cv.glm()` function from package `boot`, crossvalidation
+
+Coefficient and model tests
+-------------------------
+
+### Individual coefficient tests
+
+```{r}
+summary(glmFit)
+```
+
+```{r results='hide'}
+lrm(Yfac ~ X1 + X2, data=dfRegr)
+```
+
+
+### Model comparisons
+
+```{r}
+anova(glmFit0, glmFit, test="Chisq")
+```
+
+```{r results='hide'}
+lrm(Yfac ~ X1 + X2, data=dfRegr)
+```
+
+```{r}
+drop1(glmFit, test="Chi")
+```
+
+Detach (automatically) loaded packages (if possible)
+-------------------------
+
+```{r}
+try(detach(package:rms))
+try(detach(package:survival))
+try(detach(package:splines))
+```
