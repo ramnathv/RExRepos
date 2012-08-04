@@ -4,10 +4,7 @@ Binary logistic regression
 TODO
 -------------------------
 
- - link to associationOrder for `ROCR`
- - link to regrOrdMultinom
- - link to regrDiag for outliers, collinearity
- - link to crossvalidation
+ - link to associationOrder for `ROCR`, regressionOrdinal, regressionMultinom, regressionDiag for outliers, collinearity, crossvalidation
 
 Install required packages
 -------------------------

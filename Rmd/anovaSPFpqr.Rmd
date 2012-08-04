@@ -4,9 +4,7 @@ Three-way split-plot-factorial ANOVA (SPF-$pq \cdot r$ and SPF-$p \cdot qr$ desi
 TODO
 -------------------------
 
- - link to SPF-pq
- - link to `lme4::lmer(), nlme::lme()`
- - link to reshape
+ - link to anovaSPFpq, anovaMixed, dfReshape
 
 Traditional univariate analysis and multivariate approach.
 

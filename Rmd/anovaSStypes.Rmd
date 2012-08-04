@@ -1,6 +1,11 @@
 Sum of squares type I, II, and III
 =========================
 
+TODO
+-------------------------
+
+ - link to anovaCRFpq, ancova, multMANOVA, multRegression
+
 Install required packages
 -------------------------
 

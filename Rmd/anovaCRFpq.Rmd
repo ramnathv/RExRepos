@@ -4,8 +4,7 @@ Two-way ANOVA (CRF-$pq$ design)
 TODO
 -------------------------
 
- - link to SS types
- - link to normality, variance homogeneity, regression diagnostics
+ - link to anovaSStypes, normality, varianceHom, regressionDiag
  - use `model.tables()`
 
 Install required packages

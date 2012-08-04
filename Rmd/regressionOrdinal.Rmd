@@ -4,7 +4,7 @@ Ordinal regression
 TODO
 -------------------------
 
- - link to regressionMultinom
+ - link to regressionLogistic, regressionMultinom
 
 Install required packages
 -------------------------

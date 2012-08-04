@@ -4,8 +4,7 @@ Covariance, correlation, and other association measures for continuous variables
 TODO
 -------------------------
 
- - link to `pairs()`
- - link to association, associationOrder
+ - link to diagMultivariate, association, associationOrder
 
 Install required packages
 -------------------------

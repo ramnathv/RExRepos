@@ -4,9 +4,7 @@ One-way ANOVA (CR-$p$ design)
 TODO
 -------------------------
 
- - link to normality, variance homogeneity, regression diagnostics
- - link to regression for model comparison
- - link to resamplingPerm, resamplingBootALM
+ - link to normality, varianceHom, regressionDiag, regression for model comparison, resamplingPerm, resamplingBootALM
 
 Install required packages
 -------------------------

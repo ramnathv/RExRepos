@@ -4,9 +4,7 @@ Transform data frames
 TODO
 -------------------------
 
- - link to strings for `grep()`
- - link to split and merge
- - link to reshape
+ - link to strings for `grep()`, dfSplitMerge, dfReshape
 
 Add variables to a data frame
 -------------------------

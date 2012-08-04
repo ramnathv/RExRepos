@@ -4,7 +4,7 @@ Multinomial regression
 TODO
 -------------------------
 
- - link to regressionOrdinal
+ - link to regressionLogistic, regressionOrdinal
 
 Install required packages
 -------------------------

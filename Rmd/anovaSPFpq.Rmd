@@ -4,9 +4,7 @@ Split-plot-factorial ANOVA (SPF-$p \cdot q$ design)
 TODO
 -------------------------
 
- - link to `lme4::lmer(), nlme::lme()`
- - link to reshape
- - link to SPF-pqr
+ - link to anovaSPFpqr, anovaMixed, dfReshape
 
 Traditional univariate analysis and multivariate approach.
 

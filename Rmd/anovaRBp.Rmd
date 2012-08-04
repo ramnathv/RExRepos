@@ -4,8 +4,7 @@ One-way repeated measures ANOVA (RB-$p$ design)
 TODO
 -------------------------
 
- - link to `lme4::lmer(), nlme::lme()`
- - link to reshape
+ - link to anovaMixed, dfReshape
 
 Traditional univariate analysis and multivariate approach.
 

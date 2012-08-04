@@ -4,9 +4,7 @@ Multiple linear regression
 TODO
 -------------------------
 
- - link to regression diagnostics
- - link to regrModMed
- - link to crossvalidation
+ - link to regressionDiag, regressionModMed, crossvalidation, resamplingBootALM
  - make [`rgl`](http://cran.r-project.org/package=rgl) snapshot work with `knitr`
 
 Install required packages

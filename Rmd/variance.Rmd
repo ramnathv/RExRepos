@@ -4,7 +4,7 @@ Variance, other spread measures, skewness and kurtosis
 TODO
 -------------------------
 
- - link to diagDistributions
+ - link to diagDistributions, varianceHom
 
 Install required packages
 -------------------------

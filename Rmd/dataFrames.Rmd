@@ -5,10 +5,7 @@ TODO
 -------------------------
 
  - `head()`, `tail()`, `some()` from package [`car`](http://cran.r-project.org/package=car)
- - link to strings for `gsub()`
- - link to transform
- - link to split and merge
- - link to reshape
+ - link to strings for `gsub()`, dfTransform, dfSplitMerge, dfReshape
 
 Create and analyze data frames
 -------------------------

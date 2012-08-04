@@ -4,8 +4,7 @@ Multivariate multiple regression
 TODO
 -------------------------
 
- - link to OLS for diagnostics
- - link to anovaSStypes
+ - link to regressionDiag, anovaSStypes
 
 Install required packages
 -------------------------

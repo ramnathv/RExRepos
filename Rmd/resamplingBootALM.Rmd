@@ -4,8 +4,8 @@ Bootstrapping linear models
 TODO
 -------------------------
 
- - generalized linear models
- - link to bootstrapping
+ - GLM example
+ - link to resamplingBoot
 
 Install required packages
 -------------------------

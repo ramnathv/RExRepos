@@ -1,0 +1,12 @@
+.Rproj.user
+*.py
+*.tar.gz
+*.zip
+TODO.txt
+RmdTmp
+rerMd
+rerMdWP
+html
+CRFpqCells.md
+knitAll.r
+r2WordPress.r

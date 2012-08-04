@@ -4,8 +4,7 @@ Multivariate analysis of variance (MANOVA)
 TODO
 -------------------------
 
- - link to multDiskrAn
- - link to anovaSStypes
+ - link to multLDA, anovaSStypes
 
 Install required packages
 -------------------------

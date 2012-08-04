@@ -4,7 +4,7 @@ Linear discriminant analysis (LDA)
 TODO
 -------------------------
 
- - link to logistic, ordinal/multinomial regression
+ - link to regressionLogistic, regressionOrdinal, regressionMultinom
 
 Install required packages
 -------------------------

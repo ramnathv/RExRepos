@@ -4,7 +4,7 @@ Analysis of covariance (ANCOVA)
 TODO
 -------------------------
 
- - link to SS types
+ - link to anovaSStypes
 
 Install required packages
 -------------------------

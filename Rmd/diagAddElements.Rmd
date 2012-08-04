@@ -10,8 +10,7 @@ TODO
 -------------------------
 
  - include t-test power-plot
- - splines
- - link to device for regions
+ - link to diagDevice for regions
 
 Install required packages
 -------------------------

@@ -10,8 +10,7 @@ TODO
 -------------------------
 
  - `some()` from package [`car`](http://cran.r-project.org/package=car)
- - link to recode
- - link to sort data frames
+ - link to recode, dataFrames
 
 Convert between data types
 -------------------------
