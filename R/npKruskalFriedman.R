@@ -42,33 +42,11 @@ JTdf <- data.frame(IV=ordered(rep(LETTERS[1:P], Nj)),
 
 
 ## @knitr unnamed-chunk-8
-ff <- function(x) {
-    K <- contrMat(table(x), "Tukey")[ , x]
-    as.vector(rep(1, nrow(K)) %*% K)
-}
-
-independence_test(DV ~ IV, data=JTdf,
-                  ytrafo=rank,
-                  xtrafo=function(data) { trafo(data, factor_trafo=ff) },
-                  alternative="greater",
-                  distribution=approximate(B=9999))
-
-
-## @knitr unnamed-chunk-9
-set.seed(1.234)
-P    <- 4
-Nj   <- c(41, 37, 42, 40)
-muJ  <- rep(c(-1, 0, 1, 2), Nj)
-JTdf <- data.frame(IV=ordered(rep(LETTERS[1:P], Nj)),
-                   DV=rnorm(sum(Nj), muJ, 7))
-
-
-## @knitr unnamed-chunk-10
 library(coin)
 kruskal_test(DV ~ IV, distribution=approximate(B=9999), data=JTdf)
 
 
-## @knitr unnamed-chunk-11
+## @knitr unnamed-chunk-9
 N   <- 5
 P   <- 4
 DV1 <- c(14, 13, 12, 11, 10)
@@ -81,19 +59,19 @@ Fdf <- data.frame(id=factor(rep(1:N, times=P)),
                             labels=LETTERS[1:P]))
 
 
-## @knitr unnamed-chunk-12
+## @knitr unnamed-chunk-10
 friedman.test(DV ~ IV | id, data=Fdf)
 
 
-## @knitr unnamed-chunk-13
+## @knitr unnamed-chunk-11
 friedman_test(DV ~ IV | id, distribution=approximate(B=9999), data=Fdf)
 
 
-## @knitr unnamed-chunk-14
+## @knitr unnamed-chunk-12
 oneway_test(DV ~ IV | id, distribution=approximate(B=9999), data=Fdf)
 
 
-## @knitr unnamed-chunk-15
+## @knitr unnamed-chunk-13
 N   <- 10
 P   <- 4
 muJ <- rep(c(-1, 0, 1, 2), each=N)
@@ -102,11 +80,11 @@ Pdf <- data.frame(id=factor(rep(1:N, times=P)),
                   IV=ordered(rep(LETTERS[1:P], each=N)))
 
 
-## @knitr unnamed-chunk-16
+## @knitr unnamed-chunk-14
 friedman_test(DV ~ IV | id, distribution=approximate(B=9999), data=Pdf)
 
 
-## @knitr unnamed-chunk-17
+## @knitr unnamed-chunk-15
 try(detach(package:coin))
 try(detach(package:modeltools))
 try(detach(package:survival))

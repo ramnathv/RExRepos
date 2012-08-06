@@ -28,12 +28,11 @@ P     <- 4
 Nj    <- c(41, 37, 42, 40)
 muJ   <- rep(c(-1, 0, 1, 2), Nj)
 dfCRp <- data.frame(IV=factor(rep(LETTERS[1:P], Nj)),
-                    DV=rnorm(sum(Nj), muJ, 6))
+                    DV=rnorm(sum(Nj), muJ, 5))
 ```
 
-```{r}
-plot.design(DV ~ IV, fun=mean, data=dfCRp,
-            main="Mittelwerte getrennt nach Gruppen")
+```{r rerAnovaCRp01}
+plot.design(DV ~ IV, fun=mean, data=dfCRp, main="Group means")
 ```
 
 ### Using `oneway.test()`
@@ -116,14 +115,14 @@ pairwise.t.test(dfCRp$DV, dfCRp$IV, p.adjust.method="bonferroni")
 (tHSD <- TukeyHSD(aovCRp))
 ```
 
-```{r}
+```{r rerAnovaCRp02}
 plot(tHSD)
 ```
 
 Assess test assumptions
 -------------------------
 
-```{r}
+```{r rerAnovaCRp03}
 Estud <- rstudent(aovCRp)
 qqnorm(Estud, pch=20, cex=2)
 qqline(Estud, col="gray60", lwd=2)
@@ -133,8 +132,8 @@ qqline(Estud, col="gray60", lwd=2)
 shapiro.test(Estud)
 ```
 
-```{r}
-plot(Estud ~ dfCRp$IV, main="Residuen vs. Stufen")
+```{r rerAnovaCRp04}
+plot(Estud ~ dfCRp$IV, main="Residuals per group")
 ```
 
 ```{r}

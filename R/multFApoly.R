@@ -52,21 +52,21 @@ faPCdirect <- fa.poly(ordNum, nfactors=2, rotate="varimax")    # polychoric FA
 faPCdirect$fa$loadings        # loadings are the same as above ...
 
 
-## @knitr unnamed-chunk-9
+## @knitr rerMultFApoly01
 factor.plot(faPCdirect$fa, cut=0.5)
 fa.diagram(faPCdirect)
 
 
-## @knitr unnamed-chunk-10
+## @knitr rerMultFApoly02
 fap <- fa.parallel.poly(ordNum)      # parallel analysis for dichotomous data
 
 
-## @knitr unnamed-chunk-11
+## @knitr rerMultFApoly03
 fap
 vss(pc$correlations, n.obs=N, rotate="varimax")   # very simple structure
 
 
-## @knitr unnamed-chunk-12
+## @knitr unnamed-chunk-9
 try(detach(package:psych))
 try(detach(package:polycor))
 try(detach(package:sfsmisc))

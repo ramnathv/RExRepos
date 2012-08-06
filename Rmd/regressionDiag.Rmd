@@ -1,6 +1,11 @@
 Regression diagnostics
 =========================
 
+```{r echo=FALSE}
+opts_knit$set(self.contained=FALSE)
+opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE, comment="")
+```
+
 TODO
 -------------------------
 
@@ -49,7 +54,7 @@ summary(sqrt(mahaSq))
 
 ### Multivariate outlier
 
-```{r}
+```{r rerRegressionDiag01}
 library(mvoutlier)
 aqRes <- aq.plot(xyMat)
 which(aqRes$outliers)
@@ -74,7 +79,7 @@ inflRes <- influence.measures(fit)
 summary(inflRes)
 ```
 
-```{r}
+```{r rerRegressionDiag02}
 library(car)
 influenceIndexPlot(fit)
 ```
@@ -89,14 +94,14 @@ Estud <- rstudent(fit)
 
 ### Normality assumption
 
-```{r}
+```{r rerRegressionDiag03}
 par(mar=c(5, 4.5, 4, 2)+0.1)
-hist(Estud, main="Histogramm stud. Residuen", breaks="FD", freq=FALSE)
+hist(Estud, main="Histogram studentized residals", breaks="FD", freq=FALSE)
 curve(dnorm(x, mean=0, sd=1), col="red", lwd=2, add=TRUE)
 ```
 
-```{r}
-qqPlot(Estud, distribution="norm", pch=20, main="Q-Q-Plot stud. Residuen")
+```{r rerRegressionDiag04}
+qqPlot(Estud, distribution="norm", pch=20, main="QQ-Plot studentized residuals")
 qqline(Estud, col="red", lwd=2)
 ```
 
@@ -107,7 +112,7 @@ shapiro.test(Estud)
 ### Independence and homoscedasticity assumption
 #### Spread-level plot
 
-```{r}
+```{r rerRegressionDiag05}
 spreadLevelPlot(fit, pch=20)
 ```
 
@@ -138,6 +143,7 @@ white.test(dfRegr$X1, dfRegr$Y)
 ```{r results='hide'}
 white.test(dfRegr$X2, dfRegr$Y)
 white.test(dfRegr$X3, dfRegr$Y)
+# not run
 ```
 
 ### Response transformations
@@ -212,3 +218,8 @@ try(detach(package:car))
 try(detach(package:nnet))
 try(detach(package:MASS))
 ```
+
+Get this post from github
+----------------------------------------------
+
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regressionDiag.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regressionDiag.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/regressionDiag.R) - ([all posts](https://github.com/dwoll/RExRepos))

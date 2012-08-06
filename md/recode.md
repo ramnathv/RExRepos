@@ -10,9 +10,11 @@ Install required packages
 [`car`](http://cran.r-project.org/package=car), [`gdata`](http://cran.r-project.org/package=gdata)
 
 
-    wants <- c("car", "gdata")
-    has   <- wants %in% rownames(installed.packages())
-    if(any(!has)) install.packages(wants[!has])
+```r
+wants <- c("car", "gdata")
+has   <- wants %in% rownames(installed.packages())
+if(any(!has)) install.packages(wants[!has])
+```
 
 
 Recode numerical or character variables
@@ -21,55 +23,79 @@ Recode numerical or character variables
 ### Using index vectors
 
 
-    myColors <- c("red", "purple", "blue", "blue", "orange", "red", "orange")
-    farben   <- character(length(myColors))
-    farben[myColors == "red"]    <- "rot"
-    farben[myColors == "purple"] <- "violett"
-    farben[myColors == "blue"]   <- "blau"
-    farben[myColors == "orange"] <- "orange"
-    farben
+```r
+myColors <- c("red", "purple", "blue", "blue", "orange", "red", "orange")
+farben   <- character(length(myColors))
+farben[myColors == "red"]    <- "rot"
+farben[myColors == "purple"] <- "violett"
+farben[myColors == "blue"]   <- "blau"
+farben[myColors == "orange"] <- "orange"
+farben
+```
 
-    [1] "rot"     "violett" "blau"    "blau"    "orange"  "rot"     "orange" 
+```
+[1] "rot"     "violett" "blau"    "blau"    "orange"  "rot"     "orange" 
+```
 
 
 
-    replace(c(1, 2, 3, 4, 5), list=c(2, 4), values=c(200, 400))
+```r
+replace(c(1, 2, 3, 4, 5), list=c(2, 4), values=c(200, 400))
+```
 
-    [1]   1 200   3 400   5
+```
+[1]   1 200   3 400   5
+```
 
 
 ### Using `recode()` from package `car`
 
 
-    library(car)
-    recode(myColors, "'red'='rot'; 'blue'='blau'; 'purple'='violett'")
+```r
+library(car)
+recode(myColors, "'red'='rot'; 'blue'='blau'; 'purple'='violett'")
+```
 
-    [1] "rot"     "violett" "blau"    "blau"    "orange"  "rot"     "orange" 
+```
+[1] "rot"     "violett" "blau"    "blau"    "orange"  "rot"     "orange" 
+```
 
 
 
-    recode(myColors, "c('red', 'blue')='basic'; else='complex'")
+```r
+recode(myColors, "c('red', 'blue')='basic'; else='complex'")
+```
 
-    [1] "basic"   "complex" "basic"   "basic"   "complex" "basic"   "complex"
+```
+[1] "basic"   "complex" "basic"   "basic"   "complex" "basic"   "complex"
+```
 
 
 ### Using `ifelse()`
 
 
-    orgVec <- c(5, 9, 11, 8, 9, 3, 1, 13, 9, 12, 5, 12, 6, 3, 17, 5, 8, 7)
-    cutoff <- 10
-    (reVec <- ifelse(orgVec <= cutoff, orgVec, cutoff))
+```r
+orgVec <- c(5, 9, 11, 8, 9, 3, 1, 13, 9, 12, 5, 12, 6, 3, 17, 5, 8, 7)
+cutoff <- 10
+(reVec <- ifelse(orgVec <= cutoff, orgVec, cutoff))
+```
 
-     [1]  5  9 10  8  9  3  1 10  9 10  5 10  6  3 10  5  8  7
+```
+ [1]  5  9 10  8  9  3  1 10  9 10  5 10  6  3 10  5  8  7
+```
 
 
 
-    targetSet <- c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K")
-    response  <- c("Z", "E", "O", "W", "H", "C", "I", "G", "A", "O", "B")
-    (respRec  <- ifelse(response %in% targetSet, response, "other"))
+```r
+targetSet <- c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K")
+response  <- c("Z", "E", "O", "W", "H", "C", "I", "G", "A", "O", "B")
+(respRec  <- ifelse(response %in% targetSet, response, "other"))
+```
 
-     [1] "other" "E"     "other" "other" "H"     "C"     "I"     "G"    
-     [9] "A"     "other" "B"    
+```
+ [1] "other" "E"     "other" "other" "H"     "C"     "I"     "G"    
+ [9] "A"     "other" "B"    
+```
 
 
 Cut continuous variables into categorical variables
@@ -78,45 +104,65 @@ Cut continuous variables into categorical variables
 ### Free recoding of value ranges into categories
 
 
-    set.seed(1.234)
-    IQ <- rnorm(20, mean=100, sd=15)
-    ifelse(IQ >= 100, "hi", "lo")
+```r
+set.seed(1.234)
+IQ <- rnorm(20, mean=100, sd=15)
+ifelse(IQ >= 100, "hi", "lo")
+```
 
-     [1] "lo" "hi" "lo" "hi" "hi" "lo" "hi" "hi" "hi" "lo" "hi" "hi" "lo" "lo"
-    [15] "hi" "lo" "lo" "hi" "hi" "hi"
+```
+ [1] "lo" "hi" "lo" "hi" "hi" "lo" "hi" "hi" "hi" "lo" "hi" "hi" "lo" "lo"
+[15] "hi" "lo" "lo" "hi" "hi" "hi"
+```
 
 
 
-    library(car)
-    recode(IQ, "0:100=1; 101:115=2; else=3")
+```r
+library(car)
+recode(IQ, "0:100=1; 101:115=2; else=3")
+```
 
-     [1] 1 2 1 3 2 1 2 2 2 1 3 2 1 1 3 1 1 2 2 2
+```
+ [1] 1 2 1 3 2 1 2 2 2 1 3 2 1 1 3 1 1 2 2 2
+```
 
 
 ### Turn ordered value ranges into factor levels using `cut()`
 
 
-    IQfac <- cut(IQ, breaks=c(0, 85, 115, Inf), labels=c("lo", "mid", "hi"))
-    head(IQfac)
+```r
+IQfac <- cut(IQ, breaks=c(0, 85, 115, Inf), labels=c("lo", "mid", "hi"))
+head(IQfac)
+```
 
-    [1] mid mid mid hi  mid mid
-    Levels: lo mid hi
-
-
-
-    medSplit <- cut(IQ, breaks=c(-Inf, median(IQ), Inf))
-    summary(medSplit)
-
-    (-Inf,105] (105, Inf] 
-            10         10 
+```
+[1] mid mid mid hi  mid mid
+Levels: lo mid hi
+```
 
 
 
-    IQdiscr <- cut(IQ, quantile(IQ), include.lowest=TRUE)
-    summary(IQdiscr)
+```r
+medSplit <- cut(IQ, breaks=c(-Inf, median(IQ), Inf))
+summary(medSplit)
+```
 
-    [66.8,94.2]  (94.2,105]   (105,111]   (111,124] 
-              5           5           5           5 
+```
+(-Inf,105] (105, Inf] 
+        10         10 
+```
+
+
+
+```r
+IQdiscr <- cut(IQ, quantile(IQ), include.lowest=TRUE)
+summary(IQdiscr)
+```
+
+```
+[66.8,94.2]  (94.2,105]   (105,111]   (111,124] 
+          5           5           5           5 
+```
 
 
 Recode factors
@@ -126,97 +172,143 @@ Recode factors
 #### Add factor levels
 
 
-    (status <- factor(c("hi", "lo", "hi")))
+```r
+(status <- factor(c("hi", "lo", "hi")))
+```
 
-    [1] hi lo hi
-    Levels: hi lo
+```
+[1] hi lo hi
+Levels: hi lo
+```
 
-    status[4] <- "mid"
-    status
+```r
+status[4] <- "mid"
+status
+```
 
-    [1] hi   lo   hi   <NA>
-    Levels: hi lo
+```
+[1] hi   lo   hi   <NA>
+Levels: hi lo
+```
 
-    levels(status) <- c(levels(status), "mid")
-    status[4] <- "mid"
-    status
+```r
+levels(status) <- c(levels(status), "mid")
+status[4] <- "mid"
+status
+```
 
-    [1] hi  lo  hi  mid
-    Levels: hi lo mid
+```
+[1] hi  lo  hi  mid
+Levels: hi lo mid
+```
 
 
 #### Combine factor levels
 
 
-    hiNotHi <- status
-    levels(hiNotHi) <- list(hi="hi", notHi=c("mid", "lo"))
-    hiNotHi
+```r
+hiNotHi <- status
+levels(hiNotHi) <- list(hi="hi", notHi=c("mid", "lo"))
+hiNotHi
+```
 
-    [1] hi    notHi hi    notHi
-    Levels: hi notHi
+```
+[1] hi    notHi hi    notHi
+Levels: hi notHi
+```
 
 
 
-    library(car)
-    (statNew <- recode(status, "'hi'='high'; c('mid', 'lo')='notHigh'"))
+```r
+library(car)
+(statNew <- recode(status, "'hi'='high'; c('mid', 'lo')='notHigh'"))
+```
 
-    [1] high    notHigh high    notHigh
-    Levels: high notHigh
+```
+[1] high    notHigh high    notHigh
+Levels: high notHigh
+```
 
 
 #### Remove factor levels
 
 
-    status[1:2]
+```r
+status[1:2]
+```
 
-    [1] hi lo
-    Levels: hi lo mid
+```
+[1] hi lo
+Levels: hi lo mid
+```
 
-    (newStatus <- droplevels(status[1:2]))
+```r
+(newStatus <- droplevels(status[1:2]))
+```
 
-    [1] hi lo
-    Levels: hi lo
+```
+[1] hi lo
+Levels: hi lo
+```
 
 
 ### Reorder factor levels
 #### Using `reorder.factor()` from package `gdata`
 
 
-    (facGrp <- factor(rep(LETTERS[1:3], each=5)))
+```r
+(facGrp <- factor(rep(LETTERS[1:3], each=5)))
+```
 
-     [1] A A A A A B B B B B C C C C C
-    Levels: A B C
+```
+ [1] A A A A A B B B B B C C C C C
+Levels: A B C
+```
 
-    library(gdata)
-    (facRe <- reorder.factor(facGrp, new.order=c("C", "B", "A")))
+```r
+library(gdata)
+(facRe <- reorder.factor(facGrp, new.order=c("C", "B", "A")))
+```
 
-     [1] A A A A A B B B B B C C C C C
-    Levels: C B A
+```
+ [1] A A A A A B B B B B C C C C C
+Levels: C B A
+```
 
 
 #### Reorder group levels according to group statistics
 
 
-    vec <- rnorm(15, rep(c(10, 5, 15), each=5), 3)
-    tapply(vec, facGrp, FUN=mean)
+```r
+vec <- rnorm(15, rep(c(10, 5, 15), each=5), 3)
+tapply(vec, facGrp, FUN=mean)
+```
 
-         A      B      C 
-    10.244  3.954 15.128 
+```
+     A      B      C 
+10.244  3.954 15.128 
+```
 
-    reorder(facGrp, vec, FUN=mean)
+```r
+reorder(facGrp, vec, FUN=mean)
+```
 
-     [1] A A A A A B B B B B C C C C C
-    Levels: B A C
+```
+ [1] A A A A A B B B B B C C C C C
+Levels: B A C
+```
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-    try(detach(package:car))
-    try(detach(package:nnet))
-    try(detach(package:MASS))
-    try(detach(package:gdata))
+```r
+try(detach(package:car))
+try(detach(package:nnet))
+try(detach(package:MASS))
+try(detach(package:gdata))
+```
 
 
 Get this post from github

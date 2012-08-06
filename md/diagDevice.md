@@ -15,48 +15,74 @@ Opening and closing a device
 -------------------------
 
 
-    dev.new(); dev.new(); dev.new()
-    dev.list()
+```r
+dev.new(); dev.new(); dev.new()
+dev.list()
+```
 
-    pdf pdf pdf pdf 
-      2   3   4   5 
+```
+pdf pdf pdf pdf 
+  2   3   4   5 
+```
 
-    dev.cur()
+```r
+dev.cur()
+```
 
-    pdf 
-      5 
+```
+pdf 
+  5 
+```
 
-    dev.set(3)
+```r
+dev.set(3)
+```
 
-    pdf 
-      3 
+```
+pdf 
+  3 
+```
 
-    dev.set(dev.next())
+```r
+dev.set(dev.next())
+```
 
-    pdf 
-      4 
+```
+pdf 
+  4 
+```
 
-    dev.off()
+```r
+dev.off()
+```
 
-    pdf 
-      5 
+```
+pdf 
+  5 
+```
 
-    graphics.off()
+```r
+graphics.off()
+```
 
 
 Saving plots to a graphics file
 -------------------------
 
 
-    pdf("pdf_test.pdf")
-    plot(1:10, rnorm(10))
-    dev.off()
+```r
+pdf("pdf_test.pdf")
+plot(1:10, rnorm(10))
+dev.off()
+```
 
 
 
-    plot(1:10, rnorm(10))
-    dev.copy(jpeg, filename="copied.jpg", quality=90)
-    graphics.off()
+```r
+plot(1:10, rnorm(10))
+dev.copy(jpeg, filename="copied.jpg", quality=90)
+graphics.off()
+```
 
 
 Get this post from github

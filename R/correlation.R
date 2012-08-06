@@ -111,7 +111,7 @@ corr.test(DVmat, adjust="bonferroni")
 ## @knitr unnamed-chunk-21
 cor.test(DV1, DV2, method="spearman")
 library(coin)
-spearman_test(DV1 ~ DV2, distribution=approximate(B=5000))
+spearman_test(DV1 ~ DV2, distribution=approximate(B=9999))
 
 
 ## @knitr unnamed-chunk-22

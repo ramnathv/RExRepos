@@ -54,7 +54,8 @@ mauchly.test(fitRBp, M=~IV, X=~1, idata=inRBp)
 
 
 ## @knitr unnamed-chunk-11
-DVw     <- data.matrix(subset(dfRBpW, select=c("DV.1", "DV.2", "DV.3", "DV.4")))
+DVw     <- data.matrix(subset(dfRBpW,
+                       select=c("DV.1", "DV.2", "DV.3", "DV.4")))
 diffMat <- combn(1:P, 2, function(x) { DVw[ , x[1]] - DVw[ , x[2]] } )
 DVdiff  <- diffMat[ , 1:(P-1), drop=FALSE]
 muH0    <- rep(0, ncol(DVdiff))

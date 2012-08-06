@@ -43,17 +43,17 @@ anderson <- factor.scores(x=X, f=faPC, method="Anderson")
 head(anderson$scores)
 
 
-## @knitr unnamed-chunk-8
+## @knitr rerMultFA01
 factor.plot(faPC, cut=0.5)
 fa.diagram(faPC)
 
 
-## @knitr unnamed-chunk-9
-fa.parallel(X)                      # parallel analysis
-vss(X, n.obs=N, rotate="varimax")   # very simple structure
+## @knitr rerMultFA02
+fa.parallel(X)                     ## parallel analysis
+vss(X, n.obs=N, rotate="varimax")  ## very simple structure
 
 
-## @knitr unnamed-chunk-10
+## @knitr unnamed-chunk-8
 try(detach(package:psych))
 try(detach(package:GPArotation))
 try(detach(package:mvtnorm))

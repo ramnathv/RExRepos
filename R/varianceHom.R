@@ -15,33 +15,33 @@ varDf <- data.frame(DV=c(DV1, DV2),
                     IV=factor(rep(1:P, Nj)))
 
 
-## @knitr unnamed-chunk-3
+## @knitr rerVarHom01
 boxplot(DV ~ IV, data=varDf)
 stripchart(DV ~ IV, data=varDf, pch=16, vert=TRUE, add=TRUE)
 
 
-## @knitr unnamed-chunk-4
+## @knitr unnamed-chunk-3
 var.test(DV1, DV2)
 
 
-## @knitr unnamed-chunk-5
+## @knitr unnamed-chunk-4
 var.test(DV ~ IV, data=varDf)
 
 
-## @knitr unnamed-chunk-6
+## @knitr unnamed-chunk-5
 mood.test(DV ~ IV, alternative="greater", data=varDf)
 
 
-## @knitr unnamed-chunk-7
+## @knitr unnamed-chunk-6
 ansari.test(DV ~ IV, alternative="greater", exact=FALSE, data=varDf)
 
 
-## @knitr unnamed-chunk-8
+## @knitr unnamed-chunk-7
 library(coin)
 ansari_test(DV ~ IV, alternative="greater", distribution="exact", data=varDf)
 
 
-## @knitr unnamed-chunk-9
+## @knitr unnamed-chunk-8
 Nj    <- c(22, 18, 20)
 N     <- sum(Nj)
 P     <- length(Nj)
@@ -49,27 +49,27 @@ levDf <- data.frame(DV=sample(0:100, N, replace=TRUE),
                     IV=factor(rep(1:P, Nj)))
 
 
-## @knitr unnamed-chunk-10
+## @knitr rerVarHom02
 boxplot(DV ~ IV, data=levDf)
 stripchart(DV ~ IV, data=levDf, pch=20, vert=TRUE, add=TRUE)
 
 
-## @knitr unnamed-chunk-11
+## @knitr unnamed-chunk-9
 library(car)
 leveneTest(DV ~ IV, center=median, data=levDf)
 leveneTest(DV ~ IV, center=mean, data=levDf)
 
 
-## @knitr unnamed-chunk-12
+## @knitr unnamed-chunk-10
 fligner.test(DV ~ IV, data=levDf)
 
 
-## @knitr unnamed-chunk-13
+## @knitr unnamed-chunk-11
 library(coin)
 fligner_test(DV ~ IV, distribution=approximate(B=9999), data=levDf)
 
 
-## @knitr unnamed-chunk-14
+## @knitr unnamed-chunk-12
 try(detach(package:car))
 try(detach(package:nnet))
 try(detach(package:MASS))

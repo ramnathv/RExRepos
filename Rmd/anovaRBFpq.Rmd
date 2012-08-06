@@ -63,7 +63,8 @@ summary(AnovaRBFpq, multivariate=FALSE, univariate=TRUE)
 ```{r}
 anova(fitRBFpq, M=~IV1, X=~1, idata=inRBFpq, test="Spherical")
 anova(fitRBFpq, M=~IV1 + IV2, X=~IV1, idata=inRBFpq, test="Spherical")
-anova(fitRBFpq, M=~IV1 + IV2 + IV1:IV2, X=~IV1 + IV2, idata=inRBFpq, test="Spherical")
+anova(fitRBFpq, M=~IV1 + IV2 + IV1:IV2, X=~IV1 + IV2,
+      idata=inRBFpq, test="Spherical")
 ```
 
 Mauchly-Test IV1 hier unnoetig, da P=2 -> Zirkularitaet liegt automatisch vor

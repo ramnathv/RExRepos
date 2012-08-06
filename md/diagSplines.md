@@ -8,18 +8,25 @@ Linear interpolation
 -------------------------
 
 
-    set.seed(1.234)
-    xOne     <- 1:9
-    yOne     <- rnorm(9)
-    ptsLin   <- approx(xOne, yOne, method="linear",   n=30)
-    ptsConst <- approx(xOne, yOne, method="constant", n=30)
-    plot(xOne, yOne, xlab=NA, ylab=NA, pch=19, main="Linear interpolation", cex=1.5)
-    points(ptsLin,   pch=16, col="red",  lwd=1.5)
-    points(ptsConst, pch=22, col="blue", lwd=1.5)
-    legend(x="bottomleft", c("Data", "linear", "constant"), pch=c(19, 16, 22),
-           col=c("black", "red", "blue"), bg="white")
+```r
+set.seed(1.234)
+xOne     <- 1:9
+yOne     <- rnorm(9)
+ptsLin   <- approx(xOne, yOne, method="linear",   n=30)
+ptsConst <- approx(xOne, yOne, method="constant", n=30)
+```
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
+
+
+```r
+plot(xOne, yOne, xlab=NA, ylab=NA, pch=19, main="Linear interpolation", cex=1.5)
+points(ptsLin,   pch=16, col="red",  lwd=1.5)
+points(ptsConst, pch=22, col="blue", lwd=1.5)
+legend(x="bottomleft", c("Data", "linear", "constant"), pch=c(19, 16, 22),
+       col=c("black", "red", "blue"), bg="white")
+```
+
+![plot of chunk rerDiagSplines01](figure/rerDiagSplines01.png) 
 
 
 Polynomial smoothing
@@ -28,21 +35,25 @@ Polynomial smoothing
 Local polynomial regression fitting
 
 
-    xTwo  <- rnorm(100)
-    yTwo  <- 0.4 * xTwo + rnorm(100, 0, 1)
-    ptsL1 <- loess.smooth(xTwo, yTwo, span=1/3)
-    ptsL2 <- loess.smooth(xTwo, yTwo, span=2/3)
+```r
+xTwo  <- rnorm(100)
+yTwo  <- 0.4 * xTwo + rnorm(100, 0, 1)
+ptsL1 <- loess.smooth(xTwo, yTwo, span=1/3)
+ptsL2 <- loess.smooth(xTwo, yTwo, span=2/3)
+```
 
 
 
-    plot(xTwo, yTwo, xlab=NA, ylab=NA, pch=16, main="Smoothed scatter plot")
-    lines(ptsL1, lwd=2, col="red")
-    lines(ptsL2, lwd=2, col="blue")
-    legend(x="topleft", c("Data", "LOESS span 1/3", "LOESS span 2/3"),
-           pch=c(19, NA, NA), lty=c(NA, 1, 1),
-           col=c("black", "red", "blue"))
+```r
+plot(xTwo, yTwo, xlab=NA, ylab=NA, pch=16, main="Smoothed scatter plot")
+lines(ptsL1, lwd=2, col="red")
+lines(ptsL2, lwd=2, col="blue")
+legend(x="topleft", c("Data", "LOESS span 1/3", "LOESS span 2/3"),
+       pch=c(19, NA, NA), lty=c(NA, 1, 1),
+       col=c("black", "red", "blue"))
+```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
+![plot of chunk rerDiagSplines02](figure/rerDiagSplines02.png) 
 
 
 See `supsmu()` for Friedman's SuperSmoother and `smooth()` for Tukey's (running median) smoothing.
@@ -53,44 +64,50 @@ Splines
 ### X-spline
 
 
-    ord   <- order(xTwo)
-    idx   <- seq(9, 89, by=20)
-    cPtsX <- xTwo[ord][idx]
-    cPtsY <- yTwo[ord][idx]
-    plot(cPtsX, cPtsY, xlab=NA, ylab=NA, main="X-spline", type="n")
-    xspline(cPtsX, cPtsY, c(1, -1, -1, 1, 1), border="blue",
-            lwd=2, open=FALSE)
-    points(cPtsX, cPtsY, pch=16, cex=1.5)
-    legend(x="topleft", c("Control points", "X-spline"), pch=c(19, NA),
-           lty=c(NA, 1), col=c("black", "blue"))
+```r
+ord   <- order(xTwo)
+idx   <- seq(9, 89, by=20)
+cPtsX <- xTwo[ord][idx]
+cPtsY <- yTwo[ord][idx]
+plot(cPtsX, cPtsY, xlab=NA, ylab=NA, main="X-spline", type="n")
+xspline(cPtsX, cPtsY, c(1, -1, -1, 1, 1), border="blue",
+        lwd=2, open=FALSE)
+points(cPtsX, cPtsY, pch=16, cex=1.5)
+legend(x="topleft", c("Control points", "X-spline"), pch=c(19, NA),
+       lty=c(NA, 1), col=c("black", "blue"))
+```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5.png) 
+![plot of chunk rerDiagSplines03](figure/rerDiagSplines03.png) 
 
 
 ### Cubic splines
 
 
-    ptsSpline <- spline(xOne, yOne, n=201)
-    smSpline1 <- smooth.spline(xOne, yOne, spar=0.25)
-    smSpline2 <- smooth.spline(xOne, yOne, spar=0.35)
-    smSpline3 <- smooth.spline(xOne, yOne, spar=0.45)
-    ptsX      <- seq(1, 9, length.out=201)
-    ptsSmSpl1 <- predict(smSpline1, ptsX)
-    ptsSmSpl2 <- predict(smSpline2, ptsX)
-    ptsSmSpl3 <- predict(smSpline3, ptsX)
+```r
+ptsSpline <- spline(xOne, yOne, n=201)
+smSpline1 <- smooth.spline(xOne, yOne, spar=0.25)
+smSpline2 <- smooth.spline(xOne, yOne, spar=0.35)
+smSpline3 <- smooth.spline(xOne, yOne, spar=0.45)
+ptsX      <- seq(1, 9, length.out=201)
+ptsSmSpl1 <- predict(smSpline1, ptsX)
+ptsSmSpl2 <- predict(smSpline2, ptsX)
+ptsSmSpl3 <- predict(smSpline3, ptsX)
+```
 
 
 
-    plot(xOne, yOne, xlab=NA, ylab=NA, main="Splines", type="n")
-    lines(ptsSpline, col="darkgray", lwd=2)
-    matlines(x=ptsX, y=cbind(ptsSmSpl1$y, ptsSmSpl2$y, ptsSmSpl3$y),
-             col=c("blue", "green", "orange"), lty=1, lwd=2)
-    points(xOne, yOne, pch=16, cex=1.5)
-    legend(x="topleft", c("Data", "Spline", "spar=0.25", "spar=0.35", "spar=0.45"),
-           pch=c(16, NA, NA, NA, NA), lty=c(NA, 1, 1, 1, 1),
-           col=c("black", "darkgray", "blue", "green", "orange"), bg="white")
+```r
+plot(xOne, yOne, xlab=NA, ylab=NA, main="Splines", type="n")
+lines(ptsSpline, col="darkgray", lwd=2)
+matlines(x=ptsX, y=cbind(ptsSmSpl1$y, ptsSmSpl2$y, ptsSmSpl3$y),
+         col=c("blue", "green", "orange"), lty=1, lwd=2)
+points(xOne, yOne, pch=16, cex=1.5)
+legend(x="topleft", c("Data", "Spline", "spar=0.25", "spar=0.35", "spar=0.45"),
+       pch=c(16, NA, NA, NA, NA), lty=c(NA, 1, 1, 1, 1),
+       col=c("black", "darkgray", "blue", "green", "orange"), bg="white")
+```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7.png) 
+![plot of chunk rerDiagSplines04](figure/rerDiagSplines04.png) 
 
 
 Get this post from github

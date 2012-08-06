@@ -25,7 +25,7 @@ names(tab)
 tab["B"]
 ```
 
-```{r}
+```{r rerFrequencies01}
 barplot(tab, main="Counts")
 ```
 
@@ -82,7 +82,7 @@ N    <- 10
 summary(cTab)
 ```
 
-```{r}
+```{r rerFrequencies02}
 barplot(cTab, beside=TRUE, legend.text=rownames(cTab), ylab="absolute frequency")
 ```
 
@@ -157,7 +157,7 @@ Fn(sort(vec))
 knots(Fn)
 ```
 
-```{r}
+```{r rerFrequencies03}
 plot(Fn, main="cumulative frequencies")
 ```
 

@@ -32,7 +32,7 @@ Yfac   <- cut(Y, breaks=c(-Inf, median(Y), Inf), labels=c("lo", "hi"))
 dfRegr <- data.frame(X1, X2, Yfac)
 ```
 
-```{r}
+```{r rerRegressionLogistic01}
 cdplot(Yfac ~ X1, data=dfRegr)
 cdplot(Yfac ~ X2, data=dfRegr)
 ```
@@ -52,7 +52,7 @@ exp(confint(glmFit))
 ### Fit the model based on a matrix of counts
 
 ```{r}
-total  <- sample(40:60, N, replace=TRUE)           ## ungleiche n_i
+total  <- sample(40:60, N, replace=TRUE)      ## unequal n_i
 hits   <- rbinom(N, size=total, prob=0.4)
 hitMat <- cbind(hits, total-hits)
 glm(hitMat ~ X1 + X2, family=binomial(link="logit"))
@@ -67,7 +67,7 @@ glm(hitMatRel ~ X1 + X2, weights=total, family=binomial(link="logit"))
 
 ### Fitted logits and probabilities
 
-```{r}
+```{r rerRegressionLogistic02}
 logitHat <- predict(glmFit, type="link")
 plot(logitHat, pch=c(1, 16)[unclass(dfRegr$Yfac)])
 abline(h=0)
@@ -132,7 +132,7 @@ as.vector((1 - exp((2/N) * (LL0 - LLf))) / (1 - exp(LL0)^(2/N)))
 
 ### Crossvalidation
 
-`cv.glm()` function from package `boot`, crossvalidation
+`cv.glm()` function from package `boot`, see crossvalidation
 
 Coefficient and model tests
 -------------------------

@@ -4,8 +4,18 @@ Create and analyze data frames
 TODO
 -------------------------
 
- - `head()`, `tail()`, `some()` from package [`car`](http://cran.r-project.org/package=car)
  - link to strings for `gsub()`, dfTransform, dfSplitMerge, dfReshape
+
+ Install required packages
+-------------------------
+
+[`car`](http://cran.r-project.org/package=car)
+
+```{r}
+wants <- c("car")
+has   <- wants %in% rownames(installed.packages())
+if(any(!has)) install.packages(wants[!has])
+```
 
 Create and analyze data frames
 -------------------------
@@ -33,6 +43,16 @@ nrow(myDf1)
 ncol(myDf1)
 summary(myDf1)
 str(myDf1)
+```
+
+```{r}
+head(myDf1)
+tail(myDf1)
+```
+
+```{r}
+library(car)
+some(myDf1, n=5)
 ```
 
 ```{r eval=FALSE}
@@ -90,7 +110,7 @@ myDf1[, "age"]
 myDf1[1:5, 4, drop=FALSE]
 ```
 
-See `?Extract` for more
+See dfTransform for selecting subsets of data
 
 ### Work with variables from a data frame
 -------------------------
@@ -109,4 +129,13 @@ IQ[3] <- 130; IQ[3]
 myDf1$IQ[3]
 detach(myDf1)
 IQ
+```
+
+Detach (automatically) loaded packages (if possible)
+-------------------------
+
+```{r}
+try(detach(package:car))
+try(detach(package:nnet))
+try(detach(package:MASS))
 ```

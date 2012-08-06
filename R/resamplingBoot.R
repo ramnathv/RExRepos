@@ -32,15 +32,15 @@ SMstar <- sqrt(res[2, ])
 tStar  <- (Mstar-mean(DV)) / SMstar
 
 
-## @knitr unnamed-chunk-5
+## @knitr rerResamplingBoot01
 plot(tStar, ecdf(tStar)(tStar), col="gray60", pch=1, xlab="t* bzw. t",
-     ylab="P(T <= t)", main="t*: Kumulierte rel. Haeufigkeiten und Verteilungsfunktion")
+     ylab="P(T <= t)", main="t*: cumulative rel. frequency and t CDF")
 curve(pt(x, N-1), lwd=2, add=TRUE)
 legend(x="topleft", lty=c(NA, 1), pch=c(1, NA), lwd=c(2, 2),
        col=c("gray60", "black"), legend=c("t*", "t"))
 
 
-## @knitr unnamed-chunk-6
+## @knitr unnamed-chunk-5
 try(detach(package:boot))
 
 

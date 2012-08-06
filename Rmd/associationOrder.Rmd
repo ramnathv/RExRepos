@@ -95,13 +95,15 @@ lrm(yDi ~ x)$stats
 
 ### Area under the Curve (AUC)
 
+Package `ROCR` works with S4 objects -> different method to extract components
+
 ```{r}
 library(ROCR)
 pred <- prediction(x, yDi)
 (AUC <- performance(pred, measure="auc")@y.values[[1]])
 ```
 
-```{r}
+```{r rerAssociationOrder01}
 perf <- performance(pred, measure="tpr", x.measure="fpr")
 par(lend=2)
 plot(perf, col=rainbow(10), lwd=3, main="ROC-Curve, AUC", asp=1,

@@ -21,13 +21,13 @@ Nj    <- table(queue)
 
 ## @knitr unnamed-chunk-4
 getP <- function(r1, r2, n1, n2) {
-    # Anzahl Iterationen einer Gruppe höchstens Gruppengrösse
-    if((r1 > n1) | (r2 > n2)) { return(0) }
+    # iterations of a symbol <= total number of this symbol?
+    stopifnot(r1 <= n1, r2 <= n2)
 
-    # Punktwahrscheinlichkeit fuer r1+r2 ungerade
+    # probability in case r1+r2 is uneven
     p <- (choose(n1-1, r1-1) * choose(n2-1, r2-1)) / choose(n1+n2, n1)
 
-    # Punktwahrscheinlichkeit fuer r1+r2 gerade: das doppelte von ungerade
+    # probability in case r1+r2 is even: twice the uneven case
     ifelse(((r1+r2) %% 2) == 0, 2*p, p)
 }
 

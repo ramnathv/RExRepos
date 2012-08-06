@@ -16,55 +16,56 @@ dice  <- sample(1:6, 100, replace=TRUE)
 (dTab <- table(dice))
 
 
+## @knitr rerDiagCategorical01
+barplot(dTab, ylim=c(0, 30), xlab="Result", ylab="N", col="black",
+        main="Absolute frequency")
+
+
 ## @knitr unnamed-chunk-4
-barplot(dTab, ylim=c(0, 30), xlab="Augenzahl", ylab="N", col="black",
-        main="Absolute Haeufigkeiten")
+barplot(prop.table(dTab), ylim=c(0, 0.3), xlab="Result",
+        ylab="relative frequency", col="gray50",
+		main="Relative frequency")
 
 
-## @knitr unnamed-chunk-5
-barplot(prop.table(dTab), ylim=c(0, 0.3), xlab="Augenzahl",
-        ylab="relative Haeufigkeit", col="gray50", main="Relative Haeufigkeiten")
-
-
-## @knitr unnamed-chunk-6
+## @knitr rerDiagCategorical02
 roll1   <- dice[1:50]
 roll2   <- dice[51:100]
 rollAll <- rbind(table(roll1), table(roll2))
 rownames(rollAll) <- c("first", "second"); rollAll
 
-barplot(rollAll, beside=FALSE, legend.text=TRUE, xlab="Augenzahl", ylab="N",
-        main="Absolute Haeufigkeiten in zwei Substichproben")
+barplot(rollAll, beside=FALSE, legend.text=TRUE, xlab="Result", ylab="N",
+        main="Absolute frequency in two samples")
 
 
-## @knitr unnamed-chunk-7
+## @knitr rerDiagCategorical03
 barplot(rollAll, beside=TRUE, ylim=c(0, 15), col=c("red", "green"),
-        legend.text=TRUE, xlab="Augenzahl", ylab="N",
-        main="Absolute Haeufigkeiten in zwei Substichproben")
+        legend.text=TRUE, xlab="Result", ylab="N",
+        main="Absolute frequency in two samples")
 
 
-## @knitr unnamed-chunk-8
+## @knitr rerDiagCategorical04
 N      <- 100
 age    <- sample(18:45, N, replace=TRUE)
 drinks <- c("beer", "red wine", "white wine")
 pref   <- factor(sample(drinks, N, replace=TRUE))
 xRange <- round(range(age), -1) + c(-10, 10)
 lims   <- c(18, 25, 35, 45)
-spineplot(x=age, y=pref, xlab="Altersstufe", ylab="Getraenk", breaks=lims,
-          main="Bevorzugte Getraenke pro Altersstufe")
+spineplot(x=age, y=pref, xlab="Age class", ylab="drink", breaks=lims,
+          main="Preferred drink by age class")
 
 
-## @knitr unnamed-chunk-9
+## @knitr rerDiagCategorical05
 ageCls <- cut(age, breaks=lims, labels=LETTERS[1:(length(lims)-1)])
 group  <- factor(sample(letters[1:2], N, replace=TRUE))
 cTab   <- table(ageCls, pref, group)
 mosaicplot(cTab, cex.axis=1)
 
 
-## @knitr unnamed-chunk-10
+## @knitr rerDiagCategorical06
 dice <- sample(1:6, 100, replace=TRUE)
 dTab <- table(dice)
 pie(dTab, col=c("blue", "red", "yellow", "pink", "green", "orange"),
-    main="Relative Haeufigkeiten beim Wuerfeln")
+    main="Relative frequencies from rolling dice")
 
 dTabFreq <- prop.table(dTab)
 textRad  <- 0.5
@@ -76,12 +77,12 @@ textY    <- textRad * sin(csAngles)
 text(x=textX, y=textY, labels=dTabFreq)
 
 
-## @knitr unnamed-chunk-11
+## @knitr rerDiagCategorical07
 library(plotrix)
 pie3D(dTab, theta=pi/4, explode=0.1, labels=names(dTab))
 
 
-## @knitr unnamed-chunk-12
+## @knitr unnamed-chunk-5
 N    <- 100
 X    <- rnorm(N, 175, 7)
 Y    <- 0.5*X + rnorm(N, 0, 6)
@@ -89,11 +90,11 @@ Yfac <- cut(Y, breaks=c(-Inf, median(Y), Inf), labels=c("lo", "hi"))
 myDf <- data.frame(X, Yfac)
 
 
-## @knitr unnamed-chunk-13
+## @knitr rerDiagCategorical08
 cdplot(Yfac ~ X, data=myDf)
 
 
-## @knitr unnamed-chunk-14
+## @knitr unnamed-chunk-6
 try(detach(package:plotrix))
 
 

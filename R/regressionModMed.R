@@ -51,6 +51,9 @@ fitY <- lm(Y ~ X + M, data=dfMed)
 library(mediation)
 fitMed <- mediate(fitM, fitY, sims=999, treat="X", mediator="M")
 summary(fitMed)
+
+
+## @knitr rerRegressionModMed01
 plot(fitMed)
 
 

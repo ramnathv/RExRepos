@@ -40,7 +40,8 @@ summary(AnovaRBFpq, multivariate=FALSE, univariate=TRUE)
 ## @knitr unnamed-chunk-6
 anova(fitRBFpq, M=~IV1, X=~1, idata=inRBFpq, test="Spherical")
 anova(fitRBFpq, M=~IV1 + IV2, X=~IV1, idata=inRBFpq, test="Spherical")
-anova(fitRBFpq, M=~IV1 + IV2 + IV1:IV2, X=~IV1 + IV2, idata=inRBFpq, test="Spherical")
+anova(fitRBFpq, M=~IV1 + IV2 + IV1:IV2, X=~IV1 + IV2,
+      idata=inRBFpq, test="Spherical")
 
 
 ## @knitr unnamed-chunk-7

@@ -7,9 +7,11 @@ Install required packages
 [`boot`](http://cran.r-project.org/package=boot)
 
 
-    wants <- c("boot")
-    has   <- wants %in% rownames(installed.packages())
-    if(any(!has)) install.packages(wants[!has])
+```r
+wants <- c("boot")
+has   <- wants %in% rownames(installed.packages())
+if(any(!has)) install.packages(wants[!has])
+```
 
 
 $k$-fold crossvalidation
@@ -18,51 +20,67 @@ $k$-fold crossvalidation
 ### Simulate data
     
 
-    set.seed(1.234)
-    N  <- 100
-    X1 <- rnorm(N, 175, 7)
-    X2 <- rnorm(N,  30, 8)
-    X3 <- abs(rnorm(N, 60, 30))
-    Y  <- 0.5*X1 - 0.3*X2 - 0.4*X3 + 10 + rnorm(N, 0, 3)
-    dfRegr <- data.frame(X1, X2, X3, Y)
+```r
+set.seed(1.234)
+N  <- 100
+X1 <- rnorm(N, 175, 7)
+X2 <- rnorm(N,  30, 8)
+X3 <- abs(rnorm(N, 60, 30))
+Y  <- 0.5*X1 - 0.3*X2 - 0.4*X3 + 10 + rnorm(N, 0, 3)
+dfRegr <- data.frame(X1, X2, X3, Y)
+```
 
 
 ### Crossvalidation
 
 
-    glmFit <- glm(Y ~ X1 + X2 + X3, data=dfRegr,
-                  family=gaussian(link="identity"))
+```r
+glmFit <- glm(Y ~ X1 + X2 + X3, data=dfRegr,
+              family=gaussian(link="identity"))
+```
 
 
 
-    library(boot)
-    k    <- 3
-    kfCV <- cv.glm(data=dfRegr, glmfit=glmFit, K=k)
-    kfCV$delta
+```r
+library(boot)
+k    <- 3
+kfCV <- cv.glm(data=dfRegr, glmfit=glmFit, K=k)
+kfCV$delta
+```
 
-    [1] 9.030 8.954
+```
+[1] 9.030 8.954
+```
 
 
 Leave-one-out crossvalidation
 -------------------------
 
 
-    LOOCV <- cv.glm(data=dfRegr, glmfit=glmFit, K=N)
+```r
+LOOCV <- cv.glm(data=dfRegr, glmfit=glmFit, K=N)
+```
 
 
 CVE = mean(PRESS)
 
 
-    LOOCV$delta
+```r
+LOOCV$delta
+```
 
-    [1] 9.500 9.496
+```
+[1] 9.500 9.496
+```
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-    try(detach(package:boot))
+```r
+try(detach(package:boot))
+```
 
 
 Get this post from github

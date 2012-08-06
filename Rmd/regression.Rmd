@@ -1,6 +1,11 @@
 Multiple linear regression
 =========================
 
+```{r echo=FALSE}
+opts_knit$set(self.contained=FALSE)
+opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE, comment="")
+```
+
 TODO
 -------------------------
 
@@ -38,7 +43,7 @@ dfRegr <- data.frame(X1, X2, X3, Y)
 lm(scale(Y) ~ scale(X1) + scale(X2), data=dfRegr)
 ```
 
-```{r}
+```{r rerRegression01}
 library(car)
 scatter3d(Y ~ X1 + X2, fill=FALSE, data=dfRegr)
 # not shown
@@ -84,7 +89,7 @@ extractAIC(fit1, k=log(N))
 
 ### Crossvalidation
 
-`cv.glm()` function from package `boot`, crossvalidation
+`cv.glm()` function from package `boot`, see crossvalidation
 
 Coefficient and overall tests
 -------------------------
@@ -113,7 +118,7 @@ anova(fit1, fit123)
 
 ### All predictor subsets
 
-```{r}
+```{r rerRegression02}
 data(longley)
 head(longley)
 library(leaps)
@@ -127,7 +132,7 @@ Xmat <- data.matrix(subset(longley, select=c("GNP", "Unemployed", "Population", 
 (leapFits <- leaps(Xmat, longley$GNP.deflator, method="Cp"))
 ```
 
-```{r}
+```{r rerRegression03}
 plot(leapFits$size, leapFits$Cp, xlab="model size", pch=20, col="blue",
      ylab="Mallows' Cp", main="Mallows' Cp agains model size")
 abline(a=0, b=1)
@@ -143,18 +148,18 @@ predict(fit1, dfNew, interval="prediction", level=0.95)
 predOrg <- predict(fit1, interval="confidence", level=0.95)
 ```
 
-```{r}
+```{r rerRegression04}
 hOrd <- order(X1)
 par(lend=2)
-plot(X1, Y, pch=20, xlab="Praediktor", ylab="Kriterium und Vorhersage",
-     xaxs="i", main="Daten und Vorhersage durch Regression")
+plot(X1, Y, pch=20, xlab="Predictor", ylab="Dependent variable and prediction",
+     xaxs="i", main="Data and regression prediction")
 
 polygon(c(X1[hOrd],             X1[rev(hOrd)]),
         c(predOrg[hOrd, "lwr"], predOrg[rev(hOrd), "upr"]),
         border=NA, col=rgb(0.7, 0.7, 0.7, 0.6))
 
 abline(fit1, col="black")
-legend(x="bottomright", legend=c("Daten", "Vorhersage", "Vertrauensbereich"),
+legend(x="bottomright", legend=c("Data", "prediction", "confidence region"),
        pch=c(20, NA, NA), lty=c(NA, 1, 1), lwd=c(NA, 1, 8),
        col=c("black", "blue", "gray"))
 ```
@@ -184,6 +189,8 @@ coeftest(fitLL, vcov=vcovHC)
  - $M$-estimators: `rlm()` from package `MASS`
  - resistant regression: `lqs()` from package `MASS`
 
+More information can be found in CRAN task view [Robust Statistical Methods](http://cran.r-project.org/web/views/Robust.html).
+ 
 ### Penalized regression
 #### Ridge regression
 
@@ -197,6 +204,9 @@ library(MASS)
 lambdas <- 10^(seq(-8, -1, length.out=200))
 lmrFit  <- lm.ridge(GNP.deflator ~ ., lambda=lambdas, data=longley)
 select(lmrFit)
+```
+
+```{r rerRegression05}
 lmrCoef <- coef(lmrFit)
 plot(lmrFit, xlab="lambda", ylab="coefficients")
 plot(lmrFit$lambda, lmrFit$GCV, type="l", xlab="lambda", ylab="GCV")
@@ -217,3 +227,8 @@ try(detach(package:car))
 try(detach(package:nnet))
 try(detach(package:MASS))
 ```
+
+Get this post from github
+----------------------------------------------
+
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regression.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regression.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/regression.R) - ([all posts](https://github.com/dwoll/RExRepos))

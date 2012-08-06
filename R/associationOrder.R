@@ -68,7 +68,7 @@ pred <- prediction(x, yDi)
 (AUC <- performance(pred, measure="auc")@y.values[[1]])
 
 
-## @knitr unnamed-chunk-12
+## @knitr rerAssociationOrder01
 perf <- performance(pred, measure="tpr", x.measure="fpr")
 par(lend=2)
 plot(perf, col=rainbow(10), lwd=3, main="ROC-Curve, AUC", asp=1,
@@ -76,7 +76,7 @@ plot(perf, col=rainbow(10), lwd=3, main="ROC-Curve, AUC", asp=1,
 abline(a=0, b=1)
 
 
-## @knitr unnamed-chunk-13
+## @knitr unnamed-chunk-12
 try(detach(package:ROCR))
 try(detach(package:gplots))
 try(detach(package:gtools))

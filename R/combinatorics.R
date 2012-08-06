@@ -58,20 +58,24 @@ for(i in 1:5) {
 
 
 ## @knitr unnamed-chunk-10
-Njk    <- 4                                 # Zellbesetzung
-P      <- 2                                 # Anzahl Stufen Faktor A
-Q      <- 3                                 # Anzahl Stufen Faktor B
+Njk    <- 4              ## cell size
+P      <- 2              ## levels factor A
+Q      <- 3              ## levels factor B
 N      <- Njk*P*Q
-nPerms <- 10             # Anzahl Permutationen
+nPerms <- 10             ## number of permutations
 id     <- 1:(Njk*P*Q)
-IV1    <- factor(rep(1:P,  each=Njk*Q))     # Faktor A
-IV2    <- factor(rep(1:Q, times=Njk*P))     # Faktor B
+IV1    <- factor(rep(1:P,  each=Njk*Q))  ## factor A
+IV2    <- factor(rep(1:Q, times=Njk*P))  ## factor B
 (myDf  <- data.frame(id, IV1, IV2))
 
-# lege Permutationsschema fuer Test von A, B fest
-library(permute)                                                # fuer permControl(), permute()
-pCtrlA <- permControl(strata=IV2, complete=FALSE, nperm=nPerms) # only permute across A (within B)
-pCtrlB <- permControl(strata=IV1, complete=FALSE, nperm=nPerms) # only permute across B (within A)
+# choose permutation schemes for tests of factor A and B
+library(permute)         ## for permControl(), permute()
+
+## only permute across A (within B)
+pCtrlA <- permControl(strata=IV2, complete=FALSE, nperm=nPerms)
+
+## only permute across B (within A)
+pCtrlB <- permControl(strata=IV1, complete=FALSE, nperm=nPerms)
 
 
 ## @knitr unnamed-chunk-11

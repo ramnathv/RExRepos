@@ -4,7 +4,7 @@ Variance homogeneity in two or more groups
 TODO
 -------------------------
 
-link to variance
+ - link to variance
 
 Install required packages
 -------------------------
@@ -32,7 +32,7 @@ varDf <- data.frame(DV=c(DV1, DV2),
                     IV=factor(rep(1:P, Nj)))
 ```
 
-```{r}
+```{r rerVarHom01}
 boxplot(DV ~ IV, data=varDf)
 stripchart(DV ~ IV, data=varDf, pch=16, vert=TRUE, add=TRUE)
 ```
@@ -77,7 +77,7 @@ levDf <- data.frame(DV=sample(0:100, N, replace=TRUE),
                     IV=factor(rep(1:P, Nj)))
 ```
 
-```{r fig.keep='none'}
+```{r rerVarHom02}
 boxplot(DV ~ IV, data=levDf)
 stripchart(DV ~ IV, data=levDf, pch=20, vert=TRUE, add=TRUE)
 ```

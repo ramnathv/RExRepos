@@ -9,16 +9,15 @@ opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE, comment="")
 TODO
 -------------------------
 
- - `plotcorr()` from package `ellipse`
  - make [`rgl`](http://cran.r-project.org/package=rgl) snapshot work with `knitr`
 
 Install required packages
 -------------------------
 
-[`car`](http://cran.r-project.org/package=car), [`lattice`](http://cran.r-project.org/package=lattice), [`mvtnorm`](http://cran.r-project.org/package=mvtnorm), [`rgl`](http://cran.r-project.org/package=rgl)
+[`car`](http://cran.r-project.org/package=car), [`ellipse`](http://cran.r-project.org/package=ellipse), [`lattice`](http://cran.r-project.org/package=lattice), [`mvtnorm`](http://cran.r-project.org/package=mvtnorm), [`rgl`](http://cran.r-project.org/package=rgl)
 
 ```{r}
-wants <- c("car", "lattice", "mvtnorm", "rgl")
+wants <- c("car", "ellipse", "lattice", "mvtnorm", "rgl")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
 ```
@@ -33,8 +32,8 @@ mu    <- c(1, 3)
 sigma <- matrix(c(1, 0.6, 0.6, 1), nrow=2)
 rng   <- 2.5
 N     <- 50
-X     <- seq(from=mu[1] - rng*sigma[1, 1], to=mu[1] + rng*sigma[1, 1], length.out=N)
-Y     <- seq(from=mu[2] - rng*sigma[2, 2], to=mu[2] + rng*sigma[2, 2], length.out=N)
+X     <- seq(mu[1]-rng*sigma[1, 1], mu[1]+rng*sigma[1, 1], length.out=N)
+Y     <- seq(mu[2]-rng*sigma[2, 2], mu[2]+rng*sigma[2, 2], length.out=N)
 ```
 
 ```{r}
@@ -44,51 +43,52 @@ genZ <- function(x, y) { dmvnorm(cbind(x, y), mu, sigma) }
 matZ <- outer(X, Y, FUN="genZ")
 ```
 
-```{r}
-contour(X, Y, matZ, main="Hoehenlinien fuer 2D-NV Dichte")
-filled.contour(X, Y, matZ, main="Farbige Hoehenlinien fuer 2D-NV Dichte")
+```{r rerDiagMultivariate01}
+contour(X, Y, matZ, main="Contours for 2D-normal density")
+filled.contour(X, Y, matZ, main="Colored contours for 2D-normal density")
 ```
 
 Bubble plot et c.
 -------------------------
 
-```{r}
+```{r rerDiagMultivariate02}
 N      <- 10
 age    <- rnorm(N, 30, 8)
 sport  <- abs(-0.25*age + rnorm(N, 60, 40))
 weight <- -0.3*age -0.4*sport + 100 + rnorm(N, 0, 3)
 wScale <- (weight-min(weight)) * (0.8 / abs(diff(range(weight)))) + 0.2
 symbols(age, sport, circles=wScale, inch=0.6, fg=NULL, bg=rainbow(N),
-        main="Gewicht in Abhaengigkeit von Alter und Sport")
+        main="Weight against age and sport")
 ```
 
-See `sunflowerplot()` for an altenative approach.
+See `sunflowerplot()` and `stars()` for altenative approaches.
 
 
 3-D grid plot
 -------------------------
 
-```{r}
+```{r rerDiagMultivariate03}
 par(cex.main=1.4, mar=c(2, 2, 4, 2) + 0.1)
-persp(X, Y, matZ, xlab="x", ylab="y", zlab="Dichte", theta=5, phi=35,
-      main="Dichte einer 2D Normalverteilung")
+persp(X, Y, matZ, xlab="x", ylab="y", zlab="Density", theta=5, phi=35,
+      main="2D-normal probability density")
 ```
 
 Interactive 3-D scatter plot
 -------------------------
 
-```{r}
+```{r rerDiagMultivariate04}
 library(rgl)
 vecX <- rep(seq(-10, 10, length.out=10), times=10)
 vecY <- rep(seq(-10, 10, length.out=10),  each=10)
 vecZ <- vecX*vecY
-plot3d(vecX, vecY, vecZ, main="3D Scatterplot", col="blue", type="h", aspect=TRUE)
+plot3d(vecX, vecY, vecZ, main="3D Scatterplot",
+       col="blue", type="h", aspect=TRUE)
 spheres3d(vecX, vecY, vecZ, col="red", radius=2)
 grid3d(c("x", "y+", "z"))
 # not shown
 ```
 
-```{r eval=FALSE}
+```{r rerDiagMultivariate05, eval=FALSE}
 demo(rgl)
 example(persp3d)
 # not shown
@@ -97,7 +97,7 @@ example(persp3d)
 Conditioning plots
 -------------------------
 
-```{r}
+```{r rerDiagMultivariate06}
 Njk    <- 25
 P      <- 2
 Q      <- 2
@@ -109,9 +109,10 @@ myDf   <- data.frame(IV1, IV2, IQ, height)
 coplot(IQ ~ height | IV1*IV2, pch=16, data=myDf)
 ```
 
-```{r}
+```{r rerDiagMultivariate07}
 library(lattice)
-res <- histogram(IQ ~ height | IV1*IV2, data=myDf, main="Histogramme pro Gruppe")
+res <- histogram(IQ ~ height | IV1*IV2, data=myDf,
+                 main="Histograms per group")
 print(res)
 ```
 
@@ -129,8 +130,8 @@ score  <- round(-0.3*IQ + 0.7*age + rnorm(N, 0, 8), 1)
 mvDf   <- data.frame(IV, age, IQ, rating, score)
 ```
 
-```{r}
-pairs(mvDf[c("age", "IQ", "rating", "score")], main="Streudiagramm-Matrix",
+```{r rerDiagMultivariate08}
+pairs(mvDf[c("age", "IQ", "rating", "score")], main="Scatter plot matrix",
       pch=16, col=c("red", "blue")[unclass(mvDf$IV)])
 ```
 
@@ -142,39 +143,57 @@ myEll  <- function(x, y, nSegments=100, rad=1, ...) {
     TT <- data.matrix(splLL$T)
 
     library(car)
-    dataEllipse(CG, level=0.5, col="red",  center.pch=4, plot.points=FALSE, add=TRUE)
-    dataEllipse(TT, level=0.5, col="blue", center.pch=4, plot.points=FALSE, add=TRUE)
+    dataEllipse(CG, level=0.5, col="red",  center.pch=4,
+                plot.points=FALSE, add=TRUE)
+    dataEllipse(TT, level=0.5, col="blue", center.pch=4,
+                plot.points=FALSE, add=TRUE)
 }
 ```
 
-```{r}
+```{r rerDiagMultivariate09}
 pairs(mvDf[c("age", "IQ", "rating", "score")], diag.panel=myHist,
-      upper.panel=myEll, main="Streudiagramm-Matrix", pch=16,
+      upper.panel=myEll, main="Scatter plot matrix", pch=16,
       col=c("red", "blue")[unclass(mvDf$IV)])
 ```
 
 Heatmap
 -------------------------
 
+Illustrating the correlation matrix of several variables.
+
 ```{r}
 library(mvtnorm)
 N <- 200
 P <- 8
 Q <- 2
-Lambda <- matrix(round(runif(P*Q, min=-0.8, max=0.8), 1), nrow=P)
+Lambda <- matrix(round(runif(P*Q, min=-0.9, max=0.9), 1), nrow=P)
 FF <- rmvnorm(N, mean=c(0, 0),   sigma=diag(Q))
-E  <- rmvnorm(N, mean=rep(0, P), sigma=diag(P))
+E  <- rmvnorm(N, mean=rep(0, P), sigma=diag(P)*0.3)
 X  <- FF %*% t(Lambda) + E
+```
+
+```{r}
 corMat <- cor(X)
 rownames(corMat) <- paste("X", 1:P, sep="")
 colnames(corMat) <- paste("X", 1:P, sep="")
 round(corMat, 2)
+```
+
+```{r rerDiagMultivariate10}
 image(corMat, axes=FALSE, main=paste("Correlation matrix of", P, "variables"))
 axis(side=1, at=seq(0, 1, length.out=P), labels=rownames(corMat))
 axis(side=2, at=seq(0, 1, length.out=P), labels=colnames(corMat))
 ```
 
-See `heatmap()` for a heatmap including dendograms added to the plot sides.
+See `heatmap()` for a heatmap including dendograms added to the plot sides and correlation for an alternative approach to visualize correlation matrices.
+
+Correlation matrix plot
+-------------------------
+
+```{r rerDiagMultivariate11}
+library(ellipse)
+plotcorr(corMat, type="lower", diag=FALSE, main="Bivariate correlations")
+```
 
 Useful packages
 -------------------------
@@ -188,6 +207,7 @@ Detach (automatically) loaded packages (if possible)
 
 ```{r}
 try(detach(package:car))
+try(detach(package:ellipse))
 try(detach(package:nnet))
 try(detach(package:MASS))
 try(detach(package:mvtnorm))

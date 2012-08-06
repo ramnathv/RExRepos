@@ -104,4 +104,6 @@ newPost(list(description=knit2wp('workflow.html'),
         publish=FALSE)
 ```
 
-For me, this works only if I perform some strange WP vodoo (that I don't understand). I need to make sure the draft is opened first with the WP html editor, not the visual editor. So the html editor has to be "active", i.e., was used last. After openening the draft with the html editor, I have to switch to the visual editor,and then hit "publish". Publishing the post while still in the html editor does not work. Further switching between visual and html editor messes everything up.
+If you plan to edit the post later on, save the return value form `newPost()`: It is the post id, necessary to identify the post using `editPost()`.
+
+For me, all this works fine, but I have to perform some strange WP vodoo (that I don't understand): I need to make sure the draft is opened first with the WP html editor, not the visual editor. So the html editor has to be "active", i.e., was used last. After openening the draft with the html editor, I have to switch to the visual editor,and then hit "publish". Publishing the post while still in the html editor does not work. Further switching between visual and html editor messes everything up.

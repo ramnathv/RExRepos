@@ -15,7 +15,7 @@ addmargins(cTab)
 
 ## @knitr unnamed-chunk-3
 library(coin)
-mh_test(cTab)
+mh_test(cTab, distribution=approximate(B=9999))
 
 
 ## @knitr unnamed-chunk-4

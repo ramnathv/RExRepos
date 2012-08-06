@@ -31,7 +31,7 @@ format(myTime, "%d.%m.%Y")
 
 
 ## @knitr unnamed-chunk-7
-charDates <- c("05.08.1972, 03:37", "31.03.1981, 12:44")
+charDates <- c("05.08.1972, 03:37", "02.04.1981, 12:44")
 (lDates   <- strptime(charDates, format="%d.%m.%Y, %H:%M"))
 
 

@@ -2,6 +2,7 @@
 *.py
 *.tar.gz
 *.zip
+postIDs.txt
 TODO.txt
 RmdTmp
 rerMd

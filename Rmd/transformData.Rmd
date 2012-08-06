@@ -9,8 +9,18 @@ opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE, comment="")
 TODO
 -------------------------
 
- - `some()` from package [`car`](http://cran.r-project.org/package=car)
  - link to recode, dataFrames
+
+ Install required packages
+-------------------------
+
+[`car`](http://cran.r-project.org/package=car)
+
+```{r}
+wants <- c("car")
+has   <- wants %in% rownames(installed.packages())
+if(any(!has)) install.packages(wants[!has])
+```
 
 Convert between data types
 -------------------------
@@ -80,8 +90,13 @@ Select random or systematic subsets of vector elements
 ### Random selection
 
 ```{r}
-vec <- rep(c("rot", "gruen", "blau"), 10)
+vec <- rep(c("red", "green", "blue"), 10)
 sample(vec, 5, replace=FALSE)
+```
+
+```{r}
+library(car)
+some(vec, n=5)
 ```
 
 ### Select every 10th element
@@ -161,4 +176,13 @@ quest1  <- c(FALSE, FALSE, FALSE, TRUE,  FALSE, TRUE, FALSE, TRUE)
 quest2  <- c(TRUE,  FALSE, FALSE, FALSE, TRUE,  TRUE, TRUE,  FALSE)
 quest3  <- c(TRUE,  TRUE,  TRUE,  TRUE,  FALSE, TRUE, FALSE, FALSE)
 (sumVar <- quest1 + quest2 + quest3)
+```
+
+Detach (automatically) loaded packages (if possible)
+-------------------------
+
+```{r}
+try(detach(package:car))
+try(detach(package:nnet))
+try(detach(package:MASS))
 ```

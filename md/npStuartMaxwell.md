@@ -7,53 +7,65 @@ Install required packages
 [`coin`](http://cran.r-project.org/package=coin)
 
 
-    wants <- c("coin")
-    has   <- wants %in% rownames(installed.packages())
-    if(any(!has)) install.packages(wants[!has])
+```r
+wants <- c("coin")
+has   <- wants %in% rownames(installed.packages())
+if(any(!has)) install.packages(wants[!has])
+```
 
 
 MH-test
 -------------------------
 
 
-    categ <- factor(1:3, labels=c("lo", "med", "hi"))
-    drug  <- rep(categ, c(30, 50, 20))
-    plac  <- rep(rep(categ, length(categ)), c(14,7,9, 5,26,19, 1,7,12))
-    cTab  <- table(drug, plac)
-    addmargins(cTab)
+```r
+categ <- factor(1:3, labels=c("lo", "med", "hi"))
+drug  <- rep(categ, c(30, 50, 20))
+plac  <- rep(rep(categ, length(categ)), c(14,7,9, 5,26,19, 1,7,12))
+cTab  <- table(drug, plac)
+addmargins(cTab)
+```
 
-         plac
-    drug   lo med  hi Sum
-      lo   14   7   9  30
-      med   5  26  19  50
-      hi    1   7  12  20
-      Sum  20  40  40 100
+```
+     plac
+drug   lo med  hi Sum
+  lo   14   7   9  30
+  med   5  26  19  50
+  hi    1   7  12  20
+  Sum  20  40  40 100
+```
 
 
 
-    library(coin)
-    mh_test(cTab)
+```r
+library(coin)
+mh_test(cTab, distribution=approximate(B=9999))
+```
 
-    
-    	Asymptotic Marginal-Homogeneity Test
-    
-    data:  response by
-    	 groups (drug, plac) 
-    	 stratified by block 
-    chi-squared = 12.14, df = 2, p-value = 0.002313
-    
+```
+
+	Approximative Marginal-Homogeneity Test
+
+data:  response by
+	 groups (drug, plac) 
+	 stratified by block 
+chi-squared = 12.14, p-value = 0.0017
+
+```
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-    try(detach(package:coin))
-    try(detach(package:modeltools))
-    try(detach(package:survival))
-    try(detach(package:mvtnorm))
-    try(detach(package:splines))
-    try(detach(package:stats4))
+```r
+try(detach(package:coin))
+try(detach(package:modeltools))
+try(detach(package:survival))
+try(detach(package:mvtnorm))
+try(detach(package:splines))
+try(detach(package:stats4))
+```
 
 
 Get this post from github

@@ -12,9 +12,11 @@ Install required packages
 [`coin`](http://cran.r-project.org/package=coin), [`e1071`](http://cran.r-project.org/package=e1071)
 
 
-    wants <- c("coin", "e1071")
-    has   <- wants %in% rownames(installed.packages())
-    if(any(!has)) install.packages(wants[!has])
+```r
+wants <- c("coin", "e1071")
+has   <- wants %in% rownames(installed.packages())
+if(any(!has)) install.packages(wants[!has])
+```
 
 
 Two-sample $t$-test for independent groups
@@ -23,70 +25,88 @@ Two-sample $t$-test for independent groups
 ### Using package `coin`
     
 
-    set.seed(1.234)
-    Nj     <- c(7, 8)
-    sigma  <- 20
-    DVa    <- rnorm(Nj[1], 100, sigma)
-    DVb    <- rnorm(Nj[2], 110, sigma)
-    tIndDf <- data.frame(DV=c(DVa, DVb),
-                         IV=factor(rep(c("A", "B"), Nj)))
+```r
+set.seed(1.234)
+Nj     <- c(7, 8)
+sigma  <- 20
+DVa    <- rnorm(Nj[1], 100, sigma)
+DVb    <- rnorm(Nj[2], 110, sigma)
+tIndDf <- data.frame(DV=c(DVa, DVb),
+                     IV=factor(rep(c("A", "B"), Nj)))
+```
 
 
 
-    library(coin)
-    oneway_test(DV ~ IV, alternative="less", distribution="exact", data=tIndDf)
+```r
+library(coin)
+oneway_test(DV ~ IV, alternative="less", distribution="exact", data=tIndDf)
+```
 
-    
-    	Exact 2-Sample Permutation Test
-    
-    data:  DV by IV (A, B) 
-    Z = -1.1, p-value = 0.142
-    alternative hypothesis: true mu is less than 0 
-    
+```
+
+	Exact 2-Sample Permutation Test
+
+data:  DV by IV (A, B) 
+Z = -1.1, p-value = 0.142
+alternative hypothesis: true mu is less than 0 
+
+```
 
 
 
-    tRes <- t.test(DV ~ IV, alternative="less", var.equal=TRUE, data=tIndDf)
-    tRes$p.value
+```r
+tRes <- t.test(DV ~ IV, alternative="less", var.equal=TRUE, data=tIndDf)
+tRes$p.value
+```
 
-    [1] 0.1438
+```
+[1] 0.1438
+```
 
 
 ### Manual exact test
 
 
-    idx   <- seq(along=tIndDf$DV)
-    idxA  <- combn(idx, Nj[1])
-    getDM <- function(x) { mean(tIndDf$DV[!(idx %in% x)]) - mean(tIndDf$DV[x]) }
-    resDM <- apply(idxA, 2, getDM)
-    diffM <- diff(tapply(tIndDf$DV, tIndDf$IV, mean))
-    (pVal <- sum(resDM >= diffM) / length(resDM))
+```r
+idx   <- seq(along=tIndDf$DV)
+idxA  <- combn(idx, Nj[1])
+getDM <- function(x) { mean(tIndDf$DV[!(idx %in% x)]) - mean(tIndDf$DV[x]) }
+resDM <- apply(idxA, 2, getDM)
+diffM <- diff(tapply(tIndDf$DV, tIndDf$IV, mean))
+(pVal <- sum(resDM >= diffM) / length(resDM))
+```
 
-    [1] 0.142
+```
+[1] 0.142
+```
 
 
 ### Diagram: permutation distribution
 
 
-    hist(resDM, freq=FALSE, breaks="FD", xlab="Mittelwertsdifferenzen",
-         main="Permutationstest: Histogramm Mittelwertsdifferenzen")
-    curve(dnorm(x, 0, sigma/sqrt(Nj[1]) + sigma/sqrt(Nj[2])), lwd=2, add=TRUE)
-    legend(x="topright", lty=1, lwd=2, legend=expression(paste("N(0, ", sigma[1]^2 / n[1] + sigma[2]^2 / n[2], ")")))
+```r
+hist(resDM, freq=FALSE, breaks="FD", xlab="Difference in means",
+     main="Permutation test: Histogram difference in means")
+curve(dnorm(x, 0, sigma/sqrt(Nj[1]) + sigma/sqrt(Nj[2])), lwd=2, add=TRUE)
+legend(x="topright", lty=1, lwd=2, legend=expression(paste("N(0, ", sigma[1]^2 / n[1] + sigma[2]^2 / n[2], ")")))
+```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6.png) 
+![plot of chunk rerResamplingPerm01](figure/rerResamplingPerm01.png) 
 
 
 
-    plot(resDM, ecdf(resDM)(resDM), col="gray60", pch=16,
-         xlab="Mittelwertsdifferenzen", ylab="kumulierte relative Haeufigkeit",
-         main="Kumulierte relative Haeufigkeiten und Verteilungsfunktion")
-    curve(pnorm(x, 0, sigma/sqrt(Nj[1]) + sigma/sqrt(Nj[2])), lwd=2, add=TRUE)
-    legend(x="bottomright", lty=c(NA, 1), pch=c(16, NA), lwd=c(1, 2),
-           col=c("gray60", "black"),
-           legend=c("Permutationen",
-           expression(paste("N(0, ", sigma[1]^2 / n[1] + sigma[2]^2 / n[2], ")"))))
+```r
+plot(resDM, ecdf(resDM)(resDM), col="gray60", pch=16,
+     xlab="Difference in means", ylab="cumulative relative frequency",
+     main="Cumulative relative frequency and normal CDF")
+curve(pnorm(x, 0, sigma/sqrt(Nj[1]) + sigma/sqrt(Nj[2])), lwd=2, add=TRUE)
+legend(x="bottomright", lty=c(NA, 1), pch=c(16, NA), lwd=c(1, 2),
+       col=c("gray60", "black"),
+       legend=c("Permutations",
+       expression(paste("N(0, ", sigma[1]^2 / n[1] + sigma[2]^2 / n[2], ")"))))
+```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7.png) 
+![plot of chunk rerResamplingPerm02](figure/rerResamplingPerm02.png) 
 
 
 Two-sample $t$-test for dependent groups
@@ -95,45 +115,59 @@ Two-sample $t$-test for dependent groups
 ### Using package `coin`
 
 
-    N      <- 12
-    id     <- factor(rep(1:N, times=2))
-    DVpre  <- rnorm(N, 100, 20)
-    DVpost <- rnorm(N, 110, 20)
-    tDepDf <- data.frame(DV=c(DVpre, DVpost),
-                         IV=factor(rep(0:1, each=N), labels=c("pre", "post")))
+```r
+N      <- 12
+id     <- factor(rep(1:N, times=2))
+DVpre  <- rnorm(N, 100, 20)
+DVpost <- rnorm(N, 110, 20)
+tDepDf <- data.frame(DV=c(DVpre, DVpost),
+                     IV=factor(rep(0:1, each=N), labels=c("pre", "post")))
+```
 
 
 
-    library(coin)
-    oneway_test(DV ~ IV | id, alternative="less", distribution=approximate(B=9999), data=tDepDf)
+```r
+library(coin)
+oneway_test(DV ~ IV | id, alternative="less", distribution=approximate(B=9999), data=tDepDf)
+```
 
-    
-    	Approximative 2-Sample Permutation Test
-    
-    data:  DV by IV (pre, post) 
-    	 stratified by id 
-    Z = -0.7336, p-value = 0.2389
-    alternative hypothesis: true mu is less than 0 
-    
+```
+
+	Approximative 2-Sample Permutation Test
+
+data:  DV by IV (pre, post) 
+	 stratified by id 
+Z = -0.7336, p-value = 0.2389
+alternative hypothesis: true mu is less than 0 
+
+```
 
 
 
-    t.test(DV ~ IV, alternative="less", paired=TRUE, data=tDepDf)$p.value
+```r
+t.test(DV ~ IV, alternative="less", paired=TRUE, data=tDepDf)$p.value
+```
 
-    [1] 0.2437
+```
+[1] 0.2437
+```
 
 
 ### Manual exact test
 
 
-    DVd    <- DVpre-DVpost
-    sgnLst <- lapply(numeric(N), function(x) { c(-1, 1) } )
-    sgnMat <- data.matrix(expand.grid(sgnLst))
-    getMD  <- function(x) { mean(abs(DVd) * x) }
-    resMD  <- apply(sgnMat, 1, getMD)
-    (pVal  <- sum(resMD <= mean(DVd)) / length(resMD))
+```r
+DVd    <- DVpre - - DVpost
+sgnLst <- lapply(numeric(N), function(x) { c(-1, 1) } )
+sgnMat <- data.matrix(expand.grid(sgnLst))
+getMD  <- function(x) { mean(abs(DVd) * x) }
+resMD  <- apply(sgnMat, 1, getMD)
+(pVal  <- sum(resMD <= mean(DVd)) / length(resMD))
+```
 
-    [1] 0.2434
+```
+[1] 1
+```
 
 
 Independence of two variables
@@ -141,42 +175,52 @@ Independence of two variables
 
 ### Fisher's exact test
 
-    Nf  <- 7
-    DV1 <- rbinom(Nf, size=1, prob=0.5)
-    DV2 <- rbinom(Nf, size=1, prob=0.5)
-    fisher.test(DV1, DV2, alternative="greater")$p.value
+```r
+Nf  <- 7
+DV1 <- rbinom(Nf, size=1, prob=0.5)
+DV2 <- rbinom(Nf, size=1, prob=0.5)
+fisher.test(DV1, DV2, alternative="greater")$p.value
+```
 
-    [1] 0.7143
+```
+[1] 0.7143
+```
 
 
 ### Manual exact test
 
 
-    library(e1071)
-    permIdx  <- permutations(Nf)
-    getAgree <- function(idx) {
-        sum(diag(table(DV1, DV2[idx])))
-    }
-    
-    resAgree <- apply(permIdx, 1, getAgree)
-    agree12  <- sum(diag(table(DV1, DV2)))
-    (pVal    <- sum(resAgree >= agree12) / length(resAgree))
+```r
+library(e1071)
+permIdx  <- permutations(Nf)
+getAgree <- function(idx) {
+    sum(diag(table(DV1, DV2[idx])))
+}
 
-    [1] 0.7143
+resAgree <- apply(permIdx, 1, getAgree)
+agree12  <- sum(diag(table(DV1, DV2)))
+(pVal    <- sum(resAgree >= agree12) / length(resAgree))
+```
+
+```
+[1] 0.7143
+```
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-    try(detach(package:e1071))
-    try(detach(package:class))
-    try(detach(package:coin))
-    try(detach(package:modeltools))
-    try(detach(package:survival))
-    try(detach(package:mvtnorm))
-    try(detach(package:splines))
-    try(detach(package:stats4))
+```r
+try(detach(package:e1071))
+try(detach(package:class))
+try(detach(package:coin))
+try(detach(package:modeltools))
+try(detach(package:survival))
+try(detach(package:mvtnorm))
+try(detach(package:splines))
+try(detach(package:stats4))
+```
 
 
 Get this post from github

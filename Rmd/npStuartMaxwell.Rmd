@@ -25,7 +25,7 @@ addmargins(cTab)
 
 ```{r}
 library(coin)
-mh_test(cTab)
+mh_test(cTab, distribution=approximate(B=9999))
 ```
 
 Detach (automatically) loaded packages (if possible)

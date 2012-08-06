@@ -53,6 +53,7 @@ head(PhatCateg)
 ## @knitr unnamed-chunk-9
 predict(vglmFitMN, type="response")
 fitted(mlogitFit, outcome=FALSE)
+# not run
 
 
 ## @knitr unnamed-chunk-10

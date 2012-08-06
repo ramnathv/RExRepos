@@ -10,29 +10,49 @@ Create and format date values
 ### Class `Date`
 
 
-    Sys.Date()
+```r
+Sys.Date()
+```
 
-    [1] "2012-08-04"
+```
+[1] "2012-08-06"
+```
 
-    (myDate <- as.Date("01.11.1974", format="%d.%m.%Y"))
+```r
+(myDate <- as.Date("01.11.1974", format="%d.%m.%Y"))
+```
 
-    [1] "1974-11-01"
+```
+[1] "1974-11-01"
+```
 
-    format(myDate, format="%d.%m.%Y")
+```r
+format(myDate, format="%d.%m.%Y")
+```
 
-    [1] "01.11.1974"
+```
+[1] "01.11.1974"
+```
 
 
 ### Internal representation
 
 
-    (negDate <- as.Date(-374, "1910-12-16"))
+```r
+(negDate <- as.Date(-374, "1910-12-16"))
+```
 
-    [1] "1909-12-07"
+```
+[1] "1909-12-07"
+```
 
-    as.numeric(negDate)
+```r
+as.numeric(negDate)
+```
 
-    [1] -21940
+```
+[1] -21940
+```
 
 
 Time values
@@ -41,62 +61,106 @@ Time values
 ### Class `POSIXct`
 
 
-    Sys.time()
+```r
+Sys.time()
+```
 
-    [1] "2012-08-04 19:57:31 CEST"
+```
+[1] "2012-08-06 11:02:39 CEST"
+```
 
-    date()
+```r
+date()
+```
 
-    [1] "Sat Aug 04 19:57:31 2012"
-
-
-
-    (myTime <- as.POSIXct("2009-02-07 09:23:02"))
-
-    [1] "2009-02-07 09:23:02 CET"
-
-    ISOdate(2010, 6, 30, 17, 32, 10, tz="CET")
-
-    [1] "2010-06-30 17:32:10 CEST"
+```
+[1] "Mon Aug 06 11:02:39 2012"
+```
 
 
 
-    format(myTime, "%H:%M:%S")
+```r
+(myTime <- as.POSIXct("2009-02-07 09:23:02"))
+```
 
-    [1] "09:23:02"
+```
+[1] "2009-02-07 09:23:02 CET"
+```
 
-    format(myTime, "%d.%m.%Y")
+```r
+ISOdate(2010, 6, 30, 17, 32, 10, tz="CET")
+```
 
-    [1] "07.02.2009"
+```
+[1] "2010-06-30 17:32:10 CEST"
+```
+
+
+
+```r
+format(myTime, "%H:%M:%S")
+```
+
+```
+[1] "09:23:02"
+```
+
+```r
+format(myTime, "%d.%m.%Y")
+```
+
+```
+[1] "07.02.2009"
+```
 
 
 ### Class `POSIXlt`
 
 
-    charDates <- c("05.08.1972, 03:37", "02.04.1981, 12:44")
-    (lDates   <- strptime(charDates, format="%d.%m.%Y, %H:%M"))
+```r
+charDates <- c("05.08.1972, 03:37", "02.04.1981, 12:44")
+(lDates   <- strptime(charDates, format="%d.%m.%Y, %H:%M"))
+```
 
-    [1] "1972-08-05 03:37:00" "1981-04-02 12:44:00"
-
-
-
-    lDates$mday
-
-    [1]  5 31
-
-    lDates$hour
-
-    [1]  3 12
+```
+[1] "1972-08-05 03:37:00" "1981-04-02 12:44:00"
+```
 
 
 
-    weekdays(lDates)
+```r
+lDates$mday
+```
 
-    [1] "Samstag"  "Dienstag"
+```
+[1] 5 2
+```
 
-    months(lDates)
+```r
+lDates$hour
+```
 
-    [1] "August" "Maerz"  
+```
+[1]  3 12
+```
+
+
+
+```r
+weekdays(lDates)
+```
+
+```
+[1] "Samstag"    "Donnerstag"
+```
+
+```r
+months(lDates)
+```
+
+```
+[1] "August" "April" 
+```
 
 
 Time and date arithmetic
@@ -105,65 +169,109 @@ Time and date arithmetic
 ### Sum and difference of time-date values
 
 
-    (myDate <- as.Date("01.11.1974", format="%d.%m.%Y"))
+```r
+(myDate <- as.Date("01.11.1974", format="%d.%m.%Y"))
+```
 
-    [1] "1974-11-01"
+```
+[1] "1974-11-01"
+```
 
-    myDate + 365
+```r
+myDate + 365
+```
 
-    [1] "1975-11-01"
-
-
-
-    (diffDate <- as.Date("1976-06-19") - myDate)
-
-    Time difference of 596 days
-
-    as.numeric(diffDate)
-
-    [1] 596
-
-    myDate + diffDate
-
-    [1] "1976-06-19"
+```
+[1] "1975-11-01"
+```
 
 
 
-    lDates + c(60, 120)
+```r
+(diffDate <- as.Date("1976-06-19") - myDate)
+```
 
-    [1] "1972-08-05 03:38:00 CET"  "1981-03-31 12:46:00 CEST"
+```
+Time difference of 596 days
+```
 
-    (diff21 <- lDates[2] - lDates[1])
+```r
+as.numeric(diffDate)
+```
 
-    Time difference of 3160 days
+```
+[1] 596
+```
 
-    lDates[1] + diff21
+```r
+myDate + diffDate
+```
 
-    [1] "1981-03-31 12:44:00 CEST"
+```
+[1] "1976-06-19"
+```
+
+
+
+```r
+lDates + c(60, 120)
+```
+
+```
+[1] "1972-08-05 03:38:00 CET"  "1981-04-02 12:46:00 CEST"
+```
+
+```r
+(diff21 <- lDates[2] - lDates[1])
+```
+
+```
+Time difference of 3162 days
+```
+
+```r
+lDates[1] + diff21
+```
+
+```
+[1] "1981-04-02 12:44:00 CEST"
+```
 
 
 ### Systematically and randomly generate time-date values
 
 
-    seq(ISOdate(2010, 5, 1), ISOdate(2013, 5, 1), by="years")
+```r
+seq(ISOdate(2010, 5, 1), ISOdate(2013, 5, 1), by="years")
+```
 
-    [1] "2010-05-01 12:00:00 GMT" "2011-05-01 12:00:00 GMT"
-    [3] "2012-05-01 12:00:00 GMT" "2013-05-01 12:00:00 GMT"
+```
+[1] "2010-05-01 12:00:00 GMT" "2011-05-01 12:00:00 GMT"
+[3] "2012-05-01 12:00:00 GMT" "2013-05-01 12:00:00 GMT"
+```
 
-    seq(ISOdate(1997, 10, 22), by="2 weeks", length.out=4)
+```r
+seq(ISOdate(1997, 10, 22), by="2 weeks", length.out=4)
+```
 
-    [1] "1997-10-22 12:00:00 GMT" "1997-11-05 12:00:00 GMT"
-    [3] "1997-11-19 12:00:00 GMT" "1997-12-03 12:00:00 GMT"
+```
+[1] "1997-10-22 12:00:00 GMT" "1997-11-05 12:00:00 GMT"
+[3] "1997-11-19 12:00:00 GMT" "1997-12-03 12:00:00 GMT"
+```
 
 
 
-    secsPerDay <- 60 * 60 * 24
-    randDates  <- ISOdate(1995, 6, 13) + sample(0:(28*secsPerDay), 100, replace=TRUE)
-    randWeeks  <- cut(randDates, breaks="week")
-    summary(randWeeks)
+```r
+secsPerDay <- 60 * 60 * 24
+randDates  <- ISOdate(1995, 6, 13) + sample(0:(28*secsPerDay), 100, replace=TRUE)
+randWeeks  <- cut(randDates, breaks="week")
+summary(randWeeks)
+```
 
-    1995-06-12 1995-06-19 1995-06-26 1995-07-03 1995-07-10 
-            21         27         25         25          2 
+```
+1995-06-12 1995-06-19 1995-06-26 1995-07-03 1995-07-10 
+        21         27         25         25          2 
+```
 
 
 Useful packages

@@ -19,10 +19,10 @@ fisher.test(contT1, alternative="greater")
 
 
 ## @knitr unnamed-chunk-4
-TN <- c11 <- contT1[1, 1]                # true negative
-TP <- c22 <- contT1[2, 2]                # true positive / hit
-FP <- c12 <- contT1[1, 2]                # false positive
-FN <- c21 <- contT1[2, 1]                # false negative / miss
+TN <- c11 <- contT1[1, 1]       ## true negative
+TP <- c22 <- contT1[2, 2]       ## true positive / hit
+FP <- c12 <- contT1[1, 2]       ## false positive
+FN <- c21 <- contT1[2, 1]       ## false negative / miss
 
 
 ## @knitr unnamed-chunk-5
@@ -50,23 +50,23 @@ FN <- c21 <- contT1[2, 1]                # false negative / miss
 
 
 ## @knitr unnamed-chunk-11
-library(vcd)                                # fuer oddsratio()
-(OR <- oddsratio(contT1, log=FALSE))        # odds ratio
-(ORln <- oddsratio(contT1))                 # logarithmierte odds ratio
+library(vcd)                          ## for oddsratio()
+(OR <- oddsratio(contT1, log=FALSE))  ## odds ratio
+(ORln <- oddsratio(contT1))           ## log odds ratio
 
 
 ## @knitr unnamed-chunk-12
-summary(ORln)               # Signifikanztest logarithmierte OR
+summary(ORln)            ## significance test log OR
 
 
 ## @knitr unnamed-chunk-13
-(CIln <- confint(ORln))     # Konfidenzintervall logarithmierte OR
-exp(CIln)                   # Konfidenzintervall nicht log. OR
+(CIln <- confint(ORln))  ## confidence interval log OR
+exp(CIln)                ## confidence interval OR (not log)
 
 
 ## @knitr unnamed-chunk-14
-(Q <- (c11*c22 - c12*c21) / (c11*c22 + c12*c21))     # Yules Q
-(OR-1) / (OR+1)                              # alternativ
+(Q <- (c11*c22 - c12*c21) / (c11*c22 + c12*c21))  ## Yule's Q
+(OR-1) / (OR+1)          ## alternative calculation given OR
 
 
 ## @knitr unnamed-chunk-15

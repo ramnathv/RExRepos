@@ -53,11 +53,10 @@ Anova(fitIII, type="III")
 
 ### Plot marginal and cell means
 
-```{r}
-plot.design(DV ~ IV1*IV2, data=dfCRFpq, main="Randmittelwerte")
+```{r rerAnovaCRFpq01}
+plot.design(DV ~ IV1*IV2, data=dfCRFpq, main="Marginal means")
 interaction.plot(dfCRFpq$IV1, dfCRFpq$IV2, dfCRFpq$DV,
-                 main="Mittelwertsverlaeufe",
-                 col=c("red", "blue", "green"), lwd=2)
+                 main="Cell means", col=c("red", "blue", "green"), lwd=2)
 ```
 
 Effect size estimate: partial $\hat{\eta}_{p}^{2}$
@@ -159,7 +158,7 @@ summary(glht(aovCRFpqA, linfct=mcp(IVcomb=cntrMat), alternative="greater"),
 Assess test assumptions
 -------------------------
 
-```{r}
+```{r rerAnovaCRFpq02}
 Estud <- rstudent(aovCRFpq)
 qqnorm(Estud, pch=20, cex=2)
 qqline(Estud, col="gray60", lwd=2)
@@ -169,8 +168,8 @@ qqline(Estud, col="gray60", lwd=2)
 shapiro.test(Estud)
 ```
 
-```{r}
-plot(Estud ~ dfCRFpq$IVcomb, main="Residuen vs. Stufen")
+```{r rerAnovaCRFpq03}
+plot(Estud ~ dfCRFpq$IVcomb, main="Residuals per group")
 ```
 
 ```{r}

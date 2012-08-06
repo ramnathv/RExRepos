@@ -39,20 +39,20 @@ dst <- dist(obj, diag=TRUE, upper=TRUE)
 cmdscale(dst, k=2)
 
 
-## @knitr unnamed-chunk-5
+## @knitr rerMultMDS01
 xLims <- range(mds[ , 1]) + c(0, 250)
-plot(mds, xlim=xLims, xlab="Nord-Sued", ylab="Ost-West", pch=16,
-     main="Anordnung der Staedte nach MDS", cex.lab=1.4)
+plot(mds, xlim=xLims, xlab="North-South", ylab="East-West", pch=16,
+     main="City locations according to MDS")
 text(mds[ , 1]+50, mds[ , 2], adj=0, labels=cities)
 
 
-## @knitr unnamed-chunk-6
+## @knitr unnamed-chunk-5
 library(vegan)
 (nmMDS <- monoMDS(dstMat, k=2))
 scores(nmMDS)
 
 
-## @knitr unnamed-chunk-7
+## @knitr unnamed-chunk-6
 try(detach(package:vegan))
 try(detach(package:permute))
 

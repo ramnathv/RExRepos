@@ -34,14 +34,14 @@ WLpost   <- c(17, 25, 10, 22, 23, 10,  2, 10, 14,  7)
 ```{r}
 P     <- 3
 Nj    <- rep(length(SSRIpre), times=P)
-dfAnc <- data.frame(IV    =factor(rep(1:P, Nj), labels=c("SSRI", "Placebo", "WL")),
-                    DVpre =c(SSRIpre,   PlacPre,  WLpre),
+dfAnc <- data.frame(IV=factor(rep(1:P, Nj), labels=c("SSRI", "Placebo", "WL")),
+                    DVpre=c(SSRIpre,   PlacPre,  WLpre),
                     DVpost=c(SSRIpost, PlacPost, WLpost))
 ```
 
-```{r}
-plot(DVpre  ~ IV, data=dfAnc, main="Prae-Scores pro Gruppe")
-plot(DVpost ~ IV, data=dfAnc, main="Post-Scores pro Gruppe")
+```{r rerAncova01}
+plot(DVpre  ~ IV, data=dfAnc, main="Pre-scores per group")
+plot(DVpost ~ IV, data=dfAnc, main="Post-Scores per group")
 ```
 
 ### Type I sum of squares
@@ -90,13 +90,13 @@ iCeptWL   <- coeffs[3, 1] + iCeptSSRI
 slopeAll  <- coeffs[4, 1]
 ```
 
-```{r}
+```{r rerAncova02}
 xLims <- c(0, max(dfAnc$DVpre))
 yLims <- c(min(iCeptSSRI, iCeptPlac, iCeptWL), max(dfAnc$DVpost))
 
 plot(DVpost ~ DVpre, data=dfAnc, xlim=xLims, ylim=yLims,
      pch=rep(c(3, 17, 19), Nj), col=rep(c("red", "green", "blue"), Nj),
-     main="Rohdaten und Regressionsgerade pro Gruppe", cex.lab=1.4)
+     main="Rohdaten und Regressionsgerade pro Gruppe")
 legend(x="topleft", legend=levels(dfAnc$IV), pch=c(3, 17, 19),
        col=c("red", "green", "blue"))
 abline(iCeptSSRI, slopeAll, col="red")

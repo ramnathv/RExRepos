@@ -55,21 +55,21 @@ diffM <- diff(tapply(tIndDf$DV, tIndDf$IV, mean))
 
 ### Diagram: permutation distribution
 
-```{r}
-hist(resDM, freq=FALSE, breaks="FD", xlab="Mittelwertsdifferenzen",
-     main="Permutationstest: Histogramm Mittelwertsdifferenzen")
+```{r rerResamplingPerm01}
+hist(resDM, freq=FALSE, breaks="FD", xlab="Difference in means",
+     main="Permutation test: Histogram difference in means")
 curve(dnorm(x, 0, sigma/sqrt(Nj[1]) + sigma/sqrt(Nj[2])), lwd=2, add=TRUE)
 legend(x="topright", lty=1, lwd=2, legend=expression(paste("N(0, ", sigma[1]^2 / n[1] + sigma[2]^2 / n[2], ")")))
 ```
 
-```{r}
+```{r rerResamplingPerm02}
 plot(resDM, ecdf(resDM)(resDM), col="gray60", pch=16,
-     xlab="Mittelwertsdifferenzen", ylab="kumulierte relative Haeufigkeit",
-     main="Kumulierte relative Haeufigkeiten und Verteilungsfunktion")
+     xlab="Difference in means", ylab="cumulative relative frequency",
+     main="Cumulative relative frequency and normal CDF")
 curve(pnorm(x, 0, sigma/sqrt(Nj[1]) + sigma/sqrt(Nj[2])), lwd=2, add=TRUE)
 legend(x="bottomright", lty=c(NA, 1), pch=c(16, NA), lwd=c(1, 2),
        col=c("gray60", "black"),
-       legend=c("Permutationen",
+       legend=c("Permutations",
        expression(paste("N(0, ", sigma[1]^2 / n[1] + sigma[2]^2 / n[2], ")"))))
 ```
 
@@ -99,7 +99,7 @@ t.test(DV ~ IV, alternative="less", paired=TRUE, data=tDepDf)$p.value
 ### Manual exact test
 
 ```{r}
-DVd    <- DVpre-DVpost
+DVd    <- DVpre - - DVpost
 sgnLst <- lapply(numeric(N), function(x) { c(-1, 1) } )
 sgnMat <- data.matrix(expand.grid(sgnLst))
 getMD  <- function(x) { mean(abs(DVd) * x) }

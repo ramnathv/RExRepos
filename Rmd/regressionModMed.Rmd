@@ -81,6 +81,9 @@ fitY <- lm(Y ~ X + M, data=dfMed)
 library(mediation)
 fitMed <- mediate(fitM, fitY, sims=999, treat="X", mediator="M")
 summary(fitMed)
+```
+
+```{r rerRegressionModMed01}
 plot(fitMed)
 ```
 
@@ -94,7 +97,7 @@ summary(fitMedBoot)
 Useful packages
 -------------------------
 
-More complex structural equation models are supported by packages [`sem`](http://cran.r-project.org/package=sem), [`OpenMx`](http://openmx.psyc.virginia.edu/), and [`lavaan`](http://cran.r-project.org/package=lavaan).
+More complex structural equation models are supported by packages [`sem`](http://cran.r-project.org/package=sem), [`OpenMx`](http://openmx.psyc.virginia.edu/), and [`lavaan`](http://cran.r-project.org/package=lavaan). More packages can be found in CRAN task view [Psychometric Models](http://cran.r-project.org/web/views/Psychometrics.html).
 
 Detach (automatically) loaded packages (if possible)
 -------------------------

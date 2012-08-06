@@ -36,9 +36,9 @@ SSbtw2Wth <- anRes["IVbtw2:IVwth", "Sum Sq"]
 
 
 ## @knitr unnamed-chunk-5
-(gEtaSqB1  <- SSbtw1 / (SSbtw1 + SSEtot))
-(gEtaSqB2  <- SSbtw2 / (SSbtw2 + SSEtot))
-(gEtaSqW   <- SSwth / (SSwth + SSEtot))
+(gEtaSqB1 <- SSbtw1 / (SSbtw1 + SSEtot))
+(gEtaSqB2 <- SSbtw2 / (SSbtw2 + SSEtot))
+(gEtaSqW <- SSwth / (SSwth + SSEtot))
 (gEtaSqB1W <- SSbtw1Wth / (SSbtw1Wth + SSEtot))
 (gEtaSqB2W <- SSbtw2Wth / (SSbtw2Wth + SSEtot))
 
@@ -50,8 +50,8 @@ SSbtw1Btw2Wth <- anRes2["IVbtw1:IVbtw2:IVwth", "Sum Sq"]
 
 
 ## @knitr unnamed-chunk-7
-(gEtaSqB1B2   <- SSbtw1Btw2    / (SSbtw1Btw2    + SSEtot))
-(gEtaSqB1B2W  <- SSbtw1Btw2Wth / (SSbtw1Btw2Wth + SSEtot))
+(gEtaSqB1B2 <- SSbtw1Btw2 / (SSbtw1Btw2 + SSEtot))
+(gEtaSqB1B2W <- SSbtw1Btw2Wth / (SSbtw1Btw2Wth + SSEtot))
 
 
 ## @knitr unnamed-chunk-8
@@ -87,11 +87,11 @@ DV_t31 <- rnorm(P*Nj, 13, 2)
 DV_t12 <- rnorm(P*Nj, 10, 2)
 DV_t22 <- rnorm(P*Nj, 15, 2)
 DV_t32 <- rnorm(P*Nj, 15, 2)
-dfSPFp.qrL <- data.frame(id    =factor(rep(1:(P*Nj), times=Q*R)),
+dfSPFp.qrL <- data.frame(id=factor(rep(1:(P*Nj), times=Q*R)),
                          IVbtw =factor(rep(LETTERS[1:P], times=Q*R*Nj)),
                          IVwth1=factor(rep(1:Q, each=P*R*Nj)),
                          IVwth2=factor(rep(rep(1:R, each=P*Nj), times=Q)),
-                         DV    =c(DV_t11, DV_t12, DV_t21, DV_t22, DV_t31, DV_t32))
+                         DV=c(DV_t11, DV_t12, DV_t21, DV_t22, DV_t31, DV_t32))
 
 
 ## @knitr unnamed-chunk-13
@@ -118,12 +118,12 @@ SSbtwWth1Wth2 <- anRes["IVbtw:IVwth1:IVwth2", "Sum Sq"]
 
 
 ## @knitr unnamed-chunk-16
-(gEtaSqB     <- SSbtw / (SSbtw + SSEtot))
-(gEtaSqW1    <- SSwth1 / (SSwth1 + SSEtot))
-(gEtaSqBW1   <- SSbtwWth1 / (SSbtwWth1 + SSEtot))
-(gEtaSqW2    <- SSwth2 / (SSwth2 + SSEtot))
-(gEtaSqBW2   <- SSbtwWth2 / (SSbtwWth2 + SSEtot))
-(gEtaSqW1W2  <- SSwth1Wth2 / (SSwth1Wth2 + SSEtot))
+(gEtaSqB  <- SSbtw / (SSbtw + SSEtot))
+(gEtaSqW1 <- SSwth1 / (SSwth1 + SSEtot))
+(gEtaSqBW1 <- SSbtwWth1 / (SSbtwWth1 + SSEtot))
+(gEtaSqW2 <- SSwth2 / (SSwth2 + SSEtot))
+(gEtaSqBW2 <- SSbtwWth2 / (SSbtwWth2 + SSEtot))
+(gEtaSqW1W2 <- SSwth1Wth2 / (SSwth1Wth2 + SSEtot))
 (gEtaSqBW1W2 <- SSbtwWth1Wth2 / (SSbtwWth1Wth2 + SSEtot))
 
 

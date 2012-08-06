@@ -34,25 +34,25 @@ diffM <- diff(tapply(tIndDf$DV, tIndDf$IV, mean))
 (pVal <- sum(resDM >= diffM) / length(resDM))
 
 
-## @knitr unnamed-chunk-6
-hist(resDM, freq=FALSE, breaks="FD", xlab="Mittelwertsdifferenzen",
-     main="Permutationstest: Histogramm Mittelwertsdifferenzen")
+## @knitr rerResamplingPerm01
+hist(resDM, freq=FALSE, breaks="FD", xlab="Difference in means",
+     main="Permutation test: Histogram difference in means")
 curve(dnorm(x, 0, sigma/sqrt(Nj[1]) + sigma/sqrt(Nj[2])), lwd=2, add=TRUE)
 legend(x="topright", lty=1, lwd=2, legend=expression(paste("N(0, ", sigma[1]^2 / n[1] + sigma[2]^2 / n[2], ")")))
 
 
-## @knitr unnamed-chunk-7
+## @knitr rerResamplingPerm02
 plot(resDM, ecdf(resDM)(resDM), col="gray60", pch=16,
-     xlab="Mittelwertsdifferenzen", ylab="kumulierte relative Haeufigkeit",
-     main="Kumulierte relative Haeufigkeiten und Verteilungsfunktion")
+     xlab="Difference in means", ylab="cumulative relative frequency",
+     main="Cumulative relative frequency and normal CDF")
 curve(pnorm(x, 0, sigma/sqrt(Nj[1]) + sigma/sqrt(Nj[2])), lwd=2, add=TRUE)
 legend(x="bottomright", lty=c(NA, 1), pch=c(16, NA), lwd=c(1, 2),
        col=c("gray60", "black"),
-       legend=c("Permutationen",
+       legend=c("Permutations",
        expression(paste("N(0, ", sigma[1]^2 / n[1] + sigma[2]^2 / n[2], ")"))))
 
 
-## @knitr unnamed-chunk-8
+## @knitr unnamed-chunk-6
 N      <- 12
 id     <- factor(rep(1:N, times=2))
 DVpre  <- rnorm(N, 100, 20)
@@ -61,17 +61,17 @@ tDepDf <- data.frame(DV=c(DVpre, DVpost),
                      IV=factor(rep(0:1, each=N), labels=c("pre", "post")))
 
 
-## @knitr unnamed-chunk-9
+## @knitr unnamed-chunk-7
 library(coin)
 oneway_test(DV ~ IV | id, alternative="less", distribution=approximate(B=9999), data=tDepDf)
 
 
-## @knitr unnamed-chunk-10
+## @knitr unnamed-chunk-8
 t.test(DV ~ IV, alternative="less", paired=TRUE, data=tDepDf)$p.value
 
 
-## @knitr unnamed-chunk-11
-DVd    <- DVpre-DVpost
+## @knitr unnamed-chunk-9
+DVd    <- DVpre - - DVpost
 sgnLst <- lapply(numeric(N), function(x) { c(-1, 1) } )
 sgnMat <- data.matrix(expand.grid(sgnLst))
 getMD  <- function(x) { mean(abs(DVd) * x) }
@@ -79,14 +79,14 @@ resMD  <- apply(sgnMat, 1, getMD)
 (pVal  <- sum(resMD <= mean(DVd)) / length(resMD))
 
 
-## @knitr unnamed-chunk-12
+## @knitr unnamed-chunk-10
 Nf  <- 7
 DV1 <- rbinom(Nf, size=1, prob=0.5)
 DV2 <- rbinom(Nf, size=1, prob=0.5)
 fisher.test(DV1, DV2, alternative="greater")$p.value
 
 
-## @knitr unnamed-chunk-13
+## @knitr unnamed-chunk-11
 library(e1071)
 permIdx  <- permutations(Nf)
 getAgree <- function(idx) {
@@ -98,7 +98,7 @@ agree12  <- sum(diag(table(DV1, DV2)))
 (pVal    <- sum(resAgree >= agree12) / length(resAgree))
 
 
-## @knitr unnamed-chunk-14
+## @knitr unnamed-chunk-12
 try(detach(package:e1071))
 try(detach(package:class))
 try(detach(package:coin))

@@ -35,8 +35,8 @@ dfRegr <- data.frame(X1, X2, Ycateg)
 
 ### Using `multinom()` from package `nnet`
 
-Schaetzer basieren auf neuronalen Netzen
--> Abweichungen gegenueber `vglm()`, `mlogit()`
+Estimator based on neural networks
+-> slightly different results than `vglm()`, `mlogit()` below
 
 ```{r}
 library(nnet)
@@ -51,7 +51,7 @@ lrtest(mnFit)
 
 ### Using `vglm()` from package `VGAM`
 
-Schaetzer basieren auf Likelihood-Inferenz
+Estimator based on likelihood-inference
 
 ```{r}
 library(VGAM)
@@ -61,7 +61,7 @@ summary(vglmFitMN)
 
 ### Using `mlogit()` from package `mlogit`
 
-Person-choice (long) format
+Uses person-choice (long) format
 
 ```{r}
 library(mlogit)
@@ -88,6 +88,7 @@ head(PhatCateg)
 ```{r results='hide'}
 predict(vglmFitMN, type="response")
 fitted(mlogitFit, outcome=FALSE)
+# not run
 ```
 
 ### Predicted categories

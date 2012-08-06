@@ -15,20 +15,22 @@ isSingle <- sample(c(TRUE, FALSE), nrow(myDf1), replace=TRUE)
 myDf2    <- myDf1
 myDf2$isSingle1    <- isSingle
 myDf2["isSingle2"] <- isSingle
-myDf3 <- cbind(myDf1, isSingle); myDf3[1:3, ]
-myDf4 <- transform(myDf3, rSq=rating^2); myDf4[1:3, ]
+myDf3 <- cbind(myDf1, isSingle)
+head(myDf3)
+myDf4 <- transform(myDf3, rSq=rating^2)
+head(myDf4)
 
 
 ## @knitr unnamed-chunk-3
 dfTemp       <- myDf1
 dfTemp$group <- NULL
-dfTemp[1:3, ]
+head(dfTemp)
 
 
 ## @knitr unnamed-chunk-4
 delVars         <- c("sex", "IQ")
 dfTemp[delVars] <- list(NULL)
-dfTemp[1:3, ]
+head(dfTemp)
 
 
 ## @knitr unnamed-chunk-5
@@ -72,7 +74,7 @@ dfTemp[1:3, colIdx]
 subset(myDf1, sex == "f")
 subset(myDf1, sex == "f", select=-2)
 subset(myDf1, (sex == "m") & (rating > 2))
-subset(myDf1, (IQ   <  90) | (IQ     > 110))
+subset(myDf1, (IQ < 90) | (IQ > 110))
 subset(myDf1, group %in% c("CG", "WL"))
 
 

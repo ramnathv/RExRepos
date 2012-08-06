@@ -20,8 +20,6 @@ if(any(!has)) install.packages(wants[!has])
 Factor analysis
 -------------------------
 
-For confirmatory factor analysis (CFA), see packages [`sem`](http://cran.r-project.org/package=sem), [`OpenMx`](http://openmx.psyc.virginia.edu/), and [`lavaan`](http://cran.r-project.org/package=lavaan) which implement structural equation models.
-
 ### Simulate data
 
 True matrix of loadings
@@ -80,7 +78,7 @@ Visualize loadings
 
 You can visualize the loadings from the factor analysis using `factor.plot()` and `fa.diagram()`, both from package `psych`. For some reason, `factor.plot()` accepts only the `$fa` component of the result from `fa.poly()`, not the full object.
 
-```{r}
+```{r rerMultFA01}
 factor.plot(faPC, cut=0.5)
 fa.diagram(faPC)
 ```
@@ -90,10 +88,15 @@ Determine number of factors
 
 Parallel analysis and a "very simple structure" analysis provide help in selecting the number of factors. Again, package `psych` has the required functions. `vss()` takes the polychoric correlation matrix as an argument.
 
-```{r}
-fa.parallel(X)                      # parallel analysis
-vss(X, n.obs=N, rotate="varimax")   # very simple structure
+```{r rerMultFA02}
+fa.parallel(X)                     ## parallel analysis
+vss(X, n.obs=N, rotate="varimax")  ## very simple structure
 ```
+
+Useful packages
+-------------------------
+
+For confirmatory factor analysis (CFA), see packages [`sem`](http://cran.r-project.org/package=sem), [`OpenMx`](http://openmx.psyc.virginia.edu/), and [`lavaan`](http://cran.r-project.org/package=lavaan) which implement structural equation models. More packages can be found in CRAN task view [Psychometric Models](http://cran.r-project.org/web/views/Psychometrics.html).
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
