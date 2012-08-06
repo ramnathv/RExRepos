@@ -134,7 +134,7 @@ as.vector((1 - exp((2/N) * (LL0 - LLf))) / (1 - exp(LL0)^(2/N)))
 
 `cv.glm()` function from package `boot`, see crossvalidation
 
-Coefficient and model tests
+Coefficient tests and overall model test
 -------------------------
 
 ### Individual coefficient tests

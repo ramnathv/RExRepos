@@ -91,7 +91,7 @@ extractAIC(fit1, k=log(N))
 
 `cv.glm()` function from package `boot`, see crossvalidation
 
-Coefficient and overall tests
+Coefficient tests and overall model test
 -------------------------
 
 ```{r}
@@ -212,7 +212,7 @@ plot(lmrFit, xlab="lambda", ylab="coefficients")
 plot(lmrFit$lambda, lmrFit$GCV, type="l", xlab="lambda", ylab="GCV")
 ```
 
-LASSO, elastic net (regularization and selection): package `glmnet`
+See package [`glmnet`](http://cran.r-project.org/package=glmnet) for the LASSO and elastic net methods which combine regularization and selection.
 
 Detach (automatically) loaded packages (if possible)
 -------------------------

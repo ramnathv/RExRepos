@@ -41,7 +41,7 @@ coef(lm(Y1 ~ X1 + X2 + X3, data=dfRegr))
 coef(lm(Y2 ~ X1 + X2 + X3, data=dfRegr))
 ```
 
-Coefficient and overall tests
+Coefficient tests and overall model test
 -------------------------
 
 ### Type I sum of squares

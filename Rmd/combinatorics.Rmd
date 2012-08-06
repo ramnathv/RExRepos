@@ -133,8 +133,10 @@ for(i in 1:3) {
 }
 ```
 
-Enumerate all combinations of elements from different sets
+Enumerate all $n$-tuples
 -------------------------
+
+All combinations of elements from $n$ different sets (cartesian product)
 
 ```{r}
 IV1 <- c("control", "treatment")

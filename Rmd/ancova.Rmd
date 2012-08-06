@@ -73,14 +73,14 @@ anova(fitRegr, fitFull)
 anova(fitGrp, fitFull)
 ```
 
-### Testing individual regression coefficients
+### Test individual regression coefficients
 
 ```{r}
 (sumRes <- summary(fitFull))
 confint(fitFull)
 ```
 
-### Vsisualizing ANCOVA coefficients
+### Vsisualize ANCOVA coefficients
 
 ```{r}
 coeffs    <- coef(sumRes)

@@ -70,7 +70,8 @@ wilcox.test(DV ~ IV, alternative="less", conf.int=TRUE, data=wIndDf)
 
 ```{r}
 library(coin)
-wilcox_test(DV ~ IV, alternative="less", distribution="exact", data=wIndDf)
+wilcox_test(DV ~ IV, alternative="less", conf.int=TRUE,
+            distribution="exact", data=wIndDf)
 ```
 
 Two dependent samples
@@ -100,7 +101,8 @@ DVdiff <- aggregate(DV ~ id, FUN=diff, data=wDepDf)
 ### Wilcoxon signed rank test
 
 ```{r}
-wilcoxsign_test(DV ~ IV | id, alternative="greater", distribution="exact", data=wDepDf)
+wilcoxsign_test(DV ~ IV | id, alternative="greater",
+                distribution="exact", data=wDepDf)
 ```
 
 Detach (automatically) loaded packages (if possible)

@@ -116,7 +116,13 @@ shapiro.test(Estud)
 spreadLevelPlot(fit, pch=20)
 ```
 
-#### Statistical tests
+#### Durbin-Watson-test for autocorrelation
+
+```{r}
+durbinWatsonTest(fit)
+```
+
+#### Statistical tests for heterocedasticity
 
 Breusch-Pagan-Test
 

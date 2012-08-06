@@ -215,7 +215,21 @@ Suggested power transformation:  0.6374
 ```
 
 
-#### Statistical tests
+#### Durbin-Watson-test for autocorrelation
+
+
+```r
+durbinWatsonTest(fit)
+```
+
+```
+ lag Autocorrelation D-W Statistic p-value
+   1         0.03852         1.911    0.67
+ Alternative hypothesis: rho != 0
+```
+
+
+#### Statistical tests for heterocedasticity
 
 Breusch-Pagan-Test
 
@@ -264,7 +278,7 @@ white.test(dfRegr$X1, dfRegr$Y)
 	White Neural Network Test
 
 data:  dfRegr$X1 and dfRegr$Y 
-X-squared = 1.149, df = 2, p-value = 0.5631
+X-squared = 0.8764, df = 2, p-value = 0.6452
 
 ```
 
@@ -364,19 +378,31 @@ Index	Variance Decomposition Proportions
 
 ```r
 attach(dfRegr)
-pRes <- perturb(fit, pvars=c("X1", "X2", "X3"), prange=c(1, 1, 1))
 ```
 
 ```
-Error: Objekt 'dfRegr' nicht gefunden
+The following object(s) are masked _by_ '.GlobalEnv':
+
+    X1, X2, X3, Y
 ```
 
 ```r
+pRes <- perturb(fit, pvars=c("X1", "X2", "X3"), prange=c(1, 1, 1))
 summary(pRes)
 ```
 
 ```
-Error: Objekt 'pRes' nicht gefunden
+Perturb variables:
+X1 		 normal(0,1) 
+X2 		 normal(0,1) 
+X3 		 normal(0,1) 
+
+Impact of perturbations on coefficients:
+              mean  s.d.    min    max
+(Intercept) 19.930 2.805 13.111 25.967
+X1           0.415 0.018  0.381  0.467
+X2          -0.307 0.014 -0.342 -0.275
+X3          -0.281 0.022 -0.350 -0.224
 ```
 
 ```r
@@ -411,11 +437,6 @@ try(detach(package:nnet))
 try(detach(package:MASS))
 ```
 
-
-Get this post from github
-----------------------------------------------
-
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regressionDiag.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regressionDiag.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/regressionDiag.R) - ([all posts](https://github.com/dwoll/RExRepos))
 
 Get this post from github
 ----------------------------------------------
