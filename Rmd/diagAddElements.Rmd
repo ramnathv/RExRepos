@@ -374,8 +374,3 @@ try(detach(package:splines))
 try(detach(package:mvtnorm))
 try(detach(package:plotrix))
 ```
-
-Get this post from github
-----------------------------------------------
-
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagAddElements.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagAddElements.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagAddElements.R) - ([all posts](https://github.com/dwoll/RExRepos))

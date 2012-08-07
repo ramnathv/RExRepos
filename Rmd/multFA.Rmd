@@ -89,8 +89,8 @@ Determine number of factors
 Parallel analysis and a "very simple structure" analysis provide help in selecting the number of factors. Again, package `psych` has the required functions. `vss()` takes the polychoric correlation matrix as an argument.
 
 ```{r rerMultFA02}
-fa.parallel(X)                     ## parallel analysis
-vss(X, n.obs=N, rotate="varimax")  ## very simple structure
+fa.parallel(X)                     # parallel analysis
+vss(X, n.obs=N, rotate="varimax")  # very simple structure
 ```
 
 Useful packages

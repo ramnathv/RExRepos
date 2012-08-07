@@ -224,8 +224,3 @@ try(detach(package:car))
 try(detach(package:nnet))
 try(detach(package:MASS))
 ```
-
-Get this post from github
-----------------------------------------------
-
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regressionDiag.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regressionDiag.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/regressionDiag.R) - ([all posts](https://github.com/dwoll/RExRepos))

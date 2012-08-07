@@ -221,8 +221,3 @@ try(detach(package:hexbin))
 try(detach(package:grid))
 try(detach(package:lattice))
 ```
-
-Get this post from github
-----------------------------------------------
-
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagDistributions.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagDistributions.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagDistributions.R) - ([all posts](https://github.com/dwoll/RExRepos))
