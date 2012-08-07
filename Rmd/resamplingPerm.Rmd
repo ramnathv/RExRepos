@@ -17,11 +17,13 @@ has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
 ```
 
-Two-sample $t$-test for independent groups
+Two-sample $t$-test / one-way ANOVA for independent groups
 -------------------------
-    
+
+Not limited to just two independent samples.
+
 ### Using package `coin`
-    
+
 ```{r}
 set.seed(1.234)
 Nj     <- c(7, 8)
@@ -73,8 +75,10 @@ legend(x="bottomright", lty=c(NA, 1), pch=c(16, NA), lwd=c(1, 2),
        expression(paste("N(0, ", sigma[1]^2 / n[1] + sigma[2]^2 / n[2], ")"))))
 ```
 
-Two-sample $t$-test for dependent groups
+Two-sample $t$-test / one-way ANOVA for dependent groups
 -------------------------
+
+Not limited to just two dependent samples.
 
 ### Using package `coin`
 

@@ -8,14 +8,6 @@ TODO
 -------------------------
 
  - link to diagAddElements -> `axis()`, diagMultiple
- - `RColorBrewer`
- - show colors
- - common set of options, example: `plot()`
- - xlab, ylab, xlim, ylim, main, sub, asp, log, axes, type="n"
- - only in `par()`: bt, mar, oma, xlog, ylog
- - `par()` and `plot()`: cex, cex.axis, cex.main, cex.lab, col, font, family, las, lend, lty,
-    lwd, pch, srt, xaxs, yaxs, xaxt, yaxt
- - fonts
 
 Install required packages
 -------------------------
@@ -30,52 +22,154 @@ if(any(!has)) install.packages(wants[!has])
 ```
 
 
-Plot symbols and line types
+Formatting elements for all kinds of diagrams
 -------------------------
 
-### Contour plots
-    
+Nearly all R base diagrams come with a shared set of options to control typical diagram elements like the title, axis labels and limits, or the type of plot symbol. They are illustrated here using the `plot()` function for simple scatter plots.
+
+### Plot symbols and line types
+
+Plot symbols are chosen with option `pch`.
+
 
 ```r
-X <- matrix(rep(1:6, times=11), ncol=11)
-Y <- matrix(rep(1:11, each=6),  ncol=11)
+X <- row(matrix(numeric(6*5), nrow=6, ncol=5))
+Y <- col(matrix(numeric(6*5), nrow=6, ncol=5))
 
 par(mar=c(1, 1, 4, 2))
-plot(0:6, seq(1, 11, length.out=7), type="n", xlab=NA, ylab=NA,
-     axes=FALSE, main="pch data symbols and lty line types")
-points(X[1:26], Y[1:26], pch=0:25, bg="gray", cex=2)
-matpoints(X[ , 6:11], Y[ , 6:11], type="l", lty=6:1, lwd=2, col="black")
-text(X[1:26]-0.3, Y[1:26],    labels=0:25)
-text(rep(0.7, 6), Y[1, 6:11], labels=6:1)
-text(0, 7.5, labels="line types for lty", srt=90, cex=1.2)
-text(0, 2.0, labels="symbole for pch",    srt=90, cex=1.2)
+plot(0:5, seq(1, 5, length.out=6), type="n", xlab=NA, ylab=NA,
+     axes=FALSE, main="Data symbols")
+points(X[1:26], Y[1:26], pch=0:25, bg="gray", cex=3)
+text(X[1:26]-0.3, Y[1:26], labels=0:25)
+text(0.2, 3, labels="symbols for pch", srt=90, cex=1.2)
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
+![plot of chunk rerDiagFormat01](figure/rerDiagFormat01.png) 
+
+
+Line types are chosen with option `lty`, line widths with option `lwd`, and round vs. square line ends with `lend`.
+
+
+```r
+X <- row(matrix(numeric(6*12), nrow=6, ncol=12))
+Y <- col(matrix(numeric(6*12), nrow=6, ncol=12))
+
+par(mar=c(1, 1, 4, 2))
+plot(0:6, seq(1, 12, length.out=7), type="n", axes=FALSE)
+matlines(X[ , 1:6],  Y[ , 1:6],  lty=6:1, lwd=6:1, lend=0, col="blue")
+matlines(X[ , 7:12], Y[ , 7:12], lty=6:1, lwd=6:1, lend=1, col="black")
+
+## add annotations
+text(rep(0.7, 12), Y[1, 1:12], labels=c(6:1, 6:1))
+text(0, 7, labels="line types: lty, line widths: lwd", srt=90, cex=1.2)
+text(0.32, 9, labels="line ending: lend=1", srt=90, cex=1.2)
+text(0.32, 3, labels="line ending: lend=0", srt=90, cex=1.2)
+```
+
+![plot of chunk rerDiagFormat02](figure/rerDiagFormat02.png) 
+
+
+### Diagram title, axis labels, axis limits, aspect ratio
+
+
+```r
+set.seed(1.234)
+N <- 100
+x <- rnorm(N, 100, 15)
+y <- 0.3*x + rnorm(N, 0, 7)
+plot(x, y, main="Scatter plot", sub="aspect ratio = 1",
+     xlab="x axis", ylab="y axis",
+     xlim=c(60, 140), asp=1, pch=16, col="blue")
+```
+
+![plot of chunk rerDiagFormat03](figure/rerDiagFormat03.png) 
 
 
 Setting parameters with `par()`
 -------------------------
 
+Formatting details of a diagram can also be controlled with a call to `par()` before a diagram is opened. Some aspects can be set both with `par()`, and with the diagram function - e.g., with options to `plot()`. These include (see `?par` for explanations):
+
+ - `cex`, `cex.axis`, `cex.main`, `cex.lab` for the size of plot symbols, axis labels and diagram title
+ - `col` for the color of plot symbols
+ - `font`, `family` for the font of the diagram annotations
+ - `las` for the orientation of axis labels
+ - `lend`, `lty`, `lwd`, `pch` for the style of lines and plot symbols
+ - `xaxs`, `yaxs` for the precise axis limits
+ - `xaxt`, `yaxt` for the presence of axes
+
+Other aspects can only be set in `par()`. These include: `bt`, `mar`, `oma`, `xlog`, `ylog`. The return value of `par()` is a list with the old value for the changed option. When it is saved, it can later be passed as an option to `par()` to reset the option for the current graphics device to its previous value.
+
 
 ```r
-set.seed(1.234)
 par(mfrow=c(1, 2))
-op  <- par(col="gray60", lwd=2, pch=16)
-plot(rnorm(10), main="Gray, bold, filled circles")
+op <- par(col="gray60", family="serif", bty="n", mar=c(7, 5, 7, 1), pch=16)
+plot(rnorm(10), main="Changed formatting")
 par(op)
 plot(rnorm(10), main="Standard format")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
+![plot of chunk rerDiagFormat04](figure/rerDiagFormat04.png) 
 
 
 Colors
 -------------------------
 
+### Default palette and other palette choices
+
 
 ```r
-palette("default")
+N <- 6
+(colDef <- palette()[1:N])
+```
+
+```
+[1] "black"   "red"     "green3"  "blue"    "cyan"    "magenta"
+```
+
+```r
+(colAll <- sample(colors(), N, replace=FALSE))
+```
+
+```
+[1] "blue2"     "gray40"    "grey68"    "lightblue" "gray20"    "grey15"   
+```
+
+
+
+```r
+colRain <- rainbow(N)
+colTopo <- topo.colors(N)
+colCm   <- cm.colors(N)
+colHeat <- heat.colors(N)
+```
+
+
+
+```r
+len    <- 1/N
+xLeft  <- rep(seq(0,   1-len, by=len), times=N)
+yBot   <- rep(seq(0,   1-len, by=len),  each=N)
+xRight <- rep(seq(len, 1,     by=len), times=N)
+yTop   <- rep(seq(len, 1,     by=len),  each=N)
+
+par(mar=c(0, 4, 1, 0) + 0.1)
+plot(c(0, 1), c(0, 1), axes=FALSE, xlab=NA, ylab=NA, type="n",
+     asp=1, main="Colors")
+rect(xLeft, yBot, xRight, yTop, border=NA,
+     col=c(colDef, colAll, colRain, colTopo, colCm, colHeat))
+par(xpd=NA)
+text(-0.05, seq(0, 1-len, length.out=N) + len/2, adj=1,
+     labels=c("default", "sample", "rainbow", "topo", "cm", "heat"))
+```
+
+![plot of chunk rerDiagFormat05](figure/rerDiagFormat05.png) 
+
+
+### RGB colors and transparency
+
+
+```r
 rgb(0, 1, 1)
 ```
 
@@ -91,12 +185,58 @@ rgb(t(col2rgb("red")/255))
 [1] "#FF0000"
 ```
 
+
+
+```r
+rgb(1, 0, 0, 0.5)
+```
+
+```
+[1] "#FF000080"
+```
+
+
+
+```r
+N  <- 150
+xx <- rnorm(N, 100, 15)
+yy <- 0.4*xx + rnorm(N, 0, 10)
+plot(xx, yy, pch=16, cex=3.5, col=rgb(0, 0, 1, 0.3))
+points(xx-20, yy-20, pch=16, cex=3.5, col=rgb(1, 0, 0, 0.3))
+points(xx+20, yy-20, pch=16, cex=3.5, col=rgb(0, 1, 0, 0.3))
+```
+
+![plot of chunk rerDiagFormat06](figure/rerDiagFormat06.png) 
+
+
+### Other color spaces
+
+
 ```r
 hsv(0.1666, 1, 1)
 ```
 
 ```
 [1] "#FFFF00"
+```
+
+```r
+rgb2hsv(matrix(c(0, 1, 1), nrow=3))
+```
+
+```
+      [,1]
+h 0.500000
+s 1.000000
+v 0.003922
+```
+
+```r
+hcl(h=120, c=35, l=85)
+```
+
+```
+[1] "#BBDEB1"
 ```
 
 ```r
@@ -108,37 +248,59 @@ gray(0.5)
 ```
 
 
+### Color palettes with `RColorBrewer`
+
 
 ```r
+N <- 6
 library(RColorBrewer)
-colorRampPalette(brewer.pal(9, "Blues"))(100)
+(bPal <- brewer.pal(N, "Blues"))
 ```
 
 ```
-  [1] "#F7FBFF" "#F4F9FE" "#F2F8FD" "#F0F7FD" "#EEF5FC" "#ECF4FB" "#EAF3FB"
-  [8] "#E8F1FA" "#E6F0F9" "#E4EFF9" "#E2EEF8" "#E0ECF7" "#DEEBF7" "#DCEAF6"
- [15] "#DAE8F5" "#D8E7F5" "#D6E6F4" "#D5E5F4" "#D3E3F3" "#D1E2F2" "#CFE1F2"
- [22] "#CDDFF1" "#CBDEF0" "#C9DDF0" "#C7DBEF" "#C5DAEE" "#C1D9ED" "#BED7EC"
- [29] "#BBD6EB" "#B8D5EA" "#B5D3E9" "#B1D2E7" "#AED1E6" "#ABCFE5" "#A8CEE4"
- [36] "#A4CCE3" "#A1CBE2" "#9ECAE1" "#9AC8E0" "#96C5DF" "#92C3DE" "#8EC1DD"
- [43] "#89BEDC" "#85BCDB" "#81BADA" "#7DB8DA" "#79B5D9" "#75B3D8" "#71B1D7"
- [50] "#6DAFD6" "#69ACD5" "#66AAD4" "#62A8D2" "#5FA6D1" "#5CA3D0" "#58A1CE"
- [57] "#559FCD" "#529DCC" "#4E9ACB" "#4B98C9" "#4896C8" "#4493C7" "#4191C5"
- [64] "#3E8EC4" "#3C8CC3" "#3989C1" "#3686C0" "#3484BE" "#3181BD" "#2E7EBC"
- [71] "#2C7CBA" "#2979B9" "#2776B8" "#2474B6" "#2171B5" "#1F6FB3" "#1D6CB1"
- [78] "#1B69AF" "#1967AD" "#1764AB" "#1562A9" "#135FA7" "#115CA5" "#0F5AA3"
- [85] "#0D57A1" "#0B559F" "#09529D" "#084F9A" "#084D96" "#084A92" "#08478E"
- [92] "#08458A" "#084286" "#083F82" "#083D7E" "#083A7A" "#083776" "#083572"
- [99] "#08326E" "#08306B"
+[1] "#EFF3FF" "#C6DBEF" "#9ECAE1" "#6BAED6" "#3182BD" "#08519C"
+```
+
+```r
+colorRampPalette(bPal)(15)
+```
+
+```
+ [1] "#EFF3FF" "#E0EAF9" "#D1E1F3" "#C3D9EE" "#B4D3E9" "#A6CDE4" "#96C6DF"
+ [8] "#84BCDB" "#72B2D7" "#5EA4D0" "#4994C7" "#3585BE" "#2574B3" "#1662A7"
+[15] "#08519C"
 ```
 
 
-The [R color chart](http://research.stowers-institute.org/efg/R/Color/Chart/) gives a very nice overview of colors available in R.
+
+```r
+b1 <- colorRampPalette(brewer.pal(N, "Reds"))(N)
+b2 <- colorRampPalette(brewer.pal(N, "Greens"))(N)
+b3 <- colorRampPalette(brewer.pal(N, "BuGn"))(N)
+b4 <- colorRampPalette(brewer.pal(N, "BrBG"))(N)
+b5 <- colorRampPalette(brewer.pal(N, "OrRd"))(N)
+b6 <- colorRampPalette(brewer.pal(N, "Accent"))(N)
+
+len    <- 1/N
+xLeft  <- rep(seq(0,   1-len, by=len), times=N)
+yBot   <- rep(seq(0,   1-len, by=len),  each=N)
+xRight <- rep(seq(len, 1,     by=len), times=N)
+yTop   <- rep(seq(len, 1,     by=len),  each=N)
+
+par(mar=c(0, 4, 1, 0) + 0.1)
+plot(c(0, 1), c(0, 1), axes=FALSE, xlab=NA, ylab=NA, type="n",
+     asp=1, main="Colors")
+rect(xLeft, yBot, xRight, yTop, border=NA,
+     col=c(b1, b2, b3, b4, b5, b6))
+```
+
+![plot of chunk rerDiagFormat07](figure/rerDiagFormat07.png) 
+
 
 Useful packages
 -------------------------
 
-Package [`colorspace`](http://cran.r-project.org/package=colorspace) provides more functions for converting between different color spaces.
+Package [`colorspace`](http://cran.r-project.org/package=colorspace) provides more functions for converting between different color spaces. The [R color chart](http://research.stowers-institute.org/efg/R/Color/Chart/) gives a very nice overview of colors available in R.
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
