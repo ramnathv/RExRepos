@@ -90,6 +90,7 @@ Using `reshape()` for more complex data frames
 -------------------------
 
 ### One within variable
+
 #### Simulate data
 
 
@@ -197,6 +198,7 @@ reshape(dfLong, v.names="DV", timevar="IVwth", idvar=c("id", "IVbtw"),
 
 
 ### Two within variables
+
 #### Simulate data
 
 
@@ -289,4 +291,4 @@ Package [`reshape2`](http://cran.r-project.org/package=reshape2) provides functi
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/dfReshape.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/dfReshape.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/dfReshape.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/dfReshape.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/dfReshape.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/dfReshape.R) - [all posts](https://github.com/dwoll/RExRepos)

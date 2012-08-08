@@ -80,7 +80,7 @@ library(psych)
 mean(ageWins)
 ```
 
-### Huber-$M$ estimator
+### Huber-\(M\) estimator
 
 ```{r}
 library(robustbase)

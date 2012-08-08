@@ -1,15 +1,29 @@
 Bootstrapping
 =========================
 
+```{r echo=FALSE}
+opts_knit$set(self.contained=FALSE)
+opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE, comment="")
+```
+
 TODO
 -------------------------
 
  - link to resamplingBootALM
 
-Confidence interval for $\mu$
+Install required packages
 -------------------------
 
 [`boot`](http://cran.r-project.org/package=boot)
+
+```{r}
+wants <- c("boot")
+has   <- wants %in% rownames(installed.packages())
+if(any(!has)) install.packages(wants[!has])
+```
+
+Confidence interval for \(\mu\)
+-------------------------
 
 ### Using package `boot`
     
@@ -20,6 +34,8 @@ sdH0 <- 40
 N    <- 200
 DV   <- rnorm(N, muH0, sdH0)
 ```
+
+Function to calculate the mean and uncorrected variance (=plug-in estimator for the population variance) of a given replication.
 
 ```{r}
 getM <- function(orgDV, idx) {
@@ -34,12 +50,16 @@ nR     <- 999
 (bsRes <- boot(DV, statistic=getM, R=nR))
 ```
 
+Various types of bootstrap confidence intervals
+
 ```{r}
 alpha <- 0.05
 boot.ci(bsRes, conf=1-alpha, type=c("basic", "perc", "norm", "stud", "bca"))
 ```
 
 ### Bootstrap distribution
+
+For the \(t\) test statistic, compare the empirical distribution from the bootstrap replicates against the theoretical \(t_{n-1}\) distribtion.
 
 ```{r}
 res    <- replicate(nR, getM(DV, sample(seq(along=DV), replace=TRUE)))

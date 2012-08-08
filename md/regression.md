@@ -165,7 +165,7 @@ Coefficients:
 Assessing model fit
 -------------------------
 
-### (Adjusted) $R^{2}$ and residual standard error
+### (Adjusted) \(R^{2}\) and residual standard error
 
 
 ```r
@@ -226,7 +226,7 @@ extractAIC(fit1, k=log(N))
 
 `cv.glm()` function from package `boot`, see crossvalidation
 
-Coefficient and overall tests
+Coefficient tests and overall model test
 -------------------------
 
 
@@ -244,10 +244,12 @@ Residuals:
 -32.34  -8.01   1.08   9.39  32.85 
 
 Coefficients:
-            Estimate Std. Error t value Pr(>|t|)
-(Intercept)   -2.700     36.901   -0.07    0.942
-X1             0.429      0.208    2.06    0.042
-X2            -0.272      0.170   -1.60    0.113
+            Estimate Std. Error t value Pr(>|t|)  
+(Intercept)   -2.700     36.901   -0.07    0.942  
+X1             0.429      0.208    2.06    0.042 *
+X2            -0.272      0.170   -1.60    0.113  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Residual standard error: 13 on 97 degrees of freedom
 Multiple R-squared: 0.0656,	Adjusted R-squared: 0.0464 
@@ -282,6 +284,7 @@ Variable selection and model comparisons
 -------------------------
 
 ### Model comparisons
+
 #### Effect of adding a single predictor
 
 
@@ -294,10 +297,12 @@ Single term additions
 
 Model:
 Y ~ X1
-       Df Sum of Sq   RSS AIC F value Pr(>F)
-<none>              16824 517               
-X2      1       432 16393 516    2.55   0.11
-X3      1     11413  5412 405  204.56 <2e-16
+       Df Sum of Sq   RSS AIC F value Pr(>F)    
+<none>              16824 517                   
+X2      1       432 16393 516    2.55   0.11    
+X3      1     11413  5412 405  204.56 <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -313,9 +318,11 @@ Analysis of Variance Table
 
 Model 1: Y ~ X1
 Model 2: Y ~ X1 + X2 + X3
-  Res.Df   RSS Df Sum of Sq   F Pr(>F)
-1     98 16824                        
-2     96  4707  2     12118 124 <2e-16
+  Res.Df   RSS Df Sum of Sq   F Pr(>F)    
+1     98 16824                            
+2     96  4707  2     12118 124 <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -491,14 +498,16 @@ Residuals:
 -2.009 -0.515  0.113  0.423  1.550 
 
 Coefficients:
-              Estimate Std. Error t value Pr(>|t|)
-(Intercept)  2946.8564  5647.9766    0.52    0.614
-GNP             0.2635     0.1082    2.44    0.038
-Unemployed      0.0365     0.0302    1.21    0.258
-Armed.Forces    0.0112     0.0155    0.72    0.488
-Population     -1.7370     0.6738   -2.58    0.030
-Year           -1.4188     2.9446   -0.48    0.641
-Employed        0.2313     1.3039    0.18    0.863
+              Estimate Std. Error t value Pr(>|t|)  
+(Intercept)  2946.8564  5647.9766    0.52    0.614  
+GNP             0.2635     0.1082    2.44    0.038 *
+Unemployed      0.0365     0.0302    1.21    0.258  
+Armed.Forces    0.0112     0.0155    0.72    0.488  
+Population     -1.7370     0.6738   -2.58    0.030 *
+Year           -1.4188     2.9446   -0.48    0.641  
+Employed        0.2313     1.3039    0.18    0.863  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Residual standard error: 1.19 on 9 degrees of freedom
 Multiple R-squared: 0.993,	Adjusted R-squared: 0.988 
@@ -514,14 +523,16 @@ coeftest(fitLL, vcov=hccm)
 
 t test of coefficients:
 
-              Estimate Std. Error t value Pr(>|t|)
-(Intercept)  2946.8564  6750.2987    0.44    0.673
-GNP             0.2635     0.1200    2.20    0.056
-Unemployed      0.0365     0.0375    0.97    0.355
-Armed.Forces    0.0112     0.0195    0.57    0.582
-Population     -1.7370     0.7859   -2.21    0.054
-Year           -1.4188     3.5206   -0.40    0.696
-Employed        0.2313     1.5920    0.15    0.888
+              Estimate Std. Error t value Pr(>|t|)  
+(Intercept)  2946.8564  6750.2987    0.44    0.673  
+GNP             0.2635     0.1200    2.20    0.056 .
+Unemployed      0.0365     0.0375    0.97    0.355  
+Armed.Forces    0.0112     0.0195    0.57    0.582  
+Population     -1.7370     0.7859   -2.21    0.054 .
+Year           -1.4188     3.5206   -0.40    0.696  
+Employed        0.2313     1.5920    0.15    0.888  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 ```
 
@@ -533,12 +544,13 @@ coeftest(fitLL, vcov=vcovHC)
 ```
 
 
- - $M$-estimators: `rlm()` from package `MASS`
+ - \(M\)-estimators: `rlm()` from package `MASS`
  - resistant regression: `lqs()` from package `MASS`
 
 More information can be found in CRAN task view [Robust Statistical Methods](http://cran.r-project.org/web/views/Robust.html).
  
 ### Penalized regression
+
 #### Ridge regression
 
 
@@ -585,7 +597,7 @@ plot(lmrFit$lambda, lmrFit$GCV, type="l", xlab="lambda", ylab="GCV")
 ![plot of chunk rerRegression05](figure/rerRegression052.png) 
 
 
-LASSO, elastic net (regularization and selection): package `glmnet`
+See package [`glmnet`](http://cran.r-project.org/package=glmnet) for the LASSO and elastic net methods which combine regularization and selection.
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
@@ -606,9 +618,4 @@ try(detach(package:MASS))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regression.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regression.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/regression.R) - ([all posts](https://github.com/dwoll/RExRepos))
-
-Get this post from github
-----------------------------------------------
-
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regression.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regression.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/regression.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regression.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regression.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/regression.R) - [all posts](https://github.com/dwoll/RExRepos)

@@ -42,7 +42,7 @@ dfRegr <- data.frame(X1, X2, Yord)
 
 ### Using `lrm()` from package `rms`
 
-logit($p(Y \geq g)$)
+logit(\(p(Y \geq g)\))
 
 
 ```r
@@ -81,7 +81,7 @@ X2     -0.1180 0.0271 -4.36  <0.0001
 
 ### Using `vglm()` from package `VGAM`
 
-logit($p(Y \geq g)$)
+logit(\(p(Y \geq g)\))
 
 
 ```r
@@ -116,7 +116,7 @@ summary(vglm(Yord ~ X1 + X2, family=cumulative(parallel=FALSE), data=dfRegr))
 
 ### Using `clm()` from package `ordinal`
 
-logit($p(Y \leq g)$)
+logit(\(p(Y \leq g)\))
 
 
 ```r
@@ -133,9 +133,11 @@ data:    dfRegr
  logit flexible  100  -121.71 253.41 4(0)  4.20e-08 8.6e+07
 
 Coefficients:
-   Estimate Std. Error z value Pr(>|z|)
-X1   0.1235     0.0321    3.84  0.00012
-X2  -0.1180     0.0271   -4.36  1.3e-05
+   Estimate Std. Error z value Pr(>|z|)    
+X1   0.1235     0.0321    3.84  0.00012 ***
+X2  -0.1180     0.0271   -4.36  1.3e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Threshold coefficients:
      Estimate Std. Error z value
@@ -147,7 +149,7 @@ Threshold coefficients:
 
 ### Using `polr()` from package `MASS`
 
-logit($p(Y \leq g)$)
+logit(\(p(Y \leq g)\))
 
 
 ```r
@@ -251,9 +253,4 @@ try(detach(package:stats4))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regressionOrdinal.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regressionOrdinal.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/regressionOrdinal.R) - ([all posts](https://github.com/dwoll/RExRepos))
-
-Get this post from github
-----------------------------------------------
-
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regressionOrdinal.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regressionOrdinal.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/regressionOrdinal.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regressionOrdinal.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regressionOrdinal.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/regressionOrdinal.R) - [all posts](https://github.com/dwoll/RExRepos)

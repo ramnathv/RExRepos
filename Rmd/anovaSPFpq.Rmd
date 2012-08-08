@@ -1,4 +1,4 @@
-Split-plot-factorial ANOVA (SPF-$p \cdot q$ design)
+Split-plot-factorial ANOVA (SPF-p.q design)
 =========================
 
 TODO
@@ -19,7 +19,7 @@ has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
 ```
 
-Two-way SPF-$p \cdot q$ ANOVA
+Two-way SPF-\(p \cdot q\) ANOVA
 -------------------------
 
 ### Using `aov()` with data in long format
@@ -66,7 +66,7 @@ anova(fitSPFpq, M=~IVwth, X=~1, idata=inSPFpq, test="Spherical")
 mauchly.test(fitSPFpq, M=~IVwth, X=~1, idata=inSPFpq)
 ```
 
-Effect size estimates: generalized $\hat{\eta}_{g}^{2}$
+Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
 -------------------------
 
 ```{r}

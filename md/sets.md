@@ -121,7 +121,7 @@ union(setdiff(m, n), setdiff(n, m))
 ```
 
 
-### Is $e$ an element of set $X$?
+### Is \(e\) an element of set \(X\)?
 
 
 ```r
@@ -291,4 +291,4 @@ try(detach(package:sets))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/sets.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/sets.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/sets.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/sets.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/sets.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/sets.R) - [all posts](https://github.com/dwoll/RExRepos)

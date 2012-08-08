@@ -80,6 +80,7 @@ legend(x="topleft", legend=c("data", "PC axes", "SDs of PC", "centroid"),
 ```
 
 ### Approximate data by their principal components
+
 #### Full reproduction using all principal components
 
 ```{r}

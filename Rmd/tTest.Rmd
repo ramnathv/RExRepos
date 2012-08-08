@@ -1,4 +1,4 @@
-$t$-tests
+t-tests
 =========================
 
 TODO
@@ -6,7 +6,7 @@ TODO
 
  - link to resamplingPerm
 
-One-sample $t$-test
+One-sample \(t\)-test
 -------------------------
 
 ### Test
@@ -19,16 +19,16 @@ muH0 <- 0
 t.test(DV, alternative="two.sided", mu=muH0)
 ```
 
-### Effect size estimate (Cohen's $d$)
+### Effect size estimate (Cohen's \(d\))
 
 ```{r}
 (d <- (mean(DV) - muH0) / sd(DV))
 ```
 
-Two-sample $t$-test for independent samples
+Two-sample \(t\)-test for independent samples
 -------------------------
 
-### $t$-Test
+### \(t\)-Test
 
 ```{r}
 Nj     <- c(18, 21)
@@ -46,13 +46,13 @@ t.test(DVf, DVm, alternative="less", var.equal=TRUE)
 t.test(DV ~ IV, alternative="greater", var.equal=TRUE, data=tIndDf)
 ```
 
-### Welch $t$-Test
+### Welch \(t\)-Test
 
 ```{r}
 t.test(DV ~ IV, alternative="greater", var.equal=FALSE, data=tIndDf)
 ```
 
-### Effect size estimate (Cohen's $d$)
+### Effect size estimate (Cohen's \(d\))
 
 ```{r}
 n1 <- Nj[1]
@@ -61,7 +61,7 @@ sdPool <- sqrt(((n1-1)*var(DVm) + (n2-1)*var(DVf)) / (n1+n2-2))
 (d     <- (mean(DVm) - mean(DVf)) / sdPool)
 ```
 
-Two-sample $t$-test for dependent samples
+Two-sample \(t\)-test for dependent samples
 -------------------------
 
 ### Test
@@ -83,7 +83,7 @@ DVdiff <- DVpre - DVpost
 t.test(DVdiff, alternative="less")
 ```
 
-### Effect size estimate (Cohen's $d$)
+### Effect size estimate (Cohen's \(d\))
 
 ```{r}
 (d <- mean(DVdiff) / sd(DVdiff))

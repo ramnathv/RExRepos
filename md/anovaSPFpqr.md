@@ -1,4 +1,4 @@
-Three-way split-plot-factorial ANOVA (SPF-$pq \cdot r$ and SPF-$p \cdot qr$ design)
+Three-way split-plot-factorial ANOVA (SPF-pq.r and SPF-p.qr design)
 =========================
 
 TODO
@@ -21,7 +21,7 @@ if(any(!has)) install.packages(wants[!has])
 ```
 
 
-Three-way SPF-$pq \cdot r$ ANOVA
+Three-way SPF-\(pq \cdot r\) ANOVA
 -------------------------
 
 ### Using `aov()` with data in long format
@@ -59,16 +59,18 @@ IVbtw1:IVbtw2  1    1.4    1.42    0.38   0.54
 Residuals     36  136.1    3.78               
 
 Error: id:IVwth
-                    Df Sum Sq Mean Sq F value Pr(>F)
-IVwth                2    573   286.3   92.14 <2e-16
-IVbtw1:IVwth         2      2     1.2    0.40   0.67
-IVbtw2:IVwth         2      1     0.4    0.14   0.87
-IVbtw1:IVbtw2:IVwth  2      3     1.7    0.55   0.58
-Residuals           72    224     3.1               
+                    Df Sum Sq Mean Sq F value Pr(>F)    
+IVwth                2    573   286.3   92.14 <2e-16 ***
+IVbtw1:IVwth         2      2     1.2    0.40   0.67    
+IVbtw2:IVwth         2      1     0.4    0.14   0.87    
+IVbtw1:IVbtw2:IVwth  2      3     1.7    0.55   0.58    
+Residuals           72    224     3.1                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
-### Effect size estimates: generalized $\hat{\eta}_{g}^{2}$
+### Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
 
 
 ```r
@@ -176,15 +178,17 @@ summary(AnovaSPFpq.r, multivariate=FALSE, univariate=TRUE)
 
 Univariate Type II Repeated-Measures ANOVA Assuming Sphericity
 
-                     SS num Df Error SS den Df     F Pr(>F)
-(Intercept)           6      1      136     36  1.53   0.22
-IVbtw1                1      1      136     36  0.29   0.59
-IVbtw2                1      1      136     36  0.20   0.65
-IVbtw1:IVbtw2         1      1      136     36  0.38   0.54
-IVwth               573      2      224     72 92.14 <2e-16
-IVbtw1:IVwth          2      2      224     72  0.40   0.67
-IVbtw2:IVwth          1      2      224     72  0.14   0.87
-IVbtw1:IVbtw2:IVwth   3      2      224     72  0.55   0.58
+                     SS num Df Error SS den Df     F Pr(>F)    
+(Intercept)           6      1      136     36  1.53   0.22    
+IVbtw1                1      1      136     36  0.29   0.59    
+IVbtw2                1      1      136     36  0.20   0.65    
+IVbtw1:IVbtw2         1      1      136     36  0.38   0.54    
+IVwth               573      2      224     72 92.14 <2e-16 ***
+IVbtw1:IVwth          2      2      224     72  0.40   0.67    
+IVbtw2:IVwth          1      2      224     72  0.14   0.87    
+IVbtw1:IVbtw2:IVwth   3      2      224     72  0.55   0.58    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 
 Mauchly Tests for Sphericity
@@ -199,17 +203,21 @@ IVbtw1:IVbtw2:IVwth          0.928   0.269
 Greenhouse-Geisser and Huynh-Feldt Corrections
  for Departure from Sphericity
 
-                    GG eps Pr(>F[GG])
-IVwth                0.933     <2e-16
-IVbtw1:IVwth         0.933       0.66
-IVbtw2:IVwth         0.933       0.86
-IVbtw1:IVbtw2:IVwth  0.933       0.57
+                    GG eps Pr(>F[GG])    
+IVwth                0.933     <2e-16 ***
+IVbtw1:IVwth         0.933       0.66    
+IVbtw2:IVwth         0.933       0.86    
+IVbtw1:IVbtw2:IVwth  0.933       0.57    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
-                    HF eps Pr(>F[HF])
-IVwth                0.982     <2e-16
-IVbtw1:IVwth         0.982       0.67
-IVbtw2:IVwth         0.982       0.87
-IVbtw1:IVbtw2:IVwth  0.982       0.57
+                    HF eps Pr(>F[HF])    
+IVwth                0.982     <2e-16 ***
+IVbtw1:IVwth         0.982       0.67    
+IVbtw2:IVwth         0.982       0.87    
+IVbtw1:IVbtw2:IVwth  0.982       0.57    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -290,7 +298,7 @@ W = 0.9277, p-value = 0.269
 ```
 
 
-Three-way SPF-$p \cdot qr$ ANOVA
+Three-way SPF-\(p \cdot qr\) ANOVA
 -------------------------
 
 ### Using `aov()` with data in long format
@@ -329,26 +337,32 @@ IVbtw      1    0.1    0.10    0.01   0.91
 Residuals 18  126.6    7.03               
 
 Error: id:IVwth1
-             Df Sum Sq Mean Sq F value Pr(>F)
-IVwth1        2    771     386  116.36 <2e-16
-IVbtw:IVwth1  2      6       3    0.94    0.4
-Residuals    36    119       3               
+             Df Sum Sq Mean Sq F value Pr(>F)    
+IVwth1        2    771     386  116.36 <2e-16 ***
+IVbtw:IVwth1  2      6       3    0.94    0.4    
+Residuals    36    119       3                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Error: id:IVwth2
-             Df Sum Sq Mean Sq F value  Pr(>F)
-IVwth2        1  110.8   110.8   28.59 4.4e-05
-IVbtw:IVwth2  1    0.3     0.3    0.07    0.79
-Residuals    18   69.8     3.9                
+             Df Sum Sq Mean Sq F value  Pr(>F)    
+IVwth2        1  110.8   110.8   28.59 4.4e-05 ***
+IVbtw:IVwth2  1    0.3     0.3    0.07    0.79    
+Residuals    18   69.8     3.9                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Error: id:IVwth1:IVwth2
-                    Df Sum Sq Mean Sq F value Pr(>F)
-IVwth1:IVwth2        2   46.0   23.01    6.14 0.0051
-IVbtw:IVwth1:IVwth2  2    0.5    0.24    0.06 0.9385
-Residuals           36  134.8    3.74               
+                    Df Sum Sq Mean Sq F value Pr(>F)   
+IVwth1:IVwth2        2   46.0   23.01    6.14 0.0051 **
+IVbtw:IVwth1:IVwth2  2    0.5    0.24    0.06 0.9385   
+Residuals           36  134.8    3.74                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
-### Effect size estimates: generalized $\hat{\eta}_{g}^{2}$
+### Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
 
 
 ```r
@@ -457,15 +471,17 @@ summary(AnovaSPFp.qr, multivariate=FALSE, univariate=TRUE)
 
 Univariate Type II Repeated-Measures ANOVA Assuming Sphericity
 
-                       SS num Df Error SS den Df       F  Pr(>F)
-(Intercept)         17864      1    126.6     18 2540.02 < 2e-16
-IVbtw                   0      1    126.6     18    0.01  0.9057
-IVwth1                771      2    119.3     36  116.36 < 2e-16
-IVbtw:IVwth1            6      2    119.3     36    0.94  0.3994
-IVwth2                111      1     69.8     18   28.59 4.4e-05
-IVbtw:IVwth2            0      1     69.8     18    0.07  0.7917
-IVwth1:IVwth2          46      2    134.8     36    6.14  0.0051
-IVbtw:IVwth1:IVwth2     0      2    134.8     36    0.06  0.9385
+                       SS num Df Error SS den Df       F  Pr(>F)    
+(Intercept)         17864      1    126.6     18 2540.02 < 2e-16 ***
+IVbtw                   0      1    126.6     18    0.01  0.9057    
+IVwth1                771      2    119.3     36  116.36 < 2e-16 ***
+IVbtw:IVwth1            6      2    119.3     36    0.94  0.3994    
+IVwth2                111      1     69.8     18   28.59 4.4e-05 ***
+IVbtw:IVwth2            0      1     69.8     18    0.07  0.7917    
+IVwth1:IVwth2          46      2    134.8     36    6.14  0.0051 ** 
+IVbtw:IVwth1:IVwth2     0      2    134.8     36    0.06  0.9385    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 
 Mauchly Tests for Sphericity
@@ -480,17 +496,21 @@ IVbtw:IVwth1:IVwth2          0.790  0.1348
 Greenhouse-Geisser and Huynh-Feldt Corrections
  for Departure from Sphericity
 
-                    GG eps Pr(>F[GG])
-IVwth1               0.807    1.1e-13
-IVbtw:IVwth1         0.807     0.3835
-IVwth1:IVwth2        0.826     0.0086
-IVbtw:IVwth1:IVwth2  0.826     0.9094
+                    GG eps Pr(>F[GG])    
+IVwth1               0.807    1.1e-13 ***
+IVbtw:IVwth1         0.807     0.3835    
+IVwth1:IVwth2        0.826     0.0086 ** 
+IVbtw:IVwth1:IVwth2  0.826     0.9094    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
-                    HF eps Pr(>F[HF])
-IVwth1               0.875    1.2e-14
-IVbtw:IVwth1         0.875     0.3896
-IVwth1:IVwth2        0.899     0.0069
-IVbtw:IVwth1:IVwth2  0.899     0.9231
+                    HF eps Pr(>F[HF])    
+IVwth1               0.875    1.2e-14 ***
+IVbtw:IVwth1         0.875     0.3896    
+IVwth1:IVwth2        0.899     0.0069 ** 
+IVbtw:IVwth1:IVwth2  0.899     0.9231    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -676,4 +696,4 @@ try(detach(package:MASS))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaSPFpqr.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaSPFpqr.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaSPFpqr.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaSPFpqr.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaSPFpqr.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaSPFpqr.R) - [all posts](https://github.com/dwoll/RExRepos)

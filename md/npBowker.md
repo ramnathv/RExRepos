@@ -51,4 +51,4 @@ sqDiffs   <- (cTab - t(cTab))^2 / (cTab + t(cTab))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/npBowker.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/npBowker.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/npBowker.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/npBowker.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/npBowker.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/npBowker.R) - [all posts](https://github.com/dwoll/RExRepos)

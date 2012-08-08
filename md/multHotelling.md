@@ -1,4 +1,4 @@
-Hotelling's $T^{2}$-test
+Hotelling's T^2-test
 =========================
 
 Install required packages
@@ -14,7 +14,7 @@ if(any(!has)) install.packages(wants[!has])
 ```
 
 
-One-sample Hotelling's $T^{2}$-test
+One-sample Hotelling's \(T^{2}\)-test
 -------------------------
 
 ### Simulate data
@@ -61,13 +61,15 @@ Y1ctr  <- sweep(Y1, 2, muH0, "-")
 ```
 Analysis of Variance Table
 
-            Df Hotelling-Lawley approx F num Df den Df Pr(>F)
-(Intercept)  1             1.09      7.1      2     13 0.0082
-Residuals   14                                               
+            Df Hotelling-Lawley approx F num Df den Df Pr(>F)   
+(Intercept)  1             1.09      7.1      2     13 0.0082 **
+Residuals   14                                                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
-Hotelling's $T^{2}$-test for two independent samples
+Hotelling's \(T^{2}\)-test for two independent samples
 -------------------------
 
 ### Using `HotellingsT2()` from package `ICSNP`
@@ -108,10 +110,12 @@ anova(lm(Y12 ~ IV), test="Hotelling-Lawley")
 ```
 Analysis of Variance Table
 
-            Df Hotelling-Lawley approx F num Df den Df  Pr(>F)
-(Intercept)  1             1.93     35.7      2     37 2.3e-09
-IV           1             1.08     20.0      2     37 1.3e-06
-Residuals   38                                                
+            Df Hotelling-Lawley approx F num Df den Df  Pr(>F)    
+(Intercept)  1             1.93     35.7      2     37 2.3e-09 ***
+IV           1             1.08     20.0      2     37 1.3e-06 ***
+Residuals   38                                                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 ```r
@@ -119,13 +123,15 @@ summary(manova(Y12 ~ IV), test="Hotelling-Lawley")
 ```
 
 ```
-          Df Hotelling-Lawley approx F num Df den Df  Pr(>F)
-IV         1             1.08       20      2     37 1.3e-06
-Residuals 38                                                
+          Df Hotelling-Lawley approx F num Df den Df  Pr(>F)    
+IV         1             1.08       20      2     37 1.3e-06 ***
+Residuals 38                                                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
-Hotelling's $T^{2}$-test for two dependent samples
+Hotelling's \(T^{2}\)-test for two dependent samples
 -------------------------
 
 ### Simulate data
@@ -184,9 +190,11 @@ anova(lm(DVdiff ~ 1), test="Hotelling-Lawley")
 ```
 Analysis of Variance Table
 
-            Df Hotelling-Lawley approx F num Df den Df  Pr(>F)
-(Intercept)  1             1.38     12.4      2     18 0.00041
-Residuals   19                                                
+            Df Hotelling-Lawley approx F num Df den Df  Pr(>F)    
+(Intercept)  1             1.38     12.4      2     18 0.00041 ***
+Residuals   19                                                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -205,4 +213,4 @@ try(detach(package:mvtnorm))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multHotelling.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multHotelling.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/multHotelling.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multHotelling.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multHotelling.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/multHotelling.R) - [all posts](https://github.com/dwoll/RExRepos)

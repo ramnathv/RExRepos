@@ -49,9 +49,11 @@ summary(manRes1, test="Wilks")
 ```
 
 ```
-          Df Wilks approx F num Df den Df Pr(>F)
-IV         2 0.371       18      4    112  2e-11
-Residuals 57                                    
+          Df Wilks approx F num Df den Df Pr(>F)    
+IV         2 0.371       18      4    112  2e-11 ***
+Residuals 57                                        
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -93,11 +95,13 @@ summary(manRes2, test="Pillai")
 ```
 
 ```
-           Df Pillai approx F num Df den Df  Pr(>F)
-IV1         2  0.855     42.6      4    228 < 2e-16
-IV2         1  0.141      9.3      2    113 0.00018
-IV1:IV2     2  0.205      6.5      4    228 5.6e-05
-Residuals 114                                      
+           Df Pillai approx F num Df den Df  Pr(>F)    
+IV1         2  0.855     42.6      4    228 < 2e-16 ***
+IV2         1  0.141      9.3      2    113 0.00018 ***
+IV1:IV2     2  0.205      6.5      4    228 5.6e-05 ***
+Residuals 114                                          
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -139,11 +143,13 @@ Y.1 295.4 501.8
 Y.2 501.8 852.5
 
 Multivariate Tests: (Intercept)
-                 Df test stat approx F num Df den Df Pr(>F)
-Pillai            1    0.5348    64.96      2    113 <2e-16
-Wilks             1    0.4652    64.96      2    113 <2e-16
-Hotelling-Lawley  1    1.1498    64.96      2    113 <2e-16
-Roy               1    1.1498    64.96      2    113 <2e-16
+                 Df test stat approx F num Df den Df Pr(>F)    
+Pillai            1    0.5348    64.96      2    113 <2e-16 ***
+Wilks             1    0.4652    64.96      2    113 <2e-16 ***
+Hotelling-Lawley  1    1.1498    64.96      2    113 <2e-16 ***
+Roy               1    1.1498    64.96      2    113 <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 ------------------------------------------
  
@@ -155,11 +161,13 @@ Y.1 870.07  28.32
 Y.2  28.32 988.64
 
 Multivariate Tests: IV1
-                 Df test stat approx F num Df den Df Pr(>F)
-Pillai            2    0.8551    42.57      4    228 <2e-16
-Wilks             2    0.3211    43.20      4    226 <2e-16
-Hotelling-Lawley  2    1.5654    43.83      4    224 <2e-16
-Roy               2    1.0354    59.02      2    114 <2e-16
+                 Df test stat approx F num Df den Df Pr(>F)    
+Pillai            2    0.8551    42.57      4    228 <2e-16 ***
+Wilks             2    0.3211    43.20      4    226 <2e-16 ***
+Hotelling-Lawley  2    1.5654    43.83      4    224 <2e-16 ***
+Roy               2    1.0354    59.02      2    114 <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 ------------------------------------------
  
@@ -171,11 +179,13 @@ Y.1 151.07 55.26
 Y.2  55.26 20.21
 
 Multivariate Tests: IV2
-                 Df test stat approx F num Df den Df  Pr(>F)
-Pillai            1    0.1126    7.166      2    113 0.00118
-Wilks             1    0.8874    7.166      2    113 0.00118
-Hotelling-Lawley  1    0.1268    7.166      2    113 0.00118
-Roy               1    0.1268    7.166      2    113 0.00118
+                 Df test stat approx F num Df den Df  Pr(>F)   
+Pillai            1    0.1126    7.166      2    113 0.00118 **
+Wilks             1    0.8874    7.166      2    113 0.00118 **
+Hotelling-Lawley  1    0.1268    7.166      2    113 0.00118 **
+Roy               1    0.1268    7.166      2    113 0.00118 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 ------------------------------------------
  
@@ -187,11 +197,13 @@ Y.1  47.37 -80.82
 Y.2 -80.82 232.23
 
 Multivariate Tests: IV1:IV2
-                 Df test stat approx F num Df den Df   Pr(>F)
-Pillai            2    0.2052    6.516      4    228 5.56e-05
-Wilks             2    0.7971    6.784      4    226 3.57e-05
-Hotelling-Lawley  2    0.2517    7.047      4    224 2.32e-05
-Roy               2    0.2398   13.668      2    114 4.78e-06
+                 Df test stat approx F num Df den Df   Pr(>F)    
+Pillai            2    0.2052    6.516      4    228 5.56e-05 ***
+Wilks             2    0.7971    6.784      4    226 3.57e-05 ***
+Hotelling-Lawley  2    0.2517    7.047      4    224 2.32e-05 ***
+Roy               2    0.2398   13.668      2    114 4.78e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -210,4 +222,4 @@ try(detach(package:MASS))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multMANOVA.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multMANOVA.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/multMANOVA.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multMANOVA.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multMANOVA.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/multMANOVA.R) - [all posts](https://github.com/dwoll/RExRepos)

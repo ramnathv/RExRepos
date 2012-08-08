@@ -151,7 +151,7 @@ mad(age)
 ```
 
 
-### $Qn$: more efficient alternative to MAD
+### \(Q_{n}\): more efficient alternative to MAD
 
 
 ```r
@@ -164,7 +164,7 @@ Qn(age)
 ```
 
 
-### $\tau$ estimate of scale
+### \(\tau\) estimate of scale
 
 
 ```r
@@ -245,4 +245,4 @@ try(detach(package:class))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/variance.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/variance.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/variance.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/variance.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/variance.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/variance.R) - [all posts](https://github.com/dwoll/RExRepos)

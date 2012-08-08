@@ -509,4 +509,4 @@ Package [`plyr`](http://cran.r-project.org/package=plyr) provides very handy fun
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/dfTransform.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/dfTransform.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/dfTransform.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/dfTransform.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/dfTransform.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/dfTransform.R) - [all posts](https://github.com/dwoll/RExRepos)

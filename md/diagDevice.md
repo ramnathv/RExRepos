@@ -88,4 +88,4 @@ graphics.off()
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagDevice.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagDevice.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagDevice.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagDevice.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagDevice.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagDevice.R) - [all posts](https://github.com/dwoll/RExRepos)

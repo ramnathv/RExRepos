@@ -22,7 +22,7 @@ if(any(!has)) install.packages(wants[!has])
 Background
 -------------------------
 
-Non-orthogonal factorial between-subjects designs typically result from non-proportional unequal cell sizes. Proportional unequal cell sizes are present when $n_{jk}/n_{jk'} = n_{j'k}/n_{j'k'}$ and $n_{jk}/n_{j'k} = n_{jk'}/n_{j'k'}$ for all $j, j', k, k'$ holds.
+Non-orthogonal factorial between-subjects designs typically result from non-proportional unequal cell sizes. Proportional unequal cell sizes are present when \(n_{jk}/n_{jk'} = n_{j'k}/n_{j'k'}\) and \(n_{jk}/n_{j'k} = n_{jk'}/n_{j'k'}\) for all \(j, j', k, k'\) holds.
 
 In the non-proportional case, so-called type I, II, or III sums of squares can give different results in an ANOVA for all tests but the highest interaction effect. "Types of SS" is a misnomer: The SS of an effect is the sum of squared differences between the predicted values from the least-squares fit of a restricted model and the prediction from the least-squares fit of a more general model. What differs between the "types of SS" is the choice for the restricted and more general model when testing an effect. Orthogonal designs obscure these differences because then all SS types will be equal.
 
@@ -33,47 +33,36 @@ A thorough resource on the topic is chapter 7 of Maxwell & Delaney (2004). Desig
 Hypotheses for main effects
 -------------------------
 
-Hypotheses for main effects as tested by different SS types in a non-proportional unbalanced two-factorial between-subjects design (IV A with $P$ groups, B with $Q$ groups).
+Hypotheses for main effects as tested by different SS types in a non-proportional unbalanced two-factorial between-subjects design (IV A with \(P\) groups, B with \(Q\) groups).
 
  - Cell expected values
-    - $\mu_{jk} \quad 1 \leq j \leq P, \quad 1 \leq k \leq Q$
+    - \(\mu_{jk} \quad 1 \leq j \leq P, \quad 1 \leq k \leq Q\)
  - Unweighted marginal expected values:
-    - $\mu_{j.} := \frac{1}{Q} \sum_{k=1}^{Q} \mu_{jk} \quad 1 \leq j \leq P$
-    - $\mu_{.k} := \frac{1}{P} \sum_{j=1}^{P} \mu_{jk} \quad 1 \leq k \leq Q$
+    - \(\mu_{j.} := \frac{1}{Q} \sum_{k=1}^{Q} \mu_{jk} \quad 1 \leq j \leq P\)
+    - \(\mu_{.k} := \frac{1}{P} \sum_{j=1}^{P} \mu_{jk} \quad 1 \leq k \leq Q\)
  - Cell sizes
-    - $n_{jk} \quad 1 \leq j \leq P, \quad 1 \leq k \leq Q$
+    - \(n_{jk} \quad 1 \leq j \leq P, \quad 1 \leq k \leq Q\)
  - Total marginal cell sizes
-    - $n_{j+} := \sum_{k=1}^{Q} n_{jk} \quad 1 \leq j \leq P$
-    - $n_{+k} := \sum_{j=1}^{P} n_{jk} \quad 1 \leq k \leq Q$
+    - \(n_{j+} := \sum_{k=1}^{Q} n_{jk} \quad 1 \leq j \leq P\)
+    - \(n_{+k} := \sum_{j=1}^{P} n_{jk} \quad 1 \leq k \leq Q\)
 
 Null-Hypotheses SS type I (A entered before B):
 
-A: $\sum_{k=1}^{Q} \frac{n_{1k}}{n_{1+}} \cdot \mu_{1k} = \ldots = \sum_{k=1}^{Q} \frac{n_{jk}}{n_{j+}} \cdot \mu_{jk} = \ldots = \sum_{k=1}^{Q} \frac{n_{Pk}}{n_{P+}} \cdot \mu_{Pk}$
+A: \(\sum_{k=1}^{Q} \frac{n_{1k}}{n_{1+}} \cdot \mu_{1k} = \ldots = \sum_{k=1}^{Q} \frac{n_{jk}}{n_{j+}} \cdot \mu_{jk} = \ldots = \sum_{k=1}^{Q} \frac{n_{Pk}}{n_{P+}} \cdot \mu_{Pk}\)
 
-B: $\sum_{j=1}^{P}(n_{jk} - \frac{n^{2}_{jk}}{n_{j+}}) \cdot \mu_{jk} = \sum_{k' \neq k} \sum_{j=1}^{P}(\frac{n_{jk} \cdot n_{jk'}}{n_{j+}}) \cdot \mu_{jk'} \qquad \forall \, k = 1, \ldots, Q-1$
+B: \(\sum_{j=1}^{P}(n_{jk} - \frac{n^{2}_{jk}}{n_{j+}}) \cdot \mu_{jk} = \sum_{k' \neq k} \sum_{j=1}^{P}(\frac{n_{jk} \cdot n_{jk'}}{n_{j+}}) \cdot \mu_{jk'} \qquad \forall \, k = 1, \ldots, Q-1\)
 
 Null-Hypotheses SS type II:
 
-A: $\sum_{k=1}^{Q}(n_{jk} - \frac{n^{2}_{jk}}{n_{+k}}) \cdot \mu_{jk} = \sum_{j' \neq j} \sum_{k=1}^{Q}(\frac{n_{jk} \cdot n_{j'k}}{n_{+k}}) \cdot \mu_{j'k} \qquad \forall \, j = 1, \ldots, P-1$
+A: \(\sum_{k=1}^{Q}(n_{jk} - \frac{n^{2}_{jk}}{n_{+k}}) \cdot \mu_{jk} = \sum_{j' \neq j} \sum_{k=1}^{Q}(\frac{n_{jk} \cdot n_{j'k}}{n_{+k}}) \cdot \mu_{j'k} \qquad \forall \, j = 1, \ldots, P-1\)
 
-B: $\sum_{j=1}^{P}(n_{jk} - \frac{n^{2}_{jk}}{n_{j+}}) \cdot \mu_{jk} = \sum_{k' \neq k} \sum_{j=1}^{P}(\frac{n_{jk} \cdot n_{jk'}}{n_{j+}}) \cdot \mu_{jk'} \qquad \forall \,k = 1, \ldots, Q-1$
+B: \(\sum_{j=1}^{P}(n_{jk} - \frac{n^{2}_{jk}}{n_{j+}}) \cdot \mu_{jk} = \sum_{k' \neq k} \sum_{j=1}^{P}(\frac{n_{jk} \cdot n_{jk'}}{n_{j+}}) \cdot \mu_{jk'} \qquad \forall \,k = 1, \ldots, Q-1\)
 
 Null-Hypotheses SS type III (with effect- or orthogonal coding method):
 
-A: $\mu_{1.} = \ldots = \mu_{j.} = \ldots = \mu_{P.}$
-B: $\mu_{.1} = \ldots = \mu_{.k} = \ldots = \mu_{.Q}$
+A: \(\mu_{1.} = \ldots = \mu_{j.} = \ldots = \mu_{P.}\)
+B: \(\mu_{.1} = \ldots = \mu_{.k} = \ldots = \mu_{.Q}\)
 
-Install required packages
--------------------------
-
-
-```r
-wants <- c("car")
-has   <- wants %in% rownames(installed.packages())
-if(any(!has)) install.packages(wants[!has])
-```
-
-    
 Data set with non-proportional unequal cell sizes
 -------------------------
 
@@ -133,11 +122,13 @@ anova(lm(DV ~ IV1 + IV2 + IV1:IV2, data=dfMD))
 Analysis of Variance Table
 
 Response: DV
-          Df Sum Sq Mean Sq F value  Pr(>F)
-IV1        2    101      51    1.81    0.18
-IV2        2   1253     627   22.44 4.7e-07
-IV1:IV2    4     14       4    0.13    0.97
-Residuals 36   1005      28                
+          Df Sum Sq Mean Sq F value  Pr(>F)    
+IV1        2    101      51    1.81    0.18    
+IV2        2   1253     627   22.44 4.7e-07 ***
+IV1:IV2    4     14       4    0.13    0.97    
+Residuals 36   1005      28                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 ```r
@@ -148,11 +139,13 @@ anova(lm(DV ~ IV2 + IV1 + IV1:IV2, data=dfMD))
 Analysis of Variance Table
 
 Response: DV
-          Df Sum Sq Mean Sq F value  Pr(>F)
-IV2        2   1116     558   19.98 1.5e-06
-IV1        2    238     119    4.27   0.022
-IV2:IV1    4     14       4    0.13   0.972
-Residuals 36   1005      28                
+          Df Sum Sq Mean Sq F value  Pr(>F)    
+IV2        2   1116     558   19.98 1.5e-06 ***
+IV1        2    238     119    4.27   0.022 *  
+IV2:IV1    4     14       4    0.13   0.972    
+Residuals 36   1005      28                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -195,7 +188,7 @@ SS.Ii[2, "Sum of Sq"]
 ```
 
 
-### Total SS $=$ sum of effect SS
+### Total SS \(=\) sum of effect SS
 
 
 ```r
@@ -241,11 +234,13 @@ Anova(lm(DV ~ IV1*IV2, data=dfMD), type="II")
 Anova Table (Type II tests)
 
 Response: DV
-          Sum Sq Df F value  Pr(>F)
-IV1          238  2    4.27   0.022
-IV2         1253  2   22.44 4.7e-07
-IV1:IV2       14  4    0.13   0.972
-Residuals   1005 36                
+          Sum Sq Df F value  Pr(>F)    
+IV1          238  2    4.27   0.022 *  
+IV2         1253  2   22.44 4.7e-07 ***
+IV1:IV2       14  4    0.13   0.972    
+Residuals   1005 36                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -288,7 +283,7 @@ SS.IIi[2, "Sum of Sq"]
 ```
 
 
-### Total SS $\neq$ sum of effect SS
+### Total SS \(\neq\) sum of effect SS
 
 
 ```r
@@ -353,12 +348,14 @@ Anova(fitIII, type="III")
 Anova Table (Type III tests)
 
 Response: DV
-            Sum Sq Df F value  Pr(>F)
-(Intercept) 121174  1 4338.72 < 2e-16
-IV1            205  2    3.67   0.036
-IV2           1181  2   21.15 8.4e-07
-IV1:IV2         14  4    0.13   0.972
-Residuals     1005 36                
+            Sum Sq Df F value  Pr(>F)    
+(Intercept) 121174  1 4338.72 < 2e-16 ***
+IV1            205  2    3.67   0.036 *  
+IV2           1181  2   21.15 8.4e-07 ***
+IV1:IV2         14  4    0.13   0.972    
+Residuals     1005 36                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -390,11 +387,13 @@ Single term deletions
 
 Model:
 DV ~ IV1 + IV2 + IV1:IV2
-        Df Sum of Sq  RSS AIC F value  Pr(>F)
-<none>               1005 158                
-IV1      2       205 1210 162    3.67   0.036
-IV2      2      1181 2187 189   21.15 8.4e-07
-IV1:IV2  4        14 1020 150    0.13   0.972
+        Df Sum of Sq  RSS AIC F value  Pr(>F)    
+<none>               1005 158                    
+IV1      2       205 1210 162    3.67   0.036 *  
+IV2      2      1181 2187 189   21.15 8.4e-07 ***
+IV1:IV2  4        14 1020 150    0.13   0.972    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -408,11 +407,13 @@ Single term deletions
 
 Model:
 DV ~ IV1 + IV2 + IV1:IV2
-        Df Sum of Sq  RSS AIC F value  Pr(>F)
-<none>               1005 158                
-IV1      2       205 1210 162    3.67   0.036
-IV2      2      1181 2187 189   21.15 8.4e-07
-IV1:IV2  4        14 1020 150    0.13   0.972
+        Df Sum of Sq  RSS AIC F value  Pr(>F)    
+<none>               1005 158                    
+IV1      2       205 1210 162    3.67   0.036 *  
+IV2      2      1181 2187 189   21.15 8.4e-07 ***
+IV1:IV2  4        14 1020 150    0.13   0.972    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -430,4 +431,4 @@ try(detach(package:MASS))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaSStypes.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaSStypes.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaSStypes.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaSStypes.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaSStypes.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaSStypes.R) - [all posts](https://github.com/dwoll/RExRepos)

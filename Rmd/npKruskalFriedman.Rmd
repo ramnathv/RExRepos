@@ -16,6 +16,7 @@ Independent samples - unordered groups
 -------------------------
 
 ### Kruskal-Wallis-test
+
 #### Using `kruskal.test()`
 
 ```{r}
@@ -74,6 +75,7 @@ Dependent samples - unordered groups
 -------------------------
 
 ### Friedman-test
+
 #### Using `friedman.test()`
 
 ```{r}

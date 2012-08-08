@@ -277,4 +277,4 @@ try(detach(package:boot))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/resamplingBootALM.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/resamplingBootALM.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/resamplingBootALM.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/resamplingBootALM.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/resamplingBootALM.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/resamplingBootALM.R) - [all posts](https://github.com/dwoll/RExRepos)

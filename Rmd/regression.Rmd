@@ -70,7 +70,7 @@ head(Yhat)
 Assessing model fit
 -------------------------
 
-### (Adjusted) $R^{2}$ and residual standard error
+### (Adjusted) \(R^{2}\) and residual standard error
 
 ```{r}
 sumRes <- summary(fit123)
@@ -104,6 +104,7 @@ Variable selection and model comparisons
 -------------------------
 
 ### Model comparisons
+
 #### Effect of adding a single predictor
 
 ```{r}
@@ -186,12 +187,13 @@ library(sandwich)
 coeftest(fitLL, vcov=vcovHC)
 ```
 
- - $M$-estimators: `rlm()` from package `MASS`
+ - \(M\)-estimators: `rlm()` from package `MASS`
  - resistant regression: `lqs()` from package `MASS`
 
 More information can be found in CRAN task view [Robust Statistical Methods](http://cran.r-project.org/web/views/Robust.html).
  
 ### Penalized regression
+
 #### Ridge regression
 
 ```{r}

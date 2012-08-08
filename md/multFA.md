@@ -207,7 +207,7 @@ Parallel analysis and a "very simple structure" analysis provide help in selecti
 
 
 ```r
-fa.parallel(X)                     ## parallel analysis
+fa.parallel(X)                     # parallel analysis
 ```
 
 ```
@@ -217,7 +217,7 @@ Parallel analysis suggests that the number of factors =  2  and the number of co
 ![plot of chunk rerMultFA02](figure/rerMultFA021.png) 
 
 ```r
-vss(X, n.obs=N, rotate="varimax")  ## very simple structure
+vss(X, n.obs=N, rotate="varimax")  # very simple structure
 ```
 
 ![plot of chunk rerMultFA02](figure/rerMultFA022.png) 
@@ -262,4 +262,4 @@ try(detach(package:mvtnorm))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multFA.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multFA.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/multFA.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multFA.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multFA.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/multFA.R) - [all posts](https://github.com/dwoll/RExRepos)

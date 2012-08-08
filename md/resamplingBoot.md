@@ -1,15 +1,29 @@
 Bootstrapping
 =========================
 
+
+
+
 TODO
 -------------------------
 
  - link to resamplingBootALM
 
-Confidence interval for $\mu$
+Install required packages
 -------------------------
 
 [`boot`](http://cran.r-project.org/package=boot)
+
+
+```r
+wants <- c("boot")
+has   <- wants %in% rownames(installed.packages())
+if(any(!has)) install.packages(wants[!has])
+```
+
+
+Confidence interval for \(\mu\)
+-------------------------
 
 ### Using package `boot`
     
@@ -22,6 +36,8 @@ N    <- 200
 DV   <- rnorm(N, muH0, sdH0)
 ```
 
+
+Function to calculate the mean and uncorrected variance (=plug-in estimator for the population variance) of a given replication.
 
 
 ```r
@@ -53,6 +69,8 @@ t2*    6.871 -0.04513      0.6576
 ```
 
 
+Various types of bootstrap confidence intervals
+
 
 ```r
 alpha <- 0.05
@@ -78,6 +96,8 @@ Calculations and Intervals on Original Scale
 
 
 ### Bootstrap distribution
+
+For the \(t\) test statistic, compare the empirical distribution from the bootstrap replicates against the theoretical \(t_{n-1}\) distribtion.
 
 
 ```r
@@ -112,4 +132,4 @@ try(detach(package:boot))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/resamplingBoot.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/resamplingBoot.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/resamplingBoot.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/resamplingBoot.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/resamplingBoot.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/resamplingBoot.R) - [all posts](https://github.com/dwoll/RExRepos)

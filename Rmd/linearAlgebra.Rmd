@@ -286,7 +286,7 @@ R <- chol(S)
 all.equal(S, t(R) %*% R)
 ```
 
-### $QR$-decomposition
+### \(QR\)-decomposition
 
 ```{r}
 qrX <- qr(X)
@@ -308,7 +308,7 @@ sqrtD <- diag(sqrt(eigS$values))
 A %*% A
 ```
 
-### $X = N N^{t}$
+### \(X = N N^{t}\)
 
 ```{r}
 N <- eigS$vectors %*% sqrt(diag(eigS$values))
@@ -318,7 +318,7 @@ N %*% t(N)
 Orthogonal projections
 -------------------------
 
-### Direct implementation of $(X^{t} X)^{-1} X^{t}$
+### Direct implementation of \((X^{t} X)^{-1} X^{t}\)
 
 ```{r}
 X    <- matrix(c(20, 26, 10, 19, 29, 27, 20, 12, 17, 23, 27, 25), nrow=4)
@@ -347,7 +347,7 @@ Px3 <- t(P3 %*% t(X))
 Px3[1:3, ]
 ```
 
-### Numerically stable implementation using the $QR$-decomposition
+### Numerically stable implementation using the \(QR\)-decomposition
 
 ```{r}
 qrX   <- qr(X)

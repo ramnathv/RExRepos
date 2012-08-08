@@ -215,7 +215,7 @@ sum(diag(cTab)) / sum(cTab)
 ```
 
 
-### log-Likelihood, AUC, Somers's $D_{xy}$, Nagelkerke's pseudo $R^{2}$
+### log-Likelihood, AUC, Somers's \(D_{xy}\), Nagelkerke's pseudo \(R^{2}\)
 
 
 ```r
@@ -257,9 +257,9 @@ X2         -0.1538 0.0396 -3.88  0.0001
 
 For plotting the ROC-curve, see `ROCR` in associationOrder
 
-### McFadden and Cox & Snell seudo $R^{2}$
+### McFadden and Cox & Snell seudo \(R^{2}\)
 
-McFadden pseudo-$R^2$
+McFadden pseudo-\(R^2\)
 
 
 ```r
@@ -302,7 +302,7 @@ as.vector((1 - exp((2/N) * (LL0 - LLf))) / (1 - exp(LL0)^(2/N)))
 
 `cv.glm()` function from package `boot`, see crossvalidation
 
-Coefficient and model tests
+Coefficient tests and overall model test
 -------------------------
 
 ### Individual coefficient tests
@@ -323,10 +323,12 @@ Deviance Residuals:
 -1.7693  -0.9053   0.0086   0.9246   2.5193  
 
 Coefficients:
-            Estimate Std. Error z value Pr(>|z|)
-(Intercept) -19.4847     7.2767   -2.68   0.0074
-X1            0.1367     0.0427    3.21   0.0013
-X2           -0.1538     0.0396   -3.88   0.0001
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -19.4847     7.2767   -2.68   0.0074 ** 
+X1            0.1367     0.0427    3.21   0.0013 ** 
+X2           -0.1538     0.0396   -3.88   0.0001 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 (Dispersion parameter for binomial family taken to be 1)
 
@@ -358,9 +360,11 @@ Analysis of Deviance Table
 
 Model 1: Yfac ~ 1
 Model 2: Yfac ~ X1 + X2
-  Resid. Df Resid. Dev Df Deviance Pr(>Chi)
-1        99        139                     
-2        97        106  2     32.1  1.1e-07
+  Resid. Df Resid. Dev Df Deviance Pr(>Chi)    
+1        99        139                         
+2        97        106  2     32.1  1.1e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -380,10 +384,12 @@ Single term deletions
 
 Model:
 Yfac ~ X1 + X2
-       Df Deviance AIC  LRT Pr(>Chi)
-<none>         106 112              
-X1      1      119 123 12.8  0.00035
-X2      1      128 132 21.5  3.5e-06
+       Df Deviance AIC  LRT Pr(>Chi)    
+<none>         106 112                  
+X1      1      119 123 12.8  0.00035 ***
+X2      1      128 132 21.5  3.5e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -401,4 +407,4 @@ try(detach(package:splines))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regressionLogistic.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regressionLogistic.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/regressionLogistic.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regressionLogistic.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regressionLogistic.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/regressionLogistic.R) - [all posts](https://github.com/dwoll/RExRepos)

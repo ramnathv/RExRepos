@@ -62,7 +62,7 @@ library(coin)
 median_test(DV ~ IV, distribution="exact", data=wIndDf)
 ```
 
-### Wilcoxon rank-sum test ($=$ Mann-Whitney $U$-test)
+### Wilcoxon rank-sum test (\(=\) Mann-Whitney \(U\)-test)
 
 ```{r}
 wilcox.test(DV ~ IV, alternative="less", conf.int=TRUE, data=wIndDf)

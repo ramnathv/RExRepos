@@ -1,4 +1,4 @@
-Hotelling's $T^{2}$-test
+Hotelling's T^2-test
 =========================
 
 Install required packages
@@ -12,7 +12,7 @@ has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
 ```
 
-One-sample Hotelling's $T^{2}$-test
+One-sample Hotelling's \(T^{2}\)-test
 -------------------------
 
 ### Simulate data
@@ -41,7 +41,7 @@ Y1ctr  <- sweep(Y1, 2, muH0, "-")
 (anRes <- anova(lm(Y1ctr ~ 1), test="Hotelling-Lawley"))
 ```
 
-Hotelling's $T^{2}$-test for two independent samples
+Hotelling's \(T^{2}\)-test for two independent samples
 -------------------------
 
 ### Using `HotellingsT2()` from package `ICSNP`
@@ -65,7 +65,7 @@ anova(lm(Y12 ~ IV), test="Hotelling-Lawley")
 summary(manova(Y12 ~ IV), test="Hotelling-Lawley")
 ```
 
-Hotelling's $T^{2}$-test for two dependent samples
+Hotelling's \(T^{2}\)-test for two dependent samples
 -------------------------
 
 ### Simulate data

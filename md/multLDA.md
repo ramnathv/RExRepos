@@ -157,9 +157,11 @@ anova(lm(ld[ , 1] ~ IV))
 Analysis of Variance Table
 
 Response: ld[, 1]
-          Df Sum Sq Mean Sq F value  Pr(>F)
-IV         2   40.6    20.3    20.3 2.2e-07
-Residuals 57   57.0     1.0                
+          Df Sum Sq Mean Sq F value  Pr(>F)    
+IV         2   40.6    20.3    20.3 2.2e-07 ***
+Residuals 57   57.0     1.0                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 ```r
@@ -170,9 +172,11 @@ anova(lm(ld[ , 2] ~ IV))
 Analysis of Variance Table
 
 Response: ld[, 2]
-          Df Sum Sq Mean Sq F value  Pr(>F)
-IV         2   30.3    15.2    15.2 5.2e-06
-Residuals 57   57.0     1.0                
+          Df Sum Sq Mean Sq F value  Pr(>F)    
+IV         2   30.3    15.2    15.2 5.2e-06 ***
+Residuals 57   57.0     1.0                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -275,4 +279,4 @@ try(detach(package:mvtnorm))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multLDA.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multLDA.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/multLDA.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multLDA.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multLDA.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/multLDA.R) - [all posts](https://github.com/dwoll/RExRepos)

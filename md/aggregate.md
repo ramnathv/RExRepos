@@ -31,8 +31,8 @@ ave(IQ, sex, FUN=mean)
 ```
 
 ```
- [1] 102.0 102.7 102.0 102.7 102.0 102.7 102.0 102.7 102.0 102.7 102.0
-[12] 102.7
+ [1]  99.83 101.83  99.83 101.83  99.83 101.83  99.83 101.83  99.83 101.83
+[11]  99.83 101.83
 ```
 
 
@@ -45,7 +45,7 @@ tapply(IQ, group, FUN=mean)
 
 ```
     CG      T     WL 
- 98.75  97.25 111.00 
+ 99.75  98.00 104.75 
 ```
 
 ```r
@@ -53,9 +53,9 @@ tapply(IQ, list(sex, group), FUN=mean)
 ```
 
 ```
-     CG    T  WL
-f 101.5 95.5 109
-m  96.0 99.0 113
+     CG     T    WL
+f  97.5  92.5 109.5
+m 102.0 103.5 100.0
 ```
 
 
@@ -282,4 +282,4 @@ Package [`plyr`](http://cran.r-project.org/package=plyr) provides more functions
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/aggregate.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/aggregate.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/aggregate.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/aggregate.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/aggregate.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/aggregate.R) - [all posts](https://github.com/dwoll/RExRepos)

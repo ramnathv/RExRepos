@@ -290,4 +290,4 @@ Package [`plyr`](http://cran.r-project.org/package=plyr) provides very handy fun
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/dfSplitMerge.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/dfSplitMerge.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/dfSplitMerge.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/dfSplitMerge.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/dfSplitMerge.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/dfSplitMerge.R) - [all posts](https://github.com/dwoll/RExRepos)

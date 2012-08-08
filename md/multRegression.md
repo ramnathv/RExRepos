@@ -76,7 +76,7 @@ coef(lm(Y2 ~ X1 + X2 + X3, data=dfRegr))
 ```
 
 
-Coefficient and overall tests
+Coefficient tests and overall model test
 -------------------------
 
 ### Type I sum of squares
@@ -87,11 +87,13 @@ summary(manova(fit), test="Hotelling-Lawley")
 ```
 
 ```
-          Df Hotelling-Lawley approx F num Df den Df Pr(>F)
-X1         1             0.04        2      2     95   0.14
-X2         1             4.60      219      2     95 <2e-16
-X3         1            27.19     1292      2     95 <2e-16
-Residuals 96                                               
+          Df Hotelling-Lawley approx F num Df den Df Pr(>F)    
+X1         1             0.04        2      2     95   0.14    
+X2         1             4.60      219      2     95 <2e-16 ***
+X3         1            27.19     1292      2     95 <2e-16 ***
+Residuals 96                                                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -116,10 +118,12 @@ Manova(fit, type="II")
 ```
 
 Type II MANOVA Tests: Pillai test statistic
-   Df test stat approx F num Df den Df Pr(>F)
-X1  1     0.027        1      2     95   0.28
-X2  1     0.779      168      2     95 <2e-16
-X3  1     0.965     1292      2     95 <2e-16
+   Df test stat approx F num Df den Df Pr(>F)    
+X1  1     0.027        1      2     95   0.28    
+X2  1     0.779      168      2     95 <2e-16 ***
+X3  1     0.965     1292      2     95 <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -137,4 +141,4 @@ try(detach(package:MASS))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multRegression.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multRegression.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/multRegression.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multRegression.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multRegression.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/multRegression.R) - [all posts](https://github.com/dwoll/RExRepos)

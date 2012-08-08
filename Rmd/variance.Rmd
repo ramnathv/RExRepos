@@ -68,14 +68,14 @@ mean(abs(age-median(age)))
 mad(age)
 ```
 
-### $Qn$: more efficient alternative to MAD
+### \(Q_{n}\): more efficient alternative to MAD
 
 ```{r}
 library(robustbase)
 Qn(age)
 ```
 
-### $\tau$ estimate of scale
+### \(\tau\) estimate of scale
 
 ```{r}
 scaleTau2(age)

@@ -1,4 +1,4 @@
-Two-way repeated-measures ANOVA (RBF-$pq$ design)
+Two-way repeated-measures ANOVA (RBF-pq design)
 =========================
 
 TODO
@@ -75,7 +75,7 @@ mauchly.test(fitRBFpq, M=~IV1 + IV2, X=~IV1, idata=inRBFpq)
 mauchly.test(fitRBFpq, M=~IV1 + IV2 + IV1:IV2, X=~IV1 + IV2, idata=inRBFpq)
 ```
 
-Effect size estimates: generalized $\hat{\eta}_{g}^{2}$
+Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
 -------------------------
 
 ```{r}

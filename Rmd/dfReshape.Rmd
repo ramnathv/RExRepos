@@ -34,6 +34,7 @@ Using `reshape()` for more complex data frames
 -------------------------
 
 ### One within variable
+
 #### Simulate data
 
 ```{r}
@@ -79,6 +80,7 @@ reshape(dfLong, v.names="DV", timevar="IVwth", idvar=c("id", "IVbtw"),
 ```
 
 ### Two within variables
+
 #### Simulate data
 
 ```{r}

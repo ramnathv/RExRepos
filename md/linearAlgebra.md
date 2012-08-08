@@ -817,7 +817,7 @@ all.equal(S, t(R) %*% R)
 ```
 
 
-### $QR$-decomposition
+### \(QR\)-decomposition
 
 
 ```r
@@ -887,7 +887,7 @@ A %*% A
 ```
 
 
-### $X = N N^{t}$
+### \(X = N N^{t}\)
 
 
 ```r
@@ -906,7 +906,7 @@ N %*% t(N)
 Orthogonal projections
 -------------------------
 
-### Direct implementation of $(X^{t} X)^{-1} X^{t}$
+### Direct implementation of \((X^{t} X)^{-1} X^{t}\)
 
 
 ```r
@@ -966,7 +966,7 @@ Px3[1:3, ]
 ```
 
 
-### Numerically stable implementation using the $QR$-decomposition
+### Numerically stable implementation using the \(QR\)-decomposition
 
 
 ```r
@@ -1007,4 +1007,4 @@ try(detach(package:mvtnorm))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/linearAlgebra.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/linearAlgebra.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/linearAlgebra.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/linearAlgebra.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/linearAlgebra.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/linearAlgebra.R) - [all posts](https://github.com/dwoll/RExRepos)

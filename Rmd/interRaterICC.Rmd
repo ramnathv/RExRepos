@@ -16,6 +16,7 @@ Inter-rater-reliability
 -------------------------
 
 ### Absolute agreement between two or more raters
+
 #### Two raters
 
 ```{r}
@@ -39,14 +40,14 @@ rtr3 <- rep(rep(lvls, nlevels(lvls)), c(48,8,3, 15,10,7, 3,4,2))
 agree(cbind(rtr1, rtr2, rtr3))
 ```
 
-### Cohen's unweighted $\kappa$ for two raters
+### Cohen's unweighted \(\kappa\) for two raters
 
 ```{r}
 library(irr)
 kappa2(cbind(rtr1, rtr2))
 ```
 
-### Cohen's weighted $\kappa$ for two raters
+### Cohen's weighted \(\kappa\) for two raters
 
 Ordered categories
 
@@ -65,7 +66,7 @@ library(irr)
 kappa2(cbind(tv1, tv2), weight="equal")
 ```
 
-### Fleiss' $\kappa$ for two or more raters
+### Fleiss' \(\kappa\) for two or more raters
 
 ```{r}
 rtr1 <- letters[c(4,2,2,5,2, 1,3,1,1,5, 1,1,2,1,2, 3,1,1,2,1, 5,2,2,1,1, 2,1,2,1,5)]
@@ -82,14 +83,14 @@ library(irr)
 kappam.fleiss(ratings)
 ```
 
-### Krippendorff's $\alpha$ for ordinal ratings and two or more raters
+### Krippendorff's \(\alpha\) for ordinal ratings and two or more raters
 
 ```{r}
 library(irr)
 kripp.alpha(ratings, method="ordinal")
 ```
 
-### Kendall's $W$ for continuous ordinal ratings and two or more raters
+### Kendall's \(W\) for continuous ordinal ratings and two or more raters
 
 ```{r}
 rtr1 <- c(1, 6, 3, 2, 5, 4)

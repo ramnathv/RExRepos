@@ -23,7 +23,9 @@ library(tseries)
 runs.test(queue, alternative="greater")
 ```
 
-### Manual exact test
+### Manual permutation test
+
+#### Exact test
 
 ```{r}
 Nj    <- table(queue)

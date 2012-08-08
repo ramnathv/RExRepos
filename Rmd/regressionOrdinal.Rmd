@@ -40,7 +40,7 @@ dfRegr <- data.frame(X1, X2, Yord)
 
 ### Using `lrm()` from package `rms`
 
-logit($p(Y \geq g)$)
+logit(\(p(Y \geq g)\))
 
 ```{r}
 library(rms)
@@ -49,7 +49,7 @@ library(rms)
 
 ### Using `vglm()` from package `VGAM`
 
-logit($p(Y \geq g)$)
+logit(\(p(Y \geq g)\))
 
 ```{r}
 library(VGAM)
@@ -73,7 +73,7 @@ summary(vglm(Yord ~ X1 + X2, family=cumulative(parallel=FALSE), data=dfRegr))
 
 ### Using `clm()` from package `ordinal`
 
-logit($p(Y \leq g)$)
+logit(\(p(Y \leq g)\))
 
 ```{r}
 library(ordinal)
@@ -83,7 +83,7 @@ summary(clmFit)
 
 ### Using `polr()` from package `MASS`
 
-logit($p(Y \leq g)$)
+logit(\(p(Y \leq g)\))
 
 ```{r}
 library(MASS)

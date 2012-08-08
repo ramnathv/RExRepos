@@ -86,8 +86,8 @@ $y
 
 ```r
 arrows(x0=pt2$usr$x[1], y0=pt2$usr$y[1],
-       x1=pt2$usr$x[2], y1=pt2$usr$y[2], lwd=4, code=3, angle=90, lend=2,
-       col="darkgray")
+       x1=pt2$usr$x[2], y1=pt2$usr$y[2], lwd=4, code=3,
+       angle=90, lend=2, col="darkgray")
 text(pt2$usr$x[1] + 0.5, pt2$usr$y[1], adj=c(0, 0),
      labels="arrow across total device-region", cex=1.5)
 ```
@@ -164,7 +164,7 @@ xRight <- rep(seq(len, 1,     by=len), times=n)
 yTop   <- rep(seq(len, 1,     by=len),  each=n)
 
 plot(c(0, 1), c(0, 1), axes=FALSE, xlab=NA, ylab=NA, type="n",
-     asp=1, main="Color ramp", cex.main=1.4)
+     asp=1, main="Color ramp")
 rect(xLeft, yBot, xRight, yTop, border=NA, col=cols)
 idx   <- c(10, 27)
 xText <- xLeft[idx] + (xRight[idx]-xLeft[idx])/2
@@ -176,6 +176,7 @@ text(xText, yText, labels=cols[idx])
 
 
 ### Polygons, mathematical symbols, and custom axes
+
 #### Filled polygon
 
 
@@ -492,9 +493,4 @@ try(detach(package:plotrix))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagAddElements.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagAddElements.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagAddElements.R) - ([all posts](https://github.com/dwoll/RExRepos))
-
-Get this post from github
-----------------------------------------------
-
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagAddElements.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagAddElements.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagAddElements.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagAddElements.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagAddElements.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagAddElements.R) - [all posts](https://github.com/dwoll/RExRepos)

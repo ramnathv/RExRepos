@@ -1,4 +1,4 @@
-One-way ANOVA (CR-$p$ design)
+One-way ANOVA (CR-p design)
 =========================
 
 TODO
@@ -19,7 +19,7 @@ if(any(!has)) install.packages(wants[!has])
 ```
 
 
-CR-$p$ ANOVA
+CR-\(p\) ANOVA
 -------------------------
 
 ### Simulate data
@@ -44,6 +44,7 @@ plot.design(DV ~ IV, fun=mean, data=dfCRp, main="Group means")
 
 
 ### Using `oneway.test()`
+
 #### Assuming variance homogeneity
 
 
@@ -227,7 +228,7 @@ B-C >= 0             -0.753      1.021   -0.74   0.23
 ```
 
 
-### Pairwise $t$-tests
+### Pairwise \(t\)-tests
 
 
 ```r
@@ -350,4 +351,4 @@ try(detach(package:splines))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaCRp.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaCRp.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaCRp.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaCRp.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaCRp.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaCRp.R) - [all posts](https://github.com/dwoll/RExRepos)

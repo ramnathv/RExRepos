@@ -37,7 +37,9 @@ alternative hypothesis: greater
 ```
 
 
-### Manual exact test
+### Manual permutation test
+
+#### Exact test
 
 
 ```r
@@ -183,4 +185,4 @@ try(detach(package:zoo))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/npRuns.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/npRuns.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/npRuns.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/npRuns.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/npRuns.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/npRuns.R) - [all posts](https://github.com/dwoll/RExRepos)

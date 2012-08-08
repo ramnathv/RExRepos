@@ -1,4 +1,4 @@
-Three-way split-plot-factorial ANOVA (SPF-$pq \cdot r$ and SPF-$p \cdot qr$ design)
+Three-way split-plot-factorial ANOVA (SPF-pq.r and SPF-p.qr design)
 =========================
 
 TODO
@@ -19,7 +19,7 @@ has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
 ```
 
-Three-way SPF-$pq \cdot r$ ANOVA
+Three-way SPF-\(pq \cdot r\) ANOVA
 -------------------------
 
 ### Using `aov()` with data in long format
@@ -44,7 +44,7 @@ dfSPFpq.rL <- data.frame(id=factor(rep(1:(P*Q*Njk), times=R)),
 summary(aov(DV ~ IVbtw1*IVbtw2*IVwth + Error(id/IVwth), data=dfSPFpq.rL))
 ```
 
-### Effect size estimates: generalized $\hat{\eta}_{g}^{2}$
+### Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
 
 ```{r}
 anRes     <- anova(lm(DV ~ IVbtw1*IVbtw2*IVwth*id, data=dfSPFpq.rL))
@@ -105,7 +105,7 @@ anova(fitSPFpq.r, M=~IVwth, X=~1, idata=inSPFpq.r, test="Spherical")
 mauchly.test(fitSPFpq.r, M=~IVwth, X=~1, idata=inSPFpq.r)
 ```
 
-Three-way SPF-$p \cdot qr$ ANOVA
+Three-way SPF-\(p \cdot qr\) ANOVA
 -------------------------
 
 ### Using `aov()` with data in long format
@@ -133,7 +133,7 @@ summary(aov(DV ~ IVbtw*IVwth1*IVwth2 + Error(id/(IVwth1*IVwth2)),
             data=dfSPFp.qrL))
 ```
 
-### Effect size estimates: generalized $\hat{\eta}_{g}^{2}$
+### Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
 
 ```{r}
 anRes  <- anova(lm(DV ~ IVbtw*IVwth1*IVwth2*id, data=dfSPFp.qrL))

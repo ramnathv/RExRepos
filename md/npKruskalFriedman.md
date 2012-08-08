@@ -18,6 +18,7 @@ Independent samples - unordered groups
 -------------------------
 
 ### Kruskal-Wallis-test
+
 #### Using `kruskal.test()`
 
 
@@ -140,6 +141,7 @@ Dependent samples - unordered groups
 -------------------------
 
 ### Friedman-test
+
 #### Using `friedman.test()`
 
 
@@ -258,4 +260,4 @@ try(detach(package:stats4))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/npKruskalFriedman.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/npKruskalFriedman.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/npKruskalFriedman.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/npKruskalFriedman.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/npKruskalFriedman.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/npKruskalFriedman.R) - [all posts](https://github.com/dwoll/RExRepos)

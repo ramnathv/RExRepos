@@ -316,4 +316,4 @@ points(xy, pch=16, cex=1.5)
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagBounding.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagBounding.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagBounding.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagBounding.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagBounding.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagBounding.R) - [all posts](https://github.com/dwoll/RExRepos)

@@ -92,4 +92,4 @@ try(detach(package:stats4))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/npMcNemar.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/npMcNemar.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/npMcNemar.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/npMcNemar.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/npMcNemar.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/npMcNemar.R) - [all posts](https://github.com/dwoll/RExRepos)

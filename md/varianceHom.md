@@ -45,7 +45,7 @@ stripchart(DV ~ IV, data=varDf, pch=16, vert=TRUE, add=TRUE)
 ![plot of chunk rerVarHom01](figure/rerVarHom01.png) 
 
 
-### $F$-test for variance ratio in two groups
+### \(F\)-test for variance ratio in two groups
 
 
 ```r
@@ -161,9 +161,11 @@ leveneTest(DV ~ IV, center=median, data=levDf)
 
 ```
 Levene's Test for Homogeneity of Variance (center = median)
-      Df F value Pr(>F)
-group  2    2.48  0.093
-      57               
+      Df F value Pr(>F)  
+group  2    2.48  0.093 .
+      57                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 ```r
@@ -172,9 +174,11 @@ leveneTest(DV ~ IV, center=mean, data=levDf)
 
 ```
 Levene's Test for Homogeneity of Variance (center = mean)
-      Df F value Pr(>F)
-group  2    2.43  0.097
-      57               
+      Df F value Pr(>F)  
+group  2    2.43  0.097 .
+      57                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -231,4 +235,4 @@ try(detach(package:stats4))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/varianceHom.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/varianceHom.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/varianceHom.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/varianceHom.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/varianceHom.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/varianceHom.R) - [all posts](https://github.com/dwoll/RExRepos)

@@ -94,7 +94,7 @@ addmargins(cTab)
 sum(diag(cTab)) / sum(cTab)
 ```
 
-### log-Likelihood, AUC, Somers's $D_{xy}$, Nagelkerke's pseudo $R^{2}$
+### log-Likelihood, AUC, Somers's \(D_{xy}\), Nagelkerke's pseudo \(R^{2}\)
 
 ```{r}
 logLik(glmFit)
@@ -107,9 +107,9 @@ lrm(Yfac ~ X1 + X2, data=dfRegr)
 
 For plotting the ROC-curve, see `ROCR` in associationOrder
 
-### McFadden and Cox & Snell seudo $R^{2}$
+### McFadden and Cox & Snell seudo \(R^{2}\)
 
-McFadden pseudo-$R^2$
+McFadden pseudo-\(R^2\)
 
 ```{r}
 glmFit0 <- update(glmFit, . ~ 1)

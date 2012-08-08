@@ -35,7 +35,7 @@ Lambda <- matrix(c(0.7,-0.4, 0.8,0, -0.2,0.9, -0.3,0.4, 0.3,0.7, -0.8,0.1),
                  nrow=P, ncol=Q, byrow=TRUE)
 ```
 
-Now simulate the actual data from the model $x = \Lambda f + e$, with $x$ being the observed variable values of a person, $\Lambda$ the true loadings matrix, $f$ the latent factor score, and $e$ iid, mean 0, normal errors.
+Now simulate the actual data from the model \(x = \Lambda f + e\), with \(x\) being the observed variable values of a person, \(\Lambda\) the true loadings matrix, \(f\) the latent factor score, and \(e\) iid, mean 0, normal errors.
 
 ```{r}
 # factor scores (uncorrelated factors)

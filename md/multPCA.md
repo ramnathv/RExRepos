@@ -163,6 +163,7 @@ legend(x="topleft", legend=c("data", "PC axes", "SDs of PC", "centroid"),
 
 
 ### Approximate data by their principal components
+
 #### Full reproduction using all principal components
 
 
@@ -312,9 +313,4 @@ try(detach(package:robustbase))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multPCA.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multPCA.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/multPCA.R) - ([all posts](https://github.com/dwoll/RExRepos))
-
-Get this post from github
-----------------------------------------------
-
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multPCA.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multPCA.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/multPCA.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multPCA.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multPCA.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/multPCA.R) - [all posts](https://github.com/dwoll/RExRepos)

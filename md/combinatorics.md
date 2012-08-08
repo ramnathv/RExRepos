@@ -22,9 +22,9 @@ if(any(!has)) install.packages(wants[!has])
 Combinations
 -------------------------
 
-### Number of $k$-combinations
+### Number of \(k\)-combinations
 
-${n \choose k}$
+\({n \choose k}\)
 
 
 ```r
@@ -132,6 +132,7 @@ shuffle(length(set))
 
 
 ### Enumerate all permutations
+
 #### All permutations at once
 
 
@@ -275,8 +276,10 @@ for(i in 1:3) {
 ```
 
 
-Enumerate all combinations of elements from different sets
+Enumerate all \(n\)-tuples
 -------------------------
+
+All combinations of elements from \(n\) different sets (cartesian product)
 
 
 ```r
@@ -331,4 +334,4 @@ try(detach(package:permute))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/combinatorics.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/combinatorics.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/combinatorics.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/combinatorics.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/combinatorics.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/combinatorics.R) - [all posts](https://github.com/dwoll/RExRepos)

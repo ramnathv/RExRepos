@@ -175,7 +175,7 @@ Nj  <- c(4, 3, 5)
 ```
 
 
-Randomly place elements in $p$ groups of approximately equal size
+Randomly place elements in \(p\) groups of approximately equal size
 -------------------------
 
 
@@ -443,4 +443,4 @@ try(detach(package:MASS))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/transformData.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/transformData.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/transformData.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/transformData.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/transformData.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/transformData.R) - [all posts](https://github.com/dwoll/RExRepos)

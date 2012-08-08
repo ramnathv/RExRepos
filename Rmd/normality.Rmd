@@ -85,11 +85,11 @@ library(nortest)
 lillie.test(DV)
 ```
 
-### Pearson $\chi^{2}$-test
+### Pearson \(\chi^{2}\)-test
 
 Tests weaker null hypothesis (any distribution with the same probabilities for the given class intervals).
 
-Wrong: `pearson.test()` does not use grouped ML-estimate or maximum $\chi^{2}$-estimate
+Wrong: `pearson.test()` does not use grouped ML-estimate or maximum \(\chi^{2}\)-estimate
 
 ```{r}
 library(nortest)
@@ -122,6 +122,7 @@ mn$mult.test
 ```
 
 ### Kurtosis- and skew-test
+
 #### Kurtosis-test
 
 ```{r}

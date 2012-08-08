@@ -29,9 +29,9 @@ First, let's simulate 200 observations from 6 variables, coming from 2 orthogona
 
 ```r
 set.seed(1.234)
-N <- 200                             # number of observations
-P <- 6                               # number of variables
-Q <- 2                               # number of factors
+N <- 200                       # number of observations
+P <- 6                         # number of variables
+Q <- 2                         # number of factors
 
 # true P x Q loading matrix -> variable-factor correlations
 Lambda <- matrix(c(0.7,-0.4, 0.8,0, -0.2,0.9, -0.3,0.4, 0.3,0.7, -0.8,0.1),
@@ -39,15 +39,18 @@ Lambda <- matrix(c(0.7,-0.4, 0.8,0, -0.2,0.9, -0.3,0.4, 0.3,0.7, -0.8,0.1),
 ```
 
 
-Now simulate the actual data from the model $x = \Lambda f + e$, with $x$ being the observed variable values of a person, $\Lambda$ the true loadings matrix, $f$ the latent factor score, and $e$ iid, mean 0, normal errors.
+Now simulate the actual data from the model \(x = \Lambda f + e\), with \(x\) being the observed variable values of a person, \(\Lambda\) the true loadings matrix, \(f\) the latent factor score, and \(e\) iid, mean 0, normal errors.
 
 
 ```r
-library(mvtnorm)                      # for rmvnorm()
-FF  <- rmvnorm(N, mean=c(5, 15), sigma=diag(Q))    # factor scores (uncorrelated factors)
-E   <- rmvnorm(N, rep(0, P), diag(P)) # matrix with iid, mean 0, normal errors
-X   <- FF %*% t(Lambda) + E           # matrix with variable values
-dfX <- data.frame(X)                  # data also as a data frame
+# factor scores (uncorrelated factors)
+library(mvtnorm)               # for rmvnorm()
+FF <- rmvnorm(N, mean=c(5, 15), sigma=diag(Q))
+
+# matrix with iid, mean 0, normal errors
+E   <- rmvnorm(N, rep(0, P), diag(P))
+X   <- FF %*% t(Lambda) + E    # matrix with variable values
+dfX <- data.frame(X)           # data also as a data frame
 ```
 
 
@@ -59,8 +62,8 @@ Now let's categorize the data. We'll keep the data in two formats: as a data fra
 lOrd <- lapply(dfX, function(x) {
                cut(x, breaks=quantile(x), include.lowest=TRUE,
                    ordered=TRUE, labels=LETTERS[1:4]) })
-dfOrd  <- data.frame(lOrd)            # combine list into a data frame
-ordNum <- data.matrix(dfOrd)          # categorized data as a numeric matrix
+dfOrd  <- data.frame(lOrd)     # combine list into a data frame
+ordNum <- data.matrix(dfOrd)   # categorized data as a numeric matrix
 ```
 
 
@@ -70,8 +73,8 @@ Use the polychoric correlation matrix to do a regular FA.
 
 
 ```r
-library(polycor)                      # for hetcor()
-pc <- hetcor(dfOrd, ML=TRUE)          # polychoric corr matrix
+library(polycor)               # for hetcor()
+pc <- hetcor(dfOrd, ML=TRUE)   # polychoric corr matrix
 ```
 
 
@@ -104,13 +107,14 @@ It is possible to skip the step of calculating the polychoric correlation matrix
 
 
 ```r
-faPCdirect <- fa.poly(ordNum, nfactors=2, rotate="varimax")    # polychoric FA
+# polychoric FA
+faPCdirect <- fa.poly(ordNum, nfactors=2, rotate="varimax")
 ```
 
 
 
 ```r
-faPCdirect$fa$loadings        # loadings are the same as above ...
+faPCdirect$fa$loadings         # loadings are the same as above ...
 ```
 
 ```
@@ -162,7 +166,7 @@ Parallel analysis and a "very simple structure" analysis provide help in selecti
 
 
 ```r
-fap <- fa.parallel.poly(ordNum)      # parallel analysis for dichotomous data
+fap <- fa.parallel.poly(ordNum)   # parallel analysis for dichotomous data
 ```
 
 ![plot of chunk rerMultFApoly02](figure/rerMultFApoly02.png) 
@@ -184,7 +188,7 @@ Parallel analysis suggests that the number of factors =  2  and the number of co
 ```
 
 ```r
-vss(pc$correlations, n.obs=N, rotate="varimax")   # very simple structure
+vss(pc$correlations, n.obs=N, rotate="varimax")  # very simple structure
 ```
 
 ![plot of chunk rerMultFApoly03](figure/rerMultFApoly03.png) 
@@ -227,4 +231,4 @@ try(detach(package:mvtnorm))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multFApoly.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multFApoly.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/multFApoly.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multFApoly.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multFApoly.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/multFApoly.R) - [all posts](https://github.com/dwoll/RExRepos)

@@ -23,6 +23,7 @@ Bivariate covariance and correlation
 -------------------------
 
 ### Covariance
+
 #### Corrected (sample) covariance
 
 
@@ -62,6 +63,7 @@ cmML[upper.tri(cmML)]
 
 
 ### Correlation
+
 #### Empirical correlation
 
 
@@ -74,7 +76,7 @@ cmML[upper.tri(cmML)]
 ```
 
 
-#### Fisher's $Z$-transformation
+#### Fisher's \(Z\)-transformation
 
 Used, e.g., for averaging correlations
 
@@ -115,7 +117,7 @@ cor(x, y)
 ```
 
 
-#### Partial correlation $r_{(xy).z}$
+#### Partial correlation \(r_{(xy).z}\)
 
 
 ```r
@@ -141,7 +143,7 @@ cor(x.z12, y.z12)
 ```
 
 
-#### Semi-partial correlation $r_{(x.z)y}$
+#### Semi-partial correlation \(r_{(x.z)y}\)
 
 
 ```r
@@ -251,7 +253,7 @@ cor(vec, X)
 Correlation for ordinal continuous variables
 -------------------------
 
-### Spearman's $\rho$
+### Spearman's \(\rho\)
 
 
 ```r
@@ -285,7 +287,7 @@ DV4 -0.18788 -0.1636 0.89636  1.0000
 ```
 
 
-### Kendall's $\tau$
+### Kendall's \(\tau\)
 
 
 ```r
@@ -364,7 +366,7 @@ DV4 0.32 0.27   0   0
 ```
 
 
-### Spearman's $\rho$
+### Spearman's \(\rho\)
 
 
 ```r
@@ -429,7 +431,7 @@ DV4 0.60 0.65   0   0
 ```
 
 
-### Kendall's $\tau$
+### Kendall's \(\tau\)
 
 
 ```r
@@ -513,4 +515,4 @@ try(detach(package:splines))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/correlation.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/correlation.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/correlation.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/correlation.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/correlation.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/correlation.R) - [all posts](https://github.com/dwoll/RExRepos)

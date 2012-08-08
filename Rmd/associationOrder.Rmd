@@ -77,7 +77,7 @@ hetcor(dfBoth, ML=TRUE)
 Association measures involving categorical and continuous variables
 -------------------------
 
-### AUC, Kendall's $\tau_{a}$, Somers' $D_{xy}$, Goodman & Kruskal's $\gamma$
+### AUC, Kendall's \(\tau_{a}\), Somers' \(D_{xy}\), Goodman & Kruskal's \(\gamma\)
 
 One continuous variable and one dichotomous variable
 

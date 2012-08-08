@@ -37,7 +37,7 @@ boxplot(DV ~ IV, data=varDf)
 stripchart(DV ~ IV, data=varDf, pch=16, vert=TRUE, add=TRUE)
 ```
 
-### $F$-test for variance ratio in two groups
+### \(F\)-test for variance ratio in two groups
 
 ```{r results='hide'}
 var.test(DV1, DV2)

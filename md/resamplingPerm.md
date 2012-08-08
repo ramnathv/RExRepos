@@ -19,11 +19,13 @@ if(any(!has)) install.packages(wants[!has])
 ```
 
 
-Two-sample $t$-test for independent groups
+Two-sample \(t\)-test / one-way ANOVA for independent groups
 -------------------------
-    
+
+Not limited to just two independent samples.
+
 ### Using package `coin`
-    
+
 
 ```r
 set.seed(1.234)
@@ -109,8 +111,10 @@ legend(x="bottomright", lty=c(NA, 1), pch=c(16, NA), lwd=c(1, 2),
 ![plot of chunk rerResamplingPerm02](figure/rerResamplingPerm02.png) 
 
 
-Two-sample $t$-test for dependent groups
+Two-sample \(t\)-test / one-way ANOVA for dependent groups
 -------------------------
+
+Not limited to just two dependent samples.
 
 ### Using package `coin`
 
@@ -226,4 +230,4 @@ try(detach(package:stats4))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/resamplingPerm.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/resamplingPerm.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/resamplingPerm.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/resamplingPerm.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/resamplingPerm.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/resamplingPerm.R) - [all posts](https://github.com/dwoll/RExRepos)

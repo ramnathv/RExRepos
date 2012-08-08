@@ -17,7 +17,7 @@ has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
 ```
 
-$(2 \times 2)$-tables
+\((2 \times 2)\)-tables
 -------------------------
 
 ### Fisher's exact test
@@ -35,7 +35,7 @@ addmargins(contT1)
 fisher.test(contT1, alternative="greater")
 ```
 
-### Prevalence, sensitivity, specificity, CCR, $F$
+### Prevalence, sensitivity, specificity, CCR, \(F\)
 
 ```{r}
 TN <- c11 <- contT1[1, 1]       ## true negative
@@ -60,19 +60,20 @@ FN <- c21 <- contT1[2, 1]       ## false negative / miss
 (relevance <- precision <- TP / (TP+FP))
 ```
 
-CCR
+Correct classification rate (CCR)
 
 ```{r}
 (CCR <- sum(diag(contT1)) / sum(contT1))
 ```
 
-$F$-value
+\(F\)-value
 
 ```{r}
 (Fval <- 1 / mean(1 / c(precision, recall)))
 ```
 
-### Odds ratio, Yule's $Q$ and risk ratio
+### Odds ratio, Yule's \(Q\) and risk ratio
+
 #### Odds ratio
 
 ```{r}
@@ -90,7 +91,7 @@ summary(ORln)            ## significance test log OR
 exp(CIln)                ## confidence interval OR (not log)
 ```
 
-#### Yule's $Q$
+#### Yule's \(Q\)
 
 ```{r}
 (Q <- (c11*c22 - c12*c21) / (c11*c22 + c12*c21))  ## Yule's Q
@@ -104,10 +105,10 @@ library(epitools)
 riskratio(contT1, method="small")
 ```
 
-$(r \times c)$-tables
+\((r \times c)\)-tables
 -------------------------
 
-### $\chi^{2}$-test
+### \(\chi^{2}\)-test
 
 ```{r}
 set.seed(1.234)
@@ -124,7 +125,7 @@ chisq.test(cTab)
 
 Also for higher-order tables
 
-### Measures of association: $\phi$, Cramer's $V$, contingency coefficient
+### Measures of association: \(\phi\), Cramer's \(V\), contingency coefficient
 
 ```{r}
 DV1  <- cut(c(100, 76, 56, 99, 50, 62, 36, 69, 55,  17), breaks=3,

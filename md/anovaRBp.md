@@ -1,4 +1,4 @@
-One-way repeated measures ANOVA (RB-$p$ design)
+One-way repeated measures ANOVA (RB-p design)
 =========================
 
 TODO
@@ -56,7 +56,7 @@ Residuals 27  208.6    7.72
 ```
 
 
-### Effect size estimates: generalized $\hat{\eta}_{g}^{2}$
+### Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
 
 
 ```r
@@ -116,9 +116,11 @@ summary(AnovaRBp, multivariate=FALSE, univariate=TRUE)
 
 Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
 
-              SS num Df Error SS den Df    F Pr(>F)
-(Intercept) 24.1      1     60.4      9 3.59  0.091
-IV          44.5      3    208.6     27 1.92  0.150
+              SS num Df Error SS den Df    F Pr(>F)  
+(Intercept) 24.1      1     60.4      9 3.59  0.091 .
+IV          44.5      3    208.6     27 1.92  0.150  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 
 Mauchly Tests for Sphericity
@@ -189,7 +191,7 @@ W = 0.6113, p-value = 0.5811
 Multivariate approach
 -------------------------
 
-### Hotelling's $T^{2}$-test using `HotellingsT2()` from package `ICSNP`
+### Hotelling's \(T^{2}\)-test using `HotellingsT2()` from package `ICSNP`
 
 
 ```r
@@ -250,11 +252,13 @@ Sum of squares and products for error:
 (Intercept)       241.5
 
 Multivariate Tests: (Intercept)
-                 Df test stat approx F num Df den Df Pr(>F)
-Pillai            1    0.2852    3.591      1      9 0.0906
-Wilks             1    0.7148    3.591      1      9 0.0906
-Hotelling-Lawley  1    0.3990    3.591      1      9 0.0906
-Roy               1    0.3990    3.591      1      9 0.0906
+                 Df test stat approx F num Df den Df Pr(>F)  
+Pillai            1    0.2852    3.591      1      9 0.0906 .
+Wilks             1    0.7148    3.591      1      9 0.0906 .
+Hotelling-Lawley  1    0.3990    3.591      1      9 0.0906 .
+Roy               1    0.3990    3.591      1      9 0.0906 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 ------------------------------------------
  
@@ -306,4 +310,4 @@ try(detach(package:mvtnorm))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaRBp.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaRBp.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaRBp.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaRBp.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaRBp.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaRBp.R) - [all posts](https://github.com/dwoll/RExRepos)

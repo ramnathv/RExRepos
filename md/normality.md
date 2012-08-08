@@ -169,11 +169,11 @@ D = 0.1105, p-value = 0.7535
 ```
 
 
-### Pearson $\chi^{2}$-test
+### Pearson \(\chi^{2}\)-test
 
 Tests weaker null hypothesis (any distribution with the same probabilities for the given class intervals).
 
-Wrong: `pearson.test()` does not use grouped ML-estimate or maximum $\chi^{2}$-estimate
+Wrong: `pearson.test()` does not use grouped ML-estimate or maximum \(\chi^{2}\)-estimate
 
 
 ```r
@@ -238,6 +238,7 @@ Kurtosis  14.4587 -0.4941 0.6212
 
 
 ### Kurtosis- and skew-test
+
 #### Kurtosis-test
 
 
@@ -297,4 +298,4 @@ try(detach(package:survey))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/normality.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/normality.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/normality.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/normality.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/normality.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/normality.R) - [all posts](https://github.com/dwoll/RExRepos)

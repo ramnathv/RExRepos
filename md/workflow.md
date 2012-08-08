@@ -29,7 +29,7 @@ Set up R and WordPress
 For blogging from R to WP, I recommend:
 
  - [SyntaxHighlighter](http://wordpress.org/extend/plugins/syntaxhighlighter/) plugin for WordPress for code boxes with R syntax highlighting
- - [MathJax](http://wordpress.org/extend/plugins/mathjax-latex/) plugin for WordPress for nice math rendering using $\LaTeX$ syntax
+ - [MathJax](http://wordpress.org/extend/plugins/mathjax-latex/) plugin for WordPress for nice math rendering using \(\LaTeX\) syntax
  - [RWordPress](http://www.omegahat.org/RWordPress/) R package for uploading posts from R to WP
 
 You will need to build RWordPress yourself, even on Windows. RWordPress depends on the packages RCurl, XML, and XMLRPC, which are available as Windows binary packages from [Prof. Ripley's site](http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/2.15/). On Linux, all build tools should already be installed, on Windows, download `Rtools<version>.exe` and follow instructions from [Building R for Windows](http://cran.r-project.org/bin/windows/Rtools/). Then build and install RWordPress:
@@ -57,17 +57,6 @@ To make syntax highlighting work in WP with the [SyntaxHighlighter](http://wordp
 ```
 
 One option is to set up knitr itself to wrap code into WP-shortcode format. The downside to this option is that the output html is only usable within WP, but not as standalone html page. Adapted from [Carl Boettiger](http://www.carlboettiger.info/wordpress/archives/3974):
-
-<!--
-knit_patterns$set(chunk.begin = '^\\[code lang="r", (.*)\\]',
-chunk.end = '^\\[/code\\]')
-
-I did not test them, though. There are patterns for other elements
-such as inline R code; if you just want to borrow the syntax for HTML,
-you can first
-
-knit_patterns$set(all_patterns$html) 
--->
 
 
 ```r
@@ -123,4 +112,4 @@ For me, all this works fine, but I have to perform some strange WP vodoo (that I
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/workflow.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/workflow.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/workflow.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/workflow.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/workflow.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/workflow.R) - [all posts](https://github.com/dwoll/RExRepos)

@@ -42,6 +42,7 @@ barplot(prop.table(dTab), ylim=c(0, 0.3), xlab="Result",
 ```
 
 ### Barplots for contingency tables of two variables
+
 #### Stacked barplot
 
 ```{r rerDiagCategorical02}

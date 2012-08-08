@@ -113,4 +113,4 @@ legend(x="topleft", c("Data", "Spline", "spar=0.25", "spar=0.35", "spar=0.45"),
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagSplines.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagSplines.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagSplines.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagSplines.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagSplines.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagSplines.R) - [all posts](https://github.com/dwoll/RExRepos)

@@ -44,7 +44,7 @@ plot(y, main="Univeriate scatter plot", ylim=c(10, 50),
 ![plot of chunk rerDiagScatter03](figure/rerDiagScatter03.png) 
 
 
-### Options for specifying $(x, y)$-coordinate pairs
+### Options for specifying \((x, y)\)-coordinate pairs
 
 
 ```r
@@ -141,4 +141,4 @@ identify(vec)
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagScatter.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagScatter.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagScatter.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagScatter.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagScatter.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagScatter.R) - [all posts](https://github.com/dwoll/RExRepos)

@@ -1,4 +1,4 @@
-One-way repeated measures ANOVA (RB-$p$ design)
+One-way repeated measures ANOVA (RB-p design)
 =========================
 
 TODO
@@ -38,7 +38,7 @@ dfRBpL <- data.frame(id=factor(rep(1:N, times=P)),
 summary(aov(DV ~ IV + Error(id/IV), data=dfRBpL))
 ```
 
-### Effect size estimates: generalized $\hat{\eta}_{g}^{2}$
+### Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
 
 ```{r}
 (anRes <- anova(lm(DV ~ IV*id, data=dfRBpL)))
@@ -83,7 +83,7 @@ mauchly.test(fitRBp, M=~IV, X=~1, idata=inRBp)
 Multivariate approach
 -------------------------
 
-### Hotelling's $T^{2}$-test using `HotellingsT2()` from package `ICSNP`
+### Hotelling's \(T^{2}\)-test using `HotellingsT2()` from package `ICSNP`
 
 ```{r}
 DVw     <- data.matrix(subset(dfRBpW,

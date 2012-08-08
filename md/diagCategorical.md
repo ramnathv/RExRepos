@@ -56,6 +56,7 @@ barplot(prop.table(dTab), ylim=c(0, 0.3), xlab="Result",
 
 
 ### Barplots for contingency tables of two variables
+
 #### Stacked barplot
 
 
@@ -199,4 +200,4 @@ try(detach(package:plotrix))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagCategorical.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagCategorical.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagCategorical.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagCategorical.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagCategorical.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagCategorical.R) - [all posts](https://github.com/dwoll/RExRepos)

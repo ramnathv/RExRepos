@@ -142,16 +142,18 @@ g'(-H)^-1g = 0.000318
 successive fonction values within tolerance limits 
 
 Coefficients :
-                Estimate Std. Error t-value Pr(>|t|)
--:(intercept)  -18.02102    9.17704   -1.96  0.04956
-+:(intercept)  -29.71395    9.91961   -3.00  0.00274
-++:(intercept) -28.48099   10.22016   -2.79  0.00532
--:X1             0.10310    0.05367    1.92  0.05475
-+:X1             0.18979    0.05808    3.27  0.00108
-++:X1            0.19686    0.06025    3.27  0.00108
--:X2             0.00307    0.03917    0.08  0.93746
-+:X2            -0.11497    0.04778   -2.41  0.01612
-++:X2           -0.20915    0.05678   -3.68  0.00023
+                Estimate Std. Error t-value Pr(>|t|)    
+-:(intercept)  -18.02102    9.17704   -1.96  0.04956 *  
++:(intercept)  -29.71395    9.91961   -3.00  0.00274 ** 
+++:(intercept) -28.48099   10.22016   -2.79  0.00532 ** 
+-:X1             0.10310    0.05367    1.92  0.05475 .  
++:X1             0.18979    0.05808    3.27  0.00108 ** 
+++:X1            0.19686    0.06025    3.27  0.00108 ** 
+-:X2             0.00307    0.03917    0.08  0.93746    
++:X2            -0.11497    0.04778   -2.41  0.01612 *  
+++:X2           -0.20915    0.05678   -3.68  0.00023 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Log-Likelihood: -119
 McFadden R^2:  0.145 
@@ -169,16 +171,18 @@ coeftest(mlogitFit)
 
 t test of coefficients:
 
-                Estimate Std. Error t value Pr(>|t|)
--:(intercept)  -18.02102    9.17704   -1.96  0.05262
-+:(intercept)  -29.71395    9.91961   -3.00  0.00353
-++:(intercept) -28.48099   10.22016   -2.79  0.00648
--:X1             0.10310    0.05367    1.92  0.05788
-+:X1             0.18979    0.05808    3.27  0.00153
-++:X1            0.19686    0.06025    3.27  0.00153
--:X2             0.00307    0.03917    0.08  0.93763
-+:X2            -0.11497    0.04778   -2.41  0.01814
-++:X2           -0.20915    0.05678   -3.68  0.00039
+                Estimate Std. Error t value Pr(>|t|)    
+-:(intercept)  -18.02102    9.17704   -1.96  0.05262 .  
++:(intercept)  -29.71395    9.91961   -3.00  0.00353 ** 
+++:(intercept) -28.48099   10.22016   -2.79  0.00648 ** 
+-:X1             0.10310    0.05367    1.92  0.05788 .  
++:X1             0.18979    0.05808    3.27  0.00153 ** 
+++:X1            0.19686    0.06025    3.27  0.00153 ** 
+-:X2             0.00307    0.03917    0.08  0.93763    
++:X2            -0.11497    0.04778   -2.41  0.01814 *  
+++:X2           -0.20915    0.05678   -3.68  0.00039 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 ```
 
@@ -264,4 +268,4 @@ try(detach(package:stats4))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regressionMultinom.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regressionMultinom.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/regressionMultinom.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regressionMultinom.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regressionMultinom.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/regressionMultinom.R) - [all posts](https://github.com/dwoll/RExRepos)

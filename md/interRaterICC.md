@@ -18,6 +18,7 @@ Inter-rater-reliability
 -------------------------
 
 ### Absolute agreement between two or more raters
+
 #### Two raters
 
 
@@ -72,7 +73,7 @@ agree(cbind(rtr1, rtr2, rtr3))
 ```
 
 
-### Cohen's unweighted $\kappa$ for two raters
+### Cohen's unweighted \(\kappa\) for two raters
 
 
 ```r
@@ -92,7 +93,7 @@ kappa2(cbind(rtr1, rtr2))
 ```
 
 
-### Cohen's weighted $\kappa$ for two raters
+### Cohen's weighted \(\kappa\) for two raters
 
 Ordered categories
 
@@ -138,7 +139,7 @@ kappa2(cbind(tv1, tv2), weight="equal")
 ```
 
 
-### Fleiss' $\kappa$ for two or more raters
+### Fleiss' \(\kappa\) for two or more raters
 
 
 ```r
@@ -170,7 +171,7 @@ kappam.fleiss(ratings)
 ```
 
 
-### Krippendorff's $\alpha$ for ordinal ratings and two or more raters
+### Krippendorff's \(\alpha\) for ordinal ratings and two or more raters
 
 
 ```r
@@ -187,7 +188,7 @@ kripp.alpha(ratings, method="ordinal")
 ```
 
 
-### Kendall's $W$ for continuous ordinal ratings and two or more raters
+### Kendall's \(W\) for continuous ordinal ratings and two or more raters
 
 
 ```r
@@ -271,4 +272,4 @@ try(detach(package:lpSolve))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/interRaterICC.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/interRaterICC.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/interRaterICC.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/interRaterICC.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/interRaterICC.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/interRaterICC.R) - [all posts](https://github.com/dwoll/RExRepos)

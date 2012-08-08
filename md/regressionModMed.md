@@ -51,11 +51,13 @@ Residuals:
 -8.777 -1.294  0.007  1.970  7.806 
 
 Coefficients:
-            Estimate Std. Error t value Pr(>|t|)
-(Intercept) 89.06026    0.31047  286.86  < 2e-16
-Xc           0.48952    0.05108    9.58  1.2e-15
-Mc          -0.32037    0.04072   -7.87  5.4e-12
-Xc:Mc       -0.01284    0.00795   -1.61     0.11
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 89.06026    0.31047  286.86  < 2e-16 ***
+Xc           0.48952    0.05108    9.58  1.2e-15 ***
+Mc          -0.32037    0.04072   -7.87  5.4e-12 ***
+Xc:Mc       -0.01284    0.00795   -1.61     0.11    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Residual standard error: 3.1 on 96 degrees of freedom
 Multiple R-squared: 0.639,	Adjusted R-squared: 0.627 
@@ -111,10 +113,12 @@ Residuals:
 -12.089  -3.066  -0.128   3.509  10.355 
 
 Coefficients:
-            Estimate Std. Error t value Pr(>|t|)
-(Intercept)  11.3426    12.2973    0.92  0.35863
-X            -0.0149     0.0922   -0.16  0.87208
-M             0.3269     0.0832    3.93  0.00016
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  11.3426    12.2973    0.92  0.35863    
+X            -0.0149     0.0922   -0.16  0.87208    
+M             0.3269     0.0832    3.93  0.00016 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Residual standard error: 4.84 on 97 degrees of freedom
 Multiple R-squared: 0.207,	Adjusted R-squared: 0.191 
@@ -260,4 +264,4 @@ try(detach(package:nlme))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regressionModMed.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regressionModMed.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/regressionModMed.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regressionModMed.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regressionModMed.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/regressionModMed.R) - [all posts](https://github.com/dwoll/RExRepos)

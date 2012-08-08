@@ -15,7 +15,7 @@ Sys.Date()
 ```
 
 ```
-[1] "2012-08-06"
+[1] "2012-08-08"
 ```
 
 ```r
@@ -66,7 +66,7 @@ Sys.time()
 ```
 
 ```
-[1] "2012-08-06 11:02:39 CEST"
+[1] "2012-08-08 21:30:09 CEST"
 ```
 
 ```r
@@ -74,7 +74,7 @@ date()
 ```
 
 ```
-[1] "Mon Aug 06 11:02:39 2012"
+[1] "Wed Aug 08 21:30:09 2012"
 ```
 
 
@@ -282,4 +282,4 @@ Packages [`timeDate`](http://cran.r-project.org/package=timeDate) and [`lubridat
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/timeDate.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/timeDate.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/timeDate.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/timeDate.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/timeDate.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/timeDate.R) - [all posts](https://github.com/dwoll/RExRepos)

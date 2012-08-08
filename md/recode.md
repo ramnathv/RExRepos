@@ -169,6 +169,7 @@ Recode factors
 -------------------------
 
 ### Add, combine and remove factor levels
+
 #### Add factor levels
 
 
@@ -253,6 +254,7 @@ Levels: hi lo
 
 
 ### Reorder factor levels
+
 #### Using `reorder.factor()` from package `gdata`
 
 
@@ -314,4 +316,4 @@ try(detach(package:gdata))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/recode.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/recode.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/recode.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/recode.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/recode.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/recode.R) - [all posts](https://github.com/dwoll/RExRepos)

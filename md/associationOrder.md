@@ -161,7 +161,7 @@ X3 0.816 0.339 0.767 0.333 0.462
 Association measures involving categorical and continuous variables
 -------------------------
 
-### AUC, Kendall's $\tau_{a}$, Somers' $D_{xy}$, Goodman & Kruskal's $\gamma$
+### AUC, Kendall's \(\tau_{a}\), Somers' \(D_{xy}\), Goodman & Kruskal's \(\gamma\)
 
 One continuous variable and one dichotomous variable
 
@@ -248,4 +248,4 @@ try(detach(package:stats4))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/associationOrder.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/associationOrder.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/associationOrder.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/associationOrder.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/associationOrder.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/associationOrder.R) - [all posts](https://github.com/dwoll/RExRepos)

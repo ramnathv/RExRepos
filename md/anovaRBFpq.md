@@ -1,4 +1,4 @@
-Two-way repeated-measures ANOVA (RBF-$pq$ design)
+Two-way repeated-measures ANOVA (RBF-pq design)
 =========================
 
 TODO
@@ -57,9 +57,11 @@ IV1        1   0.96   0.965    0.32   0.59
 Residuals  9  27.48   3.054               
 
 Error: id:IV2
-          Df Sum Sq Mean Sq F value  Pr(>F)
-IV2        2  120.0    60.0    17.3 6.4e-05
-Residuals 18   62.4     3.5                
+          Df Sum Sq Mean Sq F value  Pr(>F)    
+IV2        2  120.0    60.0    17.3 6.4e-05 ***
+Residuals 18   62.4     3.5                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Error: id:IV1:IV2
           Df Sum Sq Mean Sq F value Pr(>F)
@@ -93,11 +95,13 @@ summary(AnovaRBFpq, multivariate=FALSE, univariate=TRUE)
 
 Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
 
-               SS num Df Error SS den Df     F  Pr(>F)
-(Intercept) 114.6      1     89.4      9 11.53  0.0079
-IV1           1.0      1     27.5      9  0.32  0.5878
-IV2         120.0      2     62.4     18 17.33 6.4e-05
-IV1:IV2       0.6      2     82.2     18  0.07  0.9363
+               SS num Df Error SS den Df     F  Pr(>F)    
+(Intercept) 114.6      1     89.4      9 11.53  0.0079 ** 
+IV1           1.0      1     27.5      9  0.32  0.5878    
+IV2         120.0      2     62.4     18 17.33 6.4e-05 ***
+IV1:IV2       0.6      2     82.2     18  0.07  0.9363    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 
 Mauchly Tests for Sphericity
@@ -110,13 +114,17 @@ IV1:IV2          0.757   0.328
 Greenhouse-Geisser and Huynh-Feldt Corrections
  for Departure from Sphericity
 
-        GG eps Pr(>F[GG])
-IV2      0.917    0.00012
-IV1:IV2  0.804    0.90246
+        GG eps Pr(>F[GG])    
+IV2      0.917    0.00012 ***
+IV1:IV2  0.804    0.90246    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
-        HF eps Pr(>F[HF])
-IV2      1.140    6.4e-05
-IV1:IV2  0.953       0.93
+        HF eps Pr(>F[HF])    
+IV2      1.140    6.4e-05 ***
+IV1:IV2  0.953       0.93    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -255,7 +263,7 @@ W = 0.7569, p-value = 0.3283
 ```
 
 
-Effect size estimates: generalized $\hat{\eta}_{g}^{2}$
+Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
 -------------------------
 
 
@@ -409,11 +417,13 @@ Sum of squares and products for error:
 (Intercept)       536.4
 
 Multivariate Tests: (Intercept)
-                 Df test stat approx F num Df den Df  Pr(>F)
-Pillai            1    0.5617    11.53      1      9 0.00792
-Wilks             1    0.4383    11.53      1      9 0.00792
-Hotelling-Lawley  1    1.2816    11.53      1      9 0.00792
-Roy               1    1.2816    11.53      1      9 0.00792
+                 Df test stat approx F num Df den Df  Pr(>F)   
+Pillai            1    0.5617    11.53      1      9 0.00792 **
+Wilks             1    0.4383    11.53      1      9 0.00792 **
+Hotelling-Lawley  1    1.2816    11.53      1      9 0.00792 **
+Roy               1    1.2816    11.53      1      9 0.00792 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 ------------------------------------------
  
@@ -467,11 +477,13 @@ IV21 159.7  91.6
 IV22  91.6 119.0
 
 Multivariate Tests: IV2
-                 Df test stat approx F num Df den Df  Pr(>F)
-Pillai            1    0.7475    11.84      2      8 0.00407
-Wilks             1    0.2525    11.84      2      8 0.00407
-Hotelling-Lawley  1    2.9604    11.84      2      8 0.00407
-Roy               1    2.9604    11.84      2      8 0.00407
+                 Df test stat approx F num Df den Df  Pr(>F)   
+Pillai            1    0.7475    11.84      2      8 0.00407 **
+Wilks             1    0.2525    11.84      2      8 0.00407 **
+Hotelling-Lawley  1    2.9604    11.84      2      8 0.00407 **
+Roy               1    2.9604    11.84      2      8 0.00407 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 ------------------------------------------
  
@@ -519,4 +531,4 @@ try(detach(package:MASS))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaRBFpq.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaRBFpq.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaRBFpq.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaRBFpq.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaRBFpq.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaRBFpq.R) - [all posts](https://github.com/dwoll/RExRepos)

@@ -34,7 +34,7 @@ plot(y, main="Univeriate scatter plot", ylim=c(10, 50),
      xlab="Index", ylab="y axis", pch=4, lwd=2, col="blue")
 ```
 
-### Options for specifying $(x, y)$-coordinate pairs
+### Options for specifying \((x, y)\)-coordinate pairs
 
 ```{r eval=FALSE}
 xy <- cbind(x, y)

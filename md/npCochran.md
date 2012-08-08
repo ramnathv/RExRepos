@@ -1,4 +1,4 @@
-Cochran-$Q$-test
+Cochran-Q-test
 =========================
 
 Install required packages
@@ -14,14 +14,14 @@ if(any(!has)) install.packages(wants[!has])
 ```
 
 
-Cochran-$Q$-test
+Cochran-\(Q\)-test
 -------------------------
 
 
 ```r
 N   <- 10
 P   <- 5
-cDf <- data.frame(id  =factor(rep(1:N, each=P)),
+cDf <- data.frame(id=factor(rep(1:N, each=P)),
                   year=factor(rep(1981:1985, times=N)),
                   pref=c(1,1,0,1,0, 0,1,0,0,1, 1,0,1,0,0, 1,1,1,1,1, 0,1,0,0,0,
                          1,0,1,1,1, 0,0,0,0,0, 1,1,1,1,0, 0,1,0,1,1, 1,0,1,0,0))
@@ -63,4 +63,4 @@ try(detach(package:stats4))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/npCochran.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/npCochran.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/npCochran.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/npCochran.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/npCochran.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/npCochran.R) - [all posts](https://github.com/dwoll/RExRepos)

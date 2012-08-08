@@ -74,7 +74,7 @@ Nj  <- c(4, 3, 5)
 (IVrand <- sample(IV, length(IV), replace=FALSE))
 ```
 
-Randomly place elements in $p$ groups of approximately equal size
+Randomly place elements in \(p\) groups of approximately equal size
 -------------------------
 
 ```{r}

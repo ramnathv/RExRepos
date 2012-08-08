@@ -147,4 +147,4 @@ try(detach(package:permute))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multMDS.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multMDS.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/multMDS.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/multMDS.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/multMDS.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/multMDS.R) - [all posts](https://github.com/dwoll/RExRepos)

@@ -288,4 +288,4 @@ See `?Distributions` for more distribution types. Even more information can be f
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/generateData.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/generateData.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/generateData.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/generateData.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/generateData.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/generateData.R) - [all posts](https://github.com/dwoll/RExRepos)

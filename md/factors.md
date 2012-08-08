@@ -440,4 +440,4 @@ try(detach(package:gdata))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/factors.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/factors.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/factors.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/factors.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/factors.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/factors.R) - [all posts](https://github.com/dwoll/RExRepos)

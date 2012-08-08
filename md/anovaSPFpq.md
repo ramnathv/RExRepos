@@ -1,4 +1,4 @@
-Split-plot-factorial ANOVA (SPF-$p \cdot q$ design)
+Split-plot-factorial ANOVA (SPF-p.q design)
 =========================
 
 TODO
@@ -21,7 +21,7 @@ if(any(!has)) install.packages(wants[!has])
 ```
 
 
-Two-way SPF-$p \cdot q$ ANOVA
+Two-way SPF-\(p \cdot q\) ANOVA
 -------------------------
 
 ### Using `aov()` with data in long format
@@ -48,15 +48,19 @@ summary(aov(DV ~ IVbtw*IVwth + Error(id/IVwth), data=dfSPFpqL))
 ```
 
 Error: id
-          Df Sum Sq Mean Sq F value  Pr(>F)
-IVbtw      2    226   113.2    11.4 0.00026
-Residuals 27    268     9.9                
+          Df Sum Sq Mean Sq F value  Pr(>F)    
+IVbtw      2    226   113.2    11.4 0.00026 ***
+Residuals 27    268     9.9                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Error: id:IVwth
-            Df Sum Sq Mean Sq F value  Pr(>F)
-IVwth        2    114    56.8    9.00 0.00042
-IVbtw:IVwth  4     23     5.8    0.91 0.46327
-Residuals   54    341     6.3                
+            Df Sum Sq Mean Sq F value  Pr(>F)    
+IVwth        2    114    56.8    9.00 0.00042 ***
+IVbtw:IVwth  4     23     5.8    0.91 0.46327    
+Residuals   54    341     6.3                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -82,11 +86,13 @@ summary(AnovaSPFpq, multivariate=FALSE, univariate=TRUE)
 
 Univariate Type II Repeated-Measures ANOVA Assuming Sphericity
 
-               SS num Df Error SS den Df     F  Pr(>F)
-(Intercept)  88.6      1      268     27  8.92 0.00593
-IVbtw       226.4      2      268     27 11.40 0.00026
-IVwth       113.7      2      341     54  9.00 0.00042
-IVbtw:IVwth  23.1      4      341     54  0.91 0.46327
+               SS num Df Error SS den Df     F  Pr(>F)    
+(Intercept)  88.6      1      268     27  8.92 0.00593 ** 
+IVbtw       226.4      2      268     27 11.40 0.00026 ***
+IVwth       113.7      2      341     54  9.00 0.00042 ***
+IVbtw:IVwth  23.1      4      341     54  0.91 0.46327    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 
 Mauchly Tests for Sphericity
@@ -99,13 +105,17 @@ IVbtw:IVwth          0.842   0.107
 Greenhouse-Geisser and Huynh-Feldt Corrections
  for Departure from Sphericity
 
-            GG eps Pr(>F[GG])
-IVwth        0.863    0.00086
-IVbtw:IVwth  0.863    0.45322
+            GG eps Pr(>F[GG])    
+IVwth        0.863    0.00086 ***
+IVbtw:IVwth  0.863    0.45322    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
-            HF eps Pr(>F[HF])
-IVwth        0.917    0.00065
-IVbtw:IVwth  0.917    0.45737
+            HF eps Pr(>F[HF])    
+IVwth        0.917    0.00065 ***
+IVbtw:IVwth  0.917    0.45737    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -182,7 +192,7 @@ W = 0.8418, p-value = 0.1067
 ```
 
 
-Effect size estimates: generalized $\hat{\eta}_{g}^{2}$
+Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
 -------------------------
 
 
@@ -254,9 +264,11 @@ summary(aov(DV ~ IVbtw, data=dfSPFpqL, subset=(IVwth==1)))
 ```
 
 ```
-            Df Sum Sq Mean Sq F value Pr(>F)
-IVbtw        2   53.4   26.69    3.24  0.055
-Residuals   27  222.7    8.25               
+            Df Sum Sq Mean Sq F value Pr(>F)  
+IVbtw        2   53.4   26.69    3.24  0.055 .
+Residuals   27  222.7    8.25                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 ```r
@@ -264,9 +276,11 @@ summary(aov(DV ~ IVbtw, data=dfSPFpqL, subset=(IVwth==2)))
 ```
 
 ```
-            Df Sum Sq Mean Sq F value Pr(>F)
-IVbtw        2   71.6    35.8    6.04 0.0068
-Residuals   27  160.1     5.9               
+            Df Sum Sq Mean Sq F value Pr(>F)   
+IVbtw        2   71.6    35.8    6.04 0.0068 **
+Residuals   27  160.1     5.9                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 ```r
@@ -274,9 +288,11 @@ summary(aov(DV ~ IVbtw, data=dfSPFpqL, subset=(IVwth==3)))
 ```
 
 ```
-            Df Sum Sq Mean Sq F value Pr(>F)
-IVbtw        2    124    62.3    7.42 0.0027
-Residuals   27    226     8.4               
+            Df Sum Sq Mean Sq F value Pr(>F)   
+IVbtw        2    124    62.3    7.42 0.0027 **
+Residuals   27    226     8.4                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -312,9 +328,11 @@ Error: id
 Residuals  9   72.8    8.08               
 
 Error: id:IVwth
-          Df Sum Sq Mean Sq F value Pr(>F)
-IVwth      2   87.6    43.8    6.83 0.0062
-Residuals 18  115.5     6.4               
+          Df Sum Sq Mean Sq F value Pr(>F)   
+IVwth      2   87.6    43.8    6.83 0.0062 **
+Residuals 18  115.5     6.4                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 ```r
@@ -393,4 +411,4 @@ try(detach(package:MASS))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaSPFpq.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaSPFpq.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaSPFpq.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaSPFpq.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaSPFpq.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaSPFpq.R) - [all posts](https://github.com/dwoll/RExRepos)

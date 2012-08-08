@@ -57,6 +57,7 @@ anova(fitFull)
 ```
 
 ### Type II/III sum of squares
+
 #### Using `Anova()` from package `car`
 
 ```{r}
@@ -107,7 +108,7 @@ abline(iCeptWL,   slopeAll, col="blue")
 Effect size estimate
 -------------------------
 
-### $\hat{\omega}^{2}$ for the group effect
+### \(\hat{\omega}^{2}\) for the group effect
 
 Using SS type III
 

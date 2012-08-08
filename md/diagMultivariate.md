@@ -21,13 +21,6 @@ has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
 ```
 
-```
-package 'ellipse' successfully unpacked and MD5 sums checked
-
-The downloaded binary packages are in
-	C:\Users\Daniel\AppData\Local\Temp\RtmpaWg2uh\downloaded_packages
-```
-
 
 3-D data
 -------------------------
@@ -296,4 +289,4 @@ try(detach(package:lattice))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagMultivariate.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagMultivariate.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagMultivariate.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/diagMultivariate.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/diagMultivariate.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/diagMultivariate.R) - [all posts](https://github.com/dwoll/RExRepos)

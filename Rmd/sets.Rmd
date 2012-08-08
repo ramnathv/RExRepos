@@ -58,7 +58,7 @@ setdiff(n, m)
 union(setdiff(m, n), setdiff(n, m))
 ```
 
-### Is $e$ an element of set $X$?
+### Is \(e\) an element of set \(X\)?
 
 ```{r}
 is.element(c(29, 23, 30, 17, 30, 10), c(30, 23))

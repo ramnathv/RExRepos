@@ -1,4 +1,4 @@
-$t$-tests
+t-tests
 =========================
 
 TODO
@@ -6,7 +6,7 @@ TODO
 
  - link to resamplingPerm
 
-One-sample $t$-test
+One-sample \(t\)-test
 -------------------------
 
 ### Test
@@ -36,7 +36,7 @@ mean of x
 ```
 
 
-### Effect size estimate (Cohen's $d$)
+### Effect size estimate (Cohen's \(d\))
 
 
 ```r
@@ -48,10 +48,10 @@ mean of x
 ```
 
 
-Two-sample $t$-test for independent samples
+Two-sample \(t\)-test for independent samples
 -------------------------
 
-### $t$-Test
+### \(t\)-Test
 
 
 ```r
@@ -90,7 +90,7 @@ mean in group f mean in group m
 ```
 
 
-### Welch $t$-Test
+### Welch \(t\)-Test
 
 
 ```r
@@ -113,7 +113,7 @@ mean in group f mean in group m
 ```
 
 
-### Effect size estimate (Cohen's $d$)
+### Effect size estimate (Cohen's \(d\))
 
 
 ```r
@@ -128,7 +128,7 @@ sdPool <- sqrt(((n1-1)*var(DVm) + (n2-1)*var(DVf)) / (n1+n2-2))
 ```
 
 
-Two-sample $t$-test for dependent samples
+Two-sample \(t\)-test for dependent samples
 -------------------------
 
 ### Test
@@ -171,7 +171,7 @@ t.test(DVdiff, alternative="less")
 ```
 
 
-### Effect size estimate (Cohen's $d$)
+### Effect size estimate (Cohen's \(d\))
 
 
 ```r
@@ -186,4 +186,4 @@ t.test(DVdiff, alternative="less")
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/tTest.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/tTest.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/tTest.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/tTest.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/tTest.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/tTest.R) - [all posts](https://github.com/dwoll/RExRepos)

@@ -1,4 +1,4 @@
-Cochran-$Q$-test
+Cochran-Q-test
 =========================
 
 Install required packages
@@ -12,7 +12,7 @@ has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
 ```
 
-Cochran-$Q$-test
+Cochran-\(Q\)-test
 -------------------------
 
 ```{r}

@@ -19,7 +19,7 @@ if(any(!has)) install.packages(wants[!has])
 ```
 
 
-$(2 \times 2)$-tables
+\((2 \times 2)\)-tables
 -------------------------
 
 ### Fisher's exact test
@@ -64,7 +64,7 @@ odds ratio
 ```
 
 
-### Prevalence, sensitivity, specificity, CCR, $F$
+### Prevalence, sensitivity, specificity, CCR, \(F\)
 
 
 ```r
@@ -115,7 +115,7 @@ FN <- c21 <- contT1[2, 1]       ## false negative / miss
 ```
 
 
-CCR
+Correct classification rate (CCR)
 
 
 ```r
@@ -127,7 +127,7 @@ CCR
 ```
 
 
-$F$-value
+\(F\)-value
 
 
 ```r
@@ -139,7 +139,8 @@ $F$-value
 ```
 
 
-### Odds ratio, Yule's $Q$ and risk ratio
+### Odds ratio, Yule's \(Q\) and risk ratio
+
 #### Odds ratio
 
 
@@ -167,8 +168,10 @@ summary(ORln)            ## significance test log OR
 ```
 
 ```
-     Log Odds Ratio Std. Error z value Pr(>|z|)
-[1,]           2.77       1.19    2.34   0.0097
+     Log Odds Ratio Std. Error z value Pr(>|z|)   
+[1,]           2.77       1.19    2.34   0.0097 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -192,7 +195,7 @@ exp(CIln)                ## confidence interval OR (not log)
 ```
 
 
-#### Yule's $Q$
+#### Yule's \(Q\)
 
 
 ```r
@@ -248,10 +251,10 @@ attr(,"method")
 ```
 
 
-$(r \times c)$-tables
+\((r \times c)\)-tables
 -------------------------
 
-### $\chi^{2}$-test
+### \(\chi^{2}\)-test
 
 
 ```r
@@ -289,7 +292,7 @@ X-squared = 0.5199, df = 2, p-value = 0.7711
 
 Also for higher-order tables
 
-### Measures of association: $\phi$, Cramer's $V$, contingency coefficient
+### Measures of association: \(\phi\), Cramer's \(V\), contingency coefficient
 
 
 ```r
@@ -380,4 +383,4 @@ try(detach(package:stats4))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/association.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/association.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/association.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/association.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/association.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/association.R) - [all posts](https://github.com/dwoll/RExRepos)

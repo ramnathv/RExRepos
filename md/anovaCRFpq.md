@@ -1,4 +1,4 @@
-Two-way ANOVA (CRF-$pq$ design)
+Two-way ANOVA (CRF-pq design)
 =========================
 
 TODO
@@ -20,7 +20,7 @@ if(any(!has)) install.packages(wants[!has])
 ```
 
 
-CRF-$pq$ ANOVA
+CRF-\(pq\) ANOVA
 -------------------------
 
 ### Using `aov()` (SS type I)
@@ -50,11 +50,13 @@ summary(aov(DV ~ IV1*IV2, data=dfCRFpq))
 ```
 
 ```
-            Df Sum Sq Mean Sq F value  Pr(>F)
-IV1          1   26.3    26.3    8.72 0.00514
-IV2          2   66.7    33.4   11.05 0.00014
-IV1:IV2      2   17.1     8.5    2.82 0.07070
-Residuals   42  126.8     3.0                
+            Df Sum Sq Mean Sq F value  Pr(>F)    
+IV1          1   26.3    26.3    8.72 0.00514 ** 
+IV2          2   66.7    33.4   11.05 0.00014 ***
+IV1:IV2      2   17.1     8.5    2.82 0.07070 .  
+Residuals   42  126.8     3.0                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -72,12 +74,14 @@ Anova(fitIII, type="III")
 Anova Table (Type III tests)
 
 Response: DV
-            Sum Sq Df F value  Pr(>F)
-(Intercept)  135.0  1   44.72 4.1e-08
-IV1           26.3  1    8.72 0.00514
-IV2           66.7  2   11.05 0.00014
-IV1:IV2       17.1  2    2.82 0.07070
-Residuals    126.8 42                
+            Sum Sq Df F value  Pr(>F)    
+(Intercept)  135.0  1   44.72 4.1e-08 ***
+IV1           26.3  1    8.72 0.00514 ** 
+IV2           66.7  2   11.05 0.00014 ***
+IV1:IV2       17.1  2    2.82 0.07070 .  
+Residuals    126.8 42                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -98,7 +102,7 @@ interaction.plot(dfCRFpq$IV1, dfCRFpq$IV2, dfCRFpq$DV,
 ![plot of chunk rerAnovaCRFpq01](figure/rerAnovaCRFpq012.png) 
 
 
-Effect size estimate: partial $\hat{\eta}_{p}^{2}$
+Effect size estimate: partial \(\hat{\eta}_{p}^{2}\)
 -------------------------
 
 
@@ -217,6 +221,7 @@ Planned comparisons
 -------------------------
 
 ### Main effects only
+
 #### Free comparisons of marginal means
 
 
@@ -314,10 +319,12 @@ Multiple Comparisons of Means: User-defined Contrasts
 Fit: aov(formula = DV ~ IVcomb, data = dfCRFpq)
 
 Linear Hypotheses:
-        Estimate Std. Error t value  Pr(>t)
-c1 <= 0   -0.688      0.532   -1.29    0.90
-c2 <= 0    0.195      0.869    0.22    0.41
-c3 <= 0    2.241      0.532    4.21 6.6e-05
+        Estimate Std. Error t value  Pr(>t)    
+c1 <= 0   -0.688      0.532   -1.29    0.90    
+c2 <= 0    0.195      0.869    0.22    0.41    
+c3 <= 0    2.241      0.532    4.21 6.6e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 (Adjusted p values reported -- none method)
 
 ```
@@ -391,4 +398,4 @@ try(detach(package:splines))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaCRFpq.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaCRFpq.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaCRFpq.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaCRFpq.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaCRFpq.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaCRFpq.R) - [all posts](https://github.com/dwoll/RExRepos)

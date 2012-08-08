@@ -78,14 +78,17 @@ anova(fitFull)
 Analysis of Variance Table
 
 Response: DVpost
-          Df Sum Sq Mean Sq F value Pr(>F)
-IV         2    240   120.2    4.13 0.0276
-DVpre      1    313   313.4   10.77 0.0029
-Residuals 26    756    29.1               
+          Df Sum Sq Mean Sq F value Pr(>F)   
+IV         2    240   120.2    4.13 0.0276 * 
+DVpre      1    313   313.4   10.77 0.0029 **
+Residuals 26    756    29.1                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
 ### Type II/III sum of squares
+
 #### Using `Anova()` from package `car`
 
 
@@ -100,11 +103,13 @@ Anova(fitFiii, type="III")
 Anova Table (Type III tests)
 
 Response: DVpost
-            Sum Sq Df F value Pr(>F)
-(Intercept)      0  1    0.00 0.9910
-IV             217  2    3.73 0.0376
-DVpre          313  1   10.77 0.0029
-Residuals      756 26               
+            Sum Sq Df F value Pr(>F)   
+(Intercept)      0  1    0.00 0.9910   
+IV             217  2    3.73 0.0376 * 
+DVpre          313  1   10.77 0.0029 **
+Residuals      756 26                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
@@ -120,9 +125,11 @@ Analysis of Variance Table
 
 Model 1: DVpost ~ DVpre
 Model 2: DVpost ~ IV + DVpre
-  Res.Df RSS Df Sum of Sq    F Pr(>F)
-1     28 973                         
-2     26 756  2       217 3.73  0.038
+  Res.Df RSS Df Sum of Sq    F Pr(>F)  
+1     28 973                           
+2     26 756  2       217 3.73  0.038 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 ```r
@@ -134,13 +141,15 @@ Analysis of Variance Table
 
 Model 1: DVpost ~ IV
 Model 2: DVpost ~ IV + DVpre
-  Res.Df  RSS Df Sum of Sq    F Pr(>F)
-1     27 1070                         
-2     26  756  1       313 10.8 0.0029
+  Res.Df  RSS Df Sum of Sq    F Pr(>F)   
+1     27 1070                            
+2     26  756  1       313 10.8 0.0029 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
-### Testing individual regression coefficients
+### Test individual regression coefficients
 
 
 ```r
@@ -157,11 +166,13 @@ Residuals:
 -10.684  -3.961   0.645   3.877   9.967 
 
 Coefficients:
-            Estimate Std. Error t value Pr(>|t|)
-(Intercept)   -3.670      3.752   -0.98   0.3370
-IVPlacebo      4.448      2.416    1.84   0.0770
-IVWL           6.442      2.413    2.67   0.0129
-DVpre          0.645      0.197    3.28   0.0029
+            Estimate Std. Error t value Pr(>|t|)   
+(Intercept)   -3.670      3.752   -0.98   0.3370   
+IVPlacebo      4.448      2.416    1.84   0.0770 . 
+IVWL           6.442      2.413    2.67   0.0129 * 
+DVpre          0.645      0.197    3.28   0.0029 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Residual standard error: 5.39 on 26 degrees of freedom
 Multiple R-squared: 0.423,	Adjusted R-squared: 0.356 
@@ -182,7 +193,7 @@ DVpre         0.2412  1.049
 ```
 
 
-### Vsisualizing ANCOVA coefficients
+### Vsisualize ANCOVA coefficients
 
 
 ```r
@@ -215,7 +226,7 @@ abline(iCeptWL,   slopeAll, col="blue")
 Effect size estimate
 -------------------------
 
-### $\hat{\omega}^{2}$ for the group effect
+### \(\hat{\omega}^{2}\) for the group effect
 
 Using SS type III
 
@@ -285,10 +296,12 @@ Multiple Comparisons of Means: User-defined Contrasts
 Fit: aov(formula = DVpost ~ IV + DVpre, data = dfAnc)
 
 Linear Hypotheses:
-                    Estimate Std. Error t value Pr(>t)
-SSRI-Placebo <= 0       4.45       2.42    1.84 0.0385
-SSRI-WL <= 0            6.44       2.41    2.67 0.0065
-SSRI-0.5(P+WL) <= 0    10.89       4.18    2.60 0.0075
+                    Estimate Std. Error t value Pr(>t)   
+SSRI-Placebo <= 0       4.45       2.42    1.84 0.0385 * 
+SSRI-WL <= 0            6.44       2.41    2.67 0.0065 **
+SSRI-0.5(P+WL) <= 0    10.89       4.18    2.60 0.0075 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 (Adjusted p values reported -- none method)
 
 ```
@@ -316,4 +329,4 @@ try(detach(package:splines))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/ancova.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/ancova.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/ancova.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/ancova.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/ancova.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/ancova.R) - [all posts](https://github.com/dwoll/RExRepos)

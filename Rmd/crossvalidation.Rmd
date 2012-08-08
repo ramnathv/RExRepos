@@ -12,7 +12,7 @@ has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
 ```
 
-$k$-fold crossvalidation
+\(k\)-fold crossvalidation
 -------------------------
 
 ### Simulate data

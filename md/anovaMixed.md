@@ -4,8 +4,8 @@ Mixed-effects models for repeated-measures ANOVA
 TODO
 -------------------------
 
- - RBF-$pq$: `lme()` with compound symmetry
- - SPF-$p \cdot qr$: `lme()` with compound symmetry
+ - RBF-\(pq\): `lme()` with compound symmetry
+ - SPF-\(p \cdot qr\): `lme()` with compound symmetry
 
 Install required packages
 -------------------------
@@ -120,7 +120,7 @@ d1 <- aggregate(Y ~ id + Xw1 + Xb1 + Xb2, data=d2, FUN=mean)
 ```
 
 
-One-way repeated measures ANOVA (RB-$p$ design)
+One-way repeated measures ANOVA (RB-\(p\) design)
 -------------------------
 
 ### Conventional analysis using `aov()`
@@ -144,6 +144,7 @@ Residuals 158 163743    1036
 
 
 ### Mixed-effects analysis
+
 #### Using `lme()` from package `nlme`
 
 no explicit assumption of compound symmetry, but
@@ -261,7 +262,7 @@ C - B == 0   7.648   -4.208  19.503
 ```
 
 
-Two-way repeated measures ANOVA (RBF-$pq$ design)
+Two-way repeated measures ANOVA (RBF-\(pq\) design)
 -------------------------
 
 ### Conventional analysis using `aov()`
@@ -283,9 +284,11 @@ Xw1         2   8384    4192    1.35   0.26
 Residuals 158 491228    3109               
 
 Error: id:Xw2
-           Df Sum Sq Mean Sq F value Pr(>F)
-Xw2         2  16588    8294    2.95  0.055
-Residuals 158 444423    2813               
+           Df Sum Sq Mean Sq F value Pr(>F)  
+Xw2         2  16588    8294    2.95  0.055 .
+Residuals 158 444423    2813                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Error: id:Xw1:Xw2
            Df Sum Sq Mean Sq F value Pr(>F)
@@ -295,6 +298,7 @@ Residuals 316 942658    2983
 
 
 ### Mixed-effects analysis
+
 #### Using `lme()` from package `nlme`
 
 
@@ -346,7 +350,7 @@ Xw1:Xw2  4  20527    5132    1.75
 ```
 
 
-Two-way split-plot-factorial ANOVA (SPF-$p \cdot q$ design)
+Two-way split-plot-factorial ANOVA (SPF-\(p \cdot q\) design)
 -------------------------
 
 ### Conventional analysis using `aov()`
@@ -364,14 +368,17 @@ Xb1        1   1912    1912    2.24   0.14
 Residuals 78  66515     853               
 
 Error: id:Xw1
-           Df Sum Sq Mean Sq F value Pr(>F)
-Xw1         2   2795    1397    1.43 0.2422
-Xb1:Xw1     2  11416    5708    5.85 0.0036
-Residuals 156 152326     976               
+           Df Sum Sq Mean Sq F value Pr(>F)   
+Xw1         2   2795    1397    1.43 0.2422   
+Xb1:Xw1     2  11416    5708    5.85 0.0036 **
+Residuals 156 152326     976                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
 ### Mixed-effects
+
 #### Using `lme()` from package `nlme`
 
 random intercept model equivalent to compound symmetry
@@ -440,7 +447,7 @@ Xb1:Xw1  2  11416    5708    6.10
 ```
 
 
-Three-way split-plot-factorial ANOVA (SPF-$pq \cdot r$ design)
+Three-way split-plot-factorial ANOVA (SPF-\(pq \cdot r\) design)
 -------------------------
 
 ### Conventional analysis using `aov()`
@@ -453,23 +460,28 @@ summary(aov(Y ~ Xb1*Xb2*Xw1 + Error(id/Xw1), data=d1))
 ```
 
 Error: id
-          Df Sum Sq Mean Sq F value  Pr(>F)
-Xb1        1   1912    1912    2.84 0.09578
-Xb2        1   5255    5255    7.82 0.00654
-Xb1:Xb2    1  10177   10177   15.14 0.00021
-Residuals 76  51082     672                
+          Df Sum Sq Mean Sq F value  Pr(>F)    
+Xb1        1   1912    1912    2.84 0.09578 .  
+Xb2        1   5255    5255    7.82 0.00654 ** 
+Xb1:Xb2    1  10177   10177   15.14 0.00021 ***
+Residuals 76  51082     672                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Error: id:Xw1
-             Df Sum Sq Mean Sq F value Pr(>F)
-Xw1           2   2795    1397    1.44 0.2412
-Xb1:Xw1       2  11416    5708    5.86 0.0035
-Xb2:Xw1       2   1989     995    1.02 0.3624
-Xb1:Xb2:Xw1   2   2383    1191    1.22 0.2969
-Residuals   152 147954     973               
+             Df Sum Sq Mean Sq F value Pr(>F)   
+Xw1           2   2795    1397    1.44 0.2412   
+Xb1:Xw1       2  11416    5708    5.86 0.0035 **
+Xb2:Xw1       2   1989     995    1.02 0.3624   
+Xb1:Xb2:Xw1   2   2383    1191    1.22 0.2969   
+Residuals   152 147954     973                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 ```
 
 
 ### Mixed-effects analysis
+
 #### Using `lme()` from package `nlme`
 
 
@@ -551,7 +563,7 @@ Xb1:Xb2:Xw1  2   2383    1191    1.36
 ```
 
 
-Three-way split-plot-factorial ANOVA (SPF-$p \cdot qr$ design)
+Three-way split-plot-factorial ANOVA (SPF-\(p \cdot qr\) design)
 -------------------------
 
 ### Conventional analysis using `aov()`
@@ -569,16 +581,20 @@ Xb1        1   5736    5736    2.24   0.14
 Residuals 78 199544    2558               
 
 Error: id:Xw1
-           Df Sum Sq Mean Sq F value Pr(>F)
-Xw1         2   8384    4192    1.43 0.2422
-Xb1:Xw1     2  34249   17124    5.85 0.0036
-Residuals 156 456979    2929               
+           Df Sum Sq Mean Sq F value Pr(>F)   
+Xw1         2   8384    4192    1.43 0.2422   
+Xb1:Xw1     2  34249   17124    5.85 0.0036 **
+Residuals 156 456979    2929                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Error: id:Xw2
-           Df Sum Sq Mean Sq F value Pr(>F)
-Xw2         2  16588    8294    3.17 0.0447
-Xb1:Xw2     2  36287   18143    6.93 0.0013
-Residuals 156 408136    2616               
+           Df Sum Sq Mean Sq F value Pr(>F)   
+Xw2         2  16588    8294    3.17 0.0447 * 
+Xb1:Xw2     2  36287   18143    6.93 0.0013 **
+Residuals 156 408136    2616                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Error: id:Xw1:Xw2
              Df Sum Sq Mean Sq F value Pr(>F)
@@ -589,6 +605,7 @@ Residuals   312 933425    2992
 
 
 ### Mixed-effects analysis
+
 #### Using `lme()` from package `nlme`
 
 
@@ -653,7 +670,7 @@ Xb1:Xw1:Xw2  4   9233    2308    0.81
 ```
 
 
-Four-way split-plot-factorial ANOVA (SPF-$pq \cdot rs$ design)
+Four-way split-plot-factorial ANOVA (SPF-\(pq \cdot rs\) design)
 -------------------------
 
 ### Conventional analysis using `aov()`
@@ -666,27 +683,33 @@ summary(aov(Y ~ Xb1*Xb2*Xw1*Xw2 + Error(id/(Xw1*Xw2)), data=d2))
 ```
 
 Error: id
-          Df Sum Sq Mean Sq F value  Pr(>F)
-Xb1        1   5736    5736    2.84 0.09578
-Xb2        1  15766   15766    7.82 0.00654
-Xb1:Xb2    1  30532   30532   15.14 0.00021
-Residuals 76 153247    2016                
+          Df Sum Sq Mean Sq F value  Pr(>F)    
+Xb1        1   5736    5736    2.84 0.09578 .  
+Xb2        1  15766   15766    7.82 0.00654 ** 
+Xb1:Xb2    1  30532   30532   15.14 0.00021 ***
+Residuals 76 153247    2016                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Error: id:Xw1
-             Df Sum Sq Mean Sq F value Pr(>F)
-Xw1           2   8384    4192    1.44 0.2412
-Xb1:Xw1       2  34249   17124    5.86 0.0035
-Xb2:Xw1       2   5968    2984    1.02 0.3624
-Xb1:Xb2:Xw1   2   7149    3574    1.22 0.2969
-Residuals   152 443862    2920               
+             Df Sum Sq Mean Sq F value Pr(>F)   
+Xw1           2   8384    4192    1.44 0.2412   
+Xb1:Xw1       2  34249   17124    5.86 0.0035 **
+Xb2:Xw1       2   5968    2984    1.02 0.3624   
+Xb1:Xb2:Xw1   2   7149    3574    1.22 0.2969   
+Residuals   152 443862    2920                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Error: id:Xw2
-             Df Sum Sq Mean Sq F value  Pr(>F)
-Xw2           2  16588    8294    3.31 0.03922
-Xb1:Xw2       2  36287   18143    7.24 0.00099
-Xb2:Xw2       2  20209   10105    4.03 0.01970
-Xb1:Xb2:Xw2   2   6870    3435    1.37 0.25720
-Residuals   152 381057    2507                
+             Df Sum Sq Mean Sq F value  Pr(>F)    
+Xw2           2  16588    8294    3.31 0.03922 *  
+Xb1:Xw2       2  36287   18143    7.24 0.00099 ***
+Xb2:Xw2       2  20209   10105    4.03 0.01970 *  
+Xb1:Xb2:Xw2   2   6870    3435    1.37 0.25720    
+Residuals   152 381057    2507                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
 Error: id:Xw1:Xw2
                  Df Sum Sq Mean Sq F value Pr(>F)
@@ -699,6 +722,7 @@ Residuals       304 907036    2984
 
 
 ### Mixed-effects analysis
+
 #### Using `lme()` from package `nlme`
 
 no explicit assumption of compound symmetry
@@ -804,4 +828,4 @@ try(detach(package:lattice))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaMixed.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaMixed.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaMixed.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/anovaMixed.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/anovaMixed.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/anovaMixed.R) - [all posts](https://github.com/dwoll/RExRepos)

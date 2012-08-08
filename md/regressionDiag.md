@@ -200,6 +200,7 @@ W = 0.9798, p-value = 0.1284
 
 
 ### Independence and homoscedasticity assumption
+
 #### Spread-level plot
 
 
@@ -343,7 +344,7 @@ vif(fit)
 
 ### Condition indexes
 
-$\kappa$
+\(\kappa\)
 
 
 ```r
@@ -378,31 +379,19 @@ Index	Variance Decomposition Proportions
 
 ```r
 attach(dfRegr)
+pRes <- perturb(fit, pvars=c("X1", "X2", "X3"), prange=c(1, 1, 1))
 ```
 
 ```
-The following object(s) are masked _by_ '.GlobalEnv':
-
-    X1, X2, X3, Y
+Error: Objekt 'dfRegr' nicht gefunden
 ```
 
 ```r
-pRes <- perturb(fit, pvars=c("X1", "X2", "X3"), prange=c(1, 1, 1))
 summary(pRes)
 ```
 
 ```
-Perturb variables:
-X1 		 normal(0,1) 
-X2 		 normal(0,1) 
-X3 		 normal(0,1) 
-
-Impact of perturbations on coefficients:
-              mean  s.d.    min    max
-(Intercept) 19.930 2.805 13.111 25.967
-X1           0.415 0.018  0.381  0.467
-X2          -0.307 0.014 -0.342 -0.275
-X3          -0.281 0.022 -0.350 -0.224
+Error: Objekt 'pRes' nicht gefunden
 ```
 
 ```r
@@ -441,4 +430,4 @@ try(detach(package:MASS))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regressionDiag.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regressionDiag.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/regressionDiag.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/regressionDiag.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/regressionDiag.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/regressionDiag.R) - [all posts](https://github.com/dwoll/RExRepos)

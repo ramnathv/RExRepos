@@ -1,4 +1,4 @@
-Binomial test and $\chi^2$-test for proportions
+Binomial test and chi^2-test for proportions
 =========================
 
 Install required packages
@@ -112,7 +112,7 @@ binom.confint(tab[1], sum(tab))
 ```
 
 
-$\chi^2$-test for proportions
+\(\chi^2\)-test for proportions
 -------------------------
 
 
@@ -150,4 +150,4 @@ try(detach(package:lattice))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/npBinomial.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/npBinomial.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/npBinomial.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/npBinomial.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/npBinomial.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/npBinomial.R) - [all posts](https://github.com/dwoll/RExRepos)

@@ -98,6 +98,7 @@ Recode factors
 -------------------------
 
 ### Add, combine and remove factor levels
+
 #### Add factor levels
 
 ```{r}
@@ -130,6 +131,7 @@ status[1:2]
 ```
 
 ### Reorder factor levels
+
 #### Using `reorder.factor()` from package `gdata`
 
 ```{r}

@@ -116,7 +116,7 @@ alternative hypothesis: true mu is not equal to 0
 ```
 
 
-### Wilcoxon rank-sum test ($=$ Mann-Whitney $U$-test)
+### Wilcoxon rank-sum test (\(=\) Mann-Whitney \(U\)-test)
 
 
 ```r
@@ -142,7 +142,8 @@ difference in location
 
 ```r
 library(coin)
-wilcox_test(DV ~ IV, alternative="less", distribution="exact", data=wIndDf)
+wilcox_test(DV ~ IV, alternative="less", conf.int=TRUE,
+            distribution="exact", data=wIndDf)
 ```
 
 ```
@@ -152,6 +153,11 @@ wilcox_test(DV ~ IV, alternative="less", distribution="exact", data=wIndDf)
 data:  DV by IV (A, B) 
 Z = -1.069, p-value = 0.1462
 alternative hypothesis: true mu is less than 0 
+95 percent confidence interval:
+  -Inf 2.159 
+sample estimates:
+difference in location 
+                -4.021 
 
 ```
 
@@ -198,7 +204,8 @@ DVdiff <- aggregate(DV ~ id, FUN=diff, data=wDepDf)
 
 
 ```r
-wilcoxsign_test(DV ~ IV | id, alternative="greater", distribution="exact", data=wDepDf)
+wilcoxsign_test(DV ~ IV | id, alternative="greater",
+                distribution="exact", data=wDepDf)
 ```
 
 ```
@@ -230,4 +237,4 @@ try(detach(package:stats4))
 Get this post from github
 ----------------------------------------------
 
-[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/npWilcoxon.Rmd) | [markdown](https://github.com/dwoll/RExRepos/raw/master/md/npWilcoxon.md) | [R code](https://github.com/dwoll/RExRepos/raw/master/R/npWilcoxon.R) - ([all posts](https://github.com/dwoll/RExRepos))
+[R markdown](https://github.com/dwoll/RExRepos/raw/master/Rmd/npWilcoxon.Rmd) - [markdown](https://github.com/dwoll/RExRepos/raw/master/md/npWilcoxon.md) - [R code](https://github.com/dwoll/RExRepos/raw/master/R/npWilcoxon.R) - [all posts](https://github.com/dwoll/RExRepos)

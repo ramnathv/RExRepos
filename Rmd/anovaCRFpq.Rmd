@@ -1,4 +1,4 @@
-Two-way ANOVA (CRF-$pq$ design)
+Two-way ANOVA (CRF-pq design)
 =========================
 
 TODO
@@ -18,7 +18,7 @@ has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
 ```
 
-CRF-$pq$ ANOVA
+CRF-\(pq\) ANOVA
 -------------------------
 
 ### Using `aov()` (SS type I)
@@ -59,7 +59,7 @@ interaction.plot(dfCRFpq$IV1, dfCRFpq$IV2, dfCRFpq$DV,
                  main="Cell means", col=c("red", "blue", "green"), lwd=2)
 ```
 
-Effect size estimate: partial $\hat{\eta}_{p}^{2}$
+Effect size estimate: partial \(\hat{\eta}_{p}^{2}\)
 -------------------------
 
 ```{r}
@@ -122,6 +122,7 @@ Planned comparisons
 -------------------------
 
 ### Main effects only
+
 #### Free comparisons of marginal means
 
 ```{r}
