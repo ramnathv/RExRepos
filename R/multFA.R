@@ -49,8 +49,8 @@ fa.diagram(faPC)
 
 
 ## @knitr rerMultFA02
-fa.parallel(X)                     ## parallel analysis
-vss(X, n.obs=N, rotate="varimax")  ## very simple structure
+fa.parallel(X)                     # parallel analysis
+vss(X, n.obs=N, rotate="varimax")  # very simple structure
 
 
 ## @knitr unnamed-chunk-8

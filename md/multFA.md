@@ -1,22 +1,17 @@
 Exploratory factor analysis
 =========================
 
-TODO
--------------------------
-
- - link to multFApoly
-
 Install required packages
 -------------------------
 
 [`mvtnorm`](http://cran.r-project.org/package=mvtnorm), [`psych`](http://cran.r-project.org/package=psych), [`GPArotation`](http://cran.r-project.org/package=GPArotation)
 
 
-```r
+{% highlight r %}
 wants <- c("mvtnorm", "psych", "GPArotation")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-```
+{% endhighlight %}
 
 
 Factor analysis
@@ -27,15 +22,17 @@ Factor analysis
 True matrix of loadings
 
 
-```r
+{% highlight r %}
 N <- 200
 P <- 6
 Q <- 2
 (Lambda <- matrix(c(0.7,-0.4, 0.8,0, -0.2,0.9, -0.3,0.4, 0.3,0.7, -0.8,0.1),
                   nrow=P, ncol=Q, byrow=TRUE))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
      [,1] [,2]
 [1,]  0.7 -0.4
 [2,]  0.8  0.0
@@ -43,13 +40,13 @@ Q <- 2
 [4,] -0.3  0.4
 [5,]  0.3  0.7
 [6,] -0.8  0.1
-```
+{% endhighlight %}
 
 
 Non correlated factors
 
 
-```r
+{% highlight r %}
 set.seed(1.234)
 library(mvtnorm)
 Kf <- diag(Q)
@@ -57,17 +54,19 @@ mu <- c(5, 15)
 FF <- rmvnorm(N, mean=mu,        sigma=Kf)
 E  <- rmvnorm(N, mean=rep(0, P), sigma=diag(P))
 X  <- FF %*% t(Lambda) + E
-```
+{% endhighlight %}
 
 
 ### Using `factanal()`
 
 
-```r
+{% highlight r %}
 (fa <- factanal(X, factors=2, scores="regression"))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Call:
 factanal(x = X, factors = 2, scores = "regression")
@@ -92,7 +91,7 @@ Cumulative Var   0.208   0.410
 Test of the hypothesis that 2 factors are sufficient.
 The chi square statistic is 3.62 on 4 degrees of freedom.
 The p-value is 0.46 
-```
+{% endhighlight %}
 
 
 ### Using `fa()` from package `psych` with rotation
@@ -100,13 +99,15 @@ The p-value is 0.46
 Rotation uses package `GPArotation`
 
 
-```r
+{% highlight r %}
 library(psych)
 corMat <- cor(X)
 (faPC  <- fa(r=corMat, nfactors=2, n.obs=N, rotate="varimax"))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Factor Analysis using method =  minres
 Call: fa(r = corMat, nfactors = 2, n.obs = N, rotate = "varimax")
 Standardized loadings (pattern matrix) based upon correlation matrix
@@ -141,19 +142,21 @@ Measures of factor score adequacy
 Correlation of scores with factors             0.81 0.99
 Multiple R square of scores with factors       0.66 0.99
 Minimum correlation of possible factor scores  0.32 0.97
-```
+{% endhighlight %}
 
 
 Factor scores
 -------------------------
 
 
-```r
+{% highlight r %}
 bartlett <- fa$scores
 head(bartlett)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
      Factor1 Factor2
 [1,]  0.9556 -1.1165
 [2,] -0.7429  2.4349
@@ -161,16 +164,18 @@ head(bartlett)
 [4,] -0.8029 -1.7216
 [5,] -0.8456 -0.8619
 [6,]  0.5332  2.0151
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 anderson <- factor.scores(x=X, f=faPC, method="Anderson")
 head(anderson$scores)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
          MR2     MR1
 [1,]  1.1372 -1.0911
 [2,] -0.8275  2.4280
@@ -178,7 +183,7 @@ head(anderson$scores)
 [4,] -1.0516 -1.7647
 [5,] -1.0732 -0.8995
 [6,]  0.7299  2.0509
-```
+{% endhighlight %}
 
 
 Visualize loadings
@@ -187,15 +192,15 @@ Visualize loadings
 You can visualize the loadings from the factor analysis using `factor.plot()` and `fa.diagram()`, both from package `psych`. For some reason, `factor.plot()` accepts only the `$fa` component of the result from `fa.poly()`, not the full object.
 
 
-```r
+{% highlight r %}
 factor.plot(faPC, cut=0.5)
-```
+{% endhighlight %}
 
 ![plot of chunk rerMultFA01](figure/rerMultFA011.png) 
 
-```r
+{% highlight r %}
 fa.diagram(faPC)
-```
+{% endhighlight %}
 
 ![plot of chunk rerMultFA01](figure/rerMultFA012.png) 
 
@@ -206,23 +211,25 @@ Determine number of factors
 Parallel analysis and a "very simple structure" analysis provide help in selecting the number of factors. Again, package `psych` has the required functions. `vss()` takes the polychoric correlation matrix as an argument.
 
 
-```r
+{% highlight r %}
 fa.parallel(X)                     # parallel analysis
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Parallel analysis suggests that the number of factors =  2  and the number of components =  2 
-```
+{% endhighlight %}
 
 ![plot of chunk rerMultFA02](figure/rerMultFA021.png) 
 
-```r
+{% highlight r %}
 vss(X, n.obs=N, rotate="varimax")  # very simple structure
-```
+{% endhighlight %}
 
 ![plot of chunk rerMultFA02](figure/rerMultFA022.png) 
 
-```
+{% highlight text %}
 
 Very Simple Structure
 Call: VSS(x = x, n = n, rotate = rotate, diagonal = diagonal, fm = fm, 
@@ -240,7 +247,7 @@ Very Simple Structure Complexity 1
 
 Very Simple Structure Complexity 2
 [1] 0.00 0.67 0.70 0.63 0.60 0.61
-```
+{% endhighlight %}
 
 
 Useful packages
@@ -252,11 +259,11 @@ Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-```r
+{% highlight r %}
 try(detach(package:psych))
 try(detach(package:GPArotation))
 try(detach(package:mvtnorm))
-```
+{% endhighlight %}
 
 
 Get this post from github

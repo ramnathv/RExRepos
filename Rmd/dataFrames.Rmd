@@ -4,7 +4,7 @@ Create and analyze data frames
 TODO
 -------------------------
 
- - link to strings for `gsub()`, dfTransform, dfSplitMerge, dfReshape
+ - link to dfTransform
 
  Install required packages
 -------------------------

@@ -14,11 +14,11 @@ Install required packages
 [`car`](http://cran.r-project.org/package=car)
 
 
-```r
+{% highlight r %}
 wants <- c("car")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-```
+{% endhighlight %}
 
 
 Traditional univariate approach
@@ -27,7 +27,7 @@ Traditional univariate approach
 ### Using `aov()` with data in long format
 
 
-```r
+{% highlight r %}
 set.seed(1.234)
 N    <- 10
 P    <- 2
@@ -37,15 +37,17 @@ dfRBFpqL <- data.frame(id =factor(rep(1:N, times=P*Q)),
                        IV1=factor(rep(rep(1:P, each=N), times=Q)),
                        IV2=factor(rep(rep(1:Q, each=N*P))),
                        DV =rnorm(N*P*Q, muJK, 2))
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 summary(aov(DV ~ IV1*IV2 + Error(id/(IV1*IV2)), data=dfRBFpqL))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Error: id
           Df Sum Sq Mean Sq F value Pr(>F)
@@ -67,31 +69,33 @@ Error: id:IV1:IV2
           Df Sum Sq Mean Sq F value Pr(>F)
 IV1:IV2    2    0.6    0.30    0.07   0.94
 Residuals 18   82.2    4.57               
-```
+{% endhighlight %}
 
 
 ### Using `Anova()` from package `car` with data in wide format
 
 
-```r
+{% highlight r %}
 dfTemp   <- reshape(dfRBFpqL, v.names="DV", timevar="IV1",
                     idvar=c("id", "IV2"), direction="wide")
 dfRBFpqW <- reshape(dfTemp, v.names=c("DV.1", "DV.2"),
                     timevar="IV2", idvar="id", direction="wide")
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 library(car)
 fitRBFpq   <- lm(cbind(DV.1.1, DV.2.1, DV.1.2, DV.2.2, DV.1.3, DV.2.3) ~ 1,
                  data=dfRBFpqW)
 inRBFpq    <- expand.grid(IV1=gl(P, 1), IV2=gl(Q, 1))
 AnovaRBFpq <- Anova(fitRBFpq, idata=inRBFpq, idesign=~IV1*IV2)
 summary(AnovaRBFpq, multivariate=FALSE, univariate=TRUE)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
 
@@ -125,17 +129,19 @@ IV2      1.140    6.4e-05 ***
 IV1:IV2  0.953       0.93    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-```
+{% endhighlight %}
 
 
 ### Using `anova.mlm()` and `mauchly.test()` with data in wide format
 
 
-```r
+{% highlight r %}
 anova(fitRBFpq, M=~IV1, X=~1, idata=inRBFpq, test="Spherical")
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Analysis of Variance Table
 
 
@@ -152,13 +158,17 @@ Huynh-Feldt epsilon:        1
             Df    F num Df den Df Pr(>F) G-G Pr H-F Pr
 (Intercept)  1 0.32      1      9  0.588  0.588  0.588
 Residuals    9                                        
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 anova(fitRBFpq, M=~IV1 + IV2, X=~IV1, idata=inRBFpq, test="Spherical")
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Analysis of Variance Table
 
 
@@ -175,14 +185,18 @@ Huynh-Feldt epsilon:        1.140
             Df    F num Df den Df   Pr(>F)   G-G Pr   H-F Pr
 (Intercept)  1 17.3      2     18 6.38e-05 0.000116 6.38e-05
 Residuals    9                                              
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 anova(fitRBFpq, M=~IV1 + IV2 + IV1:IV2, X=~IV1 + IV2,
       idata=inRBFpq, test="Spherical")
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Analysis of Variance Table
 
 
@@ -199,17 +213,19 @@ Huynh-Feldt epsilon:        0.9531
             Df    F num Df den Df Pr(>F) G-G Pr H-F Pr
 (Intercept)  1 0.07      2     18  0.936  0.902   0.93
 Residuals    9                                        
-```
+{% endhighlight %}
 
 
 Mauchly-Test IV1 hier unnoetig, da P=2 -> Zirkularitaet liegt automatisch vor
 
 
-```r
+{% highlight r %}
 mauchly.test(fitRBFpq, M=~IV1, X=~1, idata=inRBFpq)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	Mauchly's test of sphericity
 	Contrasts orthogonal to
@@ -222,13 +238,17 @@ mauchly.test(fitRBFpq, M=~IV1, X=~1, idata=inRBFpq)
 data:  SSD matrix from lm(formula = cbind(DV.1.1, DV.2.1, DV.1.2, DV.2.2, DV.1.3, DV.2.3) ~  SSD matrix from     1, data = dfRBFpqW) 
 W = 1, p-value = 1
 
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 mauchly.test(fitRBFpq, M=~IV1 + IV2, X=~IV1, idata=inRBFpq)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	Mauchly's test of sphericity
 	Contrasts orthogonal to
@@ -241,13 +261,17 @@ mauchly.test(fitRBFpq, M=~IV1 + IV2, X=~IV1, idata=inRBFpq)
 data:  SSD matrix from lm(formula = cbind(DV.1.1, DV.2.1, DV.1.2, DV.2.2, DV.1.3, DV.2.3) ~  SSD matrix from     1, data = dfRBFpqW) 
 W = 0.9095, p-value = 0.6843
 
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 mauchly.test(fitRBFpq, M=~IV1 + IV2 + IV1:IV2, X=~IV1 + IV2, idata=inRBFpq)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	Mauchly's test of sphericity
 	Contrasts orthogonal to
@@ -260,18 +284,20 @@ mauchly.test(fitRBFpq, M=~IV1 + IV2 + IV1:IV2, X=~IV1 + IV2, idata=inRBFpq)
 data:  SSD matrix from lm(formula = cbind(DV.1.1, DV.2.1, DV.1.2, DV.2.2, DV.1.3, DV.2.3) ~  SSD matrix from     1, data = dfRBFpqW) 
 W = 0.7569, p-value = 0.3283
 
-```
+{% endhighlight %}
 
 
 Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
 -------------------------
 
 
-```r
+{% highlight r %}
 (anRes <- anova(lm(DV ~ IV1*IV2*id, data=dfRBFpqL)))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Analysis of Variance Table
 
 Response: DV
@@ -284,11 +310,11 @@ IV1:id      9   27.5     3.1
 IV2:id     18   62.4     3.5               
 IV1:IV2:id 18   82.2     4.6               
 Residuals   0    0.0                       
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 SSEtot <- anRes["id",         "Sum Sq"] +
           anRes["IV1:id",     "Sum Sq"] +
           anRes["IV2:id",     "Sum Sq"] +
@@ -296,33 +322,43 @@ SSEtot <- anRes["id",         "Sum Sq"] +
 SS1    <- anRes["IV1",        "Sum Sq"]
 SS2    <- anRes["IV2",        "Sum Sq"]
 SSI    <- anRes["IV1:IV2",    "Sum Sq"]
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 (gEtaSq1 <- SS1 / (SS1 + SSEtot))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.003675
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 (gEtaSq2 <- SS2 / (SS2 + SSEtot))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.3147
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 (gEtaSqI <- SSI / (SSI + SSEtot))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.002304
-```
+{% endhighlight %}
 
 
 Or from function `ezANOVA()` from package [`ez`](http://cran.r-project.org/package=ez)
@@ -333,11 +369,13 @@ Simple effects
 Separate error terms
 
 
-```r
+{% highlight r %}
 summary(aov(DV ~ IV1 + Error(id/IV1), data=dfRBFpqL, subset=(IV2==1)))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Error: id
           Df Sum Sq Mean Sq F value Pr(>F)
@@ -347,13 +385,17 @@ Error: id:IV1
           Df Sum Sq Mean Sq F value Pr(>F)
 IV1        1    0.3    0.27    0.06   0.82
 Residuals  9   42.9    4.76               
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 summary(aov(DV ~ IV1 + Error(id/IV1), data=dfRBFpqL, subset=(IV2==2)))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Error: id
           Df Sum Sq Mean Sq F value Pr(>F)
@@ -363,13 +405,17 @@ Error: id:IV1
           Df Sum Sq Mean Sq F value Pr(>F)
 IV1        1   1.29    1.29    0.45   0.52
 Residuals  9  25.90    2.88               
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 summary(aov(DV ~ IV1 + Error(id/IV1), data=dfRBFpqL, subset=(IV2==3)))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Error: id
           Df Sum Sq Mean Sq F value Pr(>F)
@@ -379,19 +425,21 @@ Error: id:IV1
           Df Sum Sq Mean Sq F value Pr(>F)
 IV1        1    0.0    0.00       0   0.98
 Residuals  9   40.9    4.55               
-```
+{% endhighlight %}
 
 
 Multivariate approach
 -------------------------
 
 
-```r
+{% highlight r %}
 library(car)
 summary(AnovaRBFpq, multivariate=TRUE, univariate=FALSE)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Type III Repeated Measures MANOVA Tests:
 
@@ -514,18 +562,18 @@ Pillai            1    0.0127  0.05131      2      8   0.95
 Wilks             1    0.9873  0.05131      2      8   0.95
 Hotelling-Lawley  1    0.0128  0.05131      2      8   0.95
 Roy               1    0.0128  0.05131      2      8   0.95
-```
+{% endhighlight %}
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-```r
+{% highlight r %}
 try(detach(package:car))
 try(detach(package:nnet))
 try(detach(package:MASS))
-```
+{% endhighlight %}
 
 
 Get this post from github

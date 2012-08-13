@@ -85,58 +85,62 @@ spreadLevelPlot(fit, pch=20)
 
 
 ## @knitr unnamed-chunk-11
+durbinWatsonTest(fit)
+
+
+## @knitr unnamed-chunk-12
 library(lmtest)
 bptest(fit)
 
 
-## @knitr unnamed-chunk-12
+## @knitr unnamed-chunk-13
 ncvTest(fit)
 
 
-## @knitr unnamed-chunk-13
+## @knitr unnamed-chunk-14
 library(tseries)
 white.test(dfRegr$X1, dfRegr$Y)
 
 
-## @knitr unnamed-chunk-14
+## @knitr unnamed-chunk-15
 white.test(dfRegr$X2, dfRegr$Y)
 white.test(dfRegr$X3, dfRegr$Y)
 # not run
 
 
-## @knitr unnamed-chunk-15
+## @knitr unnamed-chunk-16
 lamObj  <- powerTransform(fit, family="bcPower")
 (lambda <- coef(lamObj))
 yTrans <- bcPower(dfRegr$Y, lambda)
 
 
-## @knitr unnamed-chunk-16
+## @knitr unnamed-chunk-17
 X   <- data.matrix(subset(dfRegr, select=c("X1", "X2", "X3")))
 (Rx <- cor(X))
 
 
-## @knitr unnamed-chunk-17
+## @knitr unnamed-chunk-18
 vif(fit)
 
 
-## @knitr unnamed-chunk-18
+## @knitr unnamed-chunk-19
 fitScl <- lm(scale(Y) ~ scale(X1) + scale(X2) + scale(X3), data=dfRegr)
 kappa(fitScl, exact=TRUE)
 
 
-## @knitr unnamed-chunk-19
+## @knitr unnamed-chunk-20
 library(perturb)
 colldiag(fit, scale=TRUE, center=FALSE)
 
 
-## @knitr unnamed-chunk-20
+## @knitr unnamed-chunk-21
 attach(dfRegr)
 pRes <- perturb(fit, pvars=c("X1", "X2", "X3"), prange=c(1, 1, 1))
 summary(pRes)
 detach(dfRegr)
 
 
-## @knitr unnamed-chunk-21
+## @knitr unnamed-chunk-22
 try(detach(package:tseries))
 try(detach(package:lmtest))
 try(detach(package:quadprog))

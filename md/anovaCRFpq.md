@@ -13,11 +13,11 @@ Install required packages
 [`car`](http://cran.r-project.org/package=car), [`multcomp`](http://cran.r-project.org/package=multcomp)
 
 
-```r
+{% highlight r %}
 wants <- c("car", "multcomp")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-```
+{% endhighlight %}
 
 
 CRF-\(pq\) ANOVA
@@ -26,7 +26,7 @@ CRF-\(pq\) ANOVA
 ### Using `aov()` (SS type I)
 
 
-```r
+{% highlight r %}
 set.seed(1.234)
 Njk  <- 8
 P    <- 2
@@ -35,21 +35,23 @@ muJK <- c(rep(c(1, -1), Njk), rep(c(2, 1), Njk), rep(c(3, 3), Njk))
 dfCRFpq <- data.frame(IV1=factor(rep(1:P, times=Njk*Q)),
                       IV2=factor(rep(1:Q,  each=Njk*P)),
                       DV =rnorm(Njk*P*Q, muJK, 2))
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 dfCRFpq$IVcomb <- interaction(dfCRFpq$IV1, dfCRFpq$IV2)
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 summary(aov(DV ~ IV1*IV2, data=dfCRFpq))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             Df Sum Sq Mean Sq F value  Pr(>F)    
 IV1          1   26.3    26.3    8.72 0.00514 ** 
 IV2          2   66.7    33.4   11.05 0.00014 ***
@@ -57,20 +59,22 @@ IV1:IV2      2   17.1     8.5    2.82 0.07070 .
 Residuals   42  126.8     3.0                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-```
+{% endhighlight %}
 
 
 ### Using `Anova()` from package `car` (SS type II or III)
 
 
-```r
+{% highlight r %}
 fitIII <- lm(DV ~ IV1 + IV2 + IV1:IV2, data=dfCRFpq,
              contrasts=list(IV1=contr.sum, IV2=contr.sum))
 library(car)
 Anova(fitIII, type="III")
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Anova Table (Type III tests)
 
 Response: DV
@@ -82,22 +86,22 @@ IV1:IV2       17.1  2    2.82 0.07070 .
 Residuals    126.8 42                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-```
+{% endhighlight %}
 
 
 ### Plot marginal and cell means
 
 
-```r
+{% highlight r %}
 plot.design(DV ~ IV1*IV2, data=dfCRFpq, main="Marginal means")
-```
+{% endhighlight %}
 
 ![plot of chunk rerAnovaCRFpq01](figure/rerAnovaCRFpq011.png) 
 
-```r
+{% highlight r %}
 interaction.plot(dfCRFpq$IV1, dfCRFpq$IV2, dfCRFpq$DV,
                  main="Cell means", col=c("red", "blue", "green"), lwd=2)
-```
+{% endhighlight %}
 
 ![plot of chunk rerAnovaCRFpq01](figure/rerAnovaCRFpq012.png) 
 
@@ -106,39 +110,49 @@ Effect size estimate: partial \(\hat{\eta}_{p}^{2}\)
 -------------------------
 
 
-```r
+{% highlight r %}
 anRes <- anova(lm(DV ~ IV1*IV2, data=dfCRFpq))
 SS1   <- anRes["IV1",       "Sum Sq"]
 SS2   <- anRes["IV2",       "Sum Sq"]
 SSI   <- anRes["IV1:IV2",   "Sum Sq"]
 SSE   <- anRes["Residuals", "Sum Sq"]
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 (pEtaSq1 <- SS1 / (SS1 + SSE))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.1719
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 (pEtaSq2 <- SS2 / (SS2 + SSE))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.3447
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 (pEtaSqI <- SSI / (SSI + SSE))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.1185
-```
+{% endhighlight %}
 
 
 Or from function `ezANOVA()` from package [`ez`](http://cran.r-project.org/package=ez)
@@ -147,74 +161,86 @@ Simple effects
 -------------------------
 
 
-```r
+{% highlight r %}
 CRFp1 <- anova(lm(DV ~ IV1, data=dfCRFpq, subset=(IV2==1)))
 CRFp2 <- anova(lm(DV ~ IV1, data=dfCRFpq, subset=(IV2==2)))
 CRFp3 <- anova(lm(DV ~ IV1, data=dfCRFpq, subset=(IV2==3)))
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 SSp1 <- CRFp1["IV1", "Sum Sq"]
 SSp2 <- CRFp2["IV1", "Sum Sq"]
 SSp3 <- CRFp3["IV1", "Sum Sq"]
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 CRFpq <- anova(lm(DV ~ IV1*IV2, data=dfCRFpq))
 SSA   <- CRFpq["IV1",       "Sum Sq"]
 SSI   <- CRFpq["IV1:IV2",   "Sum Sq"]
 SSE   <- CRFpq["Residuals", "Sum Sq"]
 dfSSA <- CRFpq["IV1",       "Df"]
 dfSSE <- CRFpq["Residuals", "Df"]
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 all.equal(SSp1 + SSp2 + SSp3, SSA + SSI)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] TRUE
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 Fp1 <- (SSp1/dfSSA) / (SSE/dfSSE)
 Fp2 <- (SSp2/dfSSA) / (SSE/dfSSE)
 Fp3 <- (SSp3/dfSSA) / (SSE/dfSSE)
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 (pP1 <- 1-pf(Fp1, dfSSA, dfSSE))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.004532
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 (pP2 <- 1-pf(Fp2, dfSSA, dfSSE))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.02594
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 (pP3 <- 1-pf(Fp3, dfSSA, dfSSE))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.847
-```
+{% endhighlight %}
 
 
 Planned comparisons
@@ -225,7 +251,7 @@ Planned comparisons
 #### Free comparisons of marginal means
 
 
-```r
+{% highlight r %}
 aovCRFpq <- aov(DV ~ IV1*IV2, data=dfCRFpq)
 cMat     <- rbind("c1"=c( 1/2, 1/2, -1),
                   "c2"=c(  -1,   0,  1))
@@ -233,9 +259,11 @@ cMat     <- rbind("c1"=c( 1/2, 1/2, -1),
 library(multcomp)
 summary(glht(aovCRFpq, linfct=mcp(IV2=cMat), alternative="two.sided"),
         test=adjusted("bonferroni"))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	 Simultaneous Tests for General Linear Hypotheses
 
@@ -250,17 +278,19 @@ c1 == 0   -0.845      0.752   -1.12     0.54
 c2 == 0    1.495      0.869    1.72     0.19
 (Adjusted p values reported -- bonferroni method)
 
-```
+{% endhighlight %}
 
 
 #### Tukey simultaneous confidence intervals
 
 
-```r
+{% highlight r %}
 TukeyHSD(aovCRFpq, which="IV2")
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
   Tukey multiple comparisons of means
     95% family-wise confidence level
 
@@ -272,17 +302,19 @@ $IV2
 3-1 2.882  1.3894 4.375 0.0001
 3-2 1.283 -0.2098 2.775 0.1046
 
-```
+{% endhighlight %}
 
 
 ### Cell comparisons using the associated one-way ANOVA
 
 
-```r
+{% highlight r %}
 (aovCRFpqA <- aov(DV ~ IVcomb, data=dfCRFpq))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Call:
    aov(formula = DV ~ IVcomb, data = dfCRFpq)
 
@@ -293,23 +325,27 @@ Deg. of Freedom      5        42
 
 Residual standard error: 1.738 
 Estimated effects may be unbalanced
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 cntrMat <- rbind("c1"=c(-1/2,  1/4, -1/2, 1/4, 1/4, 1/4),
                  "c2"=c(   0,    0,   -1,   0,   1,   0),
                  "c3"=c(-1/2, -1/2,  1/4, 1/4, 1/4, 1/4))
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 library(multcomp)
 summary(glht(aovCRFpqA, linfct=mcp(IVcomb=cntrMat), alternative="greater"),
         test=adjusted("none"))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	 Simultaneous Tests for General Linear Hypotheses
 
@@ -327,64 +363,68 @@ c3 <= 0    2.241      0.532    4.21 6.6e-05 ***
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 (Adjusted p values reported -- none method)
 
-```
+{% endhighlight %}
 
 
 Assess test assumptions
 -------------------------
 
 
-```r
+{% highlight r %}
 Estud <- rstudent(aovCRFpq)
 qqnorm(Estud, pch=20, cex=2)
 qqline(Estud, col="gray60", lwd=2)
-```
+{% endhighlight %}
 
 ![plot of chunk rerAnovaCRFpq02](figure/rerAnovaCRFpq02.png) 
 
 
 
-```r
+{% highlight r %}
 shapiro.test(Estud)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	Shapiro-Wilk normality test
 
 data:  Estud 
 W = 0.9765, p-value = 0.4414
 
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 plot(Estud ~ dfCRFpq$IVcomb, main="Residuals per group")
-```
+{% endhighlight %}
 
 ![plot of chunk rerAnovaCRFpq03](figure/rerAnovaCRFpq03.png) 
 
 
 
-```r
+{% highlight r %}
 library(car)
 leveneTest(aovCRFpq)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Levene's Test for Homogeneity of Variance (center = median)
       Df F value Pr(>F)
 group  5    0.56   0.73
       42               
-```
+{% endhighlight %}
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-```r
+{% highlight r %}
 try(detach(package:car))
 try(detach(package:nnet))
 try(detach(package:MASS))
@@ -392,7 +432,7 @@ try(detach(package:multcomp))
 try(detach(package:survival))
 try(detach(package:mvtnorm))
 try(detach(package:splines))
-```
+{% endhighlight %}
 
 
 Get this post from github

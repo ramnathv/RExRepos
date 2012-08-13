@@ -4,7 +4,8 @@ Covariance, correlation, and other association measures for continuous variables
 TODO
 -------------------------
 
- - link to diagMultivariate, association, associationOrder
+ - [`psych`](http://cran.r-project.org/package=psych) `cor.plot()`
+ - link to diagScatter, diagMultivariate, association, associationOrder
 
 Install required packages
 -------------------------

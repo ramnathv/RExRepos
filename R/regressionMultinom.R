@@ -1,11 +1,16 @@
 
 ## @knitr unnamed-chunk-1
+opts_knit$set(self.contained=FALSE)
+opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE, comment="")
+
+
+## @knitr unnamed-chunk-2
 wants <- c("lmtest", "mlogit", "nnet", "VGAM")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
 
 
-## @knitr unnamed-chunk-2
+## @knitr unnamed-chunk-3
 set.seed(1.234)
 N      <- 100
 X1     <- rnorm(N, 175, 7)
@@ -16,56 +21,56 @@ Ycateg <- cut(Ycont, breaks=quantile(Ycont), include.lowest=TRUE,
 dfRegr <- data.frame(X1, X2, Ycateg)
 
 
-## @knitr unnamed-chunk-3
+## @knitr unnamed-chunk-4
 library(nnet)
 mnFit <- multinom(Ycateg ~ X1 + X2, data=dfRegr)
 summary(mnFit)
 
 
-## @knitr unnamed-chunk-4
+## @knitr unnamed-chunk-5
 library(lmtest)
 lrtest(mnFit)
 
 
-## @knitr unnamed-chunk-5
+## @knitr unnamed-chunk-6
 library(VGAM)
 vglmFitMN <- vglm(Ycateg ~ X1 + X2, family=multinomial(refLevel=1), data=dfRegr)
 summary(vglmFitMN)
 
 
-## @knitr unnamed-chunk-6
+## @knitr unnamed-chunk-7
 library(mlogit)
 dfRegrL   <- mlogit.data(dfRegr, choice="Ycateg", shape="wide", varying=NULL)
 mlogitFit <- mlogit(Ycateg ~ 0 | X1 + X2, reflevel="--", data=dfRegrL)
 summary(mlogitFit)
 
 
-## @knitr unnamed-chunk-7
+## @knitr unnamed-chunk-8
 library(lmtest)
 coeftest(mlogitFit)
 
 
-## @knitr unnamed-chunk-8
+## @knitr unnamed-chunk-9
 PhatCateg <- predict(mnFit, type="probs")
 head(PhatCateg)
 
 
-## @knitr unnamed-chunk-9
+## @knitr unnamed-chunk-10
 predict(vglmFitMN, type="response")
 fitted(mlogitFit, outcome=FALSE)
 # not run
 
 
-## @knitr unnamed-chunk-10
+## @knitr unnamed-chunk-11
 (predCls <- predict(mnFit, type="class"))
 
 
-## @knitr unnamed-chunk-11
+## @knitr unnamed-chunk-12
 categHat <- levels(dfRegr$Ycateg)[max.col(PhatCateg)]
 all.equal(factor(categHat), predCls, check.attributes=FALSE)
 
 
-## @knitr unnamed-chunk-12
+## @knitr unnamed-chunk-13
 try(detach(package:mlogit))
 try(detach(package:MASS))
 try(detach(package:Formula))

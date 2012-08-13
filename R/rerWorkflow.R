@@ -1,32 +1,33 @@
 
 ## @knitr unnamed-chunk-1
-opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE, comment="")
-
-
-## @knitr unnamed-chunk-2
 install.packages("RWordPress", repos="http://www.omegahat.org/R", build=TRUE)
 
 
-## @knitr unnamed-chunk-3
+## @knitr unnamed-chunk-2
 library(RWordPress)
 options(WordpressLogin=c(user="password"),
         WordpressURL="http://your_wp_installation.org/xmlrpc.php")
 
 
-## @knitr unnamed-chunk-4
+## @knitr unnamed-chunk-3
 knit_hooks$set(output=function(x, options) paste("\\[code\\]\n", x, "\\[/code\\]\n", sep=""))
 knit_hooks$set(source=function(x, options) paste("\\[code lang='r'\\]\n", x, "\\[/code\\]\n", sep=""))
 
 
-## @knitr unnamed-chunk-5
+## @knitr unnamed-chunk-4
 knit2wp <- function(file) {
     require(XML)
     content <- readLines(file)
     content <- htmlTreeParse(content, trim=FALSE)
+
+    ## WP will add the h1 header later based on the title, so delete here
+    content$children$html$children$body$children$h1 <- NULL
     content <- paste(capture.output(print(content$children$html$children$body,
                                           indent=FALSE, tagSeparator="")),
                      collapse="\n")
-    content <- gsub("<?.body>", "", content)
+    content <- gsub("<?.body>", "", content)         # remove body tag
+    
+    ## enclose code snippets in SyntaxHighlighter format
     content <- gsub("<?pre><code class=\"r\">", "\\[code lang='r'\\]\\\n",
                     content)
     content <- gsub("<?pre><code class=\"no-highlight\">", "\\[code\\]\\\n",
@@ -37,11 +38,19 @@ knit2wp <- function(file) {
 }
 
 
-## @knitr unnamed-chunk-6
-newPost(list(description=knit2wp('workflow.html'),
-             title='Workflow: Post R markdown to WordPress',
-             categories=c('R'),
-             mt_keywords=c('WordPress', 'publish')),
+## @knitr unnamed-chunk-5
+newPost(content=list(description=knit2wp('rerWorkflow.html'),
+                     title='Workflow: Post R markdown to WordPress',
+                     categories=c('R')),
         publish=FALSE)
+
+
+## @knitr unnamed-chunk-6
+postID <- 99                    # post id returned by newPost()
+editPost(postID,
+         content=list(description=knit2wp('rerWorkflow.html'),
+                      title='Workflow: Post R markdown to WordPress',
+                      categories=c('R')),
+         publish=FALSE)
 
 

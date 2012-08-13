@@ -1,11 +1,16 @@
 
 ## @knitr unnamed-chunk-1
+opts_knit$set(self.contained=FALSE)
+opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE, comment="")
+
+
+## @knitr unnamed-chunk-2
 wants <- c("coin", "mvtnorm", "polycor", "rms", "ROCR")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
 
 
-## @knitr unnamed-chunk-2
+## @knitr unnamed-chunk-3
 set.seed(1.234)
 library(mvtnorm)
 N     <- 100
@@ -14,7 +19,7 @@ mu    <- c(-3, 2, 4)
 Xdf   <- data.frame(rmvnorm(n=N, mean=mu, sigma=Sigma))
 
 
-## @knitr unnamed-chunk-3
+## @knitr unnamed-chunk-4
 lOrd   <- lapply(Xdf, function(x) {
                  cut(x, breaks=quantile(x), include.lowest=TRUE,
                      ordered=TRUE, labels=LETTERS[1:4]) })
@@ -22,47 +27,47 @@ dfOrd  <- data.frame(lOrd)
 matOrd <- data.matrix(dfOrd)
 
 
-## @knitr unnamed-chunk-4
+## @knitr unnamed-chunk-5
 cTab <- xtabs(~ X1 + X3, data=dfOrd)
 addmargins(cTab)
 library(coin)
 lbl_test(cTab, distribution=approximate(B=9999))
 
 
-## @knitr unnamed-chunk-5
+## @knitr unnamed-chunk-6
 library(polycor)
 polychor(dfOrd$X1, dfOrd$X2, ML=TRUE)
 
 
-## @knitr unnamed-chunk-6
+## @knitr unnamed-chunk-7
 polychor(cTab, ML=TRUE)
 
 
-## @knitr unnamed-chunk-7
+## @knitr unnamed-chunk-8
 library(polycor)
 polyserial(Xdf$X2, dfOrd$X3)
 
 
-## @knitr unnamed-chunk-8
+## @knitr unnamed-chunk-9
 library(polycor)
 Xdf2   <- rmvnorm(n=N, mean=mu, sigma=Sigma)
 dfBoth <- cbind(Xdf2, dfOrd)
 hetcor(dfBoth, ML=TRUE)
 
 
-## @knitr unnamed-chunk-9
+## @knitr unnamed-chunk-10
 N   <- 100
 x   <- rnorm(N)
 y   <- x + rnorm(N, 0, 2)
 yDi <- ifelse(y <= median(y), 0, 1)
 
 
-## @knitr unnamed-chunk-10
+## @knitr unnamed-chunk-11
 library(rms)
 lrm(yDi ~ x)$stats
 
 
-## @knitr unnamed-chunk-11
+## @knitr unnamed-chunk-12
 library(ROCR)
 pred <- prediction(x, yDi)
 (AUC <- performance(pred, measure="auc")@y.values[[1]])
@@ -70,13 +75,12 @@ pred <- prediction(x, yDi)
 
 ## @knitr rerAssociationOrder01
 perf <- performance(pred, measure="tpr", x.measure="fpr")
-par(lend=2)
 plot(perf, col=rainbow(10), lwd=3, main="ROC-Curve, AUC", asp=1,
      xlim=c(0,1), ylim=c(0,1))
 abline(a=0, b=1)
 
 
-## @knitr unnamed-chunk-12
+## @knitr unnamed-chunk-13
 try(detach(package:ROCR))
 try(detach(package:gplots))
 try(detach(package:gtools))

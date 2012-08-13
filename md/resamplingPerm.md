@@ -12,11 +12,11 @@ Install required packages
 [`coin`](http://cran.r-project.org/package=coin), [`e1071`](http://cran.r-project.org/package=e1071)
 
 
-```r
+{% highlight r %}
 wants <- c("coin", "e1071")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-```
+{% endhighlight %}
 
 
 Two-sample \(t\)-test / one-way ANOVA for independent groups
@@ -27,7 +27,7 @@ Not limited to just two independent samples.
 ### Using package `coin`
 
 
-```r
+{% highlight r %}
 set.seed(1.234)
 Nj     <- c(7, 8)
 sigma  <- 20
@@ -35,16 +35,18 @@ DVa    <- rnorm(Nj[1], 100, sigma)
 DVb    <- rnorm(Nj[2], 110, sigma)
 tIndDf <- data.frame(DV=c(DVa, DVb),
                      IV=factor(rep(c("A", "B"), Nj)))
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 library(coin)
 oneway_test(DV ~ IV, alternative="less", distribution="exact", data=tIndDf)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	Exact 2-Sample Permutation Test
 
@@ -52,52 +54,56 @@ data:  DV by IV (A, B)
 Z = -1.1, p-value = 0.142
 alternative hypothesis: true mu is less than 0 
 
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 tRes <- t.test(DV ~ IV, alternative="less", var.equal=TRUE, data=tIndDf)
 tRes$p.value
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.1438
-```
+{% endhighlight %}
 
 
 ### Manual exact test
 
 
-```r
+{% highlight r %}
 idx   <- seq(along=tIndDf$DV)
 idxA  <- combn(idx, Nj[1])
 getDM <- function(x) { mean(tIndDf$DV[!(idx %in% x)]) - mean(tIndDf$DV[x]) }
 resDM <- apply(idxA, 2, getDM)
 diffM <- diff(tapply(tIndDf$DV, tIndDf$IV, mean))
 (pVal <- sum(resDM >= diffM) / length(resDM))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.142
-```
+{% endhighlight %}
 
 
 ### Diagram: permutation distribution
 
 
-```r
+{% highlight r %}
 hist(resDM, freq=FALSE, breaks="FD", xlab="Difference in means",
      main="Permutation test: Histogram difference in means")
 curve(dnorm(x, 0, sigma/sqrt(Nj[1]) + sigma/sqrt(Nj[2])), lwd=2, add=TRUE)
 legend(x="topright", lty=1, lwd=2, legend=expression(paste("N(0, ", sigma[1]^2 / n[1] + sigma[2]^2 / n[2], ")")))
-```
+{% endhighlight %}
 
 ![plot of chunk rerResamplingPerm01](figure/rerResamplingPerm01.png) 
 
 
 
-```r
+{% highlight r %}
 plot(resDM, ecdf(resDM)(resDM), col="gray60", pch=16,
      xlab="Difference in means", ylab="cumulative relative frequency",
      main="Cumulative relative frequency and normal CDF")
@@ -106,7 +112,7 @@ legend(x="bottomright", lty=c(NA, 1), pch=c(16, NA), lwd=c(1, 2),
        col=c("gray60", "black"),
        legend=c("Permutations",
        expression(paste("N(0, ", sigma[1]^2 / n[1] + sigma[2]^2 / n[2], ")"))))
-```
+{% endhighlight %}
 
 ![plot of chunk rerResamplingPerm02](figure/rerResamplingPerm02.png) 
 
@@ -119,23 +125,25 @@ Not limited to just two dependent samples.
 ### Using package `coin`
 
 
-```r
+{% highlight r %}
 N      <- 12
 id     <- factor(rep(1:N, times=2))
 DVpre  <- rnorm(N, 100, 20)
 DVpost <- rnorm(N, 110, 20)
 tDepDf <- data.frame(DV=c(DVpre, DVpost),
                      IV=factor(rep(0:1, each=N), labels=c("pre", "post")))
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 library(coin)
 oneway_test(DV ~ IV | id, alternative="less", distribution=approximate(B=9999), data=tDepDf)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	Approximative 2-Sample Permutation Test
 
@@ -144,34 +152,38 @@ data:  DV by IV (pre, post)
 Z = -0.7336, p-value = 0.2389
 alternative hypothesis: true mu is less than 0 
 
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 t.test(DV ~ IV, alternative="less", paired=TRUE, data=tDepDf)$p.value
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.2437
-```
+{% endhighlight %}
 
 
 ### Manual exact test
 
 
-```r
+{% highlight r %}
 DVd    <- DVpre - - DVpost
 sgnLst <- lapply(numeric(N), function(x) { c(-1, 1) } )
 sgnMat <- data.matrix(expand.grid(sgnLst))
 getMD  <- function(x) { mean(abs(DVd) * x) }
 resMD  <- apply(sgnMat, 1, getMD)
 (pVal  <- sum(resMD <= mean(DVd)) / length(resMD))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 1
-```
+{% endhighlight %}
 
 
 Independence of two variables
@@ -179,22 +191,24 @@ Independence of two variables
 
 ### Fisher's exact test
 
-```r
+{% highlight r %}
 Nf  <- 7
 DV1 <- rbinom(Nf, size=1, prob=0.5)
 DV2 <- rbinom(Nf, size=1, prob=0.5)
 fisher.test(DV1, DV2, alternative="greater")$p.value
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.7143
-```
+{% endhighlight %}
 
 
 ### Manual exact test
 
 
-```r
+{% highlight r %}
 library(e1071)
 permIdx  <- permutations(Nf)
 getAgree <- function(idx) {
@@ -204,18 +218,20 @@ getAgree <- function(idx) {
 resAgree <- apply(permIdx, 1, getAgree)
 agree12  <- sum(diag(table(DV1, DV2)))
 (pVal    <- sum(resAgree >= agree12) / length(resAgree))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.7143
-```
+{% endhighlight %}
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-```r
+{% highlight r %}
 try(detach(package:e1071))
 try(detach(package:class))
 try(detach(package:coin))
@@ -224,7 +240,7 @@ try(detach(package:survival))
 try(detach(package:mvtnorm))
 try(detach(package:splines))
 try(detach(package:stats4))
-```
+{% endhighlight %}
 
 
 Get this post from github

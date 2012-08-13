@@ -214,7 +214,7 @@ plot(lmrFit, xlab="lambda", ylab="coefficients")
 plot(lmrFit$lambda, lmrFit$GCV, type="l", xlab="lambda", ylab="GCV")
 ```
 
-See package [`glmnet`](http://cran.r-project.org/package=glmnet) for the LASSO and elastic net methods which combine regularization and selection.
+See packages [`lars`](http://cran.r-project.org/package=lars) and [`glmnet`](http://cran.r-project.org/package=glmnet) for the LASSO and elastic net methods which combine regularization and selection.
 
 Detach (automatically) loaded packages (if possible)
 -------------------------

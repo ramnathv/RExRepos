@@ -8,41 +8,55 @@ Empty objects
 -------------------------
 
 
-```r
+{% highlight r %}
 N <- 5
 numeric(N)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0 0 0 0 0
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 matrix(numeric(N))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
      [,1]
 [1,]    0
 [2,]    0
 [3,]    0
 [4,]    0
 [5,]    0
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 character(N)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] "" "" "" "" ""
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 vector(mode="list", length=N)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [[1]]
 NULL
 
@@ -58,7 +72,7 @@ NULL
 [[5]]
 NULL
 
-```
+{% endhighlight %}
 
 
 Systematic numerical sequences
@@ -67,125 +81,175 @@ Systematic numerical sequences
 ### Ordered sequences
 
 
-```r
+{% highlight r %}
 20:26
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 20 21 22 23 24 25 26
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 26:20
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 26 25 24 23 22 21 20
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 -4:2
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] -4 -3 -2 -1  0  1  2
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 -(4:2)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] -4 -3 -2
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 seq(from=2, to=12, by=2)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1]  2  4  6  8 10 12
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 seq(from=2, to=11, by=2)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1]  2  4  6  8 10
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 seq(from=0, to=-1, length.out=5)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1]  0.00 -0.25 -0.50 -0.75 -1.00
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 age <- c(18, 20, 30, 24, 23, 21)
 seq(along=age)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 1 2 3 4 5 6
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 vec <- numeric(0)
 length(vec)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 1:length(vec)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 1 0
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 seq(along=vec)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 integer(0)
-```
+{% endhighlight %}
 
 
 ### Repeated sequences
 
 
-```r
+{% highlight r %}
 rep(1:3, times=5)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
  [1] 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 rep(c("A", "B", "C"), times=c(2, 3, 4))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] "A" "A" "B" "B" "B" "C" "C" "C" "C"
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 rep(age, each=2)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
  [1] 18 18 20 20 30 30 24 24 23 23 21 21
-```
+{% endhighlight %}
 
 
 Random data
@@ -196,91 +260,127 @@ Strictly, the data is pseudorandom. There are several options for the random num
 ### Sample from an urn
 
 
-```r
+{% highlight r %}
 set.seed(1.234)
 sample(1:6, size=20, replace=TRUE)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
  [1] 2 3 4 6 2 6 6 4 4 1 2 2 5 3 5 3 5 6 3 5
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 sample(c("rot", "gruen", "blau"), size=8, replace=TRUE)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] "blau"  "rot"   "gruen" "rot"   "rot"   "gruen" "rot"   "gruen"
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 x <- c(2, 4, 6, 8)
 sample(x[(x %% 4) == 0])
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 8 4
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 sample(x[(x %% 8) == 0])
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 4 5 3 1 8 6 2 7
-```
+{% endhighlight %}
 
 
 ### Data from random variables with different distributions
 
 
-```r
+{% highlight r %}
 runif(5, min=1, max=6)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 4.619 3.056 5.105 4.235 4.915
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 rbinom(20, size=5, prob=0.3)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
  [1] 2 2 2 0 1 2 2 1 3 1 1 0 0 1 1 2 1 3 1 1
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 rchisq(4, df=7)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1]  4.593  5.815 10.654  9.929
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 rnorm(6, mean=100, sd=15)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1]  93.56 118.57  95.81 126.37 108.41  93.21
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 rt(5, df=5, ncp=1)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1]  0.14510 -0.20251 -0.06428 -0.80438  3.35429
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 rf(5, df1=2, df2=10)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 1.0467 0.2462 0.5550 0.2835 2.1458
-```
+{% endhighlight %}
 
 
 See `?Distributions` for more distribution types. Even more information can be found in CRAN task view [Probability Distributions](http://cran.r-project.org/web/views/Distributions.html).

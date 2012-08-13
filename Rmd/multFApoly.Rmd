@@ -1,11 +1,6 @@
 Exploratory factor analysis for ordinal categorical data
 =========================
 
-TODO
--------------------------
-
- - link to multFA
-
 Install required packages
 -------------------------
 

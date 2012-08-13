@@ -78,10 +78,10 @@ IV   <- gl(P, Nj)
 
 
 ## @knitr rerDiagDistributions07
-stripchart(dice ~ IV, xlab="Result", ylab="group", pch=1,  col="blue",
-           main="Dice results - 4 groups", sub="jitter-method", method="jitter")
+stripchart(dice ~ IV, xlab="Result", ylab="group", pch=1, col="blue",
+           main="Dice results: 4 groups", sub="jitter-method", method="jitter")
 stripchart(dice ~ IV, xlab="Result", ylab="group", pch=16, col="red",
-           main="Dice results - 4 groups", sub="stack-method",  method="stack")
+           main="Dice results: 4 groups", sub="stack-method", method="stack")
 
 
 ## @knitr rerDiagDistributions08

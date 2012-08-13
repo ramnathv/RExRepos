@@ -1,6 +1,11 @@
 Association tests and measures for ordered categorical variables
 =========================
 
+```{r echo=FALSE}
+opts_knit$set(self.contained=FALSE)
+opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE, comment="")
+```
+
 TODO
 -------------------------
 
@@ -105,7 +110,6 @@ pred <- prediction(x, yDi)
 
 ```{r rerAssociationOrder01}
 perf <- performance(pred, measure="tpr", x.measure="fpr")
-par(lend=2)
 plot(perf, col=rainbow(10), lwd=3, main="ROC-Curve, AUC", asp=1,
      xlim=c(0,1), ylim=c(0,1))
 abline(a=0, b=1)

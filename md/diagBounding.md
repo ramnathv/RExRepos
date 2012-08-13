@@ -8,19 +8,19 @@ Convex hull
 -------------------------
 
 
-```r
+{% highlight r %}
 set.seed(1.234)
 xy      <- matrix(rnorm(24, 100, 15), ncol=2)
 hullIdx <- chull(xy)
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 plot(xy, xlab="x", ylab="y", asp=1, type="n")
 polygon(xy[hullIdx, ], border="blue", lwd=2)
 points(xy, pch=16, cex=1.5)
-```
+{% endhighlight %}
 
 ![plot of chunk rerDiagBounding01](figure/rerDiagBounding01.png) 
 
@@ -29,7 +29,7 @@ Bounding box
 -------------------------
 
 
-```r
+{% highlight r %}
 getBoundingBox <- function(xy) {
     stopifnot(is.matrix(xy), is.numeric(xy), ncol(xy) == 2)
     x   <- range(xy[ , 1])
@@ -37,28 +37,30 @@ getBoundingBox <- function(xy) {
     pts <- c(xleft=x[1], ybottom=y[1], xright=x[2], ytop=y[2])
     return(list(pts=pts, width=abs(diff(x)), height=abs(diff(y))))
 }
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 bb <- getBoundingBox(xy)
 plot(xy, xlab="x", ylab="y", asp=1, type="n")
 rect(bb$pts[1], bb$pts[2], bb$pts[3], bb$pts[4], border="blue", lwd="2")
 points(xy, pch=16, cex=1.5)
-```
+{% endhighlight %}
 
 ![plot of chunk rerDiagBounding02](figure/rerDiagBounding02.png) 
 
 
 
-```r
+{% highlight r %}
 bb$width * bb$height
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 1827
-```
+{% endhighlight %}
 
 
 Minimum bounding box
@@ -67,7 +69,7 @@ Minimum bounding box
 ### Rotating calipers algorithm
 
 
-```r
+{% highlight r %}
 getMinBBox <- function(xy) {
     stopifnot(is.matrix(xy), is.numeric(xy), nrow(xy) >= 2, ncol(xy) == 2)
 
@@ -130,13 +132,13 @@ getMinBBox <- function(xy) {
 
     return(list(pts=pts, width=widths[eMin], height=heights[eMin], angle=deg))
 }
-```
+{% endhighlight %}
 
 
 ### Draw the minimum bounding box
 
 
-```r
+{% highlight r %}
 mbb <- getMinBBox(xy)       ## minimum bounding box
 H   <- chull(xy)            ## convex hull
 
@@ -147,27 +149,33 @@ plot(xy, xlab="x", ylab="y", asp=1, type="n",
 polygon(xy[H, ], col=NA)    ## show convex hull
 polygon(mbb$pts, border="blue", lwd=2)
 points(xy, pch=16, cex=1.5)
-```
+{% endhighlight %}
 
 ![plot of chunk rerDiagBounding03](figure/rerDiagBounding03.png) 
 
 
 
-```r
+{% highlight r %}
 mbb$width * mbb$height      ## box area
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 1732
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 mbb$angle                   ## box orientation
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 58.2
-```
+{% endhighlight %}
 
 
 Minimum enclosing circle
@@ -178,7 +186,7 @@ Skyum algorithm based on the convex hull
 ### Circle defined by three points
 
 
-```r
+{% highlight r %}
 getCircleFrom3 <- function(xy) {
     stopifnot(is.matrix(xy), is.numeric(xy), nrow(xy) == 3, ncol(xy) == 2)
 
@@ -214,7 +222,7 @@ getCircleFrom3 <- function(xy) {
 
     return(list(ctr=ctr, rad=rad))
 }
-```
+{% endhighlight %}
 
 
 ### Vertex that produces the circle with the maximum radius
@@ -222,7 +230,7 @@ getCircleFrom3 <- function(xy) {
 Used later in `getMinCircle()`
 
 
-```r
+{% highlight r %}
 getMaxRad <- function(xy, S) {
     stopifnot(is.matrix(xy), is.numeric(xy), nrow(xy) >= 2, ncol(xy) == 2)
     stopifnot(is.numeric(S), length(S) >= 2, length(S) <= nrow(xy))
@@ -240,13 +248,13 @@ getMaxRad <- function(xy, S) {
 
     return(which.max(rads))
 }
-```
+{% endhighlight %}
 
 
 ### Check if the angle at B in triangle ABC exceeds 90 degrees
 
 
-```r
+{% highlight r %}
 isBiggerThan90 <- function(xy) {
     stopifnot(is.matrix(xy), is.numeric(xy), nrow(xy) == 3, ncol(xy) == 2)
     d   <- dist(xy)
@@ -255,13 +263,13 @@ isBiggerThan90 <- function(xy) {
     dBC <- d[3]
     return((dAB^2 + dBC^2 - dAC^2) < 0)
 }
-```
+{% endhighlight %}
 
 
 ### Minimal enclosing circle
 
 
-```r
+{% highlight r %}
 getMinCircle <- function(xy) {
     stopifnot(is.matrix(xy), is.numeric(xy), nrow(xy) >= 2, ncol(xy) == 2)
 
@@ -290,13 +298,13 @@ getMinCircle <- function(xy) {
 
     return(getCircleFrom3(Smax))
 }
-```
+{% endhighlight %}
 
 
 ### Draw the minimal enclosing circle
 
 
-```r
+{% highlight r %}
 mc     <- getMinCircle(xy)
 angles <- seq(0, 2*pi, length.out=200)
 circ   <- cbind(mc$ctr[1] + mc$rad*cos(angles),
@@ -308,7 +316,7 @@ yLims <- mc$ctr[2] + c(-mc$rad, mc$rad)
 plot(xy, xlab="x", ylab="y", xlim=xLims, ylim=yLims, asp=1, type="n")
 lines(circ, col="blue", lwd=2)
 points(xy, pch=16, cex=1.5)
-```
+{% endhighlight %}
 
 ![plot of chunk rerDiagBounding04](figure/rerDiagBounding04.png) 
 

@@ -47,7 +47,8 @@ wilcox.test(DV ~ IV, alternative="less", conf.int=TRUE, data=wIndDf)
 
 ## @knitr unnamed-chunk-9
 library(coin)
-wilcox_test(DV ~ IV, alternative="less", distribution="exact", data=wIndDf)
+wilcox_test(DV ~ IV, alternative="less", conf.int=TRUE,
+            distribution="exact", data=wIndDf)
 
 
 ## @knitr unnamed-chunk-10
@@ -70,7 +71,8 @@ DVdiff <- aggregate(DV ~ id, FUN=diff, data=wDepDf)
 
 
 ## @knitr unnamed-chunk-13
-wilcoxsign_test(DV ~ IV | id, alternative="greater", distribution="exact", data=wDepDf)
+wilcoxsign_test(DV ~ IV | id, alternative="greater",
+                distribution="exact", data=wDepDf)
 
 
 ## @knitr unnamed-chunk-14

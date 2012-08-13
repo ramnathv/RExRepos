@@ -15,74 +15,94 @@ Opening and closing a device
 -------------------------
 
 
-```r
+{% highlight r %}
 dev.new(); dev.new(); dev.new()
 dev.list()
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 pdf pdf pdf pdf 
   2   3   4   5 
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 dev.cur()
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 pdf 
   5 
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 dev.set(3)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 pdf 
   3 
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 dev.set(dev.next())
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 pdf 
   4 
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 dev.off()
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 pdf 
   5 
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 graphics.off()
-```
+{% endhighlight %}
 
 
 Saving plots to a graphics file
 -------------------------
 
 
-```r
+{% highlight r %}
 pdf("pdf_test.pdf")
 plot(1:10, rnorm(10))
 dev.off()
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 plot(1:10, rnorm(10))
 dev.copy(jpeg, filename="copied.jpg", quality=90)
 graphics.off()
-```
+{% endhighlight %}
 
 
 Get this post from github

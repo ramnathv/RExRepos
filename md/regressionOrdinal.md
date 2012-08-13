@@ -15,11 +15,11 @@ Install required packages
 [`MASS`](http://cran.r-project.org/package=MASS), [`ordinal`](http://cran.r-project.org/package=ordinal), [`rms`](http://cran.r-project.org/package=rms), [`VGAM`](http://cran.r-project.org/package=VGAM)
 
 
-```r
+{% highlight r %}
 wants <- c("MASS", "ordinal", "rms", "VGAM")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-```
+{% endhighlight %}
 
 
 Ordinal regression (proportional odds model)
@@ -28,7 +28,7 @@ Ordinal regression (proportional odds model)
 ### Simulate data
     
 
-```r
+{% highlight r %}
 set.seed(1.234)
 N      <- 100
 X1     <- rnorm(N, 175, 7)
@@ -37,7 +37,7 @@ Ycont  <- 0.5*X1 - 0.3*X2 + 10 + rnorm(N, 0, 6)
 Yord   <- cut(Ycont, breaks=quantile(Ycont), include.lowest=TRUE,
               labels=c("--", "-", "+", "++"), ordered=TRUE)
 dfRegr <- data.frame(X1, X2, Yord)
-```
+{% endhighlight %}
 
 
 ### Using `lrm()` from package `rms`
@@ -45,12 +45,14 @@ dfRegr <- data.frame(X1, X2, Yord)
 logit(\(p(Y \geq g)\))
 
 
-```r
+{% highlight r %}
 library(rms)
 (lrmFit <- lrm(Yord ~ X1 + X2, data=dfRegr))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Logistic Regression Model
 
@@ -76,7 +78,8 @@ y>=++ -19.6302 5.6161 -3.50  0.0005
 X1      0.1235 0.0321  3.84  0.0001  
 X2     -0.1180 0.0271 -4.36  <0.0001 
 
-```
+
+{% endhighlight %}
 
 
 ### Using `vglm()` from package `VGAM`
@@ -84,34 +87,36 @@ X2     -0.1180 0.0271 -4.36  <0.0001
 logit(\(p(Y \geq g)\))
 
 
-```r
+{% highlight r %}
 library(VGAM)
 vglmFit <- vglm(Yord ~ X1 + X2, family=propodds, data=dfRegr)
 summary(vglmFit)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Length  Class   Mode 
      1   vglm     S4 
-```
+{% endhighlight %}
 
 
 Equivalent:
 
 
-```r
+{% highlight r %}
 summary(vglm(Yord ~ X1 + X2, family=cumulative(parallel=TRUE), data=dfRegr))
 # not run
-```
+{% endhighlight %}
 
 
 Cumulative logits without assumption of proportionality:
 
 
-```r
+{% highlight r %}
 summary(vglm(Yord ~ X1 + X2, family=cumulative(parallel=FALSE), data=dfRegr))
 # not run
-```
+{% endhighlight %}
 
 
 ### Using `clm()` from package `ordinal`
@@ -119,13 +124,15 @@ summary(vglm(Yord ~ X1 + X2, family=cumulative(parallel=FALSE), data=dfRegr))
 logit(\(p(Y \leq g)\))
 
 
-```r
+{% highlight r %}
 library(ordinal)
 clmFit <- clm(Yord ~ X1 + X2, link="logit", data=dfRegr)
 summary(clmFit)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 formula: Yord ~ X1 + X2
 data:    dfRegr
 
@@ -144,7 +151,7 @@ Threshold coefficients:
 --|-    16.78       5.52    3.04
 -|+     18.20       5.57    3.27
 +|++    19.63       5.62    3.50
-```
+{% endhighlight %}
 
 
 ### Using `polr()` from package `MASS`
@@ -152,15 +159,17 @@ Threshold coefficients:
 logit(\(p(Y \leq g)\))
 
 
-```r
+{% highlight r %}
 library(MASS)
 polrFit <- polr(Yord ~ X1 + X2, method="logistic", data=dfRegr)
 summary(polrFit)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Error: Objekt 'dfRegr' nicht gefunden
-```
+{% endhighlight %}
 
 
 Predicted category membership
@@ -169,12 +178,14 @@ Predicted category membership
 ### Predicted category probabilities
 
 
-```r
+{% highlight r %}
 PhatCateg <- predict(lrmFit, type="fitted.ind")
 head(PhatCateg)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
   Yord=-- Yord=-  Yord=+ Yord=++
 1 0.20885 0.3134 0.29762 0.18010
 2 0.19673 0.3068 0.30501 0.19143
@@ -182,26 +193,28 @@ head(PhatCateg)
 4 0.07463 0.1758 0.33136 0.41825
 5 0.10060 0.2160 0.34200 0.34140
 6 0.74828 0.1766 0.05599 0.01913
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 predict(vglmFit, type="response")
 predict(clmFit, subset(dfRegr, select=c("X1", "X2"), type="prob"))$fit
 predict(polrFit, type="probs")
 # not run
-```
+{% endhighlight %}
 
 
 ### Predicted categories
 
 
-```r
+{% highlight r %}
 predict(clmFit, type="class")
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 $fit
   [1] -  -  +  ++ +  -- -  -  +  -- ++ +  -- -- ++ +  +  ++ +  +  ++ -  + 
  [24] -- +  -- -  -- +  +  ++ +  -  ++ -- ++ -  +  ++ +  ++ -- ++ ++ +  - 
@@ -210,32 +223,34 @@ $fit
  [93] ++ -  ++ ++ -- +  -- - 
 Levels: -- - + ++
 
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 (predCls <- predict(polrFit, type="class"))
 # not run
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 categHat <- levels(dfRegr$Yord)[max.col(PhatCateg)]
 all.equal(factor(categHat), predCls, check.attributes=FALSE)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] TRUE
-```
+{% endhighlight %}
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-```r
+{% highlight r %}
 try(detach(package:ordinal))
 try(detach(package:ucminf))
 try(detach(package:Matrix))
@@ -247,7 +262,7 @@ try(detach(package:survival))
 try(detach(package:VGAM))
 try(detach(package:splines))
 try(detach(package:stats4))
-```
+{% endhighlight %}
 
 
 Get this post from github

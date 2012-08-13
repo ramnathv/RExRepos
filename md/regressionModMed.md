@@ -12,36 +12,38 @@ Install required packages
 [`mediation`](http://cran.r-project.org/package=mediation), [`multilevel`](http://cran.r-project.org/package=multilevel), [`QuantPsyc`](http://cran.r-project.org/package=QuantPsyc)
 
 
-```r
+{% highlight r %}
 wants <- c("mediation", "multilevel", "QuantPsyc")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-```
+{% endhighlight %}
 
     
 Moderated regression
 -------------------------
 
 
-```r
+{% highlight r %}
 set.seed(1.234)
 N <- 100
 X <- rnorm(N, 175, 7)
 M <- rnorm(N,  30, 8)
 Y <- 0.5*X - 0.3*M + 10 + rnorm(N, 0, 3)
 dfRegr <- data.frame(X, M, Y)
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 Xc <- c(scale(dfRegr$X, center=TRUE, scale=FALSE))
 Mc <- c(scale(dfRegr$M, center=TRUE, scale=FALSE))
 fitMod <- lm(Y ~ Xc + Mc + Xc:Mc, data=dfRegr)
 summary(fitMod)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Call:
 lm(formula = Y ~ Xc + Mc + Xc:Mc, data = dfRegr)
@@ -63,23 +65,25 @@ Residual standard error: 3.1 on 96 degrees of freedom
 Multiple R-squared: 0.639,	Adjusted R-squared: 0.627 
 F-statistic: 56.6 on 3 and 96 DF,  p-value: <2e-16 
 
-```
+{% endhighlight %}
 
 
 Only valid for models with exactly one predictor, one moderator, and one predicted variable. Function will appear to work in more complex models, but results will then be wrong.
 
 
-```r
+{% highlight r %}
 library(QuantPsyc)
 sim.slopes(fitMod, Mc)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
            INT  Slope      SE    LCL    UCL
 at zHigh 86.61 0.3911 0.08831 0.2158 0.5664
 at zMean 89.06 0.4895 0.05108 0.3881 0.5909
 at zLow  91.52 0.5879 0.06964 0.4497 0.7261
-```
+{% endhighlight %}
 
 
 Mediation analysis
@@ -88,22 +92,24 @@ Mediation analysis
 ### Simulate data
 
 
-```r
+{% highlight r %}
 N <- 100
 X <- rnorm(N, 175, 7)
 M <- 0.7*X + rnorm(N, 0, 5)
 Y <- 0.4*M + rnorm(N, 0, 5)
 dfMed <- data.frame(X, M, Y)
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 fit <- lm(Y ~ X + M, data=dfMed)
 summary(fit)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Call:
 lm(formula = Y ~ X + M, data = dfMed)
@@ -124,18 +130,20 @@ Residual standard error: 4.84 on 97 degrees of freedom
 Multiple R-squared: 0.207,	Adjusted R-squared: 0.191 
 F-statistic: 12.7 on 2 and 97 DF,  p-value: 1.28e-05 
 
-```
+{% endhighlight %}
 
 
 ### Sobel test
 
 
-```r
+{% highlight r %}
 library(multilevel)
 sobel(dfMed$X, dfMed$M, dfMed$Y)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 $`Mod1: Y~X`
             Estimate Std. Error t value Pr(>|t|)
 (Intercept)  10.1248   13.16855  0.7689 0.443824
@@ -164,7 +172,7 @@ $z.value
 $N
 [1] 100
 
-```
+{% endhighlight %}
 
 
 ### Using package `mediation`
@@ -174,16 +182,18 @@ Also useful for much more complicated situations.
 #### Estimation via quasi-Bayesian approximation
 
 
-```r
+{% highlight r %}
 fitM <- lm(M ~ X,     data=dfMed)
 fitY <- lm(Y ~ X + M, data=dfMed)
 
 library(mediation)
 fitMed <- mediate(fitM, fitY, sims=999, treat="X", mediator="M")
 summary(fitMed)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Causal Mediation Analysis 
 
@@ -200,13 +210,13 @@ Sample Size Used: 100
 
 Simulations: 999 
 
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 plot(fitMed)
-```
+{% endhighlight %}
 
 ![plot of chunk rerRegressionModMed01](figure/rerRegressionModMed01.png) 
 
@@ -214,12 +224,14 @@ plot(fitMed)
 #### Estimation via nonparametric bootstrap
 
 
-```r
+{% highlight r %}
 fitMedBoot <- mediate(fitM, fitY, boot=TRUE, sims=999, treat="X", mediator="M")
 summary(fitMedBoot)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Causal Mediation Analysis 
 
@@ -236,7 +248,7 @@ Sample Size Used: 100
 
 Simulations: 999 
 
-```
+{% endhighlight %}
 
 
 Useful packages
@@ -248,7 +260,7 @@ Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-```r
+{% highlight r %}
 try(detach(package:QuantPsyc))
 try(detach(package:boot))
 try(detach(package:mediation))
@@ -258,7 +270,7 @@ try(detach(package:lattice))
 try(detach(package:multilevel))
 try(detach(package:MASS))
 try(detach(package:nlme))
-```
+{% endhighlight %}
 
 
 Get this post from github

@@ -1,11 +1,6 @@
 Exploratory factor analysis
 =========================
 
-TODO
--------------------------
-
- - link to multFApoly
-
 Install required packages
 -------------------------
 

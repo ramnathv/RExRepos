@@ -13,11 +13,11 @@ Install required packages
 [`lme4`](http://cran.r-project.org/package=lme4), [`nlme`](http://cran.r-project.org/package=nlme)
 
 
-```r
+{% highlight r %}
 wants <- c("lme4", "nlme")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-```
+{% endhighlight %}
 
 
 Simulate data for all designs
@@ -26,7 +26,7 @@ Simulate data for all designs
 Two between-subjects factors, two within-subjects factors.
 
 
-```r
+{% highlight r %}
 set.seed(1.234)
 P     <- 2               # Xb1
 Q     <- 2               # Xb2
@@ -40,13 +40,13 @@ Xb1   <- gl(P,   Njklm*Q*R*S, N, labels=c("CG", "T"))
 Xb2   <- gl(Q,   Njklm  *R*S, N, labels=c("f", "m"))
 Xw1   <- gl(R,             S, N, labels=c("A", "B", "C"))
 Xw2   <- gl(S,   1,           N, labels=c("-", "o", "+"))
-```
+{% endhighlight %}
 
 
 Theoretical main effects and interactions
 
 
-```r
+{% highlight r %}
 mu      <- 100
 eB1     <- c(-5, 5)
 eB2     <- c(-5, 5)
@@ -63,13 +63,13 @@ eB1B2W2 <- c(-5, 5, 5, -5, 2, -2, -2, 2, 3, -3, -3, 3)
 eB1W1W2 <- c(-5, 5, 2, -2, 3, -3, 3, -3, -5, 5, 2, -2, 2, -2, 3, -3, -5, 5)
 eB2W1W2 <- c(-5, 5, 2, -2, 3, -3, 3, -3, -5, 5, 2, -2, 2, -2, 3, -3, -5, 5)
 # no 3rd-order interaction B1xB2xW1xW2
-```
+{% endhighlight %}
 
 
 Name values according to the corresponding cell in the experimental design
 
 
-```r
+{% highlight r %}
 names(eB1)     <- levels(Xb1)
 names(eB2)     <- levels(Xb2)
 names(eW1)     <- levels(Xw1)
@@ -84,13 +84,13 @@ names(eB1B2W1) <- levels(interaction(Xb1, Xb2, Xw1))
 names(eB1B2W2) <- levels(interaction(Xb1, Xb2, Xw2))
 names(eB1W1W2) <- levels(interaction(Xb1, Xw1, Xw2))
 names(eB2W1W2) <- levels(interaction(Xb2, Xw1, Xw2))
-```
+{% endhighlight %}
 
 
 Simulate data given the effects defined above
 
 
-```r
+{% highlight r %}
 muJKLM <- mu +
           eB1[Xb1] + eB2[Xb2] + eW1[Xw1] + eW2[Xw2] +
           eB1B2[interaction(Xb1, Xb2)] +
@@ -109,15 +109,15 @@ sigma <- 50
 
 Y  <- round(rnorm(N, mus, sigma), 1)
 d2 <- data.frame(id, Xb1, Xb2, Xw1, Xw2, Y)
-```
+{% endhighlight %}
 
 
 Data frame with just one within-subjects factor (average over levels of `IVw2`)
 
 
-```r
+{% highlight r %}
 d1 <- aggregate(Y ~ id + Xw1 + Xb1 + Xb2, data=d2, FUN=mean)
-```
+{% endhighlight %}
 
 
 One-way repeated measures ANOVA (RB-\(p\) design)
@@ -126,11 +126,13 @@ One-way repeated measures ANOVA (RB-\(p\) design)
 ### Conventional analysis using `aov()`
 
 
-```r
+{% highlight r %}
 summary(aov(Y ~ Xw1 + Error(id/Xw1), data=d1))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Error: id
           Df Sum Sq Mean Sq F value Pr(>F)
@@ -140,7 +142,7 @@ Error: id:Xw1
            Df Sum Sq Mean Sq F value Pr(>F)
 Xw1         2   2795    1397    1.35   0.26
 Residuals 158 163743    1036               
-```
+{% endhighlight %}
 
 
 ### Mixed-effects analysis
@@ -152,71 +154,81 @@ random intercept model equivalent to compound symmetry
 iff all var comps positive (id > id:IV and IV > id:IV)
 
 
-```r
+{% highlight r %}
 library(nlme)
 anova(lme(Y ~ Xw1, random=~1 | id, method="ML", data=d1))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             numDF denDF F-value p-value
 (Intercept)     1   158  2392.4  <.0001
 Xw1             2   158     1.4  0.2433
-```
+{% endhighlight %}
 
 
 assume compound symmetry
 
 
-```r
+{% highlight r %}
 lmeFit <- lme(Y ~ Xw1, random=~1 | id, correlation=corCompSymm(form=~1|id),
               method="ML", data=d1)
 anova(lmeFit)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             numDF denDF F-value p-value
 (Intercept)     1   158  2705.8  <.0001
 Xw1             2   158     1.3  0.2626
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 anova(lme(Y ~ Xw1, random=list(id=pdCompSymm(~Xw1-1)), method="REML", data=d1))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             numDF denDF F-value p-value
 (Intercept)     1   158  2705.8  <.0001
 Xw1             2   158     1.3  0.2626
-```
+{% endhighlight %}
 
 
 #### Using `lmer()` from package `lme4`
 
 
-```r
+{% highlight r %}
 library(lme4)
 anova(lmer(Y ~ Xw1 + (1|id), data=d1))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Analysis of Variance Table
     Df Sum Sq Mean Sq F value
 Xw1  2   2795    1397    1.43
-```
+{% endhighlight %}
 
 
 ### Multiple comparisons using `glht()` from package `multcomp`
 
 
-```r
+{% highlight r %}
 library(multcomp)
 contr <- glht(lmeFit, linfct=mcp(Xw1="Tukey"))
 summary(contr)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	 Simultaneous Tests for General Linear Hypotheses
 
@@ -233,13 +245,17 @@ C - A == 0    6.745      5.058    1.33     0.38
 C - B == 0    7.648      5.058    1.51     0.29
 (Adjusted p values reported -- single-step method)
 
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 confint(contr)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	 Simultaneous Confidence Intervals
 
@@ -259,7 +275,7 @@ B - A == 0  -0.902  -12.757  10.953
 C - A == 0   6.745   -5.110  18.601
 C - B == 0   7.648   -4.208  19.503
 
-```
+{% endhighlight %}
 
 
 Two-way repeated measures ANOVA (RBF-\(pq\) design)
@@ -268,11 +284,13 @@ Two-way repeated measures ANOVA (RBF-\(pq\) design)
 ### Conventional analysis using `aov()`
 
 
-```r
+{% highlight r %}
 summary(aov(Y ~ Xw1*Xw2 + Error(id/(Xw1*Xw2)), data=d2))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Error: id
           Df Sum Sq Mean Sq F value Pr(>F)
@@ -294,7 +312,7 @@ Error: id:Xw1:Xw2
            Df Sum Sq Mean Sq F value Pr(>F)
 Xw1:Xw2     4  20527    5132    1.72   0.15
 Residuals 316 942658    2983               
-```
+{% endhighlight %}
 
 
 ### Mixed-effects analysis
@@ -302,52 +320,58 @@ Residuals 316 942658    2983
 #### Using `lme()` from package `nlme`
 
 
-```r
+{% highlight r %}
 anova(lme(Y ~ Xw1*Xw2, random=list(id=pdBlocked(list(~1, pdIdent(~Xw1-1), pdIdent(~Xw2-1)))),
           method="ML", data=d2))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             numDF denDF F-value p-value
 (Intercept)     1   632  2399.2  <.0001
 Xw1             2   632     1.4  0.2400
 Xw2             2   632     2.8  0.0597
 Xw1:Xw2         4   632     1.8  0.1371
-```
+{% endhighlight %}
 
 
 assume compound symmetry
 
 
-```r
+{% highlight r %}
 anova(lme(Y ~ Xw1*Xw2,
           random=list(id=pdBlocked(list(~1, pdCompSymm(~Xw1-1), pdCompSymm(~Xw2-1)))),
           method="ML", data=d2))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             numDF denDF F-value p-value
 (Intercept)     1   632  2441.7  <.0001
 Xw1             2   632     1.3  0.2604
 Xw2             2   632     2.9  0.0568
 Xw1:Xw2         4   632     1.8  0.1307
-```
+{% endhighlight %}
 
 
 #### Using `lmer()` from package `lme4`
 
 
-```r
+{% highlight r %}
 anova(lmer(Y ~ Xw1*Xw2 + (1|id) + (1|Xw1:id) + (1|Xw2:id), data=d2))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Analysis of Variance Table
         Df Sum Sq Mean Sq F value
 Xw1      2   8348    4174    1.43
 Xw2      2  16588    8294    2.83
 Xw1:Xw2  4  20527    5132    1.75
-```
+{% endhighlight %}
 
 
 Two-way split-plot-factorial ANOVA (SPF-\(p \cdot q\) design)
@@ -356,11 +380,13 @@ Two-way split-plot-factorial ANOVA (SPF-\(p \cdot q\) design)
 ### Conventional analysis using `aov()`
 
 
-```r
+{% highlight r %}
 summary(aov(Y ~ Xb1*Xw1 + Error(id/Xw1), data=d1))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Error: id
           Df Sum Sq Mean Sq F value Pr(>F)
@@ -374,7 +400,7 @@ Xb1:Xw1     2  11416    5708    5.85 0.0036 **
 Residuals 156 152326     976                  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-```
+{% endhighlight %}
 
 
 ### Mixed-effects
@@ -387,64 +413,72 @@ iff all var comps positive (id > id:IV and IV > id:IV)
 no explicit assumption of compound symmetry
 
 
-```r
+{% highlight r %}
 anova(lme(Y ~ Xb1*Xw1, random=~1 | id, method="ML", data=d1))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             numDF denDF F-value p-value
 (Intercept)     1   156  2506.0  <.0001
 Xb1             1    78     2.0  0.1568
 Xw1             2   156     1.5  0.2276
 Xb1:Xw1         2   156     6.1  0.0028
-```
+{% endhighlight %}
 
 
 assume compound symmetry
 
 
-```r
+{% highlight r %}
 anova(lme(Y ~ Xb1*Xw1, random=~1 | id, correlation=corCompSymm(form=~1|id),
           method="ML", data=d1))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             numDF denDF F-value p-value
 (Intercept)     1   156  2748.4  <.0001
 Xb1             1    78     2.2  0.1383
 Xw1             2   156     1.4  0.2422
 Xb1:Xw1         2   156     5.8  0.0036
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 anova(lme(Y ~ Xb1*Xw1, random=list(id=pdCompSymm(~Xw1-1)), method="REML", data=d1))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             numDF denDF F-value p-value
 (Intercept)     1   156  2748.4  <.0001
 Xb1             1    78     2.2  0.1383
 Xw1             2   156     1.4  0.2422
 Xb1:Xw1         2   156     5.8  0.0036
-```
+{% endhighlight %}
 
 
 #### Using `lmer()` from package `lme4`
 
 
-```r
+{% highlight r %}
 anova(lmer(Y ~ Xb1*Xw1 + (1|id), data=d1))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Analysis of Variance Table
         Df Sum Sq Mean Sq F value
 Xb1      1   1912    1912    2.04
 Xw1      2   2795    1397    1.49
 Xb1:Xw1  2  11416    5708    6.10
-```
+{% endhighlight %}
 
 
 Three-way split-plot-factorial ANOVA (SPF-\(pq \cdot r\) design)
@@ -453,11 +487,13 @@ Three-way split-plot-factorial ANOVA (SPF-\(pq \cdot r\) design)
 ### Conventional analysis using `aov()`
 
 
-```r
+{% highlight r %}
 summary(aov(Y ~ Xb1*Xb2*Xw1 + Error(id/Xw1), data=d1))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Error: id
           Df Sum Sq Mean Sq F value  Pr(>F)    
@@ -477,7 +513,7 @@ Xb1:Xb2:Xw1   2   2383    1191    1.22 0.2969
 Residuals   152 147954     973                  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-```
+{% endhighlight %}
 
 
 ### Mixed-effects analysis
@@ -485,11 +521,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #### Using `lme()` from package `nlme`
 
 
-```r
+{% highlight r %}
 anova(lme(Y ~ Xb1*Xb2*Xw1, random=~1 | id, method="ML", data=d1))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             numDF denDF F-value p-value
 (Intercept)     1   152  2684.7  <.0001
 Xb1             1    76     2.2  0.1430
@@ -499,18 +537,20 @@ Xb1:Xb2         1    76    11.7  0.0010
 Xb1:Xw1         2   152     6.5  0.0019
 Xb2:Xw1         2   152     1.1  0.3227
 Xb1:Xb2:Xw1     2   152     1.4  0.2585
-```
+{% endhighlight %}
 
 
 assume compound symmetry
 
 
-```r
+{% highlight r %}
 anova(lme(Y ~ Xb1*Xb2*Xw1, random=~1 | id,
           correlation=corCompSymm(form=~1 | id), method="ML", data=d1))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             numDF denDF F-value p-value
 (Intercept)     1   152    3487  <.0001
 Xb1             1    76       3  0.0958
@@ -520,17 +560,19 @@ Xb1:Xb2         1    76      15  0.0002
 Xb1:Xw1         2   152       6  0.0035
 Xb2:Xw1         2   152       1  0.3624
 Xb1:Xb2:Xw1     2   152       1  0.2969
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 anova(lme(Y ~ Xb1*Xb2*Xw1,
           random=list(id=pdBlocked(list(~1, pdCompSymm(~Xw1-1)))),
           method="ML", data=d1))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             numDF denDF F-value p-value
 (Intercept)     1   152    3487  <.0001
 Xb1             1    76       3  0.0958
@@ -540,17 +582,19 @@ Xb1:Xb2         1    76      15  0.0002
 Xb1:Xw1         2   152       6  0.0035
 Xb2:Xw1         2   152       1  0.3624
 Xb1:Xb2:Xw1     2   152       1  0.2969
-```
+{% endhighlight %}
 
 
 #### Using `lmer()` from package `lme4`
 
 
-```r
+{% highlight r %}
 anova(lmer(Y ~ Xb1*Xb2*Xw1 + (1|id), data=d1))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Analysis of Variance Table
             Df Sum Sq Mean Sq F value
 Xb1          1   1912    1912    2.19
@@ -560,7 +604,7 @@ Xb1:Xb2      1  10177   10177   11.66
 Xb1:Xw1      2  11416    5708    6.54
 Xb2:Xw1      2   1989     995    1.14
 Xb1:Xb2:Xw1  2   2383    1191    1.36
-```
+{% endhighlight %}
 
 
 Three-way split-plot-factorial ANOVA (SPF-\(p \cdot qr\) design)
@@ -569,11 +613,13 @@ Three-way split-plot-factorial ANOVA (SPF-\(p \cdot qr\) design)
 ### Conventional analysis using `aov()`
 
 
-```r
+{% highlight r %}
 summary(aov(Y ~ Xb1*Xw1*Xw2 + Error(id/(Xw1*Xw2)), data=d2))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Error: id
           Df Sum Sq Mean Sq F value Pr(>F)
@@ -601,7 +647,7 @@ Error: id:Xw1:Xw2
 Xw1:Xw2       4  20527    5132    1.72   0.15
 Xb1:Xw1:Xw2   4   9233    2308    0.77   0.54
 Residuals   312 933425    2992               
-```
+{% endhighlight %}
 
 
 ### Mixed-effects analysis
@@ -609,13 +655,15 @@ Residuals   312 933425    2992
 #### Using `lme()` from package `nlme`
 
 
-```r
+{% highlight r %}
 anova(lme(Y ~ Xb1*Xw1*Xw2,
           random=list(id=pdBlocked(list(~1, pdIdent(~Xw1-1), pdIdent(~Xw2-1)))),
           method="ML", data=d2))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             numDF denDF F-value p-value
 (Intercept)     1   624  2470.2  <.0001
 Xb1             1    78     2.0  0.1597
@@ -625,19 +673,21 @@ Xb1:Xw1         2   624     6.0  0.0026
 Xb1:Xw2         2   624     6.4  0.0018
 Xw1:Xw2         4   624     1.8  0.1266
 Xb1:Xw1:Xw2     4   624     0.8  0.5184
-```
+{% endhighlight %}
 
 
 assume compound symmetry
 
 
-```r
+{% highlight r %}
 anova(lme(Y ~ Xb1*Xw1*Xw2,
           random=list(id=pdBlocked(list(~1, pdCompSymm(~Xw1-1), pdCompSymm(~Xw2-1)))),
           method="ML", data=d2))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             numDF denDF F-value p-value
 (Intercept)     1   624  2491.0  <.0001
 Xb1             1    78     2.0  0.1580
@@ -647,17 +697,19 @@ Xb1:Xw1         2   624     5.8  0.0031
 Xb1:Xw2         2   624     6.4  0.0017
 Xw1:Xw2         4   624     1.8  0.1236
 Xb1:Xw1:Xw2     4   624     0.8  0.5140
-```
+{% endhighlight %}
 
 
 #### Using `lmer()` from package `lme4`
 
 
-```r
+{% highlight r %}
 anova(lmer(Y ~ Xb1*Xw1*Xw2 + (1|id) + (1|Xw1:id) + (1|Xw2:id), data=d2))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Analysis of Variance Table
             Df Sum Sq Mean Sq F value
 Xb1          1   5736    5736    2.02
@@ -667,7 +719,7 @@ Xb1:Xw1      2  34249   17124    6.02
 Xb1:Xw2      2  36287   18143    6.37
 Xw1:Xw2      4  20527    5132    1.80
 Xb1:Xw1:Xw2  4   9233    2308    0.81
-```
+{% endhighlight %}
 
 
 Four-way split-plot-factorial ANOVA (SPF-\(pq \cdot rs\) design)
@@ -676,11 +728,13 @@ Four-way split-plot-factorial ANOVA (SPF-\(pq \cdot rs\) design)
 ### Conventional analysis using `aov()`
 
 
-```r
+{% highlight r %}
 summary(aov(Y ~ Xb1*Xb2*Xw1*Xw2 + Error(id/(Xw1*Xw2)), data=d2))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Error: id
           Df Sum Sq Mean Sq F value  Pr(>F)    
@@ -718,7 +772,7 @@ Xb1:Xw1:Xw2       4   9233    2308    0.77   0.54
 Xb2:Xw1:Xw2       4  18107    4527    1.52   0.20
 Xb1:Xb2:Xw1:Xw2   4   8282    2070    0.69   0.60
 Residuals       304 907036    2984               
-```
+{% endhighlight %}
 
 
 ### Mixed-effects analysis
@@ -728,13 +782,15 @@ Residuals       304 907036    2984
 no explicit assumption of compound symmetry
 
 
-```r
+{% highlight r %}
 anova(lme(Y ~ Xb1*Xb2*Xw1*Xw2,
           random=list(id=pdBlocked(list(~1, pdIdent(~Xw1-1), pdIdent(~Xw2-1)))),
           method="ML", data=d2))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
                 numDF denDF F-value p-value
 (Intercept)         1   608  2551.0  <.0001
 Xb1                 1    76     2.1  0.1532
@@ -752,19 +808,21 @@ Xb1:Xb2:Xw2         2   608     1.2  0.2883
 Xb1:Xw1:Xw2         4   608     0.8  0.5016
 Xb2:Xw1:Xw2         4   608     1.6  0.1620
 Xb1:Xb2:Xw1:Xw2     4   608     0.8  0.5574
-```
+{% endhighlight %}
 
 
 assume compound symmetry
 
 
-```r
+{% highlight r %}
 anova(lme(Y ~ Xb1*Xb2*Xw1*Xw2,
           random=list(id=pdBlocked(list(~1, pdCompSymm(~Xw1-1), pdCompSymm(~Xw2-1)))),
           method="ML", data=d2))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
                 numDF denDF F-value p-value
 (Intercept)         1   608  2595.2  <.0001
 Xb1                 1    76     2.1  0.1498
@@ -782,17 +840,19 @@ Xb1:Xb2:Xw2         2   608     1.3  0.2822
 Xb1:Xw1:Xw2         4   608     0.9  0.4926
 Xb2:Xw1:Xw2         4   608     1.7  0.1551
 Xb1:Xb2:Xw1:Xw2     4   608     0.8  0.5488
-```
+{% endhighlight %}
 
 
 #### Using `lmer()` from package `lme4`
 
 
-```r
+{% highlight r %}
 anova(lmer(Y ~ Xb1*Xb2*Xw1*Xw2 + (1|id) + (1|Xw1:id) + (1|Xw2:id), data=d2))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Analysis of Variance Table
                 Df Sum Sq Mean Sq F value
 Xb1              1   5736    5736    2.08
@@ -810,19 +870,19 @@ Xb1:Xb2:Xw2      2   6870    3435    1.25
 Xb1:Xw1:Xw2      4   9233    2308    0.84
 Xb2:Xw1:Xw2      4  18107    4527    1.64
 Xb1:Xb2:Xw1:Xw2  4   8282    2070    0.75
-```
+{% endhighlight %}
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-```r
+{% highlight r %}
 try(detach(package:lme4))
 try(detach(package:nlme))
 try(detach(package:Matrix))
 try(detach(package:lattice))
-```
+{% endhighlight %}
 
 
 Get this post from github

@@ -12,15 +12,17 @@ One-sample \(t\)-test
 ### Test
 
 
-```r
+{% highlight r %}
 set.seed(1.234)
 N    <- 100
 DV   <- rnorm(N, 5, 20)
 muH0 <- 0
 t.test(DV, alternative="two.sided", mu=muH0)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	One Sample t-test
 
@@ -33,19 +35,21 @@ sample estimates:
 mean of x 
     7.178 
 
-```
+{% endhighlight %}
 
 
 ### Effect size estimate (Cohen's \(d\))
 
 
-```r
+{% highlight r %}
 (d <- (mean(DV) - muH0) / sd(DV))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.3996
-```
+{% endhighlight %}
 
 
 Two-sample \(t\)-test for independent samples
@@ -54,27 +58,29 @@ Two-sample \(t\)-test for independent samples
 ### \(t\)-Test
 
 
-```r
+{% highlight r %}
 Nj     <- c(18, 21)
 DVm    <- rnorm(Nj[1], 180, 10)
 DVf    <- rnorm(Nj[2], 175, 6)
 tIndDf <- data.frame(DV=c(DVm, DVf),
                      IV=factor(rep(c("f", "m"), Nj)))
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 t.test(DVf, DVm, alternative="less", var.equal=TRUE)
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 t.test(DV ~ IV, alternative="greater", var.equal=TRUE, data=tIndDf)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	Two Sample t-test
 
@@ -87,17 +93,19 @@ sample estimates:
 mean in group f mean in group m 
           181.1           173.9 
 
-```
+{% endhighlight %}
 
 
 ### Welch \(t\)-Test
 
 
-```r
+{% highlight r %}
 t.test(DV ~ IV, alternative="greater", var.equal=FALSE, data=tIndDf)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	Welch Two Sample t-test
 
@@ -110,22 +118,24 @@ sample estimates:
 mean in group f mean in group m 
           181.1           173.9 
 
-```
+{% endhighlight %}
 
 
 ### Effect size estimate (Cohen's \(d\))
 
 
-```r
+{% highlight r %}
 n1 <- Nj[1]
 n2 <- Nj[2]
 sdPool <- sqrt(((n1-1)*var(DVm) + (n2-1)*var(DVf)) / (n1+n2-2))
 (d     <- (mean(DVm) - mean(DVf)) / sdPool)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 1.113
-```
+{% endhighlight %}
 
 
 Two-sample \(t\)-test for dependent samples
@@ -134,21 +144,23 @@ Two-sample \(t\)-test for dependent samples
 ### Test
 
 
-```r
+{% highlight r %}
 N      <- 20
 DVpre  <- rnorm(N, mean=90,  sd=15)
 DVpost <- rnorm(N, mean=100, sd=15)
 tDepDf <- data.frame(DV=c(DVpre, DVpost),
                      IV=factor(rep(0:1, each=N), labels=c("pre", "post")))
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 t.test(DV ~ IV, alternative="less", paired=TRUE, data=tDepDf)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	Paired t-test
 
@@ -161,26 +173,28 @@ sample estimates:
 mean of the differences 
                  -25.21 
 
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 DVdiff <- DVpre - DVpost
 t.test(DVdiff, alternative="less")
-```
+{% endhighlight %}
 
 
 ### Effect size estimate (Cohen's \(d\))
 
 
-```r
+{% highlight r %}
 (d <- mean(DVdiff) / sd(DVdiff))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] -1.138
-```
+{% endhighlight %}
 
 
 Get this post from github

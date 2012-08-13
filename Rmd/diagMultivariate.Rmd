@@ -9,6 +9,7 @@ opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE, comment="")
 TODO
 -------------------------
 
+ - [`psych`](http://cran.r-project.org/package=psych) `cor.plot()`
  - make [`rgl`](http://cran.r-project.org/package=rgl) snapshot work with `knitr`
 
 Install required packages

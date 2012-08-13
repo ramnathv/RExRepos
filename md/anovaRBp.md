@@ -14,11 +14,11 @@ Install required packages
 [`car`](http://cran.r-project.org/package=car), [`ICSNP`](http://cran.r-project.org/package=ICSNP)
 
 
-```r
+{% highlight r %}
 wants <- c("car", "ICSNP")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-```
+{% endhighlight %}
 
 
 Traditional univariate approach
@@ -27,7 +27,7 @@ Traditional univariate approach
 ### Using `aov()` with data in long format
 
 
-```r
+{% highlight r %}
 set.seed(1.234)
 N      <- 10
 P      <- 4
@@ -35,15 +35,17 @@ muJ    <- rep(c(-1, 0, 1, 2), each=N)
 dfRBpL <- data.frame(id=factor(rep(1:N, times=P)),
                      IV=factor(rep(1:P,  each=N)),
                      DV=rnorm(N*P, muJ, 3))
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 summary(aov(DV ~ IV + Error(id/IV), data=dfRBpL))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Error: id
           Df Sum Sq Mean Sq F value Pr(>F)
@@ -53,17 +55,19 @@ Error: id:IV
           Df Sum Sq Mean Sq F value Pr(>F)
 IV         3   44.5   14.84    1.92   0.15
 Residuals 27  208.6    7.72               
-```
+{% endhighlight %}
 
 
 ### Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
 
 
-```r
+{% highlight r %}
 (anRes <- anova(lm(DV ~ IV*id, data=dfRBpL)))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Analysis of Variance Table
 
 Response: DV
@@ -72,24 +76,26 @@ IV         3   44.5   14.84
 id         9   60.4    6.71               
 IV:id     27  208.6    7.72               
 Residuals  0    0.0                       
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 SSEtot <- anRes["id", "Sum Sq"] + anRes["IV:id", "Sum Sq"]
 SSb    <- anRes["IV", "Sum Sq"]
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 (gEtaSq <- SSb / (SSb + SSEtot))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.142
-```
+{% endhighlight %}
 
 
 Or from function `ezANOVA()` from package [`ez`](http://cran.r-project.org/package=ez)
@@ -97,22 +103,24 @@ Or from function `ezANOVA()` from package [`ez`](http://cran.r-project.org/packa
 ### Using `Anova()` from package `car` with data in wide format
 
 
-```r
+{% highlight r %}
 dfRBpW <- reshape(dfRBpL, v.names="DV", timevar="IV", idvar="id",
                   direction="wide")
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 library(car)
 fitRBp   <- lm(cbind(DV.1, DV.2, DV.3, DV.4) ~ 1, data=dfRBpW)
 inRBp    <- data.frame(IV=gl(P, 1))
 AnovaRBp <- Anova(fitRBp, idata=inRBp, idesign=~IV)
 summary(AnovaRBp, multivariate=FALSE, univariate=TRUE)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Univariate Type III Repeated-Measures ANOVA Assuming Sphericity
 
@@ -137,17 +145,19 @@ IV  0.748       0.17
 
    HF eps Pr(>F[HF])
 IV   1.01       0.15
-```
+{% endhighlight %}
 
 
 ### Using `anova.mlm()` and `mauchly.test()` with data in wide format
 
 
-```r
+{% highlight r %}
 anova(fitRBp, M=~IV, X=~1, idata=inRBp, test="Spherical")
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Analysis of Variance Table
 
 
@@ -164,15 +174,17 @@ Huynh-Feldt epsilon:        1.0081
             Df    F num Df den Df Pr(>F) G-G Pr H-F Pr
 (Intercept)  1 1.92      3     27   0.15  0.169   0.15
 Residuals    9                                        
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 mauchly.test(fitRBp, M=~IV, X=~1, idata=inRBp)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	Mauchly's test of sphericity
 	Contrasts orthogonal to
@@ -185,7 +197,7 @@ mauchly.test(fitRBp, M=~IV, X=~1, idata=inRBp)
 data:  SSD matrix from lm(formula = cbind(DV.1, DV.2, DV.3, DV.4) ~ 1, data = dfRBpW) 
 W = 0.6113, p-value = 0.5811
 
-```
+{% endhighlight %}
 
 
 Multivariate approach
@@ -194,22 +206,24 @@ Multivariate approach
 ### Hotelling's \(T^{2}\)-test using `HotellingsT2()` from package `ICSNP`
 
 
-```r
+{% highlight r %}
 DVw     <- data.matrix(subset(dfRBpW,
                        select=c("DV.1", "DV.2", "DV.3", "DV.4")))
 diffMat <- combn(1:P, 2, function(x) { DVw[ , x[1]] - DVw[ , x[2]] } )
 DVdiff  <- diffMat[ , 1:(P-1), drop=FALSE]
 muH0    <- rep(0, ncol(DVdiff))
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 library(ICSNP)
 HotellingsT2(DVdiff, mu=muH0)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	Hotelling's one sample T2-test
 
@@ -217,18 +231,20 @@ data:  DVdiff
 T.2 = 1.994, df1 = 3, df2 = 7, p-value = 0.2036
 alternative hypothesis: true location is not equal to c(0,0,0) 
 
-```
+{% endhighlight %}
 
 
 ### Using `Anova()` from package `car`
 
 
-```r
+{% highlight r %}
 library(car)
 summary(AnovaRBp, multivariate=TRUE, univariate=FALSE)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Type III Repeated Measures MANOVA Tests:
 
@@ -289,14 +305,14 @@ Pillai            1    0.4607    1.994      3      7  0.204
 Wilks             1    0.5393    1.994      3      7  0.204
 Hotelling-Lawley  1    0.8544    1.994      3      7  0.204
 Roy               1    0.8544    1.994      3      7  0.204
-```
+{% endhighlight %}
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-```r
+{% highlight r %}
 try(detach(package:car))
 try(detach(package:nnet))
 try(detach(package:MASS))
@@ -304,7 +320,7 @@ try(detach(package:ICSNP))
 try(detach(package:ICS))
 try(detach(package:survey))
 try(detach(package:mvtnorm))
-```
+{% endhighlight %}
 
 
 Get this post from github

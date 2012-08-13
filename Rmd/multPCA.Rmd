@@ -44,7 +44,7 @@ pca$sdev^2 / sum(diag(cov(X)))
 plot(pca)
 ```
 
-For rotated principal components, see `principal()` from package `psych`.
+For rotated principal components, see `principal()` from package [`psych`](http://cran.r-project.org/package=psych).
 
 ### Using `princomp()`
 

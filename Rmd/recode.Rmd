@@ -6,6 +6,11 @@ opts_knit$set(self.contained=FALSE)
 opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE, comment="")
 ```
 
+TODO
+-------------------------
+
+ - link to factors
+
 Install required packages
 -------------------------
 

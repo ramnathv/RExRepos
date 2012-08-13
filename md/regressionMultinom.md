@@ -1,6 +1,9 @@
 Multinomial regression
 =========================
 
+
+
+
 TODO
 -------------------------
 
@@ -12,11 +15,11 @@ Install required packages
 [`lmtest`](http://cran.r-project.org/package=lmtest), [`mlogit`](http://cran.r-project.org/package=mlogit), [`nnet`](http://cran.r-project.org/package=nnet), [`VGAM`](http://cran.r-project.org/package=VGAM)
 
 
-```r
+{% highlight r %}
 wants <- c("lmtest", "mlogit", "nnet", "VGAM")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-```
+{% endhighlight %}
 
 
 Multinomial regression
@@ -25,7 +28,7 @@ Multinomial regression
 ### Simulate data
     
 
-```r
+{% highlight r %}
 set.seed(1.234)
 N      <- 100
 X1     <- rnorm(N, 175, 7)
@@ -34,7 +37,7 @@ Ycont  <- 0.5*X1 - 0.3*X2 + 10 + rnorm(N, 0, 6)
 Ycateg <- cut(Ycont, breaks=quantile(Ycont), include.lowest=TRUE,
               labels=c("--", "-", "+", "++"))
 dfRegr <- data.frame(X1, X2, Ycateg)
-```
+{% endhighlight %}
 
 
 ### Using `multinom()` from package `nnet`
@@ -43,12 +46,14 @@ Estimator based on neural networks
 -> slightly different results than `vglm()`, `mlogit()` below
 
 
-```r
+{% highlight r %}
 library(nnet)
 mnFit <- multinom(Ycateg ~ X1 + X2, data=dfRegr)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 # weights:  16 (9 variable)
 initial  value 138.629436 
 iter  10 value 124.455652
@@ -59,13 +64,17 @@ iter  40 value 118.549362
 iter  40 value 118.549362
 final  value 118.549362 
 converged
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 summary(mnFit)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Call:
 multinom(formula = Ycateg ~ X1 + X2, data = dfRegr)
 
@@ -83,18 +92,20 @@ Std. Errors:
 
 Residual Deviance: 237.1 
 AIC: 255.1 
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 library(lmtest)
 lrtest(mnFit)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Error: Objekt 'dfRegr' nicht gefunden
-```
+{% endhighlight %}
 
 
 ### Using `vglm()` from package `VGAM`
@@ -102,16 +113,18 @@ Error: Objekt 'dfRegr' nicht gefunden
 Estimator based on likelihood-inference
 
 
-```r
+{% highlight r %}
 library(VGAM)
 vglmFitMN <- vglm(Ycateg ~ X1 + X2, family=multinomial(refLevel=1), data=dfRegr)
 summary(vglmFitMN)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Length  Class   Mode 
      1   vglm     S4 
-```
+{% endhighlight %}
 
 
 ### Using `mlogit()` from package `mlogit`
@@ -119,14 +132,16 @@ Length  Class   Mode
 Uses person-choice (long) format
 
 
-```r
+{% highlight r %}
 library(mlogit)
 dfRegrL   <- mlogit.data(dfRegr, choice="Ycateg", shape="wide", varying=NULL)
 mlogitFit <- mlogit(Ycateg ~ 0 | X1 + X2, reflevel="--", data=dfRegrL)
 summary(mlogitFit)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Call:
 mlogit(formula = Ycateg ~ 0 | X1 + X2, data = dfRegrL, reflevel = "--", 
@@ -158,16 +173,18 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Log-Likelihood: -119
 McFadden R^2:  0.145 
 Likelihood ratio test : chisq = 40.2 (p.value = 4.22e-07)
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 library(lmtest)
 coeftest(mlogitFit)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 t test of coefficients:
 
@@ -184,7 +201,7 @@ t test of coefficients:
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
-```
+{% endhighlight %}
 
 
 Predicted category membership
@@ -193,12 +210,14 @@ Predicted category membership
 ### Predicted category probabilities
 
 
-```r
+{% highlight r %}
 PhatCateg <- predict(mnFit, type="probs")
 head(PhatCateg)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
        --      -       +       ++
 1 0.29441 0.2064 0.23518 0.263978
 2 0.22495 0.2871 0.28854 0.199399
@@ -206,50 +225,54 @@ head(PhatCateg)
 4 0.05887 0.2079 0.44475 0.288511
 5 0.11391 0.1586 0.33514 0.392312
 6 0.57790 0.3743 0.04031 0.007472
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 predict(vglmFitMN, type="response")
 fitted(mlogitFit, outcome=FALSE)
 # not run
-```
+{% endhighlight %}
 
 
 ### Predicted categories
 
 
-```r
+{% highlight r %}
 (predCls <- predict(mnFit, type="class"))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
   [1] -- +  ++ +  ++ -- -  -  -  -- ++ ++ -- -- +  +  +  +  -  +  ++ -  + 
  [24] -- +  -  -- -- ++ +  +  ++ -  ++ -- ++ -- ++ ++ +  ++ -- ++ ++ ++ --
  [47] -  +  ++ ++ -  -- +  -- ++ ++ -- -- ++ -  +  +  -  -  -- -  -- ++ + 
  [70] +  -  -- -  -- -- +  -- -  -  -- ++ -  +  ++ -  +  -  ++ +  ++ -- + 
  [93] ++ -  ++ ++ -- ++ -- --
 Levels: -- - + ++
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 categHat <- levels(dfRegr$Ycateg)[max.col(PhatCateg)]
 all.equal(factor(categHat), predCls, check.attributes=FALSE)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] TRUE
-```
+{% endhighlight %}
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-```r
+{% highlight r %}
 try(detach(package:mlogit))
 try(detach(package:MASS))
 try(detach(package:Formula))
@@ -262,7 +285,7 @@ try(detach(package:nnet))
 try(detach(package:VGAM))
 try(detach(package:splines))
 try(detach(package:stats4))
-```
+{% endhighlight %}
 
 
 Get this post from github

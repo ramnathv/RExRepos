@@ -14,11 +14,11 @@ Install required packages
 [`car`](http://cran.r-project.org/package=car), [`multcomp`](http://cran.r-project.org/package=multcomp)
 
 
-```r
+{% highlight r %}
 wants <- c("car", "multcomp")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-```
+{% endhighlight %}
 
 
 Two-way SPF-\(p \cdot q\) ANOVA
@@ -27,25 +27,27 @@ Two-way SPF-\(p \cdot q\) ANOVA
 ### Using `aov()` with data in long format
 
 
-```r
+{% highlight r %}
 set.seed(1.234)
 Nj   <- 10
 P    <- 3
 Q    <- 3
 muJK <- c(rep(c(1,-1,-2), Nj), rep(c(2,1,-1), Nj), rep(c(3,3,0), Nj))
-dfSPFpqL <- data.frame(id   =factor(rep(1:(P*Nj), times=Q)),
+dfSPFpqL <- data.frame(id=factor(rep(1:(P*Nj), times=Q)),
                        IVbtw=factor(rep(LETTERS[1:P], times=Q*Nj)),
                        IVwth=factor(rep(1:Q, each=P*Nj)),
-                       DV   =rnorm(Nj*P*Q, muJK, 3))
-```
+                       DV=rnorm(Nj*P*Q, muJK, 3))
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 summary(aov(DV ~ IVbtw*IVwth + Error(id/IVwth), data=dfSPFpqL))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Error: id
           Df Sum Sq Mean Sq F value  Pr(>F)    
@@ -61,28 +63,30 @@ IVbtw:IVwth  4     23     5.8    0.91 0.46327
 Residuals   54    341     6.3                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-```
+{% endhighlight %}
 
 
 ### Using `Anova()` from package `car` with data in wide format
 
 
-```r
+{% highlight r %}
 dfSPFpqW <- reshape(dfSPFpqL, v.names="DV", timevar="IVwth",
                     idvar=c("id", "IVbtw"), direction="wide")
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 library(car)
 fitSPFpq   <- lm(cbind(DV.1, DV.2, DV.3) ~ IVbtw, data=dfSPFpqW)
 inSPFpq    <- data.frame(IVwth=gl(Q, 1))
 AnovaSPFpq <- Anova(fitSPFpq, idata=inSPFpq, idesign=~IVwth)
 summary(AnovaSPFpq, multivariate=FALSE, univariate=TRUE)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Univariate Type II Repeated-Measures ANOVA Assuming Sphericity
 
@@ -116,17 +120,19 @@ IVwth        0.917    0.00065 ***
 IVbtw:IVwth  0.917    0.45737    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-```
+{% endhighlight %}
 
 
 ### Using `anova.mlm()` and `mauchly.test()` with data in wide format
 
 
-```r
+{% highlight r %}
 anova(fitSPFpq, M=~1, X=~0, idata=inSPFpq, test="Spherical")
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Analysis of Variance Table
 
 
@@ -144,13 +150,17 @@ Huynh-Feldt epsilon:        1
 (Intercept)  1  8.92      1     27 0.00593 0.00593 0.00593
 IVbtw        2 11.40      2     27 0.00026 0.00026 0.00026
 Residuals   27                                            
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 anova(fitSPFpq, M=~IVwth, X=~1, idata=inSPFpq, test="Spherical")
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Analysis of Variance Table
 
 
@@ -168,15 +178,17 @@ Huynh-Feldt epsilon:        0.9170
 (Intercept)  1 9.00      2     54  0.000  0.001  0.001
 IVbtw        2 0.91      4     54  0.463  0.453  0.457
 Residuals   27                                        
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 mauchly.test(fitSPFpq, M=~IVwth, X=~1, idata=inSPFpq)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	Mauchly's test of sphericity
 	Contrasts orthogonal to
@@ -189,18 +201,20 @@ mauchly.test(fitSPFpq, M=~IVwth, X=~1, idata=inSPFpq)
 data:  SSD matrix from lm(formula = cbind(DV.1, DV.2, DV.3) ~ IVbtw, data = dfSPFpqW) 
 W = 0.8418, p-value = 0.1067
 
-```
+{% endhighlight %}
 
 
 Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
 -------------------------
 
 
-```r
+{% highlight r %}
 (anRes <- anova(lm(DV ~ IVbtw*IVwth*id, data=dfSPFpqL)))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 Analysis of Variance Table
 
 Response: DV
@@ -211,42 +225,52 @@ id          27    268     9.9
 IVbtw:IVwth  4     23     5.8               
 IVwth:id    54    341     6.3               
 Residuals    0      0                       
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 SSEtot <- anRes["id", "Sum Sq"] + anRes["IVwth:id", "Sum Sq"]
 SSbtw  <- anRes["IVbtw", "Sum Sq"]
 SSwth  <- anRes["IVwth", "Sum Sq"]
 SSI    <- anRes["IVbtw:IVwth", "Sum Sq"]
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 (gEtaSqB <- SSbtw / (SSbtw + SSEtot))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.2709
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 (gEtaSqW <- SSwth / (SSwth + SSEtot))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.1573
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 (gEtaSqI <- SSI   / (SSI   + SSEtot))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 [1] 0.03648
-```
+{% endhighlight %}
 
 
 Or from function `ezANOVA()` from package [`ez`](http://cran.r-project.org/package=ez)
@@ -259,52 +283,64 @@ Separate error terms
 ### Between-subjects effect at a fixed level of the within-subjects factor
 
 
-```r
+{% highlight r %}
 summary(aov(DV ~ IVbtw, data=dfSPFpqL, subset=(IVwth==1)))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             Df Sum Sq Mean Sq F value Pr(>F)  
 IVbtw        2   53.4   26.69    3.24  0.055 .
 Residuals   27  222.7    8.25                 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 summary(aov(DV ~ IVbtw, data=dfSPFpqL, subset=(IVwth==2)))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             Df Sum Sq Mean Sq F value Pr(>F)   
 IVbtw        2   71.6    35.8    6.04 0.0068 **
 Residuals   27  160.1     5.9                  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 summary(aov(DV ~ IVbtw, data=dfSPFpqL, subset=(IVwth==3)))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
             Df Sum Sq Mean Sq F value Pr(>F)   
 IVbtw        2    124    62.3    7.42 0.0027 **
 Residuals   27    226     8.4                  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-```
+{% endhighlight %}
 
 
 ### Within-subjects effect at a fixed level of the between-subjects factor
 
 
-```r
+{% highlight r %}
 summary(aov(DV ~ IVwth + Error(id/IVwth), data=dfSPFpqL,
         subset=(IVbtw=="A")))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Error: id
           Df Sum Sq Mean Sq F value Pr(>F)
@@ -314,14 +350,18 @@ Error: id:IVwth
           Df Sum Sq Mean Sq F value Pr(>F)
 IVwth      2   40.4    20.2    2.52   0.11
 Residuals 18  144.0     8.0               
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 summary(aov(DV ~ IVwth + Error(id/IVwth), data=dfSPFpqL,
         subset=(IVbtw=="B")))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Error: id
           Df Sum Sq Mean Sq F value Pr(>F)
@@ -333,14 +373,18 @@ IVwth      2   87.6    43.8    6.83 0.0062 **
 Residuals 18  115.5     6.4                  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 summary(aov(DV ~ IVwth + Error(id/IVwth), data=dfSPFpqL,
         subset=(IVbtw=="C")))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 Error: id
           Df Sum Sq Mean Sq F value Pr(>F)
@@ -350,32 +394,34 @@ Error: id:IVwth
           Df Sum Sq Mean Sq F value Pr(>F)
 IVwth      2    8.8    4.38    0.96    0.4
 Residuals 18   81.7    4.54               
-```
+{% endhighlight %}
 
 
 Planned comparisons for the between-subjects factor
 -------------------------
 
 
-```r
+{% highlight r %}
 mDf    <- aggregate(DV ~ id + IVbtw, data=dfSPFpqL, FUN=mean)
 aovRes <- aov(DV ~ IVbtw, data=mDf)
-```
+{% endhighlight %}
 
-```r
+{% highlight r %}
 cMat <- rbind("-0.5*(A+B)+C"=c(-1/2, -1/2, 1),
                        "A-C"=c(-1,    0,   1))
-```
+{% endhighlight %}
 
 
 
-```r
+{% highlight r %}
 library(multcomp)
 summary(glht(aovRes, linfct=mcp(IVbtw=cMat), alternative="greater"),
         test=adjusted("none"))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 
 	 Simultaneous Tests for General Linear Hypotheses
 
@@ -390,14 +436,14 @@ Linear Hypotheses:
 A-C <= 0            -3.795      0.814   -4.66      1
 (Adjusted p values reported -- none method)
 
-```
+{% endhighlight %}
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-```r
+{% highlight r %}
 try(detach(package:multcomp))
 try(detach(package:mvtnorm))
 try(detach(package:car))
@@ -405,7 +451,7 @@ try(detach(package:survival))
 try(detach(package:splines))
 try(detach(package:nnet))
 try(detach(package:MASS))
-```
+{% endhighlight %}
 
 
 Get this post from github
