@@ -63,8 +63,8 @@ head(Yhat)
 
 ```{r}
 (fit123 <- update(fit12,  . ~ . + X3))
-(fit13  <- update(fit123, . ~ . - X1))
-(fit1   <- update(fit12,  . ~ . - X2))
+(fit13 <- update(fit123, . ~ . - X1))
+(fit1 <- update(fit12,  . ~ . - X2))
 ```
 
 Assessing model fit

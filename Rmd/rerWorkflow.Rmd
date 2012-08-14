@@ -95,7 +95,7 @@ newPost(content=list(description=knit2wp('rerWorkflow.html'),
         publish=FALSE)
 ```
 
-If you plan to edit the post later on and upload the changed html, save the return value from `newPost()`: It is the post id, necessary to identify the post using `editPost()`.
+If you plan to edit the post later and upload the changed html, save the return value from `newPost()`: It is the post id, necessary to identify the post using `editPost()`.
 
 ```{r eval=FALSE}
 postID <- 99                    # post id returned by newPost()

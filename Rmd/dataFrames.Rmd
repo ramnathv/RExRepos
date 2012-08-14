@@ -112,7 +112,7 @@ myDf1[1:5, 4, drop=FALSE]
 
 See dfTransform for selecting subsets of data
 
-### Work with variables from a data frame
+Work with variables from a data frame
 -------------------------
 
 ```{r}

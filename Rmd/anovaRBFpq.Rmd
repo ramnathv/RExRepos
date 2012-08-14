@@ -67,7 +67,7 @@ anova(fitRBFpq, M=~IV1 + IV2 + IV1:IV2, X=~IV1 + IV2,
       idata=inRBFpq, test="Spherical")
 ```
 
-Mauchly-Test IV1 hier unnoetig, da P=2 -> Zirkularitaet liegt automatisch vor
+Mauchly-Test for IV1 is unnecessary here since P=2 -> sphericity holds automatically
 
 ```{r}
 mauchly.test(fitRBFpq, M=~IV1, X=~1, idata=inRBFpq)

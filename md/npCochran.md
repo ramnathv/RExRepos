@@ -7,36 +7,34 @@ Install required packages
 [`coin`](http://cran.r-project.org/package=coin)
 
 
-{% highlight r %}
+```r
 wants <- c("coin")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-{% endhighlight %}
+```
 
 
 Cochran-\(Q\)-test
 -------------------------
 
 
-{% highlight r %}
+```r
 N   <- 10
 P   <- 5
 cDf <- data.frame(id=factor(rep(1:N, each=P)),
                   year=factor(rep(1981:1985, times=N)),
                   pref=c(1,1,0,1,0, 0,1,0,0,1, 1,0,1,0,0, 1,1,1,1,1, 0,1,0,0,0,
                          1,0,1,1,1, 0,0,0,0,0, 1,1,1,1,0, 0,1,0,1,1, 1,0,1,0,0))
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 library(coin)
 symmetry_test(pref ~ year | id, teststat="quad", data=cDf)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 	Asymptotic General Independence Test
 
@@ -45,21 +43,21 @@ data:  pref by
 	 stratified by id 
 chi-squared = 1.333, df = 4, p-value = 0.8557
 
-{% endhighlight %}
+```
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-{% highlight r %}
+```r
 try(detach(package:coin))
 try(detach(package:modeltools))
 try(detach(package:survival))
 try(detach(package:mvtnorm))
 try(detach(package:splines))
 try(detach(package:stats4))
-{% endhighlight %}
+```
 
 
 Get this post from github

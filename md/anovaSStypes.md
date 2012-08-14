@@ -12,11 +12,11 @@ Install required packages
 [`car`](http://cran.r-project.org/package=car)
 
 
-{% highlight r %}
+```r
 wants <- c("car")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-{% endhighlight %}
+```
 
 
 Background
@@ -67,7 +67,7 @@ Data set with non-proportional unequal cell sizes
 -------------------------
 
 
-{% highlight r %}
+```r
 P    <- 3
 Q    <- 3
 g11  <- c(41, 43, 50)
@@ -82,23 +82,21 @@ g33  <- c(55, 69, 63, 56, 62, 67)
 dfMD <- data.frame(IV1=factor(rep(1:P, c(3+5+7, 5+6+4, 5+4+6))),
                    IV2=factor(rep(rep(1:Q, P), c(3,5,7, 5,6,4, 5,4,6))),
                    DV =c(g11, g12, g13, g21, g22, g23, g31, g32, g33))
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 xtabs(~ IV1 + IV2, data=dfMD)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
    IV2
 IV1 1 2 3
   1 3 5 7
   2 5 6 4
   3 5 4 6
-{% endhighlight %}
+```
 
 
 SS type I (sequential sum of squares)
@@ -116,13 +114,11 @@ Type I sum of squares have the following properties:
 ### Factor order matters
 
 
-{% highlight r %}
+```r
 anova(lm(DV ~ IV1 + IV2 + IV1:IV2, data=dfMD))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Analysis of Variance Table
 
 Response: DV
@@ -133,17 +129,13 @@ IV1:IV2    4     14       4    0.13    0.97
 Residuals 36   1005      28                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 anova(lm(DV ~ IV2 + IV1 + IV1:IV2, data=dfMD))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Analysis of Variance Table
 
 Response: DV
@@ -154,84 +146,68 @@ IV2:IV1    4     14       4    0.13   0.972
 Residuals 36   1005      28                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 ### Sequential model comparisons
 
 
-{% highlight r %}
+```r
 SS.I1 <- anova(lm(DV ~ 1,                 data=dfMD),
                lm(DV ~ IV1,               data=dfMD))
 SS.I2 <- anova(lm(DV ~ IV1,               data=dfMD),
                lm(DV ~ IV1+IV2,           data=dfMD))
 SS.Ii <- anova(lm(DV ~ IV1+IV2,           data=dfMD),
                lm(DV ~ IV1+IV2 + IV1:IV2, data=dfMD))
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 SS.I1[2, "Sum of Sq"]
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 101.1
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 SS.I2[2, "Sum of Sq"]
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 1253
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 SS.Ii[2, "Sum of Sq"]
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 14.19
-{% endhighlight %}
+```
 
 
 ### Total SS \(=\) sum of effect SS
 
 
-{% highlight r %}
+```r
 SST <- anova(lm(DV ~ 1,       data=dfMD),
              lm(DV ~ IV1*IV2, data=dfMD))
 SST[2, "Sum of Sq"]
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 1368
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 SS.I1[2, "Sum of Sq"] + SS.I2[2, "Sum of Sq"] + SS.Ii[2, "Sum of Sq"]
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 1368
-{% endhighlight %}
+```
 
 
 SS type II
@@ -249,14 +225,12 @@ Type II sum of squares have the following properties:
 ### Using `Anova()` from package `car`
 
 
-{% highlight r %}
+```r
 library(car)
 Anova(lm(DV ~ IV1*IV2, data=dfMD), type="II")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Anova Table (Type II tests)
 
 Response: DV
@@ -267,84 +241,68 @@ IV1:IV2       14  4    0.13   0.972
 Residuals   1005 36                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 ### Using model comparisons
 
 
-{% highlight r %}
+```r
 SS.II1 <- anova(lm(DV ~     IV2,         data=dfMD),
                 lm(DV ~ IV1+IV2,         data=dfMD))
 SS.II2 <- anova(lm(DV ~ IV1,             data=dfMD),
                 lm(DV ~ IV1+IV2,         data=dfMD))
 SS.IIi <- anova(lm(DV ~ IV1+IV2,         data=dfMD),
                 lm(DV ~ IV1+IV2+IV1:IV2, data=dfMD))
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 SS.II1[2, "Sum of Sq"]
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 238.5
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 SS.II2[2, "Sum of Sq"]
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 1253
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 SS.IIi[2, "Sum of Sq"]
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 14.19
-{% endhighlight %}
+```
 
 
 ### Total SS \(\neq\) sum of effect SS
 
 
-{% highlight r %}
+```r
 SST <- anova(lm(DV ~ 1,       data=dfMD),
              lm(DV ~ IV1*IV2, data=dfMD))
 SST[2, "Sum of Sq"]
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 1368
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 SS.II1[2, "Sum of Sq"] + SS.II2[2, "Sum of Sq"] + SS.IIi[2, "Sum of Sq"]
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 1506
-{% endhighlight %}
+```
 
 
 SS type III
@@ -362,33 +320,31 @@ Type III sum of squares have the following properties:
 ### Using `Anova()` from package `car`
 
 
-{% highlight r %}
+```r
 # options(contrasts=c(unordered="contr.sum",       ordered="contr.poly"))
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 # options(contrasts=c(unordered="contr.treatment", ordered="contr.poly"))
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 fitIII <- lm(DV ~ IV1 + IV2 + IV1:IV2, data=dfMD,
              contrasts=list(IV1=contr.sum, IV2=contr.sum))
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 library(car)
 Anova(fitIII, type="III")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Anova Table (Type III tests)
 
 Response: DV
@@ -400,7 +356,7 @@ IV1:IV2         14  4    0.13   0.972
 Residuals     1005 36                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 ### Model comparisons using `drop1()`
@@ -408,27 +364,25 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 The model comparisons for main effects with SS type III cannot be done using `anova()` due to the violation of marginality principle - `anova()` automatically includes all lower-order terms for the interactions it finds. This would be the comparison:
 
 
-{% highlight r %}
+```r
 # A: lm(DV ~     IV2 + IV1:IV2) vs. lm(DV ~ IV1 + IV2 + IV1:IV2)
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 # B: lm(DV ~ IV1     + IV1:IV2) vs. lm(DV ~ IV1 + IV2 + IV1:IV2)
-{% endhighlight %}
+```
 
 
 In contrast, `drop1()` drops each term in turn even if marginality is violated, so it gives SS type III.
 
 
-{% highlight r %}
+```r
 drop1(fitIII, ~ ., test="F")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Single term deletions
 
 Model:
@@ -440,17 +394,15 @@ IV2      2      1181 2187 189   21.15 8.4e-07 ***
 IV1:IV2  4        14 1020 150    0.13   0.972    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 drop1(fitIII, ~ ., test="F")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Single term deletions
 
 Model:
@@ -462,18 +414,18 @@ IV2      2      1181 2187 189   21.15 8.4e-07 ***
 IV1:IV2  4        14 1020 150    0.13   0.972    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-{% highlight r %}
+```r
 try(detach(package:car))
 try(detach(package:nnet))
 try(detach(package:MASS))
-{% endhighlight %}
+```
 
 
 Get this post from github

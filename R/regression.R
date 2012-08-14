@@ -41,8 +41,8 @@ head(Yhat)
 
 ## @knitr unnamed-chunk-6
 (fit123 <- update(fit12,  . ~ . + X3))
-(fit13  <- update(fit123, . ~ . - X1))
-(fit1   <- update(fit12,  . ~ . - X2))
+(fit13 <- update(fit123, . ~ . - X1))
+(fit1 <- update(fit12,  . ~ . - X2))
 
 
 ## @knitr unnamed-chunk-7

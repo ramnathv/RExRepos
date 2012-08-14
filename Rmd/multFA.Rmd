@@ -4,10 +4,10 @@ Exploratory factor analysis
 Install required packages
 -------------------------
 
-[`mvtnorm`](http://cran.r-project.org/package=mvtnorm), [`psych`](http://cran.r-project.org/package=psych), [`GPArotation`](http://cran.r-project.org/package=GPArotation)
+[`GPArotation`](http://cran.r-project.org/package=GPArotation), [`mvtnorm`](http://cran.r-project.org/package=mvtnorm), [`psych`](http://cran.r-project.org/package=psych)
 
 ```{r}
-wants <- c("mvtnorm", "psych", "GPArotation")
+wants <- c("GPArotation", "mvtnorm", "psych")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
 ```
@@ -70,8 +70,6 @@ head(anderson$scores)
 
 Visualize loadings
 -------------------------
-
-You can visualize the loadings from the factor analysis using `factor.plot()` and `fa.diagram()`, both from package `psych`. For some reason, `factor.plot()` accepts only the `$fa` component of the result from `fa.poly()`, not the full object.
 
 ```{r rerMultFA01}
 factor.plot(faPC, cut=0.5)

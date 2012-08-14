@@ -12,11 +12,11 @@ Install required packages
 [`rms`](http://cran.r-project.org/package=rms)
 
 
-{% highlight r %}
+```r
 wants <- c("rms")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-{% endhighlight %}
+```
 
 
 Descriptive model fit
@@ -25,7 +25,7 @@ Descriptive model fit
 ### Simulate data
     
 
-{% highlight r %}
+```r
 set.seed(1.234)
 N      <- 100
 X1     <- rnorm(N, 175, 7)
@@ -33,19 +33,19 @@ X2     <- rnorm(N,  30, 8)
 Y      <- 0.5*X1 - 0.3*X2 + 10 + rnorm(N, 0, 6)
 Yfac   <- cut(Y, breaks=c(-Inf, median(Y), Inf), labels=c("lo", "hi"))
 dfRegr <- data.frame(X1, X2, Yfac)
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 cdplot(Yfac ~ X1, data=dfRegr)
-{% endhighlight %}
+```
 
 ![plot of chunk rerRegressionLogistic01](figure/rerRegressionLogistic011.png) 
 
-{% highlight r %}
+```r
 cdplot(Yfac ~ X2, data=dfRegr)
-{% endhighlight %}
+```
 
 ![plot of chunk rerRegressionLogistic01](figure/rerRegressionLogistic012.png) 
 
@@ -53,14 +53,12 @@ cdplot(Yfac ~ X2, data=dfRegr)
 ### Fit the model
 
 
-{% highlight r %}
+```r
 (glmFit <- glm(Yfac ~ X1 + X2,
                family=binomial(link="logit"), data=dfRegr))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 Call:  glm(formula = Yfac ~ X1 + X2, family = binomial(link = "logit"), 
     data = dfRegr)
@@ -72,50 +70,42 @@ Coefficients:
 Degrees of Freedom: 99 Total (i.e. Null);  97 Residual
 Null Deviance:	    139 
 Residual Deviance: 106 	AIC: 112 
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 exp(coef(glmFit))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 (Intercept)          X1          X2 
   3.451e-09   1.147e+00   8.575e-01 
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 exp(confint(glmFit))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
                 2.5 %  97.5 %
 (Intercept) 7.249e-16 0.00239
 X1          1.060e+00 1.25564
 X2          7.870e-01 0.92066
-{% endhighlight %}
+```
 
 
 ### Fit the model based on a matrix of counts
 
 
-{% highlight r %}
+```r
 total  <- sample(40:60, N, replace=TRUE)      ## unequal n_i
 hits   <- rbinom(N, size=total, prob=0.4)
 hitMat <- cbind(hits, total-hits)
 glm(hitMat ~ X1 + X2, family=binomial(link="logit"))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 Call:  glm(formula = hitMat ~ X1 + X2, family = binomial(link = "logit"))
 
@@ -126,20 +116,18 @@ Coefficients:
 Degrees of Freedom: 99 Total (i.e. Null);  97 Residual
 Null Deviance:	    105 
 Residual Deviance: 105 	AIC: 542 
-{% endhighlight %}
+```
 
 
 ### Fit the model based on a matrix with relative frequencies
 
 
-{% highlight r %}
+```r
 hitMatRel <- sweep(hitMat, 1, total, "/")
 glm(hitMatRel ~ X1 + X2, weights=total, family=binomial(link="logit"))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 Call:  glm(formula = hitMatRel ~ X1 + X2, family = binomial(link = "logit"), 
     weights = total)
@@ -151,60 +139,50 @@ Coefficients:
 Degrees of Freedom: 99 Total (i.e. Null);  97 Residual
 Null Deviance:	    105 
 Residual Deviance: 105 	AIC: 542 
-{% endhighlight %}
+```
 
 
 ### Fitted logits and probabilities
 
 
-{% highlight r %}
+```r
 logitHat <- predict(glmFit, type="link")
-plot(logitHat, pch=c(1, 16)[unclass(dfRegr$Yfac)])
+plot(logitHat, pch=16, col=c("red", "blue")[unclass(dfRegr$Yfac)])
 abline(h=0)
-{% endhighlight %}
+```
 
 ![plot of chunk rerRegressionLogistic02](figure/rerRegressionLogistic02.png) 
 
 
 
-{% highlight r %}
+```r
 Phat <- fitted(glmFit)
 Phat <- predict(glmFit, type="response")
 head(Phat)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
       1       2       3       4       5       6 
 0.49807 0.48815 0.53732 0.76152 0.72098 0.04186 
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 mean(Phat)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.5
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 prop.table(table(dfRegr$Yfac))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
  lo  hi 
 0.5 0.5 
-{% endhighlight %}
+```
 
 
 Assess model fit
@@ -213,59 +191,49 @@ Assess model fit
 ### Classification table
 
 
-{% highlight r %}
+```r
 thresh <- 0.5
 Yhat   <- cut(Phat, breaks=c(-Inf, thresh, Inf), labels=c("lo", "hi"))
 cTab   <- table(Yfac, Yhat)
 addmargins(cTab)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
      Yhat
 Yfac   lo  hi Sum
   lo   34  16  50
   hi   13  37  50
   Sum  47  53 100
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 sum(diag(cTab)) / sum(cTab)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.71
-{% endhighlight %}
+```
 
 
-### log-Likelihood, AUC, Somers's \(D_{xy}\), Nagelkerke's pseudo \(R^{2}\)
+### log-Likelihood, AUC, Somers' \(D_{xy}\), Nagelkerke's pseudo \(R^{2}\)
 
 
-{% highlight r %}
+```r
 logLik(glmFit)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 'log Lik.' -53.25 (df=3)
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 library(rms)
 lrm(Yfac ~ X1 + X2, data=dfRegr)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 Logistic Regression Model
 
@@ -284,8 +252,7 @@ Intercept -19.4847 7.2768 -2.68  0.0074
 X1          0.1367 0.0427  3.21  0.0013  
 X2         -0.1538 0.0396 -3.88  0.0001  
 
-
-{% endhighlight %}
+```
 
 
 For plotting the ROC-curve, see `ROCR` in associationOrder
@@ -295,46 +262,40 @@ For plotting the ROC-curve, see `ROCR` in associationOrder
 McFadden pseudo-\(R^2\)
 
 
-{% highlight r %}
+```r
 glmFit0 <- update(glmFit, . ~ 1)
 LLf <- logLik(glmFit)
 LL0 <- logLik(glmFit0)
 as.vector(1 - (LLf / LL0))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.2318
-{% endhighlight %}
+```
 
 
 Cox & Snell
 
 
-{% highlight r %}
+```r
 as.vector(1 - exp((2/N) * (LL0 - LLf)))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.2749
-{% endhighlight %}
+```
 
 
 Nagelkerke
 
 
-{% highlight r %}
+```r
 as.vector((1 - exp((2/N) * (LL0 - LLf))) / (1 - exp(LL0)^(2/N)))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.3665
-{% endhighlight %}
+```
 
 
 ### Crossvalidation
@@ -347,13 +308,11 @@ Coefficient tests and overall model test
 ### Individual coefficient tests
 
 
-{% highlight r %}
+```r
 summary(glmFit)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 Call:
 glm(formula = Yfac ~ X1 + X2, family = binomial(link = "logit"), 
@@ -379,26 +338,24 @@ AIC: 112.5
 
 Number of Fisher Scoring iterations: 4
 
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 lrm(Yfac ~ X1 + X2, data=dfRegr)
-{% endhighlight %}
+```
 
 
 
 ### Model comparisons
 
 
-{% highlight r %}
+```r
 anova(glmFit0, glmFit, test="Chisq")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Analysis of Deviance Table
 
 Model 1: Yfac ~ 1
@@ -408,23 +365,21 @@ Model 2: Yfac ~ X1 + X2
 2        97        106  2     32.1  1.1e-07 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 lrm(Yfac ~ X1 + X2, data=dfRegr)
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 drop1(glmFit, test="Chi")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Single term deletions
 
 Model:
@@ -435,18 +390,18 @@ X1      1      119 123 12.8  0.00035 ***
 X2      1      128 132 21.5  3.5e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-{% highlight r %}
+```r
 try(detach(package:rms))
 try(detach(package:survival))
 try(detach(package:splines))
-{% endhighlight %}
+```
 
 
 Get this post from github

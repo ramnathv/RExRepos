@@ -45,7 +45,7 @@ dfLong[order(dfLong$id), ]
 ## @knitr unnamed-chunk-6
 resLong <- reshape(dfWide, varying=c("DV_t1", "DV_t2", "DV_t3"),
                    direction="long", idvar=c("id", "IVbtw"),
-				   v.names="DV", timevar="IVwth")
+                   v.names="DV", timevar="IVwth")
 resLong[order(resLong$id), ]
 
 
@@ -80,7 +80,7 @@ dfW  <- data.frame(id, t_11, t_21, t_31, t_12, t_22, t_32)
 
 ## @knitr unnamed-chunk-11
 dfL2 <- reshape(dfL1, varying=c("IV2-1", "IV2-2"),
-                direction="long", timevar="IV2",
+				direction="long", timevar="IV2",
 				idvar=c("id", "IV1"), v.names="DV")
 head(dfL2)
 

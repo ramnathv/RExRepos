@@ -49,8 +49,7 @@ contour(X, Y, matZ, main="Contours for 2D-normal density")
 filled.contour(X, Y, matZ, main="Colored contours for 2D-normal density")
 ```
 
-Bubble plot et c.
--------------------------
+### Bubble plot et c.
 
 ```{r rerDiagMultivariate02}
 N      <- 10
@@ -65,8 +64,7 @@ symbols(age, sport, circles=wScale, inch=0.6, fg=NULL, bg=rainbow(N),
 See `sunflowerplot()` and `stars()` for altenative approaches.
 
 
-3-D grid plot
--------------------------
+### 3-D grid plot
 
 ```{r rerDiagMultivariate03}
 par(cex.main=1.4, mar=c(2, 2, 4, 2) + 0.1)
@@ -74,8 +72,7 @@ persp(X, Y, matZ, xlab="x", ylab="y", zlab="Density", theta=5, phi=35,
       main="2D-normal probability density")
 ```
 
-Interactive 3-D scatter plot
--------------------------
+### Interactive 3-D scatter plot
 
 ```{r rerDiagMultivariate04}
 library(rgl)

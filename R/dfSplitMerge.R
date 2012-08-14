@@ -19,10 +19,10 @@ unsplit(lDf, myDf$group)
 ## @knitr unnamed-chunk-3
 (dfNew <- data.frame(id=13:15,
                      group=c("CG", "WL", "T"),
-					 sex=c("f", "f", "m"),
+                     sex=c("f", "f", "m"),
                      age=c(18, 31, 21),
-					 IQ=c(116, 101, 99),
-					 rating=c(4, 4, 1)))
+                     IQ=c(116, 101, 99),
+                     rating=c(4, 4, 1)))
 dfComb <- rbind(myDf, dfNew)
 dfComb[11:15, ]
 
@@ -31,11 +31,11 @@ dfComb[11:15, ]
 (dfA <- data.frame(id=1:4,
                    initials=c("AB", "CD", "EF", "GH"),
                    IV1=c("-", "-", "+", "+"),
-				   DV1=c(10, 10, 11, 14)))
+                   DV1=c(10, 10, 11, 14)))
 (dfB <- data.frame(id=1:4,
                    initials=c("AB", "CD", "EF", "GH"),
                    IV2=c("A", "B", "A", "B"),
-				   DV2=c(91, 89, 92, 79)))
+                   DV2=c(91, 89, 92, 79)))
 
 
 ## @knitr unnamed-chunk-5
@@ -48,7 +48,7 @@ merge(dfA, dfB, by.x=c(TRUE, FALSE, FALSE, FALSE),
 (dfC <- data.frame(id=3:6,
                    initials=c("EF", "GH", "IJ", "KL"),
                    IV2=c("A", "B", "A", "B"),
-				   DV2=c(92, 79, 101, 81)))
+                   DV2=c(92, 79, 101, 81)))
 
 
 ## @knitr unnamed-chunk-7

@@ -40,8 +40,7 @@ dfRegr <- data.frame(X1, X2, Ycateg)
 
 ### Using `multinom()` from package `nnet`
 
-Estimator based on neural networks
--> slightly different results than `vglm()`, `mlogit()` below
+Estimator based on neural networks -> slightly different results than `vglm()`, `mlogit()` below
 
 ```{r}
 library(nnet)
@@ -90,7 +89,7 @@ PhatCateg <- predict(mnFit, type="probs")
 head(PhatCateg)
 ```
 
-```{r results='hide'}
+```{r eval=FALSE}
 predict(vglmFitMN, type="response")
 fitted(mlogitFit, outcome=FALSE)
 # not run
@@ -105,6 +104,34 @@ fitted(mlogitFit, outcome=FALSE)
 ```{r}
 categHat <- levels(dfRegr$Ycateg)[max.col(PhatCateg)]
 all.equal(factor(categHat), predCls, check.attributes=FALSE)
+```
+
+Apply regression model to new data
+-------------------------
+
+### Simulate new data
+
+`predict.mlogit()` requires a new data frame in long format. Therefore also add new (irrelevant) categorical responses to enable reshaping the data frame with `mlogit.data()`.
+
+```{r}
+Nnew  <- 4
+dfNew <- data.frame(X1=rnorm(Nnew, 175, 7),
+                    X2=rnorm(Nnew,  30, 8),
+                    Ycateg=factor(sample(c("--", "-", "+", "++"), Nnew, TRUE),
+                                  levels=c("--", "-", "+", "++")))
+dfNewL <- mlogit.data(dfNew, choice="Ycateg", shape="wide", varying=NULL)
+```
+
+### Predicted class probabilities
+
+```{r}
+predict(mnFit, dfNew, type="probs")
+```
+
+```{r eval=FALSE}
+predict(vglmFitMN, dfNew, type="response")
+predict(mlogitFit, dfNewL)
+# not shown
 ```
 
 Detach (automatically) loaded packages (if possible)

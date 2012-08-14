@@ -263,7 +263,7 @@ arrows(x0=barsX, y0=limLo, x1=barsX, y1=limHi, code=3, angle=90,
        length=0.1, col="blue", lwd=2)
 
 
-## @knitr rerDiagAddElements13
+## @knitr unnamed-chunk-8
 pxSq  <- 6
 colsR <- rep(0.4, pxSq^2)
 colsG <- rep(seq(0, 1, length.out=pxSq), times=pxSq)
@@ -271,6 +271,8 @@ colsB <- rep(seq(0, 1, length.out=pxSq), each=pxSq)
 arrSq <- array(c(colsR, colsG, colsB), c(pxSq, pxSq, 3))
 sqIm  <- as.raster(arrSq)
 
+
+## @knitr unnamed-chunk-9
 pxG    <- 500
 alpha  <- 0.4
 beta   <- min(1-alpha, 1+alpha)
@@ -281,6 +283,8 @@ y      <- matrix(vals, nrow=pxG, byrow=FALSE)
 phi    <- alpha*x + beta*y
 cosMat <- 0.5*cos(freq*phi) + 0.5
 
+
+## @knitr unnamed-chunk-10
 library(mvtnorm)
 mu       <- c(0, 0)
 sigma    <- diag(2)*9
@@ -288,12 +292,14 @@ gaussVal <- dmvnorm(cbind(c(x), c(y)), mu, sigma)
 gaussMat <- matrix(gaussVal, nrow=pxG) / max(gaussVal)
 gabIm    <- as.raster(cosMat*gaussMat)
 
+
+## @knitr rerDiagAddElements13
 plot(c(0, 1), c(0, 1), type="n", main="Bitmaps", xlab="", ylab="", asp=1)
 rasterImage(sqIm,  0,   0,   0.4, 0.4, angle=0,  interpolate=FALSE)
 rasterImage(gabIm, 0.5, 0.3, 1.1, 0.9, angle=10, interpolate=TRUE)
 
 
-## @knitr unnamed-chunk-8
+## @knitr unnamed-chunk-11
 try(detach(package:Hmisc))
 try(detach(package:survival))
 try(detach(package:splines))

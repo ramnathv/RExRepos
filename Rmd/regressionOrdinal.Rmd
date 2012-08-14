@@ -101,11 +101,11 @@ PhatCateg <- predict(lrmFit, type="fitted.ind")
 head(PhatCateg)
 ```
 
-```{r results='hide'}
+```{r eval=FALSE}
 predict(vglmFit, type="response")
 predict(clmFit, subset(dfRegr, select=c("X1", "X2"), type="prob"))$fit
 predict(polrFit, type="probs")
-# not run
+# not shown
 ```
 
 ### Predicted categories
@@ -116,12 +116,38 @@ predict(clmFit, type="class")
 
 ```{r results='hide'}
 (predCls <- predict(polrFit, type="class"))
-# not run
+# not shown
 ```
 
 ```{r}
 categHat <- levels(dfRegr$Yord)[max.col(PhatCateg)]
 all.equal(factor(categHat), predCls, check.attributes=FALSE)
+```
+
+Apply regression model to new data
+-------------------------
+
+### Simulate new data
+
+```{r}
+Nnew  <- 4
+dfNew <- data.frame(X1=rnorm(Nnew, 175, 7),
+                    X2=rnorm(Nnew,  30, 8),
+                    Ycateg=ordered(sample(c("--", "-", "+", "++"), Nnew, TRUE),
+                                   levels=c("--", "-", "+", "++")))
+```
+
+### Predicted class probabilities
+
+```{r}
+predict(lrmFit, dfNew, type="fitted.ind")
+```
+
+```{r eval=FALSE}
+predict(vglmFit, dfNew, type="response")
+predict(polrFit, dfNew, type="probs")
+predict(clmFit, subset(dfNew, select=c("X1", "X2"), type="prob"))$fit
+# not shown
 ```
 
 Detach (automatically) loaded packages (if possible)

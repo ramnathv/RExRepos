@@ -7,11 +7,11 @@ Install required packages
 [`binom`](http://cran.r-project.org/package=binom)
 
 
-{% highlight r %}
+```r
 wants <- c("binom")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-{% endhighlight %}
+```
 
 
 Binomial test
@@ -20,30 +20,24 @@ Binomial test
 ### One-sided
 
 
-{% highlight r %}
+```r
 DV   <- factor(c("+", "+", "-", "+", "-", "+", "+"), levels=c("+", "-"))
 N    <- length(DV)
 (tab <- table(DV))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 DV
 + - 
 5 2 
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 pH0 <- 0.25
 binom.test(tab, p=pH0, alternative="greater", conf.level=0.95)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 	Exact binomial test
 
@@ -56,21 +50,19 @@ sample estimates:
 probability of success 
                 0.7143 
 
-{% endhighlight %}
+```
 
 
 ### Two-sided
 
 
-{% highlight r %}
+```r
 N    <- 20
 hits <- 10
 binom.test(hits, N, p=pH0, alternative="two.sided")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 	Exact binomial test
 
@@ -83,32 +75,28 @@ sample estimates:
 probability of success 
                    0.5 
 
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 sum(dbinom(hits:N, N, p=pH0)) + sum(dbinom(0, N, p=pH0))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.01704
-{% endhighlight %}
+```
 
 
 ### Confidence intervals
 
 
-{% highlight r %}
+```r
 library(binom)
 binom.confint(tab[1], sum(tab))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
           method x n   mean  lower  upper
 1  agresti-coull 5 7 0.7143 0.3524 0.9244
 2     asymptotic 5 7 0.7143 0.3796 1.0489
@@ -121,22 +109,20 @@ binom.confint(tab[1], sum(tab))
 9            lrt 5 7 0.7143 0.3502 0.9458
 10     prop.test 5 7 0.7143 0.3026 0.9489
 11        wilson 5 7 0.7143 0.3589 0.9178
-{% endhighlight %}
+```
 
 
 \(\chi^2\)-test for proportions
 -------------------------
 
 
-{% highlight r %}
+```r
 total <- c(4000, 5000, 3000)
 hits  <- c( 585,  610,  539)
 prop.test(hits, total)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 	3-sample test for equality of proportions without continuity
 	correction
@@ -148,17 +134,17 @@ sample estimates:
 prop 1 prop 2 prop 3 
 0.1462 0.1220 0.1797 
 
-{% endhighlight %}
+```
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-{% highlight r %}
+```r
 try(detach(package:binom))
 try(detach(package:lattice))
-{% endhighlight %}
+```
 
 
 Get this post from github

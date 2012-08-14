@@ -35,7 +35,7 @@ addmargins(contT1)
 fisher.test(contT1, alternative="greater")
 ```
 
-### Prevalence, sensitivity, specificity, CCR, \(F\)
+### Prevalence, sensitivity, specificity, CCR, \(F\)-score
 
 ```{r}
 TN <- c11 <- contT1[1, 1]       ## true negative
@@ -66,7 +66,7 @@ Correct classification rate (CCR)
 (CCR <- sum(diag(contT1)) / sum(contT1))
 ```
 
-\(F\)-value
+\(F\)-score
 
 ```{r}
 (Fval <- 1 / mean(1 / c(precision, recall)))

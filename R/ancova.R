@@ -68,7 +68,7 @@ yLims <- c(min(iCeptSSRI, iCeptPlac, iCeptWL), max(dfAnc$DVpost))
 
 plot(DVpost ~ DVpre, data=dfAnc, xlim=xLims, ylim=yLims,
      pch=rep(c(3, 17, 19), Nj), col=rep(c("red", "green", "blue"), Nj),
-     main="Rohdaten und Regressionsgerade pro Gruppe")
+     main="Data and group-wise regression lines")
 legend(x="topleft", legend=levels(dfAnc$IV), pch=c(3, 17, 19),
        col=c("red", "green", "blue"))
 abline(iCeptSSRI, slopeAll, col="red")

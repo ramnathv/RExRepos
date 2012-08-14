@@ -38,7 +38,7 @@ dfRBpL <- data.frame(id=factor(rep(1:N, times=P)),
 summary(aov(DV ~ IV + Error(id/IV), data=dfRBpL))
 ```
 
-### Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
+### Effect size estimate: generalized \(\hat{\eta}_{g}^{2}\)
 
 ```{r}
 (anRes <- anova(lm(DV ~ IV*id, data=dfRBpL)))

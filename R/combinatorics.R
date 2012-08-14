@@ -82,6 +82,7 @@ pCtrlB <- permControl(strata=IV1, complete=FALSE, nperm=nPerms)
 for(i in 1:3) {
     perm <- permute(i, n=N, control=pCtrlA)
     print(myDf[perm, ])
+# not shown
 }
 
 
@@ -89,6 +90,7 @@ for(i in 1:3) {
 for(i in 1:3) {
     perm <- permute(i, n=N, control=pCtrlB)
     print(myDf[perm, ])
+# not shown
 }
 
 

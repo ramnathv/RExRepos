@@ -25,6 +25,7 @@ barplot(dTab, ylim=c(0, 30), xlab="Result", ylab="N", col="black",
 barplot(prop.table(dTab), ylim=c(0, 0.3), xlab="Result",
         ylab="relative frequency", col="gray50",
 		main="Relative frequency")
+# not shown
 
 
 ## @knitr rerDiagCategorical02

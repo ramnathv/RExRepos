@@ -14,11 +14,11 @@ Install required packages
 [`car`](http://cran.r-project.org/package=car)
 
 
-{% highlight r %}
+```r
 wants <- c("car")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-{% endhighlight %}
+```
 
 
 Three-way SPF-\(pq \cdot r\) ANOVA
@@ -27,7 +27,7 @@ Three-way SPF-\(pq \cdot r\) ANOVA
 ### Using `aov()` with data in long format
 
 
-{% highlight r %}
+```r
 set.seed(1.234)
 Njk   <- 10
 P     <- 2
@@ -41,17 +41,15 @@ dfSPFpq.rL <- data.frame(id=factor(rep(1:(P*Q*Njk), times=R)),
                          IVbtw2=factor(rep(rep(1:Q, each=P*Njk), times=R)),
                          IVwth=factor(rep(1:R, each=P*Q*Njk)),
                          DV=c(DV_t1, DV_t2, DV_t3))
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 summary(aov(DV ~ IVbtw1*IVbtw2*IVwth + Error(id/IVwth), data=dfSPFpq.rL))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 Error: id
               Df Sum Sq Mean Sq F value Pr(>F)
@@ -69,13 +67,13 @@ IVbtw1:IVbtw2:IVwth  2      3     1.7    0.55   0.58
 Residuals           72    224     3.1                   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 ### Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
 
 
-{% highlight r %}
+```r
 anRes     <- anova(lm(DV ~ IVbtw1*IVbtw2*IVwth*id, data=dfSPFpq.rL))
 SSEtot    <- anRes["id", "Sum Sq"] + anRes["IVwth:id", "Sum Sq"]
 SSbtw1    <- anRes["IVbtw1",       "Sum Sq"]
@@ -83,101 +81,77 @@ SSbtw2    <- anRes["IVbtw2",       "Sum Sq"]
 SSwth     <- anRes["IVwth",        "Sum Sq"]
 SSbtw1Wth <- anRes["IVbtw1:IVwth", "Sum Sq"]
 SSbtw2Wth <- anRes["IVbtw2:IVwth", "Sum Sq"]
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 (gEtaSqB1 <- SSbtw1 / (SSbtw1 + SSEtot))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.003007
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 (gEtaSqB2 <- SSbtw2 / (SSbtw2 + SSEtot))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.002103
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 (gEtaSqW <- SSwth / (SSwth + SSEtot))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.6109
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 (gEtaSqB1W <- SSbtw1Wth / (SSbtw1Wth + SSEtot))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.00675
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 (gEtaSqB2W <- SSbtw2Wth / (SSbtw2Wth + SSEtot))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.002299
-{% endhighlight %}
+```
 
 
 Due to the nesting structure, the following interaction sums of squares are not calculated in the model above. We need to fit a model without `id` to get them.
 
 
-{% highlight r %}
+```r
 anRes2        <- anova(lm(DV ~ IVbtw1*IVbtw2*IVwth, data=dfSPFpq.rL))
 SSbtw1Btw2    <- anRes2["IVbtw1:IVbtw2",       "Sum Sq"]
 SSbtw1Btw2Wth <- anRes2["IVbtw1:IVbtw2:IVwth", "Sum Sq"]
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 (gEtaSqB1B2 <- SSbtw1Btw2 / (SSbtw1Btw2 + SSEtot))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.003891
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 (gEtaSqB1B2W <- SSbtw1Btw2Wth / (SSbtw1Btw2Wth + SSEtot))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.009338
-{% endhighlight %}
+```
 
 
 Or from function `ezANOVA()` from package [`ez`](http://cran.r-project.org/package=ez)
@@ -185,24 +159,22 @@ Or from function `ezANOVA()` from package [`ez`](http://cran.r-project.org/packa
 ### Using `Anova()` from package `car` with data in wide format
 
 
-{% highlight r %}
+```r
 dfSPFpq.rW <- reshape(dfSPFpq.rL, v.names="DV", timevar="IVwth",
                       idvar=c("id", "IVbtw1", "IVbtw2"), direction="wide")
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 library(car)
 fitSPFpq.r   <- lm(cbind(DV.1, DV.2, DV.3) ~ IVbtw1*IVbtw2, data=dfSPFpq.rW)
 inSPFpq.r    <- data.frame(IVwth=gl(R, 1))
 AnovaSPFpq.r <- Anova(fitSPFpq.r, idata=inSPFpq.r, idesign=~IVwth)
 summary(AnovaSPFpq.r, multivariate=FALSE, univariate=TRUE)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 Univariate Type II Repeated-Measures ANOVA Assuming Sphericity
 
@@ -246,19 +218,17 @@ IVbtw2:IVwth         0.982       0.87
 IVbtw1:IVbtw2:IVwth  0.982       0.57    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 ### Using `anova.mlm()` and `mauchly.test()` with data in wide format
 
 
-{% highlight r %}
+```r
 anova(fitSPFpq.r, M=~1, X=~0, idata=inSPFpq.r, test="Spherical")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Analysis of Variance Table
 
 
@@ -278,17 +248,13 @@ IVbtw1         1 0.29      1     36  0.593  0.593  0.593
 IVbtw2         1 0.20      1     36  0.655  0.655  0.655
 IVbtw1:IVbtw2  1 0.38      1     36  0.543  0.543  0.543
 Residuals     36                                        
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 anova(fitSPFpq.r, M=~IVwth, X=~1, idata=inSPFpq.r, test="Spherical")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Analysis of Variance Table
 
 
@@ -308,17 +274,15 @@ IVbtw1         1  0.40      2     72  0.673  0.658  0.669
 IVbtw2         1  0.14      2     72  0.874  0.860  0.870
 IVbtw1:IVbtw2  1  0.55      2     72  0.578  0.566  0.574
 Residuals     36                                         
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 mauchly.test(fitSPFpq.r, M=~IVwth, X=~1, idata=inSPFpq.r)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 	Mauchly's test of sphericity
 	Contrasts orthogonal to
@@ -331,7 +295,7 @@ mauchly.test(fitSPFpq.r, M=~IVwth, X=~1, idata=inSPFpq.r)
 data:  SSD matrix from lm(formula = cbind(DV.1, DV.2, DV.3) ~ IVbtw1 * IVbtw2, data = dfSPFpq.rW) 
 W = 0.9277, p-value = 0.269
 
-{% endhighlight %}
+```
 
 
 Three-way SPF-\(p \cdot qr\) ANOVA
@@ -340,7 +304,7 @@ Three-way SPF-\(p \cdot qr\) ANOVA
 ### Using `aov()` with data in long format
 
 
-{% highlight r %}
+```r
 Nj     <- 10
 P      <- 2
 Q      <- 3
@@ -356,18 +320,16 @@ dfSPFp.qrL <- data.frame(id=factor(rep(1:(P*Nj), times=Q*R)),
                          IVwth1=factor(rep(1:Q, each=P*R*Nj)),
                          IVwth2=factor(rep(rep(1:R, each=P*Nj), times=Q)),
                          DV=c(DV_t11, DV_t12, DV_t21, DV_t22, DV_t31, DV_t32))
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 summary(aov(DV ~ IVbtw*IVwth1*IVwth2 + Error(id/(IVwth1*IVwth2)),
             data=dfSPFp.qrL))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 Error: id
           Df Sum Sq Mean Sq F value Pr(>F)
@@ -397,23 +359,23 @@ IVbtw:IVwth1:IVwth2  2    0.5    0.24    0.06 0.9385
 Residuals           36  134.8    3.74                  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 ### Effect size estimates: generalized \(\hat{\eta}_{g}^{2}\)
 
 
-{% highlight r %}
+```r
 anRes  <- anova(lm(DV ~ IVbtw*IVwth1*IVwth2*id, data=dfSPFp.qrL))
 SSEtot <- anRes["id",               "Sum Sq"] +
           anRes["IVwth1:id",        "Sum Sq"] +
           anRes["IVwth2:id",        "Sum Sq"] +
           anRes["IVwth1:IVwth2:id", "Sum Sq"]
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 SSbtw         <- anRes["IVbtw",               "Sum Sq"]
 SSwth1        <- anRes["IVwth1",              "Sum Sq"]
 SSwth2        <- anRes["IVwth2",              "Sum Sq"]
@@ -421,91 +383,65 @@ SSbtwWth1     <- anRes["IVbtw:IVwth1",        "Sum Sq"]
 SSbtwWth2     <- anRes["IVbtw:IVwth2",        "Sum Sq"]
 SSwth1Wth2    <- anRes["IVwth1:IVwth2",       "Sum Sq"]
 SSbtwWth1Wth2 <- anRes["IVbtw:IVwth1:IVwth2", "Sum Sq"]
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 (gEtaSqB  <- SSbtw / (SSbtw + SSEtot))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.0002251
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 (gEtaSqW1 <- SSwth1 / (SSwth1 + SSEtot))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.6313
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 (gEtaSqBW1 <- SSbtwWth1 / (SSbtwWth1 + SSEtot))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.01366
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 (gEtaSqW2 <- SSwth2 / (SSwth2 + SSEtot))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.1974
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 (gEtaSqBW2 <- SSbtwWth2 / (SSbtwWth2 + SSEtot))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.0006177
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 (gEtaSqW1W2 <- SSwth1Wth2 / (SSwth1Wth2 + SSEtot))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.09268
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 (gEtaSqBW1W2 <- SSbtwWth1Wth2 / (SSbtwWth1Wth2 + SSEtot))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.001056
-{% endhighlight %}
+```
 
 
 Or from function `ezANOVA()` from package [`ez`](http://cran.r-project.org/package=ez)
@@ -513,27 +449,25 @@ Or from function `ezANOVA()` from package [`ez`](http://cran.r-project.org/packa
 ### Using `Anova()` from package `car` with data in wide format
 
 
-{% highlight r %}
+```r
 dfW1       <- reshape(dfSPFp.qrL, v.names="DV", timevar="IVwth1",
                       idvar=c("id", "IVbtw", "IVwth2"), direction="wide")
 dfSPFp.qrW <- reshape(dfW1, v.names=c("DV.1", "DV.2", "DV.3"),
                       timevar="IVwth2", idvar=c("id", "IVbtw"), direction="wide")
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 library(car)
 fitSPFp.qr   <- lm(cbind(DV.1.1, DV.2.1, DV.3.1, DV.1.2, DV.2.2, DV.3.2) ~ IVbtw,
                    data=dfSPFp.qrW)
 inSPFp.qr    <- expand.grid(IVwth1=gl(Q, 1), IVwth2=gl(R, 1))
 AnovaSPFp.qr <- Anova(fitSPFp.qr, idata=inSPFp.qr, idesign=~IVwth1*IVwth2)
 summary(AnovaSPFp.qr, multivariate=FALSE, univariate=TRUE)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 Univariate Type II Repeated-Measures ANOVA Assuming Sphericity
 
@@ -577,20 +511,18 @@ IVwth1:IVwth2        0.899     0.0069 **
 IVbtw:IVwth1:IVwth2  0.899     0.9231    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 ### Using `anova.mlm()` and `mauchly.test()` with data in wide format
 
 
-{% highlight r %}
+```r
 anova(fitSPFp.qr, M=~1, X=~0,
       idata=inSPFp.qr, test="Spherical")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Analysis of Variance Table
 
 
@@ -608,18 +540,14 @@ Huynh-Feldt epsilon:        1
 (Intercept)  1 2540.02      1     18  0.000  0.000  0.000
 IVbtw        1    0.01      1     18  0.906  0.906  0.906
 Residuals   18                                           
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 anova(fitSPFp.qr, M=~IVwth1, X=~1,
       idata=inSPFp.qr, test="Spherical")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Analysis of Variance Table
 
 
@@ -637,18 +565,14 @@ Huynh-Feldt epsilon:        0.8751
 (Intercept)  1 116.36      2     36  0.000  0.000   0.00
 IVbtw        1   0.94      2     36  0.399  0.384   0.39
 Residuals   18                                          
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 anova(fitSPFp.qr, M=~IVwth1 + IVwth2, X=~IVwth1,
       idata=inSPFp.qr, test="Spherical")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Analysis of Variance Table
 
 
@@ -666,18 +590,14 @@ Huynh-Feldt epsilon:        1
 (Intercept)  1 28.59      1     18  0.000  0.000  0.000
 IVbtw        1  0.07      1     18  0.792  0.792  0.792
 Residuals   18                                         
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 anova(fitSPFp.qr, M=~IVwth1 + IVwth2 + IVwth1:IVwth2, X=~IVwth1 + IVwth2,
       idata=inSPFp.qr, test="Spherical")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Analysis of Variance Table
 
 
@@ -695,18 +615,16 @@ Huynh-Feldt epsilon:        0.8993
 (Intercept)  1 6.14      2     36  0.005  0.009  0.007
 IVbtw        1 0.06      2     36  0.939  0.909  0.923
 Residuals   18                                        
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 mauchly.test(fitSPFp.qr, M=~IVwth1, X=~1,
              idata=inSPFp.qr)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 	Mauchly's test of sphericity
 	Contrasts orthogonal to
@@ -719,20 +637,17 @@ mauchly.test(fitSPFp.qr, M=~IVwth1, X=~1,
 data:  SSD matrix from lm(formula = cbind(DV.1.1, DV.2.1, DV.3.1, DV.1.2, DV.2.2, DV.3.2) ~  SSD matrix from     IVbtw, data = dfSPFp.qrW) 
 W = 0.7613, p-value = 0.09842
 
-{% endhighlight %}
+```
+
+Mauchly-Test for IVwth2 is unnecessary here since R=2 -> sphericity holds automatically
 
 
-
-{% highlight r %}
-## Mauchly-Test IVwth2 hier unnoetig, da R=2
-## -> Zirkularitaet liegt automatisch vor
+```r
 mauchly.test(fitSPFp.qr, M=~IVwth1 + IVwth2, X=~IVwth1,
              idata=inSPFp.qr)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 	Mauchly's test of sphericity
 	Contrasts orthogonal to
@@ -745,18 +660,14 @@ mauchly.test(fitSPFp.qr, M=~IVwth1 + IVwth2, X=~IVwth1,
 data:  SSD matrix from lm(formula = cbind(DV.1.1, DV.2.1, DV.3.1, DV.1.2, DV.2.2, DV.3.2) ~  SSD matrix from     IVbtw, data = dfSPFp.qrW) 
 W = 1, p-value = 1
 
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 mauchly.test(fitSPFp.qr, M=~IVwth1 + IVwth2 + IVwth1:IVwth2, X=~IVwth1 + IVwth2,
              idata=inSPFp.qr)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 	Mauchly's test of sphericity
 	Contrasts orthogonal to
@@ -769,18 +680,18 @@ mauchly.test(fitSPFp.qr, M=~IVwth1 + IVwth2 + IVwth1:IVwth2, X=~IVwth1 + IVwth2,
 data:  SSD matrix from lm(formula = cbind(DV.1.1, DV.2.1, DV.3.1, DV.1.2, DV.2.2, DV.3.2) ~  SSD matrix from     IVbtw, data = dfSPFp.qrW) 
 W = 0.7899, p-value = 0.1348
 
-{% endhighlight %}
+```
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-{% highlight r %}
+```r
 try(detach(package:car))
 try(detach(package:nnet))
 try(detach(package:MASS))
-{% endhighlight %}
+```
 
 
 Get this post from github

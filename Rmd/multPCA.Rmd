@@ -67,7 +67,6 @@ ab2  <- solve(cbind(1, xMat[ , 2]), yMat[ , 2])
 ```
 
 ```{r rerMultPCA02}
-par(lend=1)
 plot(X, xlab="x", ylab="y", pch=20, asp=1,
      main="Data und principal components")
 abline(coef=ab1, lwd=2, col="gray")
@@ -76,7 +75,7 @@ matlines(xMat, yMat, lty=1, lwd=6, col="blue")
 points(ctr[1], ctr[2], pch=16, col="red", cex=3)
 legend(x="topleft", legend=c("data", "PC axes", "SDs of PC", "centroid"),
        pch=c(20, NA, NA, 16), lty=c(NA, 1, 1, NA), lwd=c(NA, 2, 2, NA),
-       col=c("black", "gray", "blue", "red"))
+       col=c("black", "gray", "blue", "red"), bg="white")
 ```
 
 ### Approximate data by their principal components
@@ -109,7 +108,7 @@ points(repr1, pch=1, lwd=2, col="blue", cex=2)
 points(ctr[1], ctr[2], pch=16, col="red", cex=3)
 legend(x="topleft", legend=c("data", "PC axes", "centroid", "approximation"),
        pch=c(20, NA, 16, 1), lty=c(NA, 1, NA, NA), lwd=c(NA, 2, NA, 2),
-       col=c("black", "gray", "red", "blue"))
+       col=c("black", "gray", "red", "blue"), bg="white")
 ```
 
 ### Approximate the covariance matrix using principal components

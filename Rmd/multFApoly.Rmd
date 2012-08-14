@@ -4,10 +4,10 @@ Exploratory factor analysis for ordinal categorical data
 Install required packages
 -------------------------
 
-[`mvtnorm`](http://cran.r-project.org/package=mvtnorm), [`psych`](http://cran.r-project.org/package=psych), [`polycor`](http://cran.r-project.org/package=polycor)
+[`mvtnorm`](http://cran.r-project.org/package=mvtnorm), [`polycor`](http://cran.r-project.org/package=polycor), [`psych`](http://cran.r-project.org/package=psych)
 
 ```{r}
-wants <- c("mvtnorm", "psych", "polycor")
+wants <- c("mvtnorm", "polycor", "psych")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
 ```

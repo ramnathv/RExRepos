@@ -63,7 +63,7 @@ head(PhatCateg)
 predict(vglmFit, type="response")
 predict(clmFit, subset(dfRegr, select=c("X1", "X2"), type="prob"))$fit
 predict(polrFit, type="probs")
-# not run
+# not shown
 
 
 ## @knitr unnamed-chunk-12
@@ -72,7 +72,7 @@ predict(clmFit, type="class")
 
 ## @knitr unnamed-chunk-13
 (predCls <- predict(polrFit, type="class"))
-# not run
+# not shown
 
 
 ## @knitr unnamed-chunk-14
@@ -81,6 +81,25 @@ all.equal(factor(categHat), predCls, check.attributes=FALSE)
 
 
 ## @knitr unnamed-chunk-15
+Nnew  <- 4
+dfNew <- data.frame(X1=rnorm(Nnew, 175, 7),
+                    X2=rnorm(Nnew,  30, 8),
+                    Ycateg=ordered(sample(c("--", "-", "+", "++"), Nnew, TRUE),
+                                   levels=c("--", "-", "+", "++")))
+
+
+## @knitr unnamed-chunk-16
+predict(lrmFit, dfNew, type="fitted.ind")
+
+
+## @knitr unnamed-chunk-17
+predict(vglmFit, dfNew, type="response")
+predict(polrFit, dfNew, type="probs")
+predict(clmFit, subset(dfNew, select=c("X1", "X2"), type="prob"))$fit
+# not shown
+
+
+## @knitr unnamed-chunk-18
 try(detach(package:ordinal))
 try(detach(package:ucminf))
 try(detach(package:Matrix))

@@ -29,19 +29,19 @@ For blogging from R to WP, I recommend:
 You will need to build `RWordPress` yourself, even on Windows. `RWordPress` depends on the packages `RCurl`, `XML`, and `XMLRPC`, which are available as source from [OmegaHat](http://www.omegahat.org/R/src/contrib/), or as Windows binary packages from [Prof. Ripley's site](http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/2.15/). On Linux, all build tools should already be installed, on Windows, download `Rtools<version>.exe` and follow instructions from [Building R for Windows](http://cran.r-project.org/bin/windows/Rtools/). Then build and install `RWordPress`:
 
 
-{% highlight r %}
+```r
 install.packages("RWordPress", repos="http://www.omegahat.org/R", build=TRUE)
-{% endhighlight %}
+```
 
 
 Set up `RWordPress` with your login credentials and the site URL.
 
 
-{% highlight r %}
+```r
 library(RWordPress)
 options(WordpressLogin=c(user="password"),
         WordpressURL="http://your_wp_installation.org/xmlrpc.php")
-{% endhighlight %}
+```
 
 
 To make syntax highlighting work in WP with the [SyntaxHighlighter](http://wordpress.org/extend/plugins/syntaxhighlighter/) plugin, R code should be enclosed in WP-shortcode instead of the `knitr` html output default `<pre><code class="r">...</code></pre>` like so:
@@ -55,16 +55,16 @@ To make syntax highlighting work in WP with the [SyntaxHighlighter](http://wordp
 One option is to set up `knitr` itself to wrap code into WP-shortcode format. The downside to this option is that the output html is only usable within WP, but not as standalone html page. Adapted from [Carl Boettiger](http://www.carlboettiger.info/wordpress/archives/3974):
 
 
-{% highlight r %}
+```r
 knit_hooks$set(output=function(x, options) paste("\\[code\\]\n", x, "\\[/code\\]\n", sep=""))
 knit_hooks$set(source=function(x, options) paste("\\[code lang='r'\\]\n", x, "\\[/code\\]\n", sep=""))
-{% endhighlight %}
+```
 
 
 As an alternative, you can use the `XML` package to extract the html body produced by `knitr` and clean it to make it work for WordPress. Adapted with small modifications from [William K. Morris](http://wkmor1.wordpress.com/2012/07/01/rchievement-of-the-day-3-bloggin-from-r-14/):
 
 
-{% highlight r %}
+```r
 knit2wp <- function(file) {
     require(XML)
     content <- readLines(file)
@@ -86,7 +86,7 @@ knit2wp <- function(file) {
     content <- gsub("<?/code></pre>", "\\[/code\\]\\\n", content)
     return(content)
 }
-{% endhighlight %}
+```
 
 
 ### Send the post from R to WordPress
@@ -97,25 +97,25 @@ In WP, you have to enable the "XML-RPC" option in Settings -> Writing -> Remote 
 In R, first set the working directory to the one containing the html page. Then use `newPost(..., publish=FALSE)` to stage the post in WP as a draft to actually publish later from the dashboard. This uses `knit2wp()` as defined above:
 
 
-{% highlight r %}
+```r
 newPost(content=list(description=knit2wp('rerWorkflow.html'),
                      title='Workflow: Post R markdown to WordPress',
                      categories=c('R')),
         publish=FALSE)
-{% endhighlight %}
+```
 
 
-If you plan to edit the post later on and upload the changed html, save the return value from `newPost()`: It is the post id, necessary to identify the post using `editPost()`.
+If you plan to edit the post later and upload the changed html, save the return value from `newPost()`: It is the post id, necessary to identify the post using `editPost()`.
 
 
-{% highlight r %}
+```r
 postID <- 99                    # post id returned by newPost()
 editPost(postID,
          content=list(description=knit2wp('rerWorkflow.html'),
                       title='Workflow: Post R markdown to WordPress',
                       categories=c('R')),
          publish=FALSE)
-{% endhighlight %}
+```
 
 
 For me, all this works fine, but I need to make sure the draft is opened first with the WP html editor, not the visual editor. So the html editor has to be "active", i.e., was used last. After openening the draft with the html editor, I have to switch to the visual editor, and then hit "publish". Publishing the post while still in the html editor does not work. Further switching between visual and html editor messes everything up.

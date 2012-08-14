@@ -1,6 +1,9 @@
 Bowker-test
 =========================
 
+Data and test
+-------------------------
+
 ```{r}
 categ <- factor(1:3, labels=c("lo", "med", "hi"))
 drug  <- rep(categ, c(30, 50, 20))

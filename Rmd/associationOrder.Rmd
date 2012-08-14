@@ -98,7 +98,7 @@ library(rms)
 lrm(yDi ~ x)$stats
 ```
 
-### Area under the Curve (AUC)
+### Area under the curve (AUC)
 
 Package `ROCR` works with S4 objects -> different method to extract components
 

@@ -69,7 +69,7 @@ glm(hitMatRel ~ X1 + X2, weights=total, family=binomial(link="logit"))
 
 ```{r rerRegressionLogistic02}
 logitHat <- predict(glmFit, type="link")
-plot(logitHat, pch=c(1, 16)[unclass(dfRegr$Yfac)])
+plot(logitHat, pch=16, col=c("red", "blue")[unclass(dfRegr$Yfac)])
 abline(h=0)
 ```
 
@@ -94,7 +94,7 @@ addmargins(cTab)
 sum(diag(cTab)) / sum(cTab)
 ```
 
-### log-Likelihood, AUC, Somers's \(D_{xy}\), Nagelkerke's pseudo \(R^{2}\)
+### log-Likelihood, AUC, Somers' \(D_{xy}\), Nagelkerke's pseudo \(R^{2}\)
 
 ```{r}
 logLik(glmFit)

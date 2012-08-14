@@ -102,7 +102,7 @@ Y  <- round(rnorm(N, mus, sigma), 1)
 d2 <- data.frame(id, Xb1, Xb2, Xw1, Xw2, Y)
 ```
 
-Data frame with just one within-subjects factor (average over levels of `IVw2`)
+Data frame with just one within-subjects factor (average over levels of `Xw2`)
 
 ```{r}
 d1 <- aggregate(Y ~ id + Xw1 + Xb1 + Xb2, data=d2, FUN=mean)
@@ -123,7 +123,7 @@ summary(aov(Y ~ Xw1 + Error(id/Xw1), data=d1))
 
 no explicit assumption of compound symmetry, but
 random intercept model equivalent to compound symmetry
-iff all var comps positive (id > id:IV and IV > id:IV)
+iff all var comps positive (id > id:Xw1 and IV > id:Xw1)
 
 ```{r}
 library(nlme)
@@ -204,7 +204,7 @@ summary(aov(Y ~ Xb1*Xw1 + Error(id/Xw1), data=d1))
 #### Using `lme()` from package `nlme`
 
 random intercept model equivalent to compound symmetry
-iff all var comps positive (id > id:IV and IV > id:IV)
+iff all var comps positive
 
 no explicit assumption of compound symmetry
 

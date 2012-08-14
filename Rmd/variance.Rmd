@@ -1,4 +1,4 @@
-Variance, other spread measures, skewness and kurtosis
+Variance, robust spread measures, skewness and kurtosis
 =========================
 
 TODO

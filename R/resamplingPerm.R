@@ -71,7 +71,7 @@ t.test(DV ~ IV, alternative="less", paired=TRUE, data=tDepDf)$p.value
 
 
 ## @knitr unnamed-chunk-9
-DVd    <- DVpre - - DVpost
+DVd    <- DVpre - DVpost
 sgnLst <- lapply(numeric(N), function(x) { c(-1, 1) } )
 sgnMat <- data.matrix(expand.grid(sgnLst))
 getMD  <- function(x) { mean(abs(DVd) * x) }

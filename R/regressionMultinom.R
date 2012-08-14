@@ -71,6 +71,25 @@ all.equal(factor(categHat), predCls, check.attributes=FALSE)
 
 
 ## @knitr unnamed-chunk-13
+Nnew  <- 4
+dfNew <- data.frame(X1=rnorm(Nnew, 175, 7),
+                    X2=rnorm(Nnew,  30, 8),
+                    Ycateg=factor(sample(c("--", "-", "+", "++"), Nnew, TRUE),
+                                  levels=c("--", "-", "+", "++")))
+dfNewL <- mlogit.data(dfNew, choice="Ycateg", shape="wide", varying=NULL)
+
+
+## @knitr unnamed-chunk-14
+predict(mnFit, dfNew, type="probs")
+
+
+## @knitr unnamed-chunk-15
+predict(vglmFitMN, dfNew, type="response")
+predict(mlogitFit, dfNewL)
+# not shown
+
+
+## @knitr unnamed-chunk-16
 try(detach(package:mlogit))
 try(detach(package:MASS))
 try(detach(package:Formula))

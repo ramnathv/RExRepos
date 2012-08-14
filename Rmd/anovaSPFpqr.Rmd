@@ -199,8 +199,10 @@ anova(fitSPFp.qr, M=~IVwth1 + IVwth2 + IVwth1:IVwth2, X=~IVwth1 + IVwth2,
 ```{r}
 mauchly.test(fitSPFp.qr, M=~IVwth1, X=~1,
              idata=inSPFp.qr)
-## Mauchly-Test IVwth2 hier unnoetig, da R=2
-## -> Zirkularitaet liegt automatisch vor
+```
+Mauchly-Test for IVwth2 is unnecessary here since R=2 -> sphericity holds automatically
+
+```{r}
 mauchly.test(fitSPFp.qr, M=~IVwth1 + IVwth2, X=~IVwth1,
              idata=inSPFp.qr)
 mauchly.test(fitSPFp.qr, M=~IVwth1 + IVwth2 + IVwth1:IVwth2, X=~IVwth1 + IVwth2,

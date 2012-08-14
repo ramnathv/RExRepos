@@ -248,6 +248,8 @@ mtext(text="Probability density", side=3)
 text(-4, 0.3, expression(frac(1, sigma*sqrt(2*pi))~exp*bgroup("(", -frac(1, 2)~bgroup("(", frac(x-mu, sigma), ")")^2, ")")))
 ```
 
+See `?plotmath` and `demo(plotmath)` for explanations and further demos for mathematical expressions.
+
 Custom axes, custom grid, and plot legend
 -------------------------
 
@@ -335,14 +337,20 @@ Raster images
 
 See packages [`EBImage`](http://www.bioconductor.org/packages/release/bioc/html/EBImage.html) or [`adimpro`](http://cran.r-project.org/package=adimpro) to read in image files of various formats.
 
-```{r rerDiagAddElements13}
+2-D color ramp square pattern
+
+```{r}
 pxSq  <- 6
 colsR <- rep(0.4, pxSq^2)
 colsG <- rep(seq(0, 1, length.out=pxSq), times=pxSq)
 colsB <- rep(seq(0, 1, length.out=pxSq), each=pxSq)
 arrSq <- array(c(colsR, colsG, colsB), c(pxSq, pxSq, 3))
 sqIm  <- as.raster(arrSq)
+```
 
+Gabor patch: oriented 2-D cosine with contrast following a 2-D normal distribution
+
+```{r}
 pxG    <- 500
 alpha  <- 0.4
 beta   <- min(1-alpha, 1+alpha)
@@ -352,14 +360,18 @@ x      <- matrix(vals, nrow=pxG, byrow=TRUE)
 y      <- matrix(vals, nrow=pxG, byrow=FALSE)
 phi    <- alpha*x + beta*y
 cosMat <- 0.5*cos(freq*phi) + 0.5
+```
 
+```{r}
 library(mvtnorm)
 mu       <- c(0, 0)
 sigma    <- diag(2)*9
 gaussVal <- dmvnorm(cbind(c(x), c(y)), mu, sigma)
 gaussMat <- matrix(gaussVal, nrow=pxG) / max(gaussVal)
 gabIm    <- as.raster(cosMat*gaussMat)
+```
 
+```{r rerDiagAddElements13}
 plot(c(0, 1), c(0, 1), type="n", main="Bitmaps", xlab="", ylab="", asp=1)
 rasterImage(sqIm,  0,   0,   0.4, 0.4, angle=0,  interpolate=FALSE)
 rasterImage(gabIm, 0.5, 0.3, 1.1, 0.9, angle=10, interpolate=TRUE)

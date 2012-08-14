@@ -5,7 +5,7 @@ Separate descriptive statistics for each group
 -------------------------
 
 
-{% highlight r %}
+```r
 Njk   <- 2
 P     <- 2
 Q     <- 3
@@ -13,60 +13,50 @@ IQ    <- round(rnorm(Njk*P*Q, mean=100, sd=15))
 sex   <- factor(rep(c("f", "m"),       times=Q*Njk))
 group <- factor(rep(c("T", "WL", "CG"), each=P*Njk))
 table(sex, group)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
    group
 sex CG T WL
   f  2 2  2
   m  2 2  2
-{% endhighlight %}
+```
 
 
 ### `ave()`
 
 
-{% highlight r %}
+```r
 ave(IQ, sex, FUN=mean)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
- [1]  99.5 105.8  99.5 105.8  99.5 105.8  99.5 105.8  99.5 105.8  99.5
-[12] 105.8
-{% endhighlight %}
+```
+ [1] 104.2 103.0 104.2 103.0 104.2 103.0 104.2 103.0 104.2 103.0 104.2
+[12] 103.0
+```
 
 
 ### `tapply()`
 
 
-{% highlight r %}
+```r
 tapply(IQ, group, FUN=mean)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
    CG     T    WL 
- 94.5 105.8 107.8 
-{% endhighlight %}
+109.8  99.0 102.0 
+```
 
-
-
-{% highlight r %}
+```r
 tapply(IQ, list(sex, group), FUN=mean)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
-     CG     T    WL
-f  86.5  97.0 115.0
-m 102.5 114.5 100.5
-{% endhighlight %}
+```
+     CG     T  WL
+f 113.0  97.5 102
+m 106.5 100.5 102
+```
 
 
 Aggregate data frames
@@ -75,7 +65,7 @@ Aggregate data frames
 ### Simulate data
 
 
-{% highlight r %}
+```r
 set.seed(1.234)
 N      <- 12
 sex    <- sample(c("f", "m"), N, replace=TRUE)
@@ -84,11 +74,9 @@ age    <- sample(18:35, N, replace=TRUE)
 IQ     <- round(rnorm(N, mean=100, sd=15))
 rating <- round(runif(N, min=0, max=6))
 (myDf1 <- data.frame(id=1:N, sex, group, age, IQ, rating))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
    id sex group age  IQ rating
 1   1   f     T  22 112      5
 2   2   f    WL  24 109      2
@@ -102,19 +90,17 @@ rating <- round(runif(N, min=0, max=6))
 10 10   f    CG  21  78      5
 11 11   f    WL  32  93      2
 12 12   f    CG  30 106      5
-{% endhighlight %}
+```
 
 
 ### Apply the same function to different variables in a data frame
 
 
-{% highlight r %}
+```r
 lapply(myDf1[ , c("age", "IQ", "rating")], mean)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 $age
 [1] 25.67
 
@@ -124,45 +110,35 @@ $IQ
 $rating
 [1] 3.25
 
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 sapply(myDf1[ , c("age", "IQ", "rating")], range)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
      age  IQ rating
 [1,]  18  70      1
 [2,]  33 114      5
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 (numIdx <- sapply(myDf1, is.numeric))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
     id    sex  group    age     IQ rating 
   TRUE  FALSE  FALSE   TRUE   TRUE   TRUE 
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 dataNum <- myDf1[ , numIdx]
 head(dataNum)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
   id age  IQ rating
 1  1  22 112      5
 2  2  24 109      2
@@ -170,13 +146,13 @@ head(dataNum)
 4  4  24 112      2
 5  5  33 101      4
 6  6  24  70      2
-{% endhighlight %}
+```
 
 
 ### Apply the same function to pairs of variables from two data frames
 
 
-{% highlight r %}
+```r
 N    <- 100
 x1   <- rnorm(N, 10, 10)
 y1   <- rnorm(N, 10, 10)
@@ -184,17 +160,15 @@ x2   <- x1 + rnorm(N, 5, 4)
 y2   <- y1 + rnorm(N, 10, 4)
 tDf1 <- data.frame(x1, y1)
 tDf2 <- data.frame(x2, y2)
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 mapply(t.test, tDf1, tDf2, MoreArgs=list(alternative="less", var.equal=TRUE))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
             x1                                     
 statistic   -4.291                                 
 parameter   198                                    
@@ -215,33 +189,29 @@ null.value  0
 alternative "less"                                 
 method      " Two Sample t-test"                   
 data.name   "dots[[1L]][[2L]] and dots[[2L]][[2L]]"
-{% endhighlight %}
+```
 
 
 ### Separate descriptive statistics for each group for many variables
 
 
-{% highlight r %}
+```r
 tapply(myDf1$IQ, myDf1$group, FUN=mean)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
     CG      T     WL 
  88.25 105.00 107.00 
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 aggregate(myDf1[ , c("age", "IQ", "rating")],
           list(myDf1$sex, myDf1$group), FUN=mean)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
   Group.1 Group.2  age    IQ rating
 1       f      CG 25.5  92.0    5.0
 2       m      CG 26.0  84.5    3.5
@@ -249,17 +219,13 @@ aggregate(myDf1[ , c("age", "IQ", "rating")],
 4       m       T 26.0 103.5    2.0
 5       f      WL 28.0 101.0    2.0
 6       m      WL 21.0 113.0    2.5
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 aggregate(cbind(age, IQ, rating) ~ sex + group, FUN=mean, data=myDf1)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
   sex group  age    IQ rating
 1   f    CG 25.5  92.0    5.0
 2   m    CG 26.0  84.5    3.5
@@ -267,17 +233,15 @@ aggregate(cbind(age, IQ, rating) ~ sex + group, FUN=mean, data=myDf1)
 4   m     T 26.0 103.5    2.0
 5   f    WL 28.0 101.0    2.0
 6   m    WL 21.0 113.0    2.5
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 by(myDf1[ , c("age", "IQ", "rating")], list(myDf1$sex, myDf1$group), FUN=mean)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 : f
 : CG
    age     IQ rating 
@@ -307,7 +271,7 @@ by(myDf1[ , c("age", "IQ", "rating")], list(myDf1$sex, myDf1$group), FUN=mean)
 : WL
    age     IQ rating 
   21.0  113.0    2.5 
-{% endhighlight %}
+```
 
 
 Useful packages

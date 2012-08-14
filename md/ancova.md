@@ -12,11 +12,11 @@ Install required packages
 [`car`](http://cran.r-project.org/package=car), [`effects`](http://cran.r-project.org/package=effects), [`multcomp`](http://cran.r-project.org/package=multcomp)
 
 
-{% highlight r %}
+```r
 wants <- c("car", "effects", "multcomp")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-{% endhighlight %}
+```
 
 
 Test the effects of group membership and of covariate
@@ -25,36 +25,36 @@ Test the effects of group membership and of covariate
 ### Visually assess the data
 
 
-{% highlight r %}
+```r
 SSRIpre  <- c(18, 16, 16, 15, 14, 20, 14, 21, 25, 11)
 SSRIpost <- c(12,  0, 10,  9,  0, 11,  2,  4, 15, 10)
 PlacPre  <- c(18, 16, 15, 14, 20, 25, 11, 25, 11, 22)
 PlacPost <- c(11,  4, 19, 15,  3, 14, 10, 16, 10, 20)
 WLpre    <- c(15, 19, 10, 29, 24, 15,  9, 18, 22, 13)
 WLpost   <- c(17, 25, 10, 22, 23, 10,  2, 10, 14,  7)
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 P     <- 3
 Nj    <- rep(length(SSRIpre), times=P)
 dfAnc <- data.frame(IV=factor(rep(1:P, Nj), labels=c("SSRI", "Placebo", "WL")),
                     DVpre=c(SSRIpre,   PlacPre,  WLpre),
                     DVpost=c(SSRIpost, PlacPost, WLpost))
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 plot(DVpre  ~ IV, data=dfAnc, main="Pre-scores per group")
-{% endhighlight %}
+```
 
 ![plot of chunk rerAncova01](figure/rerAncova011.png) 
 
-{% highlight r %}
+```r
 plot(DVpost ~ IV, data=dfAnc, main="Post-Scores per group")
-{% endhighlight %}
+```
 
 ![plot of chunk rerAncova01](figure/rerAncova012.png) 
 
@@ -62,21 +62,19 @@ plot(DVpost ~ IV, data=dfAnc, main="Post-Scores per group")
 ### Type I sum of squares
 
 
-{% highlight r %}
+```r
 fitFull <- lm(DVpost ~ IV + DVpre, data=dfAnc)
 fitGrp  <- lm(DVpost ~ IV,         data=dfAnc)
 fitRegr <- lm(DVpost ~      DVpre, data=dfAnc)
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 anova(fitFull)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Analysis of Variance Table
 
 Response: DVpost
@@ -86,24 +84,24 @@ DVpre      1    313   313.4   10.77 0.0029 **
 Residuals 26    756    29.1                  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 ### Type II/III sum of squares
 
+Since no interaction is present in the model, SS type II and III are equivalent.
+
 #### Using `Anova()` from package `car`
 
 
-{% highlight r %}
+```r
 library(car)
 fitFiii <- lm(DVpost ~ IV + DVpre,
               contrasts=list(IV=contr.sum), data=dfAnc)
 Anova(fitFiii, type="III")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Anova Table (Type III tests)
 
 Response: DVpost
@@ -114,19 +112,17 @@ DVpre          313  1   10.77 0.0029 **
 Residuals      756 26                  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 #### Using model comparisons for SS type II
 
 
-{% highlight r %}
+```r
 anova(fitRegr, fitFull)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Analysis of Variance Table
 
 Model 1: DVpost ~ DVpre
@@ -136,17 +132,13 @@ Model 2: DVpost ~ IV + DVpre
 2     26 756  2       217 3.73  0.038 *
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 anova(fitGrp, fitFull)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Analysis of Variance Table
 
 Model 1: DVpost ~ IV
@@ -156,19 +148,17 @@ Model 2: DVpost ~ IV + DVpre
 2     26  756  1       313 10.8 0.0029 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 ### Test individual regression coefficients
 
 
-{% highlight r %}
+```r
 (sumRes <- summary(fitFull))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 Call:
 lm(formula = DVpost ~ IV + DVpre, data = dfAnc)
@@ -190,51 +180,47 @@ Residual standard error: 5.39 on 26 degrees of freedom
 Multiple R-squared: 0.423,	Adjusted R-squared: 0.356 
 F-statistic: 6.35 on 3 and 26 DF,  p-value: 0.00225 
 
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 confint(fitFull)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
                2.5 % 97.5 %
 (Intercept) -11.3837  4.043
 IVPlacebo    -0.5178  9.414
 IVWL          1.4812 11.403
 DVpre         0.2412  1.049
-{% endhighlight %}
+```
 
 
 ### Vsisualize ANCOVA coefficients
 
 
-{% highlight r %}
+```r
 coeffs    <- coef(sumRes)
 iCeptSSRI <- coeffs[1, 1]
 iCeptPlac <- coeffs[2, 1] + iCeptSSRI
 iCeptWL   <- coeffs[3, 1] + iCeptSSRI
 slopeAll  <- coeffs[4, 1]
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 xLims <- c(0, max(dfAnc$DVpre))
 yLims <- c(min(iCeptSSRI, iCeptPlac, iCeptWL), max(dfAnc$DVpost))
 
 plot(DVpost ~ DVpre, data=dfAnc, xlim=xLims, ylim=yLims,
      pch=rep(c(3, 17, 19), Nj), col=rep(c("red", "green", "blue"), Nj),
-     main="Rohdaten und Regressionsgerade pro Gruppe")
+     main="Data and group-wise regression lines")
 legend(x="topleft", legend=levels(dfAnc$IV), pch=c(3, 17, 19),
        col=c("red", "green", "blue"))
 abline(iCeptSSRI, slopeAll, col="red")
 abline(iCeptPlac, slopeAll, col="green")
 abline(iCeptWL,   slopeAll, col="blue")
-{% endhighlight %}
+```
 
 ![plot of chunk rerAncova02](figure/rerAncova02.png) 
 
@@ -244,10 +230,10 @@ Effect size estimate
 
 ### \(\hat{\omega}^{2}\) for the group effect
 
-Using SS type III
+Using SS type II
 
 
-{% highlight r %}
+```r
 anRes <- anova(fitRegr, fitFull)
 dfGrp <- anRes[2, "Df"]
 dfE   <- anRes[2, "Res.Df"]
@@ -256,13 +242,11 @@ MSE   <- anRes[2, "RSS"] / dfE
 SST   <- sum(anova(fitFull)[ , "Sum Sq"])
 
 (omegaSqHat <- dfGrp*(MSgrp - MSE) / (SST + MSE))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.1187
-{% endhighlight %}
+```
 
 
 Planned comparisons between groups
@@ -271,44 +255,40 @@ Planned comparisons between groups
 ### Adjusted group means
 
 
-{% highlight r %}
+```r
 aovAncova <- aov(DVpost ~ IV + DVpre, data=dfAnc)
 library(effects)
 effect("IV", aovAncova)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
  IV effect
 IV
    SSRI Placebo      WL 
   7.537  11.985  13.978 
-{% endhighlight %}
+```
 
 
 ### Planned comparisons
 
 
-{% highlight r %}
+```r
 cMat <- rbind("SSRI-Placebo"  = c(-1,  1, 0),
               "SSRI-WL"       = c(-1,  0, 1),
               "SSRI-0.5(P+WL)"= c(-2,  1, 1))
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 library(multcomp)
 aovAncova <- aov(DVpost ~ IV + DVpre, data=dfAnc)
 summary(glht(aovAncova, linfct=mcp(IV=cMat), alternative="greater"),
         test=adjusted("none"))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 	 Simultaneous Tests for General Linear Hypotheses
 
@@ -326,14 +306,14 @@ SSRI-0.5(P+WL) <= 0    10.89       4.18    2.60 0.0075 **
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 (Adjusted p values reported -- none method)
 
-{% endhighlight %}
+```
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-{% highlight r %}
+```r
 try(detach(package:effects))
 try(detach(package:colorspace))
 try(detach(package:lattice))
@@ -345,7 +325,7 @@ try(detach(package:multcomp))
 try(detach(package:survival))
 try(detach(package:mvtnorm))
 try(detach(package:splines))
-{% endhighlight %}
+```
 
 
 Get this post from github

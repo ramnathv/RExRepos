@@ -15,11 +15,11 @@ Install required packages
 [`RColorBrewer`](http://cran.r-project.org/package=RColorBrewer)
 
 
-{% highlight r %}
+```r
 wants <- c("RColorBrewer")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-{% endhighlight %}
+```
 
 
 Formatting elements for all kinds of diagrams
@@ -32,7 +32,7 @@ Nearly all R base diagrams come with a shared set of options to control typical 
 Plot symbols are chosen with option `pch`.
 
 
-{% highlight r %}
+```r
 X <- row(matrix(numeric(6*5), nrow=6, ncol=5))
 Y <- col(matrix(numeric(6*5), nrow=6, ncol=5))
 
@@ -42,7 +42,7 @@ plot(0:5, seq(1, 5, length.out=6), type="n", xlab=NA, ylab=NA,
 points(X[1:26], Y[1:26], pch=0:25, bg="gray", cex=3)
 text(X[1:26]-0.3, Y[1:26], labels=0:25)
 text(0.2, 3, labels="symbols for pch", srt=90, cex=1.2)
-{% endhighlight %}
+```
 
 ![plot of chunk rerDiagFormat01](figure/rerDiagFormat01.png) 
 
@@ -50,7 +50,7 @@ text(0.2, 3, labels="symbols for pch", srt=90, cex=1.2)
 Line types are chosen with option `lty`, line widths with option `lwd`, and round vs. square line ends with `lend`.
 
 
-{% highlight r %}
+```r
 X <- row(matrix(numeric(6*12), nrow=6, ncol=12))
 Y <- col(matrix(numeric(6*12), nrow=6, ncol=12))
 
@@ -64,7 +64,7 @@ text(rep(0.7, 12), Y[1, 1:12], labels=c(6:1, 6:1))
 text(0, 7, labels="line types: lty, line widths: lwd", srt=90, cex=1.2)
 text(0.32, 9, labels="line ending: lend=1", srt=90, cex=1.2)
 text(0.32, 3, labels="line ending: lend=0", srt=90, cex=1.2)
-{% endhighlight %}
+```
 
 ![plot of chunk rerDiagFormat02](figure/rerDiagFormat02.png) 
 
@@ -72,7 +72,7 @@ text(0.32, 3, labels="line ending: lend=0", srt=90, cex=1.2)
 ### Diagram title, axis labels, axis limits, aspect ratio
 
 
-{% highlight r %}
+```r
 set.seed(1.234)
 N <- 100
 x <- rnorm(N, 100, 15)
@@ -80,7 +80,7 @@ y <- 0.3*x + rnorm(N, 0, 7)
 plot(x, y, main="Scatter plot", sub="aspect ratio = 1",
      xlab="x axis", ylab="y axis",
      xlim=c(60, 140), asp=1, pch=16, col="blue")
-{% endhighlight %}
+```
 
 ![plot of chunk rerDiagFormat03](figure/rerDiagFormat03.png) 
 
@@ -101,13 +101,13 @@ Formatting details of a diagram can also be controlled with a call to `par()` be
 Other aspects can only be set in `par()`. These include: `bt`, `mar`, `oma`, `xlog`, `ylog`. The return value of `par()` is a list with the old value for the changed option. When it is saved, it can later be passed as an option to `par()` to reset the option for the current graphics device to its previous value.
 
 
-{% highlight r %}
+```r
 par(mfrow=c(1, 2))
 op <- par(col="gray60", family="serif", bty="n", mar=c(7, 5, 7, 1), pch=16)
 plot(rnorm(10), main="Changed formatting")
 par(op)
 plot(rnorm(10), main="Standard format")
-{% endhighlight %}
+```
 
 ![plot of chunk rerDiagFormat04](figure/rerDiagFormat04.png) 
 
@@ -118,41 +118,35 @@ Colors
 ### Default palette and other palette choices
 
 
-{% highlight r %}
+```r
 N <- 6
 (colDef <- palette()[1:N])
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] "black"   "red"     "green3"  "blue"    "cyan"    "magenta"
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 (colAll <- sample(colors(), N, replace=FALSE))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] "blue2"     "gray40"    "grey68"    "lightblue" "gray20"    "grey15"   
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 colRain <- rainbow(N)
 colTopo <- topo.colors(N)
 colCm   <- cm.colors(N)
 colHeat <- heat.colors(N)
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 len    <- 1/N
 xLeft  <- rep(seq(0,   1-len, by=len), times=N)
 yBot   <- rep(seq(0,   1-len, by=len),  each=N)
@@ -167,7 +161,7 @@ rect(xLeft, yBot, xRight, yTop, border=NA,
 par(xpd=NA)
 text(-0.05, seq(0, 1-len, length.out=N) + len/2, adj=1,
      labels=c("default", "sample", "rainbow", "topo", "cm", "heat"))
-{% endhighlight %}
+```
 
 ![plot of chunk rerDiagFormat05](figure/rerDiagFormat05.png) 
 
@@ -175,50 +169,42 @@ text(-0.05, seq(0, 1-len, length.out=N) + len/2, adj=1,
 ### RGB colors and transparency
 
 
-{% highlight r %}
+```r
 rgb(0, 1, 1)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] "#00FFFF"
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 rgb(t(col2rgb("red")/255))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] "#FF0000"
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 rgb(1, 0, 0, 0.5)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] "#FF000080"
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 N  <- 150
 xx <- rnorm(N, 100, 15)
 yy <- 0.4*xx + rnorm(N, 0, 10)
 plot(xx, yy, pch=16, cex=3.5, col=rgb(0, 0, 1, 0.3))
 points(xx-20, yy-20, pch=16, cex=3.5, col=rgb(1, 0, 0, 0.3))
 points(xx+20, yy-20, pch=16, cex=3.5, col=rgb(0, 1, 0, 0.3))
-{% endhighlight %}
+```
 
 ![plot of chunk rerDiagFormat06](figure/rerDiagFormat06.png) 
 
@@ -226,88 +212,68 @@ points(xx+20, yy-20, pch=16, cex=3.5, col=rgb(0, 1, 0, 0.3))
 ### Other color spaces
 
 
-{% highlight r %}
+```r
 hsv(0.1666, 1, 1)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] "#FFFF00"
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 rgb2hsv(matrix(c(0, 1, 1), nrow=3))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
       [,1]
 h 0.500000
 s 1.000000
 v 0.003922
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 hcl(h=120, c=35, l=85)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] "#BBDEB1"
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 gray(0.5)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] "#808080"
-{% endhighlight %}
+```
 
 
 ### Color palettes with `RColorBrewer`
 
 
-{% highlight r %}
+```r
 N <- 6
 library(RColorBrewer)
 (bPal <- brewer.pal(N, "Blues"))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] "#EFF3FF" "#C6DBEF" "#9ECAE1" "#6BAED6" "#3182BD" "#08519C"
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 colorRampPalette(bPal)(15)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
  [1] "#EFF3FF" "#E0EAF9" "#D1E1F3" "#C3D9EE" "#B4D3E9" "#A6CDE4" "#96C6DF"
  [8] "#84BCDB" "#72B2D7" "#5EA4D0" "#4994C7" "#3585BE" "#2574B3" "#1662A7"
 [15] "#08519C"
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 b1 <- colorRampPalette(brewer.pal(N, "Reds"))(N)
 b2 <- colorRampPalette(brewer.pal(N, "Greens"))(N)
 b3 <- colorRampPalette(brewer.pal(N, "BuGn"))(N)
@@ -326,7 +292,7 @@ plot(c(0, 1), c(0, 1), axes=FALSE, xlab=NA, ylab=NA, type="n",
      asp=1, main="Colors")
 rect(xLeft, yBot, xRight, yTop, border=NA,
      col=c(b1, b2, b3, b4, b5, b6))
-{% endhighlight %}
+```
 
 ![plot of chunk rerDiagFormat07](figure/rerDiagFormat07.png) 
 
@@ -340,9 +306,9 @@ Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-{% highlight r %}
+```r
 try(detach(package:RColorBrewer))
-{% endhighlight %}
+```
 
 
 Get this post from github

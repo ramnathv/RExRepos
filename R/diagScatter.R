@@ -26,6 +26,7 @@ plot(y, main="Univeriate scatter plot", ylim=c(10, 50),
 xy <- cbind(x, y)
 plot(xy)
 plot(y ~ x)
+# not shown
 
 
 ## @knitr rerDiagScatter04

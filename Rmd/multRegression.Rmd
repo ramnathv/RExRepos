@@ -60,6 +60,8 @@ No possibility to use `confint()` for multivariate models.
 
 ### Type II/III sum of squares
 
+Since no interaction is present in the model, SS type II and III are equivalent.
+
 ```{r}
 library(car)                           # for Manova()
 Manova(fit, type="II")

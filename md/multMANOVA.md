@@ -12,18 +12,18 @@ Install required packages
 [`car`](http://cran.r-project.org/package=car), [`mvtnorm`](http://cran.r-project.org/package=mvtnorm)
 
 
-{% highlight r %}
+```r
 wants <- c("car", "mvtnorm")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-{% endhighlight %}
+```
 
 
 One-way MANOVA
 -------------------------
     
 
-{% highlight r %}
+```r
 set.seed(1.234)
 P     <- 3
 Nj    <- c(15, 25, 20)
@@ -39,39 +39,37 @@ Y31 <- round(rmvnorm(Nj[3], mean=mu31, sigma=Sigma))
 
 dfMan1 <- data.frame(Y =rbind(Y11, Y21, Y31),
                      IV=factor(rep(1:P, Nj)))
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 manRes1 <- manova(cbind(Y.1, Y.2) ~ IV, data=dfMan1)
 summary(manRes1, test="Wilks")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
           Df Wilks approx F num Df den Df Pr(>F)    
 IV         2 0.371       18      4    112  2e-11 ***
 Residuals 57                                        
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 summary(manRes1, test="Roy")
 summary(manRes1, test="Pillai")
 summary(manRes1, test="Hotelling-Lawley")
-{% endhighlight %}
+```
 
 
 Two-way MANOVA
 -------------------------
 
 
-{% highlight r %}
+```r
 Q    <- 2
 mu12 <- c(-1,  4)
 mu22 <- c( 4,  8)
@@ -85,20 +83,18 @@ Y32  <- round(rmvnorm(Nj[3], mean=mu32, sigma=Sigma))
 dfMan2 <- data.frame(Y  =rbind(Y11, Y21, Y31, Y12, Y22, Y32),
                      IV1=factor(rep(rep(1:P, Nj), Q)),
                      IV2=factor(rep(1:Q, each=sum(Nj))))
-{% endhighlight %}
+```
 
 
 ### Type I sum of squares
 
 
-{% highlight r %}
+```r
 manRes2 <- manova(cbind(Y.1, Y.2) ~ IV1*IV2, data=dfMan2)
 summary(manRes2, test="Pillai")
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
            Df Pillai approx F num Df den Df  Pr(>F)    
 IV1         2  0.855     42.6      4    228 < 2e-16 ***
 IV2         1  0.141      9.3      2    113 0.00018 ***
@@ -106,31 +102,29 @@ IV1:IV2     2  0.205      6.5      4    228 5.6e-05 ***
 Residuals 114                                          
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 summary(manRes2, test="Wilks")
 summary(manRes2, test="Roy")
 summary(manRes2, test="Hotelling-Lawley")
-{% endhighlight %}
+```
 
 
 ### Type II/III sum of squares
 
 
-{% highlight r %}
+```r
 library(car)
 fitIII <- lm(cbind(Y.1, Y.2) ~ IV1*IV2, data=dfMan2,
              contrasts=list(IV1=contr.sum, IV2=contr.sum))
 ManRes <- Manova(fitIII, type="III")
 summary(ManRes, multivariate=TRUE)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 
 Type III MANOVA Tests:
 
@@ -210,19 +204,19 @@ Hotelling-Lawley  2    0.2517    7.047      4    224 2.32e-05 ***
 Roy               2    0.2398   13.668      2    114 4.78e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-{% highlight r %}
+```r
 try(detach(package:mvtnorm))
 try(detach(package:car))
 try(detach(package:nnet))
 try(detach(package:MASS))
-{% endhighlight %}
+```
 
 
 Get this post from github

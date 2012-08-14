@@ -157,15 +157,16 @@ anova(fitSPFp.qr, M=~IVwth1 + IVwth2 + IVwth1:IVwth2, X=~IVwth1 + IVwth2,
 ## @knitr unnamed-chunk-20
 mauchly.test(fitSPFp.qr, M=~IVwth1, X=~1,
              idata=inSPFp.qr)
-## Mauchly-Test IVwth2 hier unnoetig, da R=2
-## -> Zirkularitaet liegt automatisch vor
+
+
+## @knitr unnamed-chunk-21
 mauchly.test(fitSPFp.qr, M=~IVwth1 + IVwth2, X=~IVwth1,
              idata=inSPFp.qr)
 mauchly.test(fitSPFp.qr, M=~IVwth1 + IVwth2 + IVwth1:IVwth2, X=~IVwth1 + IVwth2,
              idata=inSPFp.qr)
 
 
-## @knitr unnamed-chunk-21
+## @knitr unnamed-chunk-22
 try(detach(package:car))
 try(detach(package:nnet))
 try(detach(package:MASS))

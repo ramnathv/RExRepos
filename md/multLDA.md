@@ -12,11 +12,11 @@ Install required packages
 [`mvtnorm`](http://cran.r-project.org/package=mvtnorm), [`MASS`](http://cran.r-project.org/package=MASS)
 
 
-{% highlight r %}
+```r
 wants <- c("mvtnorm", "MASS")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
-{% endhighlight %}
+```
 
 
 Conventional LDA
@@ -25,7 +25,7 @@ Conventional LDA
 ### Simulate data
 
 
-{% highlight r %}
+```r
 set.seed(1.234)
 library(mvtnorm)
 Nj    <- c(15, 25, 20)
@@ -39,20 +39,18 @@ Y3    <- rmvnorm(Nj[3], mean=mu3, sigma=Sigma)
 Y     <- rbind(Y1, Y2, Y3)
 IV    <- factor(rep(1:length(Nj), Nj))
 Ydf   <- data.frame(IV, DV1=Y[ , 1], DV2=Y[ , 2])
-{% endhighlight %}
+```
 
 
 ### Run the analysis
 
 
-{% highlight r %}
+```r
 library(MASS)
 (ldaRes <- lda(IV ~ DV1 + DV2, data=Ydf))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Call:
 lda(IV ~ DV1 + DV2, data = Ydf)
 
@@ -74,18 +72,16 @@ DV2 -0.1465 -0.3330
 Proportion of trace:
    LD1    LD2 
 0.5726 0.4274 
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 ldaP <- lda(IV ~ DV1 + DV2, CV=TRUE, data=Ydf)
 head(ldaP$posterior)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
         1       2        3
 1 0.90665 0.03911 0.054233
 2 0.68389 0.18576 0.130343
@@ -93,19 +89,17 @@ head(ldaP$posterior)
 4 0.09603 0.85261 0.051354
 5 0.69575 0.24608 0.058178
 6 0.96937 0.02325 0.007379
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 ldaPred <- predict(ldaRes, Ydf)
 ld      <- ldaPred$x
 head(ld)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
       LD1      LD2
 1 -2.1103  0.54951
 2 -1.2980  0.09722
@@ -113,63 +107,53 @@ head(ld)
 4 -0.2824 -1.43883
 5 -1.4589 -0.55884
 6 -2.7978 -0.26433
-{% endhighlight %}
+```
 
 
 ### Predicted classification
 
 
-{% highlight r %}
+```r
 cls <- ldaPred$class
 head(cls)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 1 1 1 2 1 1
 Levels: 1 2 3
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 cTab <- table(IV, cls, dnn=c("IV", "ldaPred"))
 addmargins(cTab)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
      ldaPred
 IV     1  2  3 Sum
   1   11  3  1  15
   2    2 19  4  25
   3    2  4 14  20
   Sum 15 26 19  60
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 sum(diag(cTab)) / sum(cTab)
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 [1] 0.7333
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 anova(lm(ld[ , 1] ~ IV))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Analysis of Variance Table
 
 Response: ld[, 1]
@@ -178,17 +162,13 @@ IV         2   40.6    20.3    20.3 2.2e-07 ***
 Residuals 57   57.0     1.0                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 anova(lm(ld[ , 2] ~ IV))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Analysis of Variance Table
 
 Response: ld[, 2]
@@ -197,28 +177,26 @@ IV         2   30.3    15.2    15.2 5.2e-06 ***
 Residuals 57   57.0     1.0                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-{% endhighlight %}
+```
 
 
 
-{% highlight r %}
+```r
 priorP <- rep(1/nlevels(IV), nlevels(IV))
 ldaEq  <- lda(IV ~ DV1 + DV2, prior=priorP, data=Ydf)
-{% endhighlight %}
+```
 
 
 Robust LDA
 -------------------------
 
 
-{% highlight r %}
+```r
 library(MASS)
 (ldaRob <- lda(IV ~ DV1 + DV2, method="mve", data=Ydf))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Call:
 lda(IV ~ DV1 + DV2, data = Ydf, method = "mve")
 
@@ -240,35 +218,29 @@ DV2 -0.44097 -0.1606
 Proportion of trace:
    LD1    LD2 
 0.5737 0.4263 
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 predict(ldaRob)$class
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
  [1] 1 1 1 2 1 1 1 1 3 1 2 1 3 1 2 2 2 3 2 1 2 2 2 2 2 2 3 2 2 2 2 2 2 3 3
 [36] 2 2 2 1 2 3 3 3 3 3 2 2 3 3 2 3 3 2 3 3 3 3 3 3 3
 Levels: 1 2 3
-{% endhighlight %}
+```
 
 
 Quadratic Discriminant Analysis
 -------------------------
 
 
-{% highlight r %}
+```r
 library(MASS)
 (qdaRes <- qda(IV ~ DV1 + DV2, data=Ydf))
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
 Call:
 qda(IV ~ DV1 + DV2, data = Ydf)
 
@@ -281,31 +253,27 @@ Group means:
 1 -3.616  4.1624
 2  3.441  3.3288
 3  1.446 -0.6944
-{% endhighlight %}
+```
 
-
-
-{% highlight r %}
+```r
 predict(qdaRes)$class
-{% endhighlight %}
+```
 
-
-
-{% highlight text %}
+```
  [1] 1 1 1 2 1 1 1 1 3 1 2 1 3 1 2 2 2 2 2 1 2 2 2 2 2 2 3 2 2 2 2 2 2 3 3
 [36] 2 2 2 1 2 3 3 3 3 3 2 2 3 3 2 3 3 2 3 3 3 3 3 3 3
 Levels: 1 2 3
-{% endhighlight %}
+```
 
 
 Detach (automatically) loaded packages (if possible)
 -------------------------
 
 
-{% highlight r %}
+```r
 try(detach(package:MASS))
 try(detach(package:mvtnorm))
-{% endhighlight %}
+```
 
 
 Get this post from github

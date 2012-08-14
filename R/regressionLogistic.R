@@ -44,7 +44,7 @@ glm(hitMatRel ~ X1 + X2, weights=total, family=binomial(link="logit"))
 
 ## @knitr rerRegressionLogistic02
 logitHat <- predict(glmFit, type="link")
-plot(logitHat, pch=c(1, 16)[unclass(dfRegr$Yfac)])
+plot(logitHat, pch=16, col=c("red", "blue")[unclass(dfRegr$Yfac)])
 abline(h=0)
 
 

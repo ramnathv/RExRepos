@@ -1,6 +1,6 @@
 
 ## @knitr unnamed-chunk-1
-wants <- c("mvtnorm", "psych", "GPArotation")
+wants <- c("GPArotation", "mvtnorm", "psych")
 has   <- wants %in% rownames(installed.packages())
 if(any(!has)) install.packages(wants[!has])
 

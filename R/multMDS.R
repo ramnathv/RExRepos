@@ -37,6 +37,7 @@ P   <- 3
 obj <- matrix(sample(-20:20, N*P, replace=TRUE), ncol=P)
 dst <- dist(obj, diag=TRUE, upper=TRUE)
 cmdscale(dst, k=2)
+# not shown
 
 
 ## @knitr rerMultMDS01
