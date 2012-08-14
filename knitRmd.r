@@ -17,5 +17,5 @@ library(markdown)
 # render_jekyll()
 # opts_chunk$set(tidy=FALSE, message=FALSE, warning=FALSE, comment="")
 
-sapply(RmdPath, knit2html)
-sapply(RmdPath, purl)
+sapply(RmdFiles, knit2html)
+sapply(RmdFiles, purl)
